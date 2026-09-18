@@ -4,7 +4,7 @@ const C=window.ENGLISH_ENGINE_ADAPTER&&window.ENGLISH_ENGINE_ADAPTER.config;
 const P=window.ENGLISH_ENGINE_ADAPTER&&window.ENGLISH_ENGINE_ADAPTER.policy;
 const E=window.ENGLISH_ENGINE_CORE;
 if(!C||!P||!E)throw new Error('Rikkyo adapter/shared engine not loaded');
-const KEY=C.storage.key,SCHEMA=C.storage.schemaVersion,TARGET=C.exam.dailyTaskTarget,app=document.getElementById('app');
+const KEY=C.storage.key,SCHEMA=C.storage.schemaVersion,TARGET=C.exam.dailyTaskTarget,IMPORT_RECOVERY_PREFIX=C.storage.importRecoveryPrefix,app=document.getElementById('app');
 let DATA=null,view='home',selectedExamId=C.exam.defaultExamId,drill=null,renderedDate=E.localDate();
 
 function h(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
@@ -136,12 +136,27 @@ function continuePractice(){const w=S.weak[drill.key];if(w.status==='mastered'||
 function resumeDrill(){view='drill';render()}
 function drillView(){if(!drill){const rows=activeWeak().filter(eligible).sort(weakSort);return '<section class="card hero"><h2>克服ドリル</h2></section><section class="card">'+(rows.map(function(x){return weakMarkup(x[0],x[1])}).join('')||'<p class="muted">今日取り組める弱点はありません。</p>')+'</section>'}const w=S.weak[drill.key],q=drill.q;return '<section class="card drill-card"><div class="eyebrow">'+(drill.mode==='confirm'?'翌日定着確認':'弱点補強')+'</div><h2>'+h(P.skillName(w.skill))+'</h2><p class="muted">'+h(w.label)+' · '+(drill.mode==='confirm'?(w.confirmStreak||0)+'/2':(w.streak||0)+'/3')+'</p>'+(q.context?'<div class="practice-context">'+h(q.context)+'</div>':'')+'<h3>'+h(q.prompt)+'</h3>'+(!drill.answered?practiceInput(q)+'<button class="primary" onclick="__RIKKYO_APP__.finishPractice()">答えを確認</button>':'<div class="feedback '+(drill.feedback.ok?'good':'bad')+'"><b>'+(drill.feedback.ok?'✓ 正解':'✕ もう一度')+'</b><p>答え：'+h(drill.feedback.answer)+'</p><p>'+h(drill.feedback.explanation)+'</p></div><button class="primary" onclick="__RIKKYO_APP__.continuePractice()">次へ</button>')+'</section>'}
 function stats(){const m=weakEntries().filter(function(x){return x[1].status==='mastered'}).length;return '<section class="card hero"><h2>進捗</h2><p>公式得点ではなく学習履歴です。</p></section><section class="grid three"><div class="card"><div class="metric">'+S.attempts.length+'</div><div>過去問</div></div><div class="card"><div class="metric">'+weakEntries().length+'</div><div>弱点</div></div><div class="card"><div class="metric">'+m+'</div><div>克服済み</div></div></section>'}
-function guide(){return '<section class="card hero"><h2>使い方</h2><p>過去問→弱点→類題→翌日確認の順です。</p></section><section class="card warnbox"><b>非公式解答</b><p>学校公式解答・配点は未確認です。点数換算はしません。</p></section><section class="card badbox"><b>FY26B holdout</b><p>最終判定前は学習に使用しません。</p></section><section class="card"><button onclick="__RIKKYO_APP__.exportData()">バックアップを書き出す</button></section>'}
+function guide(){return '<section class="card hero"><h2>使い方</h2><p>過去問→弱点→類題→翌日確認の順です。</p></section><section class="card warnbox"><b>非公式解答</b><p>学校公式解答・配点は未確認です。点数換算はしません。</p></section><section class="card badbox"><b>FY26B holdout</b><p>最終判定前は学習に使用しません。</p></section><section class="card backup-box"><h3>学習データのバックアップ</h3><p>立教英語専用JSONです。復元前の状態は端末内に3世代まで退避します。</p><div class="row"><button onclick="__RIKKYO_APP__.exportData()">バックアップを書き出す</button><label>復元方法 <select id="importMode"><option value="merge">現在データへ統合</option><option value="replace">現在データと置換</option></select></label><label class="file-button">バックアップを選ぶ<input type="file" accept="application/json,.json" onchange="__RIKKYO_APP__.importData(this)"></label></div></section>'}
 function exportData(){const p={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',exportedAt:now(),state:clone(S)},b=new Blob([JSON.stringify(p,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='rikkyo-uk-english-'+today()+'.json';a.click();setTimeout(function(){URL.revokeObjectURL(u)},1000)}
+function recoveryKeys(){const keys=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.indexOf(IMPORT_RECOVERY_PREFIX+'.')===0)keys.push(k)}return keys.sort()}
+function saveImportRecovery(){const key=IMPORT_RECOVERY_PREFIX+'.'+Date.now();localStorage.setItem(key,JSON.stringify(S));const keys=recoveryKeys();while(keys.length>3)localStorage.removeItem(keys.shift());return key}
+function validateBackup(payload){if(!payload||payload.format!=='rikkyo-uk-english-backup'||payload.appId!=='rikkyo-uk-english'||payload.version!==1||!payload.state||typeof payload.state!=='object')throw new Error('立教英語の有効なバックアップではありません。');return payload}
+function importPayload(payload,mode){
+  validateBackup(payload);saveImportRecovery();const incoming=normalizeState(payload.state);
+  if(mode==='replace')S=incoming;
+  else S=normalizeState(E.mergeImportedLearningState(S,incoming,{schemaVersion:SCHEMA,todayValue:today(),nowIso:now}));
+  drill=S.currentDrill;selectedExamId=C.exam.examIds.includes(S.selectedExamId)?S.selectedExamId:C.exam.defaultExamId;save();render();return clone(S)
+}
+async function importData(input){
+  const file=input&&input.files&&input.files[0];if(!file)return;
+  try{const payload=JSON.parse(await file.text()),mode=(document.getElementById('importMode')||{}).value||'merge';if(!confirm(mode==='replace'?'現在の立教英語データをバックアップで置換しますか？':'現在の立教英語データへバックアップを統合しますか？'))return;importPayload(payload,mode);alert('バックアップを復元しました。')}
+  catch(e){alert('復元できませんでした: '+e.message)}
+  finally{input.value=''}
+}
 function applyDay(){const cur=today(),d=E.decideDayRollover({renderedDate:renderedDate,currentDate:cur,isDrillView:view==='drill',hasDrill:!!drill,drillAnswered:!!(drill&&drill.answered)});if(d.kind==='same'||d.kind==='defer')return false;E.applyDailyRolloverState(S,cur);renderedDate=cur;save();return true}
 window.addEventListener('focus',function(){if(applyDay())render()});
 
 function render(){if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,stats:stats,guide:guide}[view];app.innerHTML=f();window.__RIKKYO_APP_READY__=true}
-window.__RIKKYO_APP__={goto:goto,runAction:runAction,selectExam:selectExam,openExam:openExam,beginAttempt:beginAttempt,setResponse:setResponse,setSlot:setSlot,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,getState:function(){return clone(S)},resetForTest:function(){localStorage.removeItem(KEY);S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
+window.__RIKKYO_APP__={goto:goto,runAction:runAction,selectExam:selectExam,openExam:openExam,beginAttempt:beginAttempt,setResponse:setResponse,setSlot:setSlot,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
 loadData().then(function(){render()}).catch(function(e){console.error(e);app.innerHTML='<section class="card badbox"><h2>読み込みエラー</h2><p>'+h(e.message)+'</p></section>'});
 })();
