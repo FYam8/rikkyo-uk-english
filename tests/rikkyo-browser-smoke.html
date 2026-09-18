@@ -110,9 +110,10 @@
    a.openExam('FY24A');
    await new Promise(r=>setTimeout(r,50));
    const text=frame.contentDocument.body.textContent;
-   if(!text.includes('原本で確認できる範囲は転記・監査済みです'))fail('source coverage notice missing');
+   if(!text.includes('原本subset'))fail('source subset notice missing');
+   if(!text.includes('原本上の未提供'))fail('source limitation wording missing');
    if(!text.includes('Q7'))fail('known source-missing section not surfaced');
-   if(text.includes('この過去問を始める'))fail('partial source exam incorrectly enabled');
+   if(!text.includes('この過去問を始める'))fail('audited source subset not enabled');
    a.openExam('FY26B');
    await new Promise(r=>setTimeout(r,50));
    const holdoutText=frame.contentDocument.body.textContent;
