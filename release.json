@@ -1,0 +1,33 @@
+{
+  "name": "rikkyo-uk-english",
+  "version": "1.0.0",
+  "status": "production-ready",
+  "releaseDate": "2026-09-18",
+  "sourceRepository": "FYam8/rikkyo-uk-english",
+  "candidateHead": "4d4a6a36aa4359f638c3b012db89285cbb56c9f8",
+  "mergeCommit": "178e2563f3e4fa5d97072d6c2fcd72ba3d6de4a4",
+  "sharedEngine": {
+    "version": "1.1.0",
+    "sourceCommit": "786d743978a4a498595ee90686ada07f3fddbf4a"
+  },
+  "sharedUi": {
+    "version": "1.0.0",
+    "sourceCommit": "ff379eb24808449f0387e58b0dcc493453dc9531"
+  },
+  "verification": {
+    "candidateRun": 35385550930,
+    "candidateAttempts": [
+      1,
+      2
+    ],
+    "postMergeRun": 35385756089,
+    "conclusion": "success"
+  },
+  "limitations": [
+    "No official answer key or official score model was supplied.",
+    "Listening audio/transcripts not supplied are not graded and do not count as wrong.",
+    "Omitted FY24/FY25 source sections are not reconstructed.",
+    "Unsupported open/picture writing tasks remain source-preserved but non-runtime until a Rikkyo-specific marking authority exists.",
+    "FY26B remains final holdout and is not used for training."
+  ]
+}
