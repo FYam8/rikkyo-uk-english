@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "authored-practice-0.1",
+  "holdoutSourceExamIds": [],
+  "items": [
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rgc01",
+      "targetId": "grammar-gerund-enjoy",
+      "familyId": "practice-gc-01",
+      "skill": "guided_completion",
+      "type": "text",
+      "prompt": "Complete: She enjoys ( _____ ) tennis after school.",
+      "answerText": "playing",
+      "explanation": "enjoy + -ing: enjoy の後ろは動名詞にします。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rgc02",
+      "targetId": "grammar-whether-if-future",
+      "familyId": "practice-gc-02",
+      "skill": "guided_completion",
+      "type": "text",
+      "prompt": "Complete: I don't know whether he ( _____ ) join us tomorrow.",
+      "answerText": "will",
+      "explanation": "whether節の中でも未来のことなら will を使えます。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rgc03",
+      "targetId": "grammar-past-participle-modifier",
+      "familyId": "practice-gc-03",
+      "skill": "guided_completion",
+      "type": "text",
+      "prompt": "Complete: The pictures ( _____ ) by my uncle are on the wall.",
+      "answerText": "taken",
+      "explanation": "名詞を後ろから説明する受け身の意味では過去分詞を使います。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rgc04",
+      "targetId": "grammar-counterfactual-if",
+      "familyId": "practice-gc-04",
+      "skill": "guided_completion",
+      "type": "text",
+      "prompt": "Complete: If I ( _____ ) you, I would talk to the teacher.",
+      "answerText": "were",
+      "explanation": "現在の事実に反する仮定では If I were ... が基本です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rgc05",
+      "targetId": "grammar-modal-passive",
+      "familyId": "practice-gc-05",
+      "skill": "guided_completion",
+      "type": "text",
+      "prompt": "Complete: The door must ( _____ ) before five.",
+      "answerText": "be closed",
+      "explanation": "must の後ろで受け身にするので be + 過去分詞です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rgc06",
+      "targetId": "grammar-passive",
+      "familyId": "practice-gc-06",
+      "skill": "guided_completion",
+      "type": "text",
+      "prompt": "Complete: This cake was ( _____ ) by my sister.",
+      "answerText": "made",
+      "explanation": "受け身 was + 過去分詞 made を使います。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rwo01",
+      "targetId": "word-order-past-perfect",
+      "familyId": "practice-wo-01",
+      "skill": "word_order",
+      "type": "word_order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "had",
+        "forgotten",
+        "his",
+        "key",
+        "he",
+        "realised",
+        "that"
+      ],
+      "answer": "He realised that he had forgotten his key.",
+      "explanation": "realised より前の出来事なので had forgotten を使います。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rwo02",
+      "targetId": "word-order-relative-preposition",
+      "familyId": "practice-wo-02",
+      "skill": "word_order",
+      "type": "word_order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "for",
+        "I",
+        "that",
+        "was",
+        "the bag",
+        "looking",
+        "This is"
+      ],
+      "answer": "This is the bag that I was looking for.",
+      "explanation": "look for を離さず、関係節の最後に前置詞 for を置けます。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rwo03",
+      "targetId": "word-order-future-progressive",
+      "familyId": "practice-wo-03",
+      "skill": "word_order",
+      "type": "word_order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "studying",
+        "tomorrow",
+        "I",
+        "will",
+        "this time",
+        "be"
+      ],
+      "answer": "I will be studying this time tomorrow.",
+      "explanation": "未来のある時点で進行中の動作は will be -ing です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rwo04",
+      "targetId": "word-order-interested-in",
+      "familyId": "practice-wo-04",
+      "skill": "word_order",
+      "type": "word_order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "French",
+        "interested",
+        "She",
+        "learning",
+        "in",
+        "is"
+      ],
+      "answer": "She is interested in learning French.",
+      "explanation": "be interested in -ing のまとまりを作ります。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rwo05",
+      "targetId": "word-order-participle-modifier",
+      "familyId": "practice-wo-05",
+      "skill": "word_order",
+      "type": "word_order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "by",
+        "written",
+        "a young author",
+        "I read",
+        "a story"
+      ],
+      "answer": "I read a story written by a young author.",
+      "explanation": "story を written by ... が後ろから説明します。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rwo06",
+      "targetId": "word-order-duration",
+      "familyId": "practice-wo-06",
+      "skill": "word_order",
+      "type": "word_order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "five years",
+        "have",
+        "here",
+        "They",
+        "for",
+        "lived"
+      ],
+      "answer": "They have lived here for five years.",
+      "explanation": "期間の長さには for を使い、現在まで続くので現在完了が自然です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rec01",
+      "targetId": "grammar-error-correction-group",
+      "familyId": "practice-ec-01",
+      "skill": "error_correction_rewrite",
+      "type": "text",
+      "prompt": "Correct the sentence: I have known her since three years.",
+      "answerText": "I have known her for three years.",
+      "explanation": "期間の長さ three years の前は since ではなく for です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rec02",
+      "targetId": "grammar-error-correction-group",
+      "familyId": "practice-ec-02",
+      "skill": "error_correction_rewrite",
+      "type": "text",
+      "prompt": "Correct the sentence: Do you know where is the station?",
+      "answerText": "Do you know where the station is?",
+      "explanation": "間接疑問では where + 主語 + 動詞の語順です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rec03",
+      "targetId": "grammar-error-correction-group",
+      "familyId": "practice-ec-03",
+      "skill": "error_correction_rewrite",
+      "type": "text",
+      "prompt": "Correct the sentence: The man which lives next door is a doctor.",
+      "answerText": "The man who lives next door is a doctor.",
+      "explanation": "人を先行詞にする関係代名詞には who を使えます。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rec04",
+      "targetId": "grammar-error-correction-group",
+      "familyId": "practice-ec-04",
+      "skill": "error_correction_rewrite",
+      "type": "text",
+      "prompt": "Correct the sentence: I am understanding the question now.",
+      "answerText": "I understand the question now.",
+      "explanation": "understand は通常、進行形にしない状態動詞です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rec05",
+      "targetId": "grammar-error-correction-group",
+      "familyId": "practice-ec-05",
+      "skill": "error_correction_rewrite",
+      "type": "text",
+      "prompt": "Correct the sentence: My mother made me to wash the dishes.",
+      "answerText": "My mother made me wash the dishes.",
+      "explanation": "make + 人 + 動詞の原形なので to は不要です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rec06",
+      "targetId": "grammar-error-correction-group",
+      "familyId": "practice-ec-06",
+      "skill": "error_correction_rewrite",
+      "type": "text",
+      "prompt": "Correct the sentence: She is good in playing the piano.",
+      "answerText": "She is good at playing the piano.",
+      "explanation": "be good at -ing の形を使います。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rrd01",
+      "targetId": "reading-paraphrase-give-up",
+      "familyId": "practice-rd-01",
+      "skill": "long_reading",
+      "type": "choice",
+      "context": "Ken tried to repair the old radio for an hour. Finally he said, “I give up,” and put the radio back on the shelf.",
+      "prompt": "What did Ken decide to do?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Stop trying to repair it."
+        },
+        {
+          "id": "B",
+          "text": "Buy another shelf."
+        },
+        {
+          "id": "C",
+          "text": "Listen to the radio."
+        }
+      ],
+      "answer": "A",
+      "explanation": "give up は「やめる・あきらめる」。直後に作業を止めています。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rrd02",
+      "targetId": "reading-remember-gerund",
+      "familyId": "practice-rd-02",
+      "skill": "long_reading",
+      "type": "text",
+      "context": "Aya met Mr Brown at a school event last year.",
+      "prompt": "Complete: Aya remembers ( _____ ) Mr Brown at the event.",
+      "answerText": "meeting",
+      "explanation": "過去にしたことを覚えている、という remember -ing の用法です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rrd03",
+      "targetId": "reading-relative-pronoun-person",
+      "familyId": "practice-rd-03",
+      "skill": "long_reading",
+      "type": "text",
+      "context": "A teacher helped Tom when he dropped his books.",
+      "prompt": "Complete: The teacher ( _____ ) helped Tom was very kind.",
+      "answerText": "who",
+      "accepted": [
+        "who",
+        "that"
+      ],
+      "explanation": "人を説明する主格の関係代名詞 who。that も文法上可能です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rrd04",
+      "targetId": "reading-content-match",
+      "familyId": "practice-rd-04",
+      "skill": "long_reading",
+      "type": "choice",
+      "context": "Mina found a wallet near the station. She took it to the police box. Later, the owner sent her a thank-you card.",
+      "prompt": "Which statement matches the text?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mina kept the wallet."
+        },
+        {
+          "id": "B",
+          "text": "Mina took the wallet to the police."
+        },
+        {
+          "id": "C",
+          "text": "The owner met Mina at the station."
+        }
+      ],
+      "answer": "B",
+      "explanation": "本文に She took it to the police box. とあります。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rrd05",
+      "targetId": "reading-grammar-see-object-ing",
+      "familyId": "practice-rd-05",
+      "skill": "long_reading",
+      "type": "choice",
+      "context": "When Leo looked out of the window, he saw a boy running across the field.",
+      "prompt": "Which form completes the same pattern: I saw a girl ( _____ ) near the gate.",
+      "options": [
+        {
+          "id": "A",
+          "text": "run"
+        },
+        {
+          "id": "B",
+          "text": "running"
+        },
+        {
+          "id": "C",
+          "text": "ran"
+        }
+      ],
+      "answer": "B",
+      "explanation": "see + 人 + -ing は、動作しているところを見た、という形です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rrd06",
+      "targetId": "reading-practical-detail",
+      "familyId": "practice-rd-06",
+      "skill": "long_reading",
+      "type": "choice",
+      "context": "LIBRARY NOTICE: The second floor will close at 4:30 p.m. on Friday. Books can still be returned at the first-floor desk until 6:00 p.m.",
+      "prompt": "What can a visitor do at 5:00 p.m. on Friday?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Study on the second floor."
+        },
+        {
+          "id": "B",
+          "text": "Return books at the first-floor desk."
+        },
+        {
+          "id": "C",
+          "text": "Borrow books from the second floor."
+        }
+      ],
+      "answer": "B",
+      "explanation": "2階は4:30に閉まりますが、1階の返却は6:00まで可能です。"
+    }
+  ]
+}
