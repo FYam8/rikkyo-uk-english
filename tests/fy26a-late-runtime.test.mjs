@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const d=JSON.parse(fs.readFileSync(new URL('../data/fy26a-late-runtime.json',import.meta.url),'utf8'));
+assert.equal(d.examId,'FY26A');
+assert.equal(d.records.length,10);
+assert.equal(d.records.filter(x=>x.majorQuestion===6).length,6);
+assert.equal(d.records.filter(x=>x.majorQuestion===7).length,4);
+assert.deepEqual(d.records.filter(x=>x.majorQuestion===6).map(x=>x.answerSpec.choice),['C','B','A','C','C','B']);
+assert.ok(d.records.filter(x=>x.majorQuestion===7).every(x=>x.scoringType==='manual_reading'&&x.autoGradeAllowed===false));
+assert.equal(d.nonRuntimeSource.length,1);
+assert.equal(d.nonRuntimeSource[0].majorQuestion,8);
+assert.equal(d.nonRuntimeSource[0].approxWords,'80-100');
+assert.equal(d.nonRuntimeSource[0].runtimeEnabled,false);
+console.log('Rikkyo FY26A late-section runtime: CLEAN');
