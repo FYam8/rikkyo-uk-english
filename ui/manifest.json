@@ -1,0 +1,60 @@
+{
+  "name": "shared-english-ui",
+  "uiVersion": "1.0.0",
+  "contractVersion": 1,
+  "status": "production-waseda-commonized",
+  "sourceRepository": "FYam8/waseshibu-english",
+  "artifactRoots": [
+    "ui/"
+  ],
+  "consumerPolicy": "pinned-vendor-pr-only",
+  "sourceOfTruth": "Waseda production UI/UX",
+  "runtimeWiring": true,
+  "sharedViewOrder": [
+    "home",
+    "route",
+    "exam",
+    "review",
+    "drill",
+    "stats",
+    "guide"
+  ],
+  "scope": [
+    "design tokens and responsive layout",
+    "application shell and navigation",
+    "Today cards and learning-action presentation",
+    "route cards",
+    "past-paper attempt shell and answer panel",
+    "weakness/review list",
+    "remediation drill shell and feedback",
+    "progress/stats shell",
+    "backup/import presentation"
+  ],
+  "excluded": [
+    "school branding/theme values",
+    "school-specific question data",
+    "school-specific scoring wording",
+    "school-specific question renderers where format differs",
+    "cloud and AI endpoints"
+  ],
+  "releaseGate": "waseda-ui-parity-before-consumer-sync",
+  "notes": "Shared English UI v1 is now the production Waseda UI/UX after exact-head CLEAN verification and successful GitHub Pages deployment. The vendorable ui/ artifact remains school-neutral; Waseda theme/policy CSS and school-specific data/renderers remain outside ui/. Rikkyo may consume only a pinned vendored UI revision through its own compatibility gates.",
+  "nextGate": "rikkyo-shared-ui-consumer-onboarding",
+  "sharedComponents": [
+    "metricCard",
+    "progressBar",
+    "completionMark",
+    "routeStepCard",
+    "todayCard",
+    "weaknessCard",
+    "drillCard",
+    "attemptBar",
+    "answerPanel",
+    "paperPage",
+    "backupPanel"
+  ],
+  "productionWiring": true,
+  "productionCutoverCommit": "ab46ccd86b7bae6ecbedb9ae2acfa7814f38f13d",
+  "postCutoverVerifyRun": 35357854853,
+  "postCutoverPagesRun": 35357854834
+}
