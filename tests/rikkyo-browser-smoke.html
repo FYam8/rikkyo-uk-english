@@ -6,7 +6,7 @@
  const fail=m=>{document.body.dataset.testResult='FAIL';out.textContent='Rikkyo browser smoke: FAIL: '+m;throw new Error(m)};
  const wait=async fn=>{for(let i=0;i<80;i++){try{if(fn())return}catch(e){}await new Promise(r=>setTimeout(r,75))}fail('timeout')};
  await wait(()=>frame.contentWindow&&frame.contentWindow.__RIKKYO_APP_READY__&&frame.contentWindow.__RIKKYO_APP__);
- let w=frame.contentWindow,a=w.__RIKKYO_APP__;w.alert=()=>{};w.confirm=()=>true;a.resetForTest();
+ let w=frame.contentWindow,a=w.__RIKKYO_APP__;w.alert=()=>{};w.confirm=()=>true;w.localStorage.setItem('waseshibu.adaptive.v3','WASEDA-SENTINEL');a.resetForTest();if(w.localStorage.getItem('waseshibu.adaptive.v3')!=='WASEDA-SENTINEL')fail('Waseda storage touched');
  await wait(()=>a.getState().selectedExamId==='FY26A');
  if(scenario==='fresh'){
    if(a.getState().currentAttempt)fail('fresh currentAttempt');
@@ -38,6 +38,19 @@
      if(weak.status!=='pending'||weak.streak<3)fail('train3 transition');
      if(!weak.next||weak.next<=new Date().toISOString().slice(0,10))fail('next-day reservation');
    }
+ }
+ if(scenario==='backup'){
+   a.beginAttempt('FY26A');a.submitAttempt();await wait(()=>a.getState().attempts.length===1);
+   const saved={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:a.getState()};
+   a.resetForTest();if(a.getState().attempts.length!==0)fail('reset before backup restore');
+   a.importPayload(saved,'replace');
+   if(a.getState().attempts.length!==1||Object.keys(a.getState().weak).length!==19)fail('replace restore');
+   if(a.recoveryKeys().length!==1)fail('pre-import recovery missing');
+   const incoming={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:{...a.getState(),dailyProgress:{date:new Date().toISOString().slice(0,10),answeredCount:7}}};
+   a.importPayload(incoming,'merge');
+   if(a.getState().dailyProgress?.answeredCount!==7)fail('merge daily progress');
+   if(a.recoveryKeys().length!==2)fail('second recovery missing');
+   if(w.localStorage.getItem('waseshibu.adaptive.v3')!=='WASEDA-SENTINEL')fail('Waseda storage touched by import');
  }
  if(scenario==='holdout'){
    a.beginAttempt('FY26B');
