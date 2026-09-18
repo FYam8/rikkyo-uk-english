@@ -18,7 +18,7 @@
    if(a.getState().currentAttempt?.examId!=='FY26A')fail('attempt identity');
    a.submitAttempt();
    await wait(()=>a.getState().attempts.length===1);
-   if(Object.keys(a.getState().weak).length!==19)fail('wrong weakness count');
+   if(Object.keys(a.getState().weak).length!==29)fail('wrong weakness count');
  }
  if(scenario==='subset'){
    a.openExam('FY24A');
@@ -59,13 +59,16 @@
  if(scenario==='renderer'){
    a.beginAttempt('FY26A');
    a.goto('exam');
-   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===19);
+   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===29);
    const doc=frame.contentDocument;
-   if(doc.querySelectorAll('.question').length!==19)fail('renderer question count');
+   if(doc.querySelectorAll('.question').length!==29)fail('renderer question count');
    if(doc.querySelectorAll('.slot-row input[type="text"]').length!==10)fail('guided completion renderer');
    if(doc.querySelectorAll('.correction-row').length!==10)fail('correction group renderer');
    if(doc.querySelectorAll('.choice-grid input[type="radio"]').length<3)fail('single-choice renderer');
    if(doc.querySelectorAll('.choice-grid input[type="checkbox"]').length<8)fail('multi-choice renderer');
+   if(doc.querySelectorAll('textarea').length<4)fail('reading short-answer renderer');
+   if(!doc.body.textContent.includes('Saturday Support Club'))fail('FY26A Q6 source text missing');
+   if(!doc.body.textContent.includes('Dr. Smith is a science teacher'))fail('FY26A Q7 source text missing');
    const groupCheckbox=doc.querySelector('.correction-row input[type="checkbox"]');
    if(!groupCheckbox)fail('correction checkbox missing');
    groupCheckbox.click();
@@ -100,7 +103,7 @@
    const saved={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:a.getState()};
    a.resetForTest();if(a.getState().attempts.length!==0)fail('reset before backup restore');
    a.importPayload(saved,'replace');
-   if(a.getState().attempts.length!==1||Object.keys(a.getState().weak).length!==19)fail('replace restore');
+   if(a.getState().attempts.length!==1||Object.keys(a.getState().weak).length!==29)fail('replace restore');
    if(a.recoveryKeys().length!==1)fail('pre-import recovery missing');
    const incoming={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:{...a.getState(),dailyProgress:{date:new Date().toISOString().slice(0,10),answeredCount:7}}};
    a.importPayload(incoming,'merge');
