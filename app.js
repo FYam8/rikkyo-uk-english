@@ -3,7 +3,8 @@
 const C=window.ENGLISH_ENGINE_ADAPTER&&window.ENGLISH_ENGINE_ADAPTER.config;
 const P=window.ENGLISH_ENGINE_ADAPTER&&window.ENGLISH_ENGINE_ADAPTER.policy;
 const E=window.ENGLISH_ENGINE_CORE;
-if(!C||!P||!E)throw new Error('Rikkyo adapter/shared engine not loaded');
+const U=window.ENGLISH_UI_COMPONENTS;
+if(!C||!P||!E||!U)throw new Error('Rikkyo adapter/shared engine/UI not loaded');
 const KEY=C.storage.key,SCHEMA=C.storage.schemaVersion,TARGET=C.exam.dailyTaskTarget,IMPORT_RECOVERY_PREFIX=C.storage.importRecoveryPrefix,app=document.getElementById('app');
 let DATA=null,view='home',selectedExamId=C.exam.defaultExamId,drill=null,renderedDate=E.localDate();
 
@@ -60,10 +61,16 @@ function runAction(a){if(a.kind==='drill')resumeDrill();else if(a.kind==='weak')
 function home(){
   const a=homeAction(),count=dailyCount(),remain=Math.max(0,TARGET-count),mastered=weakEntries().filter(function(x){return x[1].status==='mastered'}).length;
   setTimeout(function(){const b=document.getElementById('today-action');if(b)b.onclick=function(){runAction(a)}},0);
-  return '<section class="card hero"><div class="eyebrow">TODAY · STANDARD '+TARGET+' QUESTIONS</div><h2>今日やること</h2><p>'+h(a.note)+'</p><div class="daily-summary"><article><b>'+count+'問</b><small>今日の克服ドリル</small></article><article><b>'+(remain?'あと'+remain+'問':'達成')+'</b><small>標準目安まで</small></article><article><b>'+mastered+'件</b><small>克服済み</small></article></div>'+(a.kind==='complete'?'<span class="status-pill ok">✓ '+h(a.label)+'</span>':'<button class="primary" id="today-action">'+h(a.label)+'</button>')+'</section><section class="grid two"><div class="card"><h3>学習方針</h3><p><b>過去問 → 弱点抽出 → オリジナル類題 → 翌日定着確認</b></p><p class="muted">初回診断 FY26A。FY26Bは最終holdoutです。</p></div><div class="card"><h3>点数について</h3><p>公式配点が確認できないため点数換算はしません。</p><p class="muted">正答タスク数と弱点分野を記録します。</p></div></section>';
+  const todayContent='<div class="eyebrow">TODAY · STANDARD '+TARGET+' QUESTIONS</div><h2>今日やること</h2><p>'+h(a.note)+'</p><div class="daily-summary"><article><b>'+count+'問</b><small>今日の克服ドリル</small></article><article><b>'+TARGET+'問</b><small>標準目安</small></article><article><b>'+(remain?'あと'+remain+'問':'達成')+'</b><small>標準目安まで</small></article></div>'+(a.kind==='complete'?U.completionMark('✓ '+a.label):'<button class="primary" id="today-action">'+h(a.label)+'</button>');
+  return U.todayCard({complete:a.kind==='complete',contentHtml:todayContent})+'<section class="grid two"><div class="card"><h3>学習方針</h3><p><b>過去問 → 弱点抽出 → オリジナル類題 → 翌日定着確認</b></p><p class="muted">初回診断 FY26A。FY26Bは最終holdoutです。</p></div><div class="card"><h3>点数について</h3><p>公式配点が確認できないため点数換算はしません。</p><p class="muted">正答タスク数と弱点分野を記録します。</p></div></section>';
 }
 function route(){
-  return '<section class="card hero"><div class="eyebrow">LEARNING ROUTE</div><h2>学習ルート</h2><p>A/Bを別examIdで管理します。</p></section><section class="route-list">'+C.exam.route.map(function(id,i){const ex=examById(id),hold=id===C.exam.holdoutExamId,has=qsFor(id).length>0;return '<article class="card route-step '+(hold?'protected':'')+'"><div class="route-number">'+(i+1)+'</div><div class="route-main"><div class="row"><h3>'+id+'</h3><span class="badge '+(hold?'holdout':'')+'">'+h(P.routeRole(id))+'</span></div><p>'+ex.year+'年度 '+ex.schedule+'日程</p><p class="muted">'+(hold?'最終判定前は学習に使用しません。':has?'問題データ利用可能':'構造登録済み・問題本文整備中')+'</p>'+(has&&!hold?'<button onclick="__RIKKYO_APP__.openExam(\''+id+'\')">過去問を開く</button>':'')+'</div></article>'}).join('')+'</section>';
+  return '<section class="card hero"><div class="eyebrow">LEARNING ROUTE</div><h2>学習ルート</h2><p>A/Bを別examIdで管理します。</p></section><section class="route-list">'+C.exam.route.map(function(id,i){
+    const ex=examById(id),hold=id===C.exam.holdoutExamId,has=qsFor(id).length>0;
+    const description=ex.year+'年度 '+ex.schedule+'日程 · '+(hold?'最終判定前は学習に使用しません。':has?'問題データ利用可能':'構造登録済み・問題本文整備中');
+    const actionHtml=has&&!hold?'<button onclick="__RIKKYO_APP__.openExam(\''+id+'\')">過去問を開く</button>':'';
+    return U.routeStepCard({index:i+1,title:id,role:P.routeRole(id),status:hold?'初見温存中':has?'利用可能':'整備中',description:description,protectedCard:hold,actionHtml:actionHtml});
+  }).join('')+'</section>';
 }
 function exam(){
   const id=selectedExamId,ex=examById(id),paper=paperById(id),qs=qsFor(id),hold=id===C.exam.holdoutExamId;
@@ -106,7 +113,10 @@ function inputFor(q){
 }
 function questionCard(q){return '<article class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+'</span></div>'+(q.japanese?'<div class="jp">'+h(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+h(q.prompt)+'</div>':'')+inputFor(q)+'</article>'}
 function examAttempt(){
-  const a=S.currentAttempt,pass=DATA.passages.find(function(p){return p.passageId==='R26-ENG-A-P5'});return '<section class="attempt-bar"><div><b>'+a.examId+'</b><div class="tiny muted">過去問学習中 · 点数換算なし</div></div><button onclick="__RIKKYO_APP__.goto(\'home\')">保存して戻る</button></section><section class="card notice"><b>アプリ解答は非公式です。</b></section>'+(pass?'<details class="card"><summary><b>大問5 長文「A Rose」</b></summary><div class="passage">'+h(pass.text)+'</div></details>':'')+qsFor(a.examId).map(questionCard).join('')+'<section class="card"><button class="primary" onclick="__RIKKYO_APP__.submitAttempt()">解答を確認して弱点を登録</button></section>'
+  const a=S.currentAttempt,pass=DATA.passages.find(function(p){return p.passageId==='R26-ENG-A-P5'});
+  const summary='<div class=attempt-summary><b>'+h(a.examId)+'</b><span class=attempt-detail>過去問学習中 · 点数換算なし</span></div>';
+  const actions='<div class=attempt-actions><button onclick="__RIKKYO_APP__.goto(\'home\')">保存して戻る</button></div>';
+  return U.attemptBar({summaryHtml:summary,actionsHtml:actions})+'<section class="card notice"><b>アプリ解答は非公式です。</b></section>'+(pass?'<details class="card"><summary><b>大問5 長文「A Rose」</b></summary><div class="passage">'+h(pass.text)+'</div></details>':'')+qsFor(a.examId).map(questionCard).join('')+'<section class="card"><button class="primary" onclick="__RIKKYO_APP__.submitAttempt()">解答を確認して弱点を登録</button></section>';
 }
 function createWeak(q,r){const key=q.examId+':'+q.id,old=S.weak[key]||{},base=E.buildWrongWeaknessState(old,{year:examById(q.examId).year,id:q.id,label:qLabel(q),category:P.skillName(q.primarySkill),component:'main',skill:q.primarySkill,targetId:q.targetId,focusTag:q.targetId,examFormat:q.scoringType,trap:q.primarySkill,priority:P.resolveQuestionPriority(q),user:String(r==null?'':typeof r==='object'?JSON.stringify(r):r),today:today(),manualComponents:[]});base.examId=q.examId;base.questionId=q.id;delete base.points;S.weak[key]=base}
 function submitAttempt(){
@@ -115,7 +125,12 @@ function submitAttempt(){
   a.status='graded';a.gradedAt=now();a.correctCount=correct;a.totalTasks=qs.length;a.results=results;a.scoreModel='unscored';S.attempts.push(clone(a));S.currentAttempt=null;S.dailyPlan=null;save();goto('review')
 }
 
-function weakMarkup(key,w){return '<div class="weak-row '+w.status+'"><div class="row space"><div><b>'+h(w.examId)+' · '+h(w.label)+'</b><div class="muted">'+h(P.skillName(w.skill))+' · '+(w.status==='pending'?'定着確認 '+w.next:w.status==='mastered'?'克服済み':'練習中 '+(w.streak||0)+'/3')+'</div></div>'+(w.status!=='mastered'?'<button onclick="__RIKKYO_APP__.startWeak(\''+h(key)+'\')">'+(w.status==='pending'?'定着確認':'類題を解く')+'</button>':'<span class="badge ok">✓</span>')+'</div></div>'}
+function weakMarkup(key,w){
+  const stateText=w.status==='pending'?'定着確認 '+w.next:w.status==='mastered'?'克服済み':'練習中 '+(w.streak||0)+'/3';
+  const action=w.status!=='mastered'?'<button onclick="__RIKKYO_APP__.startWeak(\''+h(key)+'\')">'+(w.status==='pending'?'定着確認':'類題を解く')+'</button>':U.completionMark('✓ 克服済み');
+  const content='<div class="row space"><div><b>'+h(w.examId)+' · '+h(w.label)+'</b><div class="tiny"><span class=skill>'+h(P.skillName(w.skill))+'</span> ／ '+h(stateText)+'</div></div>'+action+'</div>';
+  return U.weaknessCard({assigned:false,contentHtml:content});
+}
 function review(){const rows=weakEntries().sort(weakSort);return '<section class="card hero"><div class="eyebrow">REVIEW</div><h2>間違い対策</h2><p>誤答分野を類題3問連続→翌日2問で確認します。</p></section><section class="card"><h3>弱点一覧</h3>'+(rows.length?rows.map(function(x){return weakMarkup(x[0],x[1])}).join(''):'<p class="muted">まだ弱点はありません。</p>')+'</section><section class="card"><h3>過去問履歴</h3>'+([...S.attempts].reverse().map(function(a){return '<div class="row space"><span><b>'+a.examId+'</b> · '+a.correctCount+'/'+a.totalTasks+'タスク</span></div>'}).join('')||'<p class="muted">記録なし</p>')+'</section>'}
 
 function pool(w){return E.selectPracticePool(DATA.practice,w,{minFamilies:5})}
@@ -134,9 +149,20 @@ function practiceInput(q){if(q.type==='choice')return '<div class="choice-grid">
 function finishPractice(){if(!drill||drill.answered)return;if(!String(drill.response||'').trim())return alert('解答を入力してください。');const q=drill.q,w=S.weak[drill.key],ok=practiceCorrect(q,drill.response);drill.answered=true;const t=E.advanceRemediationMastery(w,drill,ok,{today:today(),nextDay:plusDays(1),nowIso:now(),trainTarget:3,confirmTarget:2});if(t.needsConfirmationReserve)reserve(w,pool(w));drill.feedback={ok:ok,answer:q.type==='choice'?q.answer:q.answer||q.answerText,explanation:q.explanation};S.drillLog.push({key:drill.key,skill:w.skill,targetId:w.targetId,q:q.id,ok:ok,at:now(),mode:drill.mode});bumpDaily();save();render()}
 function continuePractice(){const w=S.weak[drill.key];if(w.status==='mastered'||(w.status==='pending'&&drill.mode==='train')){drill=null;save();return goto('home')}nextPractice();render()}
 function resumeDrill(){view='drill';render()}
-function drillView(){if(!drill){const rows=activeWeak().filter(eligible).sort(weakSort);return '<section class="card hero"><h2>克服ドリル</h2></section><section class="card">'+(rows.map(function(x){return weakMarkup(x[0],x[1])}).join('')||'<p class="muted">今日取り組める弱点はありません。</p>')+'</section>'}const w=S.weak[drill.key],q=drill.q;return '<section class="card drill-card"><div class="eyebrow">'+(drill.mode==='confirm'?'翌日定着確認':'弱点補強')+'</div><h2>'+h(P.skillName(w.skill))+'</h2><p class="muted">'+h(w.label)+' · '+(drill.mode==='confirm'?(w.confirmStreak||0)+'/2':(w.streak||0)+'/3')+'</p>'+(q.context?'<div class="practice-context">'+h(q.context)+'</div>':'')+'<h3>'+h(q.prompt)+'</h3>'+(!drill.answered?practiceInput(q)+'<button class="primary" onclick="__RIKKYO_APP__.finishPractice()">答えを確認</button>':'<div class="feedback '+(drill.feedback.ok?'good':'bad')+'"><b>'+(drill.feedback.ok?'✓ 正解':'✕ もう一度')+'</b><p>答え：'+h(drill.feedback.answer)+'</p><p>'+h(drill.feedback.explanation)+'</p></div><button class="primary" onclick="__RIKKYO_APP__.continuePractice()">次へ</button>')+'</section>'}
-function stats(){const m=weakEntries().filter(function(x){return x[1].status==='mastered'}).length;return '<section class="card hero"><h2>進捗</h2><p>公式得点ではなく学習履歴です。</p></section><section class="grid three"><div class="card"><div class="metric">'+S.attempts.length+'</div><div>過去問</div></div><div class="card"><div class="metric">'+weakEntries().length+'</div><div>弱点</div></div><div class="card"><div class="metric">'+m+'</div><div>克服済み</div></div></section>'}
-function guide(){return '<section class="card hero"><h2>使い方</h2><p>過去問→弱点→類題→翌日確認の順です。</p></section><section class="card warnbox"><b>非公式解答</b><p>学校公式解答・配点は未確認です。点数換算はしません。</p></section><section class="card badbox"><b>FY26B holdout</b><p>最終判定前は学習に使用しません。</p></section><section class="card backup-box"><h3>学習データのバックアップ</h3><p>立教英語専用JSONです。復元前の状態は端末内に3世代まで退避します。</p><div class="row"><button onclick="__RIKKYO_APP__.exportData()">バックアップを書き出す</button><label>復元方法 <select id="importMode"><option value="merge">現在データへ統合</option><option value="replace">現在データと置換</option></select></label><label class="file-button">バックアップを選ぶ<input type="file" accept="application/json,.json" onchange="__RIKKYO_APP__.importData(this)"></label></div></section>'}
+function drillView(){
+  if(!drill){const rows=activeWeak().filter(eligible).sort(weakSort);return '<section class="card hero"><h2>克服ドリル</h2></section><section class="card">'+(rows.map(function(x){return weakMarkup(x[0],x[1])}).join('')||'<p class="muted">今日取り組める弱点はありません。</p>')+'</section>'}
+  const w=S.weak[drill.key],q=drill.q,target=drill.mode==='confirm'?2:3,streak=drill.mode==='confirm'?(w.confirmStreak||0):(w.streak||0);
+  const content='<div class="row space drill-head"><div><div class=drill-mode>'+(drill.mode==='confirm'?'翌日の定着チェック':'類題反復')+'</div><h2>'+h(P.skillName(w.skill))+' 克服ドリル</h2></div><span class=streak-label>'+streak+'/'+target+' 連続正解</span></div>'+U.progressBar(streak,target)+'<p class=drill-origin>元の弱点：'+h(w.examId)+' · '+h(w.label)+'</p>'+(q.context?'<div class="practice-context">'+h(q.context)+'</div>':'')+'<h3 class=drill-prompt>'+h(q.prompt)+'</h3>'+(!drill.answered?practiceInput(q)+'<button class="primary" onclick="__RIKKYO_APP__.finishPractice()">答えを確認</button>':'<div class="feedback '+(drill.feedback.ok?'good':'bad')+'"><b>'+(drill.feedback.ok?'✓ 正解':'✕ もう一度')+'</b><p>答え：'+h(drill.feedback.answer)+'</p><p>'+h(drill.feedback.explanation)+'</p></div><button class="primary" onclick="__RIKKYO_APP__.continuePractice()">次へ</button>');
+  return U.drillCard({contentHtml:content});
+}
+function stats(){
+  const m=weakEntries().filter(function(x){return x[1].status==='mastered'}).length;
+  return '<section class="card hero"><h2>進捗</h2><p>公式得点ではなく学習履歴です。</p></section><section class="grid three">'+U.metricCard(S.attempts.length,'過去問')+U.metricCard(weakEntries().length,'弱点')+U.metricCard(m,'克服済み')+'</section>';
+}
+function guide(){
+  const backup=U.backupPanel({description:'立教英語専用JSONです。復元前の状態は端末内に3世代まで退避します。',exportOnclick:'__RIKKYO_APP__.exportData()',importOnchange:'__RIKKYO_APP__.importData(this)'});
+  return '<section class="card hero"><h2>使い方</h2><p>過去問→弱点→類題→翌日確認の順です。</p></section><section class="card warnbox"><b>非公式解答</b><p>学校公式解答・配点は未確認です。点数換算はしません。</p></section><section class="card badbox"><b>FY26B holdout</b><p>最終判定前は学習に使用しません。</p></section>'+backup;
+}
 function exportData(){const p={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',exportedAt:now(),state:clone(S)},b=new Blob([JSON.stringify(p,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='rikkyo-uk-english-'+today()+'.json';a.click();setTimeout(function(){URL.revokeObjectURL(u)},1000)}
 function recoveryKeys(){const keys=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.indexOf(IMPORT_RECOVERY_PREFIX+'.')===0)keys.push(k)}return keys.sort()}
 function saveImportRecovery(){const suffix=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(16).slice(2)),key=IMPORT_RECOVERY_PREFIX+'.'+Date.now()+'.'+suffix;localStorage.setItem(key,JSON.stringify(S));const keys=recoveryKeys();while(keys.length>3)localStorage.removeItem(keys.shift());return key}
