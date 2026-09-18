@@ -23,6 +23,7 @@ jobs:
       - run: node tests/supplied-reading-runtime.test.mjs
       - run: node tests/fy26b-holdout-source.test.mjs
       - run: node tests/source-coverage-status.test.mjs
+      - run: node tests/source-linked-presentation.test.mjs
       - run: node tests/writing-runtime-policy.test.mjs
       - run: node tests/final-release-readiness.test.mjs
       - run: node --check app.js
