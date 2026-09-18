@@ -15,6 +15,9 @@ jobs:
           node-version: 20
       - run: node tests/bootstrap-integrity.test.mjs
       - run: node tests/paper-structure.test.mjs
+      - run: node tests/rikkyo-adapter-contract.test.mjs
       - run: node --check engine/core.js
       - run: node --check engine/contract.js
       - run: node --check engine/bootstrap.js
+      - run: node --check schools/rikkyo/config.js
+      - run: node --check schools/rikkyo/policy.js
