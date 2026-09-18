@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "papers": {
+    "FY24A": {
+      "Q1": {
+        "type": "listening",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q2": {
+        "type": "guided_completion",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q3": {
+        "type": "word_order",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q4": {
+        "type": "error_correction",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q5": {
+        "type": "paraphrase",
+        "count": 3,
+        "sourceStatus": "visible"
+      },
+      "Q6": {
+        "type": "long_reading",
+        "count": 9,
+        "sourceStatus": "visible"
+      },
+      "Q7": {
+        "type": "unknown",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q8": {
+        "type": "unknown",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q9": {
+        "type": "writing_related",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      }
+    },
+    "FY24B": {
+      "Q1": {
+        "type": "listening",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q2": {
+        "type": "guided_completion",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q3": {
+        "type": "word_order",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q4": {
+        "type": "error_correction",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q5": {
+        "type": "paraphrase",
+        "count": 3,
+        "sourceStatus": "visible"
+      },
+      "Q6": {
+        "type": "long_reading",
+        "count": 8,
+        "sourceStatus": "visible"
+      },
+      "Q7": {
+        "type": "unknown",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q8": {
+        "type": "unknown",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q9": {
+        "type": "writing_related",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      }
+    },
+    "FY25A": {
+      "Q1": {
+        "type": "listening",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q2": {
+        "type": "guided_completion",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q3": {
+        "type": "word_order",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q4": {
+        "type": "error_correction",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q5": {
+        "type": "paraphrase",
+        "count": 3,
+        "sourceStatus": "visible"
+      },
+      "Q6": {
+        "type": "long_reading",
+        "count": 8,
+        "sourceStatus": "visible"
+      },
+      "Q7": {
+        "type": "unknown",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q8": {
+        "type": "unknown",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q9": {
+        "type": "picture_story_writing",
+        "count": 1,
+        "sourceStatus": "visible",
+        "approxWords": "80-100"
+      }
+    },
+    "FY25B": {
+      "Q1": {
+        "type": "listening",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q2": {
+        "type": "guided_completion",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q3": {
+        "type": "word_order",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q4": {
+        "type": "error_correction",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q5": {
+        "type": "paraphrase",
+        "count": 3,
+        "sourceStatus": "visible"
+      },
+      "Q6": {
+        "type": "long_reading",
+        "count": 8,
+        "sourceStatus": "visible"
+      },
+      "Q7": {
+        "type": "unknown",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q8": {
+        "type": "unknown",
+        "count": null,
+        "sourceStatus": "omitted_in_supplied_file"
+      },
+      "Q9": {
+        "type": "picture_story_writing",
+        "count": 1,
+        "sourceStatus": "visible",
+        "approxWords": "80-100"
+      }
+    },
+    "FY26A": {
+      "Q1": {
+        "type": "listening",
+        "count": 8,
+        "sourceStatus": "visible",
+        "subtypes": {
+          "multiple_choice": 4,
+          "short_answer": 4
+        }
+      },
+      "Q2": {
+        "type": "guided_completion",
+        "count": 5,
+        "sourceStatus": "visible"
+      },
+      "Q3": {
+        "type": "word_order",
+        "count": 5,
+        "sourceStatus": "visible"
+      },
+      "Q4": {
+        "type": "error_correction_rewrite",
+        "count": 5,
+        "sourceStatus": "visible",
+        "candidateSentences": 10
+      },
+      "Q5": {
+        "type": "long_reading",
+        "count": 8,
+        "sourceStatus": "visible"
+      },
+      "Q6": {
+        "type": "short_text_multiple_choice",
+        "count": 6,
+        "sourceStatus": "visible"
+      },
+      "Q7": {
+        "type": "reading_short_answer",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q8": {
+        "type": "open_writing",
+        "count": 1,
+        "sourceStatus": "visible",
+        "approxWords": "80-100"
+      }
+    },
+    "FY26B": {
+      "Q1": {
+        "type": "listening",
+        "count": 8,
+        "sourceStatus": "visible",
+        "subtypes": {
+          "multiple_choice": 4,
+          "short_answer": 4
+        }
+      },
+      "Q2": {
+        "type": "guided_completion",
+        "count": 5,
+        "sourceStatus": "visible"
+      },
+      "Q3": {
+        "type": "word_order",
+        "count": 5,
+        "sourceStatus": "visible"
+      },
+      "Q4": {
+        "type": "error_correction_rewrite",
+        "count": 5,
+        "sourceStatus": "visible",
+        "candidateSentences": 10
+      },
+      "Q5": {
+        "type": "long_reading",
+        "count": 8,
+        "sourceStatus": "visible"
+      },
+      "Q6": {
+        "type": "short_text_multiple_choice",
+        "count": 6,
+        "sourceStatus": "visible"
+      },
+      "Q7": {
+        "type": "reading_short_answer",
+        "count": 4,
+        "sourceStatus": "visible"
+      },
+      "Q8": {
+        "type": "open_writing",
+        "count": 1,
+        "sourceStatus": "visible",
+        "approxWords": "80-100"
+      }
+    }
+  }
+}
