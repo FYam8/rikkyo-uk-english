@@ -133,8 +133,8 @@ function exam(){
   let detail='';
   if(hold)detail='<div class="badbox"><b>最終判定用holdout</b><p>問題本文の転記・非公式解答監査は別データとして完了していますが、最終判定前の学習には公開しません。リスニングは音源未入手のため採点対象外です。</p></div>';
   else if(qs.length){
-    const subsetNote=subset?'<div class="warnbox"><b>原本subset</b><p>'+h(sourceCoverageNote(id))+'</p></div>':'';
-    detail='<div class="notice"><b>非公式解答</b><p>原本から独立に検討したアプリ解答で、学校公式解答ではありません。</p></div>'+subsetNote+'<p>学習タスク: <b>'+qs.length+'</b></p><button class="primary" onclick="__RIKKYO_APP__.beginAttempt(\''+id+'\')">この過去問を始める</button>';
+    const runtimeNote=ex.runtimeNotice?'<div class="warnbox"><b>'+(subset?'原本subset':'現在の実施範囲')+'</b><p>'+h(ex.runtimeNotice)+'</p></div>':'';
+    detail='<div class="notice"><b>非公式解答</b><p>原本から独立に検討したアプリ解答で、学校公式解答ではありません。</p></div>'+runtimeNote+'<p>学習タスク: <b>'+qs.length+'</b></p><button class="primary" onclick="__RIKKYO_APP__.beginAttempt(\''+id+'\')">この過去問を始める</button>';
   }else detail='<div class="warnbox">'+h(sourceCoverageNote(id))+'</div>';
   return '<section class="card hero"><div class="eyebrow">PAST EXAMS</div><h2>過去問</h2></section><section class="exam-list">'+cards+'</section><section class="card"><h2>'+id+' · '+h(P.routeRole(id))+'</h2><p>'+ex.year+'年度 '+ex.schedule+'日程 ／ supplied pages: '+paper.pageCount+'</p>'+detail+'</section>';
 }
@@ -181,9 +181,9 @@ function examAttempt(){
   const majors=Array.isArray(ex.runtimeMajors)?ex.runtimeMajors:[],scope=a.runtimeMode==='supplied_subset'?(majors.length?'原本Q'+majors[0]+'-Q'+majors[majors.length-1]+' subset':'原本subset'):'過去問学習中';
   const summary='<div class=attempt-summary><b>'+h(a.examId)+'</b><span class=attempt-detail>'+h(scope)+' · 点数換算なし</span></div>';
   const actions='<div class=attempt-actions><button onclick="__RIKKYO_APP__.goto(\'home\')">保存して戻る</button></div>';
-  const subsetNotice=a.runtimeMode==='supplied_subset'?'<section class="card warnbox"><b>原本subset</b><p>'+h(ex.runtimeNotice||'この年度は原本で利用可能な範囲のみを出題します。')+'</p></section>':'';
+  const runtimeNotice=ex.runtimeNotice?'<section class="card warnbox"><b>'+(a.runtimeMode==='supplied_subset'?'原本subset':'現在の実施範囲')+'</b><p>'+h(ex.runtimeNotice)+'</p></section>':'';
   const passageHtml=passes.map(function(pass){return '<details class="card"><summary><b>'+h(pass.title||'長文')+'</b></summary><div class="passage">'+h(pass.text)+'</div></details>'}).join('');
-  return U.attemptBar({summaryHtml:summary,actionsHtml:actions})+'<section class="card notice"><b>アプリ解答は非公式です。</b></section>'+subsetNotice+passageHtml+qsFor(a.examId).map(questionCard).join('')+'<section class="card"><button class="primary" onclick="__RIKKYO_APP__.submitAttempt()">解答を確認して弱点を登録</button></section>';
+  return U.attemptBar({summaryHtml:summary,actionsHtml:actions})+'<section class="card notice"><b>アプリ解答は非公式です。</b></section>'+runtimeNotice+passageHtml+qsFor(a.examId).map(questionCard).join('')+'<section class="card"><button class="primary" onclick="__RIKKYO_APP__.submitAttempt()">解答を確認して弱点を登録</button></section>';
 }
 function createWeak(q,r){const key=q.examId+':'+q.id,old=S.weak[key]||{},base=E.buildWrongWeaknessState(old,{year:examById(q.examId).year,id:q.id,label:qLabel(q),category:P.skillName(q.primarySkill),component:'main',skill:q.primarySkill,targetId:q.targetId,focusTag:q.targetId,examFormat:q.scoringType,trap:q.primarySkill,priority:P.resolveQuestionPriority(q),user:String(r==null?'':typeof r==='object'?JSON.stringify(r):r),today:today(),manualComponents:[]});base.examId=q.examId;base.questionId=q.id;delete base.points;S.weak[key]=base}
 function submitAttempt(){
