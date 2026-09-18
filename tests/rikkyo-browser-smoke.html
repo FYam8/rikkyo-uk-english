@@ -133,8 +133,8 @@
    await new Promise(r=>setTimeout(r,50));
    const text=frame.contentDocument.body.textContent;
    if(!text.includes('原本subset'))fail('source subset notice missing');
-   if(!text.includes('原本上の未提供'))fail('source limitation wording missing');
-   if(!text.includes('Q7'))fail('known source-missing section not surfaced');
+   if(!text.includes('リスニング')||!text.includes('省略部'))fail('source limitation wording missing');
+   if(!text.includes('完全版として扱わない'))fail('partial-source warning missing');
    if(!text.includes('この過去問を始める'))fail('audited source subset not enabled');
    a.openExam('FY26B');
    await new Promise(r=>setTimeout(r,50));
