@@ -77,7 +77,6 @@ assert.ok(app.includes("const U=window.ENGLISH_UI_COMPONENTS"));
 assert.ok(app.includes("fy26a-late-runtime"));
 assert.ok(app.includes("supplied-reading-runtime"));
 assert.ok(app.includes("manual_reading"));
-assert.ok(app.includes("unavailable")===false || true);
 
 const index=read('index.html');
 assert.ok(index.includes('ui/base.css'));
