@@ -24,18 +24,37 @@
    a.openExam('FY24A');
    a.beginAttempt('FY24A');
    a.goto('exam');
-   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===15);
+   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===24);
    const text=frame.contentDocument.body.textContent;
-   if(!text.includes('原本Q2-Q5 subset'))fail('subset attempt scope missing');
+   if(!text.includes('原本Q2-Q6 subset'))fail('subset attempt scope missing');
    if(!text.includes('原本subset'))fail('subset limitation notice missing');
-   if(frame.contentDocument.querySelectorAll('.question').length!==15)fail('FY24A subset question count');
+   if(!text.includes('The Shoemaker and the Elves'))fail('FY24A supplied passage missing');
+   if(frame.contentDocument.querySelectorAll('.question').length!==24)fail('FY24A subset question count');
    a.submitAttempt();
    await wait(()=>a.getState().attempts.some(x=>x.examId==='FY24A'));
-   if(Object.keys(a.getState().weak).length!==15)fail('FY24A subset weakness count');
+   if(Object.keys(a.getState().weak).length!==24)fail('FY24A subset weakness count');
    const first=Object.keys(a.getState().weak)[0];
    a.startWeak(first);
    await wait(()=>a.getState().currentDrill?.q?.id);
    if(!a.getState().currentDrill.q.id)fail('subset weakness has no practice');
+ }
+ if(scenario==='reading'){
+   a.openExam('FY25A');
+   a.beginAttempt('FY25A');
+   a.goto('exam');
+   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===23);
+   const doc=frame.contentDocument;
+   if(!doc.body.textContent.includes('A Gift from Nature'))fail('FY25A supplied passage missing');
+   const manual=doc.querySelector('textarea');
+   if(!manual)fail('manual reading textarea missing');
+   const manualId=a.data().questions.find(q=>q.examId==='FY25A'&&q.scoringType==='manual_reading')?.id;
+   if(!manualId)fail('manual reading record missing');
+   a.setResponse(manualId,'Goldie liked seeing the apple tree from the living room.');
+   a.submitAttempt();
+   await wait(()=>a.getState().attempts.some(x=>x.examId==='FY25A'));
+   const attempt=a.getState().attempts.find(x=>x.examId==='FY25A');
+   if(attempt.totalTasks!==23)fail('FY25A reading task count');
+   if(attempt.results[manualId]!==true)fail('manual reading self-check result');
  }
  if(scenario==='renderer'){
    a.beginAttempt('FY26A');
