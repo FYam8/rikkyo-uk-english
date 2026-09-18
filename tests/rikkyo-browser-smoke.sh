@@ -11,7 +11,7 @@ SERVER_PID=$!
 for _ in {1..30}; do curl -fsS "http://127.0.0.1:$PORT/tests/rikkyo-browser-smoke.html" >/dev/null && break; sleep .2; done
 CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
 [[ -n "$CHROME" ]] || { echo "Chrome/Chromium not available" >&2; exit 1; }
-for scenario in fresh attempt drill resume backup mobile holdout; do
+for scenario in fresh attempt renderer drill resume backup mobile holdout; do
   DOM="$TMP/$scenario.html"
   "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="$TMP/profile-$scenario" --virtual-time-budget=8000 --dump-dom "http://127.0.0.1:$PORT/tests/rikkyo-browser-smoke.html?case=$scenario" >"$DOM" 2>"$TMP/$scenario.log"
   grep -q 'data-test-result="CLEAN"' "$DOM" || { echo "Rikkyo browser smoke failed: $scenario" >&2; grep -o 'Rikkyo browser smoke: FAIL:[^<]*' "$DOM" >&2 || true; cat "$TMP/$scenario.log" >&2; exit 1; }
