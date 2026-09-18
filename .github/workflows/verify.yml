@@ -18,6 +18,7 @@ jobs:
       - run: node tests/rikkyo-adapter-contract.test.mjs
       - run: node tests/shared-ui-migration-hold.test.mjs
       - run: node tests/fy26a-mvp-data.test.mjs
+      - run: node tests/fy26a-late-runtime.test.mjs
       - run: node tests/supplied-source-coverage.test.mjs
       - run: node tests/supplied-reading-runtime.test.mjs
       - run: node tests/fy26b-holdout-source.test.mjs
