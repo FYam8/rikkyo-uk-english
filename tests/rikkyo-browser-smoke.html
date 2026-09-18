@@ -89,6 +89,19 @@
    const root=doc.documentElement;
    if(root.scrollWidth>root.clientWidth+2)fail('mobile horizontal overflow');
  }
+ if(scenario==='coverage'){
+   a.openExam('FY24A');
+   await new Promise(r=>setTimeout(r,50));
+   const text=frame.contentDocument.body.textContent;
+   if(!text.includes('原本で確認できる範囲は転記・監査済みです'))fail('source coverage notice missing');
+   if(!text.includes('Q7'))fail('known source-missing section not surfaced');
+   if(text.includes('この過去問を始める'))fail('partial source exam incorrectly enabled');
+   a.openExam('FY26B');
+   await new Promise(r=>setTimeout(r,50));
+   const holdoutText=frame.contentDocument.body.textContent;
+   if(!holdoutText.includes('最終判定用holdout'))fail('holdout notice missing');
+   if(!holdoutText.includes('リスニングは音源未入手'))fail('listening limitation missing');
+ }
  if(scenario==='holdout'){
    a.beginAttempt('FY26B');
    if(a.getState().currentAttempt)fail('holdout opened');
