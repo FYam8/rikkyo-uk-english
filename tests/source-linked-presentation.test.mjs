@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const json=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+const late=json('data/fy26a-late-runtime.json');
+const practice=json('data/practice.json');
+const allStrings=value=>typeof value==='string'?[value]:Array.isArray(value)?value.flatMap(allStrings):value&&typeof value==='object'?Object.values(value).flatMap(allStrings):[];
+for(const s of [...allStrings(late),...allStrings(practice)])assert.equal(s.includes('\\n'),false,'literal \\n must not remain in runtime source text');
+const q65=late.records.find(x=>x.id==='R26-ENG-A-Q6-5'),q66=late.records.find(x=>x.id==='R26-ENG-A-Q6-6');
+assert.ok(q65&&q66);
+assert.equal(q65.context,q66.context,'shared email source should be identical for dedupe');
+assert.ok(q65.context.includes('\nThanks,\nMaria'),'email source should contain real line breaks');
+console.log('Rikkyo source-linked presentation data: CLEAN');

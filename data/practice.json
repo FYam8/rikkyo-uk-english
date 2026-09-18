@@ -548,7 +548,7 @@
       "familyId": "practice-st-01",
       "skill": "short_text_multiple_choice",
       "type": "choice",
-      "context": "MUSIC CLUB NOTICE\\nFriday practice will be in Room 8 instead of the hall. Please arrive by 3:45 p.m.",
+      "context": "MUSIC CLUB NOTICE\nFriday practice will be in Room 8 instead of the hall. Please arrive by 3:45 p.m.",
       "prompt": "Where will the club practise?",
       "options": [
         {
@@ -606,7 +606,7 @@
       "familyId": "practice-st-03",
       "skill": "short_text_multiple_choice",
       "type": "choice",
-      "context": "SCIENCE ROOM\\nSafety glasses must be worn during experiments. Food and drinks are not allowed.",
+      "context": "SCIENCE ROOM\nSafety glasses must be worn during experiments. Food and drinks are not allowed.",
       "prompt": "What is not allowed?",
       "options": [
         {
@@ -664,7 +664,7 @@
       "familyId": "practice-st-05",
       "skill": "short_text_multiple_choice",
       "type": "choice",
-      "context": "BOOK SALE\\nUsed books will be sold in the school entrance on Monday. The money will be used to buy new books for the library.",
+      "context": "BOOK SALE\nUsed books will be sold in the school entrance on Monday. The money will be used to buy new books for the library.",
       "prompt": "Why is the school holding the sale?",
       "options": [
         {

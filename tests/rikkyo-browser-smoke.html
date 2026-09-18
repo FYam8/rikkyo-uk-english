@@ -79,6 +79,19 @@
    if(!doc.querySelector('.answer-sheet-body'))fail('shared answer panel body missing');
    if(!doc.querySelector('.paper-page'))fail('shared paper page missing');
    if(!doc.querySelector('header')||!doc.querySelector('nav')||!doc.querySelector('footer'))fail('shared shell missing');
+   const rose=[...doc.querySelectorAll('.source-block-title b')].find(x=>x.textContent.includes('A Rose'));if(!rose)fail('A Rose source block missing');
+   const q2=doc.getElementById('problem-R26-ENG-A-Q2-1'),q5=doc.getElementById('problem-R26-ENG-A-Q5-1'),roseBlock=rose.closest('.source-block');
+   if(!(q2.compareDocumentPosition(roseBlock)&Node.DOCUMENT_POSITION_FOLLOWING))fail('A Rose shown before Q2');
+   if(!(roseBlock.compareDocumentPosition(q5)&Node.DOCUMENT_POSITION_FOLLOWING))fail('A Rose not linked before Q5');
+   const problemText=doc.querySelector('.problem-column').textContent;
+   if(problemText.includes('\\n'))fail('literal slash-n leaked into problem UI');
+   if((problemText.match(/Hi Alex,/g)||[]).length!==1)fail('repeated Q6 email context');
+   if((problemText.match(/Saturday Support Club/g)||[]).length!==1)fail('repeated Q6 support context');
+   const reorder=doc.querySelector('#answer-R26-ENG-A-Q3-1 .reorder-answer');if(!reorder)fail('interactive word-order UI missing');
+   a.setWordOrderMissing('R26-ENG-A-Q3-1','had');
+   a.addWordOrderToken('R26-ENG-A-Q3-1',0);a.addWordOrderToken('R26-ENG-A-Q3-1',4);a.addWordOrderToken('R26-ENG-A-Q3-1',1);a.addWordOrderMissing('R26-ENG-A-Q3-1');a.addWordOrderToken('R26-ENG-A-Q3-1',5);a.addWordOrderToken('R26-ENG-A-Q3-1',2);a.addWordOrderToken('R26-ENG-A-Q3-1',3);
+   await new Promise(r=>setTimeout(r,50));
+   const wr=a.getState().currentAttempt.responses['R26-ENG-A-Q3-1'];if(!wr||wr.order.length!==7||wr.missing!=='had')fail('word-order state did not build');
  }
  if(scenario==='drill'||scenario==='resume'){
    const key=Object.keys(a.getState().weak)[0];a.startWeak(key);

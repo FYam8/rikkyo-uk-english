@@ -89,6 +89,10 @@ assert.ok(app.includes('U.answerPanel'));
 assert.ok(app.includes('U.paperPage'));
 assert.ok(app.includes('timerMarkup'));
 assert.ok(app.includes('futureConfirmationMarkup'));
+assert.ok(app.includes('renderProblemFlow'));
+assert.ok(app.includes('wordOrderInput'));
+assert.ok(app.includes('addWordOrderToken'));
+assert.ok(app.includes('sourceText'));
 
 const index=read('index.html');
 assert.ok(index.includes('ui/base.css'));

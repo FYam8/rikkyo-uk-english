@@ -80,7 +80,7 @@
       "primarySkill": "short_text_multiple_choice",
       "scoringType": "single_choice",
       "prompt": "Where is the study support taking place?",
-      "context": "Saturday Support Club\\nCome to the library between 10am and 1pm for quiet study and free tutoring. Teachers will be available to help with maths, science, and English. Bring your class books and notes. Snacks and drinks are not allowed in the library.",
+      "context": "Saturday Support Club\nCome to the library between 10am and 1pm for quiet study and free tutoring. Teachers will be available to help with maths, science, and English. Bring your class books and notes. Snacks and drinks are not allowed in the library.",
       "options": [
         {
           "id": "A",
@@ -112,7 +112,7 @@
       "primarySkill": "short_text_multiple_choice",
       "scoringType": "single_choice",
       "prompt": "What is not allowed in the library?",
-      "context": "Saturday Support Club\\nCome to the library between 10am and 1pm for quiet study and free tutoring. Teachers will be available to help with maths, science, and English. Bring your class books and notes. Snacks and drinks are not allowed in the library.",
+      "context": "Saturday Support Club\nCome to the library between 10am and 1pm for quiet study and free tutoring. Teachers will be available to help with maths, science, and English. Bring your class books and notes. Snacks and drinks are not allowed in the library.",
       "options": [
         {
           "id": "A",
@@ -144,7 +144,7 @@
       "primarySkill": "short_text_multiple_choice",
       "scoringType": "single_choice",
       "prompt": "What topic has Maria been researching?",
-      "context": "Hi Alex,\\nDon’t forget our history project is due on Monday. I’ve finished my research on the Industrial Revolution, but we still need to make the presentation slides together. Can we meet after school on Friday? Oh, and I hope you enjoy the War Museum this weekend. I found the poster exhibition really fascinating when I went last month.\\nThanks,\\nMaria",
+      "context": "Hi Alex,\nDon’t forget our history project is due on Monday. I’ve finished my research on the Industrial Revolution, but we still need to make the presentation slides together. Can we meet after school on Friday? Oh, and I hope you enjoy the War Museum this weekend. I found the poster exhibition really fascinating when I went last month.\nThanks,\nMaria",
       "options": [
         {
           "id": "A",
@@ -176,7 +176,7 @@
       "primarySkill": "short_text_multiple_choice",
       "scoringType": "single_choice",
       "prompt": "What do Maria and Alex still need to do?",
-      "context": "Hi Alex,\\nDon’t forget our history project is due on Monday. I’ve finished my research on the Industrial Revolution, but we still need to make the presentation slides together. Can we meet after school on Friday? Oh, and I hope you enjoy the War Museum this weekend. I found the poster exhibition really fascinating when I went last month.\\nThanks,\\nMaria",
+      "context": "Hi Alex,\nDon’t forget our history project is due on Monday. I’ve finished my research on the Industrial Revolution, but we still need to make the presentation slides together. Can we meet after school on Friday? Oh, and I hope you enjoy the War Museum this weekend. I found the poster exhibition really fascinating when I went last month.\nThanks,\nMaria",
       "options": [
         {
           "id": "A",
