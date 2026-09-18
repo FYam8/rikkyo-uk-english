@@ -19,6 +19,7 @@ jobs:
       - run: node tests/shared-ui-migration-hold.test.mjs
       - run: node tests/fy26a-mvp-data.test.mjs
       - run: node tests/supplied-source-coverage.test.mjs
+      - run: node tests/supplied-reading-runtime.test.mjs
       - run: node tests/fy26b-holdout-source.test.mjs
       - run: node tests/source-coverage-status.test.mjs
       - run: node --check app.js
