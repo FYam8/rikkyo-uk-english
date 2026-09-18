@@ -1,11 +1,19 @@
 {
   "schemaVersion": 1,
   "deployAllowed": false,
-  "reason": "Shared UI v1.0.0 is pinned and wired. Production remains blocked until Rikkyo renderer/data/mobile compatibility and two consecutive CLEAN loops are complete.",
+  "reason": "Shared Engine v1.1 and Shared UI v1.0.0 are pinned and wired. Renderer/mobile/browser compatibility is clean; production remains blocked by remaining source/answer coverage and final two-CLEAN release loops.",
   "blockers": [
-    "Rikkyo question renderer compatibility",
     "remaining past-paper/answer coverage",
-    "full desktop/mobile browser parity",
     "two consecutive CLEAN loops"
+  ],
+  "completedGates": [
+    "Shared Engine v1.1 pinned",
+    "Shared UI v1.0.0 pinned",
+    "Rikkyo storage/cloud isolation",
+    "FY26B holdout isolation",
+    "Rikkyo question renderer compatibility",
+    "desktop browser parity",
+    "mobile browser parity",
+    "backup/import browser parity"
   ]
 }
