@@ -1,0 +1,1105 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "supplied-reading-runtime-v1",
+  "records": [
+    {
+      "id": "R24-ENG-A-Q6-1",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 1,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-1",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "single_choice",
+      "prompt": "下線部(1)の気持ちを最もよく表しているものを1つ選びなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "この革では良い靴は作れないので、他の革を探した方がよい。"
+        },
+        {
+          "id": "イ",
+          "text": "今夜無理をして靴を作らないで、明日作ればよい。"
+        },
+        {
+          "id": "ウ",
+          "text": "靴職人の仕事をやめて、他の仕事を探した方がよい。"
+        },
+        {
+          "id": "エ",
+          "text": "全てが上手く運ぶようになるまで靴を作らなくてよい。"
+        }
+      ],
+      "answerSpec": {
+        "choice": "イ"
+      }
+    },
+    {
+      "id": "R24-ENG-A-Q6-2",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 2,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-2",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "word_order",
+      "prompt": "4人の小妖精たちが家に来て、作業場の窓の外で二人が話しているのを聞いた、という意味になるように並べ替えなさい。",
+      "tokens": [
+        "them",
+        "heard",
+        "of",
+        "outside",
+        "and",
+        "their house",
+        "the window",
+        "came to",
+        "talking"
+      ],
+      "answerSpec": {
+        "sentence": "four elves came to their house and heard them talking outside the window of the workshop"
+      }
+    },
+    {
+      "id": "R24-ENG-A-Q6-3",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 3,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-3",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "context_text",
+      "prompt": "下線部(3) fly を適切な形にしなさい。",
+      "answerSpec": {
+        "accepted": [
+          "flew"
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-A-Q6-4",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 4,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-4",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "single_choice",
+      "prompt": "靴職人が何も言わず笑った理由として最も適切なものを選びなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "Because he wanted to sell the shoes to the merchant."
+        },
+        {
+          "id": "イ",
+          "text": "Because the merchant wanted to buy the shoes."
+        },
+        {
+          "id": "ウ",
+          "text": "Because someone else made the shoes."
+        },
+        {
+          "id": "エ",
+          "text": "Because he thought that the shoes were expensive."
+        }
+      ],
+      "answerSpec": {
+        "choice": "ウ"
+      }
+    },
+    {
+      "id": "R24-ENG-A-Q6-5",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 5,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-5",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "context_text",
+      "prompt": "下線部(5)の空所に適切な語を入れなさい。",
+      "answerSpec": {
+        "accepted": [
+          "which",
+          "that"
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-A-Q6-6",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 6,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-6",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "context_text",
+      "prompt": "I love this shirt. とほぼ同じ意味になるよう、fで始まる語を入れなさい。",
+      "answerSpec": {
+        "accepted": [
+          "favorite",
+          "favourite"
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-A-Q6-7",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 7,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-7",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "single_choice",
+      "prompt": "They all agreed. が入る場所を選びなさい。",
+      "options": [
+        {
+          "id": "A",
+          "text": "[A]"
+        },
+        {
+          "id": "B",
+          "text": "[B]"
+        },
+        {
+          "id": "C",
+          "text": "[C]"
+        },
+        {
+          "id": "D",
+          "text": "[D]"
+        }
+      ],
+      "answerSpec": {
+        "choice": "A"
+      }
+    },
+    {
+      "id": "R24-ENG-A-Q6-8",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 8,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-8",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "multi_slot_text",
+      "prompt": "本文の出来事を起きた順に並べた時、2番目と4番目の記号を書きなさい。ア merchant bought shoes / イ shoemaker and wife made gifts / ウ elves continued making shoes / エ shoemaker and wife discovered who made shoes / オ elves first made shoes to help.",
+      "answerSpec": {
+        "slots": [
+          [
+            "ア"
+          ],
+          [
+            "エ"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-A-Q6-9",
+      "examId": "FY24A",
+      "majorQuestion": 6,
+      "minorQuestion": 9,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24a-reading-9",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-A-P6",
+      "scoringType": "multiple_choice",
+      "prompt": "本文の内容と異なるものを3つ選びなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "靴職人はもともと貧しかったので、靴を作るための革が1枚しかなかった。"
+        },
+        {
+          "id": "イ",
+          "text": "小妖精たちが最初に作った靴を買ったのは、隣町に住んでいる商人だった。"
+        },
+        {
+          "id": "ウ",
+          "text": "靴職人が作った美しい靴は、作るたびにその日のうちに全て売れてしまった。"
+        },
+        {
+          "id": "エ",
+          "text": "誰が靴を作っているのか見つけ出そうと言ったのは、靴職人だった。"
+        },
+        {
+          "id": "オ",
+          "text": "小妖精たちは、作ってもらった服を喜んで着て窓から飛んで出て行った。"
+        }
+      ],
+      "answerSpec": {
+        "choices": [
+          "ア",
+          "ウ",
+          "オ"
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-B-Q6-1",
+      "examId": "FY24B",
+      "majorQuestion": 6,
+      "minorQuestion": 1,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24b-reading-1",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-B-P6",
+      "scoringType": "word_order",
+      "prompt": "「屋根と天井を修理するのにどのくらいの費用がかかりますか。」となるよう並べ替えなさい。",
+      "tokens": [
+        "the roof",
+        "the ceiling",
+        "it",
+        "to",
+        "and",
+        "will",
+        "much",
+        "repair",
+        "cost"
+      ],
+      "answerSpec": {
+        "sentence": "How much will it cost to repair the roof and the ceiling?"
+      }
+    },
+    {
+      "id": "R24-ENG-B-Q6-2",
+      "examId": "FY24B",
+      "majorQuestion": 6,
+      "minorQuestion": 2,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24b-reading-2",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-B-P6",
+      "scoringType": "context_text",
+      "prompt": "下線部(2) didn't の後に省略されている表現を書きなさい。",
+      "answerSpec": {
+        "accepted": [
+          "run away"
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-B-Q6-3",
+      "examId": "FY24B",
+      "majorQuestion": 6,
+      "minorQuestion": 3,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24b-reading-3",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-B-P6",
+      "scoringType": "word_order",
+      "prompt": "「誰の猫なのだろうと思った」となるよう並べ替えなさい。",
+      "tokens": [
+        "was",
+        "whose",
+        "it",
+        "cat"
+      ],
+      "answerSpec": {
+        "sentence": "whose cat it was"
+      }
+    },
+    {
+      "id": "R24-ENG-B-Q6-4",
+      "examId": "FY24B",
+      "majorQuestion": 6,
+      "minorQuestion": 4,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24b-reading-4",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-B-P6",
+      "scoringType": "multi_slot_text",
+      "prompt": "It's a lovely cat, (a)(b)? の(a)(b)を答えなさい。",
+      "answerSpec": {
+        "slots": [
+          [
+            "isn't"
+          ],
+          [
+            "it"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-B-Q6-5",
+      "examId": "FY24B",
+      "majorQuestion": 6,
+      "minorQuestion": 5,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24b-reading-5",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-B-P6",
+      "scoringType": "context_text",
+      "prompt": "下線部(5) the postman's words が指す1文を本文から抜き出しなさい。",
+      "answerSpec": {
+        "accepted": [
+          "Black cats may bring us a good luck!"
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-B-Q6-6",
+      "examId": "FY24B",
+      "majorQuestion": 6,
+      "minorQuestion": 6,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24b-reading-6",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-B-P6",
+      "scoringType": "multi_slot_text",
+      "prompt": "A-1〜A-4に入る語を順に入力しなさい（As / After / So / Though）。",
+      "answerSpec": {
+        "slots": [
+          [
+            "So"
+          ],
+          [
+            "Though"
+          ],
+          [
+            "As"
+          ],
+          [
+            "After"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-B-Q6-7",
+      "examId": "FY24B",
+      "majorQuestion": 6,
+      "minorQuestion": 7,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24b-reading-7",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-B-P6",
+      "scoringType": "multi_slot_text",
+      "prompt": "B-1〜B-4に入る発言の記号を順に入力しなさい。ア Of course, yes. / イ It's a good idea. / ウ Oh, thank you. / エ I have no idea.",
+      "answerSpec": {
+        "slots": [
+          [
+            "エ"
+          ],
+          [
+            "イ"
+          ],
+          [
+            "ウ"
+          ],
+          [
+            "ア"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "R24-ENG-B-Q6-8",
+      "examId": "FY24B",
+      "majorQuestion": 6,
+      "minorQuestion": 8,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy24b-reading-8",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R24-ENG-B-P6",
+      "scoringType": "multiple_choice",
+      "prompt": "本文の内容と一致するものを2つ選びなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "8月の前半と後半とでは天気が全く違った。"
+        },
+        {
+          "id": "イ",
+          "text": "黒猫は、初めてヘレンを見た時、他の猫と同様に瞬間的に逃げて行った。"
+        },
+        {
+          "id": "ウ",
+          "text": "黒猫は、ヘレンの庭に来た時はいつも椅子の上にすわっていた。"
+        },
+        {
+          "id": "エ",
+          "text": "黒猫が前を横切ると不運がおとずれると考えている人たちがいる。"
+        }
+      ],
+      "answerSpec": {
+        "choices": [
+          "ア",
+          "エ"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-A-Q6-1",
+      "examId": "FY25A",
+      "majorQuestion": 6,
+      "minorQuestion": 1,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25a-reading-1",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-A-P6",
+      "scoringType": "context_text",
+      "prompt": "He had a parrot ( ) Goldie. の空所に適切な語を入れなさい。",
+      "answerSpec": {
+        "accepted": [
+          "named",
+          "called"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-A-Q6-2",
+      "examId": "FY25A",
+      "majorQuestion": 6,
+      "minorQuestion": 2,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25a-reading-2",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-A-P6",
+      "scoringType": "context_text",
+      "prompt": "下線部(2) catch を適切な形にしなさい。",
+      "answerSpec": {
+        "accepted": [
+          "caught"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-A-Q6-3",
+      "examId": "FY25A",
+      "majorQuestion": 6,
+      "minorQuestion": 3,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25a-reading-3",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-A-P6",
+      "scoringType": "context_text",
+      "prompt": "pass away soon と同じ意味の語句を本文から抜き出しなさい。",
+      "answerSpec": {
+        "accepted": [
+          "took its last breath"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-A-Q6-4",
+      "examId": "FY25A",
+      "majorQuestion": 6,
+      "minorQuestion": 4,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25a-reading-4",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": false,
+      "passageId": "R25-ENG-A-P6",
+      "scoringType": "manual_reading",
+      "prompt": "マークがGoldieをリンゴの木の下に埋めた理由を説明しなさい。",
+      "answerSpec": {
+        "guidance": "Goldie liked to see the apple tree through the windows of the living room when he was alive."
+      }
+    },
+    {
+      "id": "R25-ENG-A-Q6-5",
+      "examId": "FY25A",
+      "majorQuestion": 6,
+      "minorQuestion": 5,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25a-reading-5",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-A-P6",
+      "scoringType": "word_order",
+      "prompt": "「マークはデイジーがえさを食べているのを見てとても嬉しかった。」となるよう並べ替えなさい。",
+      "tokens": [
+        "to",
+        "Mark",
+        "Daisy",
+        "mealworms",
+        "was",
+        "eating",
+        "very",
+        "see",
+        "glad"
+      ],
+      "answerSpec": {
+        "sentence": "Mark was very glad to see Daisy eating mealworms."
+      }
+    },
+    {
+      "id": "R25-ENG-A-Q6-6",
+      "examId": "FY25A",
+      "majorQuestion": 6,
+      "minorQuestion": 6,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25a-reading-6",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-A-P6",
+      "scoringType": "context_text",
+      "prompt": "下線部(6) did it の内容を本文中の英語で表しなさい。",
+      "answerSpec": {
+        "accepted": [
+          "fly to warm countries before winter"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-A-Q6-7",
+      "examId": "FY25A",
+      "majorQuestion": 6,
+      "minorQuestion": 7,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25a-reading-7",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-A-P6",
+      "scoringType": "context_text",
+      "prompt": "They gave up doing it. とほぼ同じ意味になるよう、sで始まる語を入れなさい。",
+      "answerSpec": {
+        "accepted": [
+          "stopped"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-A-Q6-8",
+      "examId": "FY25A",
+      "majorQuestion": 6,
+      "minorQuestion": 8,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25a-reading-8",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-A-P6",
+      "scoringType": "multiple_choice",
+      "prompt": "本文の内容と一致するものを3つ選びなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "マークの母親はゴールディのことが心配になり、獣医へ連れて行くことにした。"
+        },
+        {
+          "id": "イ",
+          "text": "マークはコマドリがメスだとわかっていたので、メスの名前をその鳥につけた。"
+        },
+        {
+          "id": "ウ",
+          "text": "マークはデイジーのえさを買うために村にあるペットショップへ歩いて行った。"
+        },
+        {
+          "id": "エ",
+          "text": "マークはデイジーが自分のそばでえさを食べるのを見てわくわくした。"
+        },
+        {
+          "id": "オ",
+          "text": "デイジーは、慣れるとマークの手のひらでえさを食べたり、肩に乗ったりした。"
+        },
+        {
+          "id": "カ",
+          "text": "4月にデイジーがマークの家の庭に戻って来た時、フレッドはいなかった。"
+        }
+      ],
+      "answerSpec": {
+        "choices": [
+          "ウ",
+          "エ",
+          "カ"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-B-Q6-1",
+      "examId": "FY25B",
+      "majorQuestion": 6,
+      "minorQuestion": 1,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25b-reading-1",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-B-P6",
+      "scoringType": "context_text",
+      "prompt": "Can you see the little vine ( ) is starting to climb up our tree? の空所に適切な語を入れなさい。",
+      "answerSpec": {
+        "accepted": [
+          "that",
+          "which"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-B-Q6-2",
+      "examId": "FY25B",
+      "majorQuestion": 6,
+      "minorQuestion": 2,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25b-reading-2",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-B-P6",
+      "scoringType": "word_order",
+      "prompt": "「そのツタは誰かがよじ登れるくらい十分大きく太くなるだろう。」となるよう並べ替えなさい。",
+      "tokens": [
+        "someone",
+        "be",
+        "big and thick",
+        "to",
+        "will",
+        "enough",
+        "the vine",
+        "climb up",
+        "for"
+      ],
+      "answerSpec": {
+        "sentence": "the vine will be big and thick enough for someone to climb up"
+      }
+    },
+    {
+      "id": "R25-ENG-B-Q6-3",
+      "examId": "FY25B",
+      "majorQuestion": 6,
+      "minorQuestion": 3,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25b-reading-3",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-B-P6",
+      "scoringType": "single_choice",
+      "prompt": "下線部(3)の気持ちを最もよく表すものを選びなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "そんな小さなツタでも大きな問題を起こしかねないから気を付けた方がよい。"
+        },
+        {
+          "id": "イ",
+          "text": "そんな小さなツタが将来太く大きくなるなんて信じられないことだ。"
+        },
+        {
+          "id": "ウ",
+          "text": "そんな小さなツタが太く大きく成長して将来問題を引き起こすわけがない。"
+        },
+        {
+          "id": "エ",
+          "text": "そんな小さなツタでも大きくなったら狩猟人がよじ登ることができる。"
+        }
+      ],
+      "answerSpec": {
+        "choice": "ウ"
+      }
+    },
+    {
+      "id": "R25-ENG-B-Q6-4",
+      "examId": "FY25B",
+      "majorQuestion": 6,
+      "minorQuestion": 4,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25b-reading-4",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-B-P6",
+      "scoringType": "word_order",
+      "prompt": "「彼はなぜそれがそんなに大きくて太いのかと思った。」となるよう並べ替えなさい。",
+      "tokens": [
+        "was",
+        "big and thick",
+        "why",
+        "it",
+        "so"
+      ],
+      "answerSpec": {
+        "sentence": "why it was so big and thick"
+      }
+    },
+    {
+      "id": "R25-ENG-B-Q6-5",
+      "examId": "FY25B",
+      "majorQuestion": 6,
+      "minorQuestion": 5,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25b-reading-5",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-B-P6",
+      "scoringType": "context_text",
+      "prompt": "下線部(5) throw を適切な形にしなさい。",
+      "answerSpec": {
+        "accepted": [
+          "is thrown"
+        ]
+      }
+    },
+    {
+      "id": "R25-ENG-B-Q6-6",
+      "examId": "FY25B",
+      "majorQuestion": 6,
+      "minorQuestion": 6,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25b-reading-6",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-B-P6",
+      "scoringType": "single_choice",
+      "prompt": "I'm sorry, I was wrong. と言った理由として最もふさわしいものを選びなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "Because the hunter came to the vine in order to find the nests."
+        },
+        {
+          "id": "イ",
+          "text": "Because the owl did not listen to the wise old owl's words."
+        },
+        {
+          "id": "ウ",
+          "text": "Because the owl thought that the owls would be killed by the hunter."
+        },
+        {
+          "id": "エ",
+          "text": "Because the owl did not think that the owls could break the vine."
+        }
+      ],
+      "answerSpec": {
+        "choice": "イ"
+      }
+    },
+    {
+      "id": "R25-ENG-B-Q6-7",
+      "examId": "FY25B",
+      "majorQuestion": 6,
+      "minorQuestion": 7,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25b-reading-7",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-B-P6",
+      "scoringType": "single_choice",
+      "prompt": "Don't you remember? が入る場所を選びなさい。",
+      "options": [
+        {
+          "id": "A",
+          "text": "[A]"
+        },
+        {
+          "id": "B",
+          "text": "[B]"
+        },
+        {
+          "id": "C",
+          "text": "[C]"
+        },
+        {
+          "id": "D",
+          "text": "[D]"
+        }
+      ],
+      "answerSpec": {
+        "choice": "B"
+      }
+    },
+    {
+      "id": "R25-ENG-B-Q6-8",
+      "examId": "FY25B",
+      "majorQuestion": 6,
+      "minorQuestion": 8,
+      "sourceType": "past_exam",
+      "sourceSubset": true,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "primarySkill": "long_reading",
+      "targetId": "fy25b-reading-8",
+      "answerAuthority": "independent_solution_nonofficial",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true,
+      "passageId": "R25-ENG-B-P6",
+      "scoringType": "multiple_choice",
+      "prompt": "本文の内容と一致するものを3つ選びなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "狩猟人は、森の中を歩いている時にたまたま大きくて太いツタを見つけた。"
+        },
+        {
+          "id": "イ",
+          "text": "狩猟人は、木の上に巣を見つけた時、その巣がフクロウの巣だとわかった。"
+        },
+        {
+          "id": "ウ",
+          "text": "フクロウたちは、賢明で年老いたフクロウも含めて皆が網にかかってしまった。"
+        },
+        {
+          "id": "エ",
+          "text": "賢明で年老いたフクロウは、死んだふりをするよう他のフクロウたちに言った。"
+        },
+        {
+          "id": "オ",
+          "text": "狩猟人は、フクロウたちが死んでいると思い、網を巣にかけたまま木から降りた。"
+        },
+        {
+          "id": "カ",
+          "text": "フクロウたちがツタを細切れにするのは、あまり大変なことではなかった。"
+        }
+      ],
+      "answerSpec": {
+        "choices": [
+          "ア",
+          "ウ",
+          "エ"
+        ]
+      }
+    }
+  ]
+}
