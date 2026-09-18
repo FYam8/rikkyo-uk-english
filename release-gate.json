@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "deployAllowed": false,
+  "reason": "All implementation/source/UI/browser gates that can be satisfied from the supplied materials are complete. Missing listening audio and omitted source sections remain explicitly unavailable, and unsupported writing is explicitly non-runtime rather than invented. The only remaining release gate is two consecutive full CLEAN loops on the exact release-candidate head.",
+  "blockers": [
+    "two consecutive CLEAN loops"
+  ],
+  "completedGates": [
+    "Shared Engine v1.1 pinned",
+    "Shared UI v1.0.0 pinned",
+    "Rikkyo storage/cloud isolation",
+    "FY26B holdout isolation",
+    "Rikkyo question renderer compatibility",
+    "desktop browser parity",
+    "mobile browser parity",
+    "backup/import browser parity",
+    "supplied-source transcription/answer audit complete with explicit missing-source limitations",
+    "FY24/FY25 Q2-Q5 source subsets runnable",
+    "FY24/FY25 Q6 reading runtime promoted",
+    "FY26A Q6-Q7 diagnostic runtime promoted",
+    "unsupported writing tasks governed by explicit non-runtime policy",
+    "final cross-year route/browser regression"
+  ],
+  "releaseCandidate": true
+}

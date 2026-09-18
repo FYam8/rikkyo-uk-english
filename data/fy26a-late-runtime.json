@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "fy26a-late-runtime-v1",
+  "examId": "FY26A",
+  "sourceDocument": "立教_FY26_英語A_問題.pdf",
+  "answerAuthority": "independent_solution_nonofficial",
+  "officialKeyAvailable": false,
+  "records": [
+    {
+      "id": "R26-ENG-A-Q6-1",
+      "examId": "FY26A",
+      "majorQuestion": 6,
+      "minorQuestion": 1,
+      "sourcePage": 8,
+      "sourceType": "past_exam",
+      "primarySkill": "short_text_multiple_choice",
+      "scoringType": "single_choice",
+      "prompt": "Where should Year 9 students go for their lesson?",
+      "context": "Next Tuesday, the science lab will be closed in the afternoon for equipment checks. Students in Year 9 should go to Room 12 for their lesson instead. The electricity experiment will take place next week, so please review your class notes and method.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Room 9"
+        },
+        {
+          "id": "B",
+          "text": "The library"
+        },
+        {
+          "id": "C",
+          "text": "Room 12"
+        }
+      ],
+      "answerSpec": {
+        "choice": "C"
+      },
+      "targetId": "fy26a-short-text-location",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true
+    },
+    {
+      "id": "R26-ENG-A-Q6-2",
+      "examId": "FY26A",
+      "majorQuestion": 6,
+      "minorQuestion": 2,
+      "sourcePage": 8,
+      "sourceType": "past_exam",
+      "primarySkill": "short_text_multiple_choice",
+      "scoringType": "single_choice",
+      "prompt": "When will the electricity experiment take place?",
+      "context": "Next Tuesday, the science lab will be closed in the afternoon for equipment checks. Students in Year 9 should go to Room 12 for their lesson instead. The electricity experiment will take place next week, so please review your class notes and method.",
+      "options": [
+        {
+          "id": "A",
+          "text": "This week"
+        },
+        {
+          "id": "B",
+          "text": "Next week"
+        },
+        {
+          "id": "C",
+          "text": "Tomorrow"
+        }
+      ],
+      "answerSpec": {
+        "choice": "B"
+      },
+      "targetId": "fy26a-short-text-time",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true
+    },
+    {
+      "id": "R26-ENG-A-Q6-3",
+      "examId": "FY26A",
+      "majorQuestion": 6,
+      "minorQuestion": 3,
+      "sourcePage": 8,
+      "sourceType": "past_exam",
+      "primarySkill": "short_text_multiple_choice",
+      "scoringType": "single_choice",
+      "prompt": "Where is the study support taking place?",
+      "context": "Saturday Support Club\\nCome to the library between 10am and 1pm for quiet study and free tutoring. Teachers will be available to help with maths, science, and English. Bring your class books and notes. Snacks and drinks are not allowed in the library.",
+      "options": [
+        {
+          "id": "A",
+          "text": "In the library"
+        },
+        {
+          "id": "B",
+          "text": "In the school gym"
+        },
+        {
+          "id": "C",
+          "text": "In the canteen"
+        }
+      ],
+      "answerSpec": {
+        "choice": "A"
+      },
+      "targetId": "fy26a-short-text-location",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true
+    },
+    {
+      "id": "R26-ENG-A-Q6-4",
+      "examId": "FY26A",
+      "majorQuestion": 6,
+      "minorQuestion": 4,
+      "sourcePage": 8,
+      "sourceType": "past_exam",
+      "primarySkill": "short_text_multiple_choice",
+      "scoringType": "single_choice",
+      "prompt": "What is not allowed in the library?",
+      "context": "Saturday Support Club\\nCome to the library between 10am and 1pm for quiet study and free tutoring. Teachers will be available to help with maths, science, and English. Bring your class books and notes. Snacks and drinks are not allowed in the library.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Talking"
+        },
+        {
+          "id": "B",
+          "text": "Books and notes"
+        },
+        {
+          "id": "C",
+          "text": "Snacks and drinks"
+        }
+      ],
+      "answerSpec": {
+        "choice": "C"
+      },
+      "targetId": "fy26a-short-text-rule",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true
+    },
+    {
+      "id": "R26-ENG-A-Q6-5",
+      "examId": "FY26A",
+      "majorQuestion": 6,
+      "minorQuestion": 5,
+      "sourcePage": 9,
+      "sourceType": "past_exam",
+      "primarySkill": "short_text_multiple_choice",
+      "scoringType": "single_choice",
+      "prompt": "What topic has Maria been researching?",
+      "context": "Hi Alex,\\nDon’t forget our history project is due on Monday. I’ve finished my research on the Industrial Revolution, but we still need to make the presentation slides together. Can we meet after school on Friday? Oh, and I hope you enjoy the War Museum this weekend. I found the poster exhibition really fascinating when I went last month.\\nThanks,\\nMaria",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ancient Rome"
+        },
+        {
+          "id": "B",
+          "text": "The Second World War"
+        },
+        {
+          "id": "C",
+          "text": "The Industrial Revolution"
+        }
+      ],
+      "answerSpec": {
+        "choice": "C"
+      },
+      "targetId": "fy26a-short-text-detail",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true
+    },
+    {
+      "id": "R26-ENG-A-Q6-6",
+      "examId": "FY26A",
+      "majorQuestion": 6,
+      "minorQuestion": 6,
+      "sourcePage": 9,
+      "sourceType": "past_exam",
+      "primarySkill": "short_text_multiple_choice",
+      "scoringType": "single_choice",
+      "prompt": "What do Maria and Alex still need to do?",
+      "context": "Hi Alex,\\nDon’t forget our history project is due on Monday. I’ve finished my research on the Industrial Revolution, but we still need to make the presentation slides together. Can we meet after school on Friday? Oh, and I hope you enjoy the War Museum this weekend. I found the poster exhibition really fascinating when I went last month.\\nThanks,\\nMaria",
+      "options": [
+        {
+          "id": "A",
+          "text": "Write the essay"
+        },
+        {
+          "id": "B",
+          "text": "Make the slides"
+        },
+        {
+          "id": "C",
+          "text": "Research their topic"
+        }
+      ],
+      "answerSpec": {
+        "choice": "B"
+      },
+      "targetId": "fy26a-short-text-detail",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": true
+    },
+    {
+      "id": "R26-ENG-A-Q7-1",
+      "examId": "FY26A",
+      "majorQuestion": 7,
+      "minorQuestion": 1,
+      "sourcePage": 9,
+      "sourceType": "past_exam",
+      "primarySkill": "reading_short_answer",
+      "scoringType": "manual_reading",
+      "context": "Dr. Smith is a science teacher. In her lessons, she often asks students to design small experiments. Last week, her class tested how light affects plant growth. They placed three plants in different conditions; one in sunlight, one in a dark cupboard, and one under an electric lamp. After seven days, the plant in the sunlight was tall and green, the plant in the cupboard was yellow, small and weak, and the plant under the lamp was also green and strong. Dr. Smith explained that plants need light to grow, but not all light has the same effect. The students said the experiment helped them understand photosynthesis in a practical way.",
+      "prompt": "What subject does Dr. Smith teach?",
+      "answerSpec": {
+        "guidance": "Science."
+      },
+      "targetId": "fy26a-reading-short-answer-detail",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": false
+    },
+    {
+      "id": "R26-ENG-A-Q7-2",
+      "examId": "FY26A",
+      "majorQuestion": 7,
+      "minorQuestion": 2,
+      "sourcePage": 9,
+      "sourceType": "past_exam",
+      "primarySkill": "reading_short_answer",
+      "scoringType": "manual_reading",
+      "context": "Dr. Smith is a science teacher. In her lessons, she often asks students to design small experiments. Last week, her class tested how light affects plant growth. They placed three plants in different conditions; one in sunlight, one in a dark cupboard, and one under an electric lamp. After seven days, the plant in the sunlight was tall and green, the plant in the cupboard was yellow, small and weak, and the plant under the lamp was also green and strong. Dr. Smith explained that plants need light to grow, but not all light has the same effect. The students said the experiment helped them understand photosynthesis in a practical way.",
+      "prompt": "What experiment did the students do?",
+      "answerSpec": {
+        "guidance": "They tested how light affects plant growth by placing plants in different light conditions."
+      },
+      "targetId": "fy26a-reading-short-answer-summary",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": false
+    },
+    {
+      "id": "R26-ENG-A-Q7-3",
+      "examId": "FY26A",
+      "majorQuestion": 7,
+      "minorQuestion": 3,
+      "sourcePage": 9,
+      "sourceType": "past_exam",
+      "primarySkill": "reading_short_answer",
+      "scoringType": "manual_reading",
+      "context": "Dr. Smith is a science teacher. In her lessons, she often asks students to design small experiments. Last week, her class tested how light affects plant growth. They placed three plants in different conditions; one in sunlight, one in a dark cupboard, and one under an electric lamp. After seven days, the plant in the sunlight was tall and green, the plant in the cupboard was yellow, small and weak, and the plant under the lamp was also green and strong. Dr. Smith explained that plants need light to grow, but not all light has the same effect. The students said the experiment helped them understand photosynthesis in a practical way.",
+      "prompt": "What plant was unhealthy?",
+      "answerSpec": {
+        "guidance": "The plant in the dark cupboard; it was yellow, small and weak."
+      },
+      "targetId": "fy26a-reading-short-answer-detail",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": false
+    },
+    {
+      "id": "R26-ENG-A-Q7-4",
+      "examId": "FY26A",
+      "majorQuestion": 7,
+      "minorQuestion": 4,
+      "sourcePage": 9,
+      "sourceType": "past_exam",
+      "primarySkill": "reading_short_answer",
+      "scoringType": "manual_reading",
+      "context": "Dr. Smith is a science teacher. In her lessons, she often asks students to design small experiments. Last week, her class tested how light affects plant growth. They placed three plants in different conditions; one in sunlight, one in a dark cupboard, and one under an electric lamp. After seven days, the plant in the sunlight was tall and green, the plant in the cupboard was yellow, small and weak, and the plant under the lamp was also green and strong. Dr. Smith explained that plants need light to grow, but not all light has the same effect. The students said the experiment helped them understand photosynthesis in a practical way.",
+      "prompt": "What did Dr. Smith explain about light and this experiment?",
+      "answerSpec": {
+        "guidance": "Plants need light to grow, but not all light has the same effect; the experiment showed this and helped explain photosynthesis."
+      },
+      "targetId": "fy26a-reading-short-answer-inference",
+      "verificationStatus": "source_context_reviewed_v1",
+      "autoGradeAllowed": false
+    }
+  ],
+  "nonRuntimeSource": [
+    {
+      "id": "R26-ENG-A-Q8",
+      "majorQuestion": 8,
+      "sourcePage": 10,
+      "type": "open_writing",
+      "runtimeEnabled": false,
+      "reason": "No official marking authority and AI writing is disabled for Rikkyo.",
+      "prompt": "One morning you wake up and discover that you have a new ability. Write a short story about your day. Explain what happens, how you feel, and what problems or adventures you experience.",
+      "approxWords": "80-100"
+    }
+  ]
+}

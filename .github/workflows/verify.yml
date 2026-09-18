@@ -1,0 +1,35 @@
+name: verify
+on:
+  push:
+    branches: [main, 'feat/**', 'fix/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node tests/bootstrap-integrity.test.mjs
+      - run: node tests/paper-structure.test.mjs
+      - run: node tests/rikkyo-adapter-contract.test.mjs
+      - run: node tests/shared-ui-migration-hold.test.mjs
+      - run: node tests/fy26a-mvp-data.test.mjs
+      - run: node tests/fy26a-late-runtime.test.mjs
+      - run: node tests/supplied-source-coverage.test.mjs
+      - run: node tests/supplied-reading-runtime.test.mjs
+      - run: node tests/fy26b-holdout-source.test.mjs
+      - run: node tests/source-coverage-status.test.mjs
+      - run: node tests/writing-runtime-policy.test.mjs
+      - run: node tests/final-release-readiness.test.mjs
+      - run: node --check app.js
+      - run: bash tests/rikkyo-browser-smoke.sh
+      - run: node tests/practice-bank.test.mjs
+      - run: node --check engine/core.js
+      - run: node --check engine/contract.js
+      - run: node --check engine/bootstrap.js
+      - run: node --check schools/rikkyo/config.js
+      - run: node --check schools/rikkyo/policy.js

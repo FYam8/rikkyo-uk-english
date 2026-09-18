@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const c=JSON.parse(fs.readFileSync(new URL('../data/source-coverage.json',import.meta.url),'utf8'));
+assert.equal(c.status,'supplied_source_transcribed_and_audited');
+assert.deepEqual(c.examinedPapers,['FY24A','FY24B','FY25A','FY25B','FY26A','FY26B']);
+assert.equal(c.policy.doNotInventMissingSource,true);
+assert.equal(c.policy.unavailableListeningMustNotCountWrong,true);
+assert.equal(c.policy.holdoutMustRemainTrainingExcluded,true);
+for(const id of ['FY24A','FY24B','FY25A','FY25B','FY26A','FY26B'])assert.ok(c.suppliedWrittenCoverage[id]);
+assert.ok(c.suppliedWrittenCoverage.FY24A.sourceMissing.includes('Q7'));
+assert.ok(c.suppliedWrittenCoverage.FY25A.runtimeAssetGap.includes('Q9 picture asset not yet vendored'));
+assert.ok(c.suppliedWrittenCoverage.FY26B.sourceMissing.includes('Q1 listening audio/transcript'));
+console.log('Rikkyo supplied-source coverage status: CLEAN');

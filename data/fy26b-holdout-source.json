@@ -1,0 +1,517 @@
+{
+  "schemaVersion": 1,
+  "examId": "FY26B",
+  "role": "final_holdout",
+  "trainingExcluded": true,
+  "runtimeEnabled": false,
+  "officialKeyAvailable": false,
+  "answerAuthority": "independent_solution_nonofficial",
+  "listeningAuthority": "unavailable_without_audio",
+  "sourceDocument": "立教_FY26_英語B_問題.pdf",
+  "records": [
+    {
+      "id": "R26-ENG-B-G1",
+      "majorQuestion": 1,
+      "groupType": "listening_group",
+      "sourcePage": 3,
+      "primarySkill": "listening",
+      "audioAvailable": false,
+      "autoGradeAllowed": false,
+      "instructions": "Interview between a teacher and a student. Questions 1-4 are multiple choice; questions 5-8 require short answers.",
+      "subItems": [
+        {
+          "n": 1,
+          "type": "single_choice",
+          "prompt": "What was the project about?",
+          "options": [
+            "Recycling rubbish",
+            "Counting wildlife",
+            "Planting trees"
+          ],
+          "answerStatus": "unavailable_without_audio"
+        },
+        {
+          "n": 2,
+          "type": "single_choice",
+          "prompt": "Which groups of animals did they study?",
+          "options": [
+            "Fish and reptiles",
+            "Birds, insects, and small mammals",
+            "Large animals only"
+          ],
+          "answerStatus": "unavailable_without_audio"
+        },
+        {
+          "n": 3,
+          "type": "single_choice",
+          "prompt": "What else did they investigate?",
+          "options": [
+            "Plants",
+            "Rocks",
+            "Soil samples"
+          ],
+          "answerStatus": "unavailable_without_audio"
+        },
+        {
+          "n": 4,
+          "type": "single_choice",
+          "prompt": "What was difficult about the work?",
+          "options": [
+            "Working in bad weather",
+            "Lack of volunteers",
+            "Waiting quietly and recording data"
+          ],
+          "answerStatus": "unavailable_without_audio"
+        },
+        {
+          "n": 5,
+          "type": "short_answer",
+          "prompt": "Who did the students work with?",
+          "answerStatus": "unavailable_without_audio"
+        },
+        {
+          "n": 6,
+          "type": "short_answer",
+          "prompt": "What difference did they notice near the car park?",
+          "answerStatus": "unavailable_without_audio"
+        },
+        {
+          "n": 7,
+          "type": "short_answer",
+          "prompt": "What did Daniel discover about his school?",
+          "answerStatus": "unavailable_without_audio"
+        },
+        {
+          "n": 8,
+          "type": "short_answer",
+          "prompt": "How has the project influenced Daniel’s future?",
+          "answerStatus": "unavailable_without_audio"
+        }
+      ]
+    },
+    {
+      "id": "R26-ENG-B-G2",
+      "majorQuestion": 2,
+      "groupType": "guided_completion_group",
+      "sourcePage": 4,
+      "primarySkill": "guided_completion",
+      "autoGradeAllowed": true,
+      "subItems": [
+        {
+          "n": 1,
+          "prompt": "It is important (　　　) us (　　　) study every day.",
+          "answerSlots": [
+            [
+              "for"
+            ],
+            [
+              "to"
+            ]
+          ]
+        },
+        {
+          "n": 2,
+          "prompt": "He didn't know (　　　) (　　　) say, so he was at a loss for words.",
+          "answerSlots": [
+            [
+              "what"
+            ],
+            [
+              "to"
+            ]
+          ]
+        },
+        {
+          "n": 3,
+          "prompt": "The man (　　　) is standing over there (　　　) my English teacher.",
+          "answerSlots": [
+            [
+              "who",
+              "that"
+            ],
+            [
+              "is"
+            ]
+          ]
+        },
+        {
+          "n": 4,
+          "prompt": "He is a famous actor, (　　　) (　　　)?",
+          "answerSlots": [
+            [
+              "isn't"
+            ],
+            [
+              "he"
+            ]
+          ]
+        },
+        {
+          "n": 5,
+          "prompt": "Thank you (　　　) (　　　) me to your birthday party.",
+          "answerSlots": [
+            [
+              "for"
+            ],
+            [
+              "inviting"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R26-ENG-B-G3",
+      "majorQuestion": 3,
+      "groupType": "word_order_missing_word_group",
+      "sourcePage": 4,
+      "primarySkill": "word_order",
+      "autoGradeAllowed": true,
+      "subItems": [
+        {
+          "n": 1,
+          "tokens": [
+            "by",
+            "spoken",
+            "people",
+            "many"
+          ],
+          "missingWord": "is",
+          "answerSentence": "English is spoken by many people."
+        },
+        {
+          "n": 2,
+          "tokens": [
+            "station",
+            "the",
+            "is"
+          ],
+          "missingWord": "where",
+          "answerSentence": "Please tell me where the station is."
+        },
+        {
+          "n": 3,
+          "tokens": [
+            "forward",
+            "you",
+            "to",
+            "looking"
+          ],
+          "missingWord": "seeing",
+          "answerSentence": "I am looking forward to seeing you again."
+        },
+        {
+          "n": 4,
+          "tokens": [
+            "bike",
+            "my",
+            "was",
+            "by",
+            "a",
+            "father"
+          ],
+          "missingWord": "bought",
+          "answerSentence": "I was bought a bike by my father."
+        },
+        {
+          "n": 5,
+          "tokens": [
+            "to",
+            "get",
+            "the",
+            "airport",
+            "how"
+          ],
+          "missingWord": "to",
+          "answerSentence": "Could you tell me how to get to the airport?"
+        }
+      ]
+    },
+    {
+      "id": "R26-ENG-B-G4",
+      "majorQuestion": 4,
+      "groupType": "select_five_and_rewrite",
+      "sourcePage": 5,
+      "primarySkill": "error_correction_rewrite",
+      "autoGradeAllowed": true,
+      "subItems": [
+        {
+          "number": 1,
+          "text": "The movie was very interested."
+        },
+        {
+          "number": 2,
+          "text": "The person who lives next door is very kind."
+        },
+        {
+          "number": 3,
+          "text": "Don't be afraid of making a mistake."
+        },
+        {
+          "number": 4,
+          "text": "This is the cheapest in all the smartphones in this shop."
+        },
+        {
+          "number": 5,
+          "text": "He is good at speaking English."
+        },
+        {
+          "number": 6,
+          "text": "Please tell me what you want for your birthday."
+        },
+        {
+          "number": 7,
+          "text": "If it is fine tomorrow, shall we going on a picnic?"
+        },
+        {
+          "number": 8,
+          "text": "The top of the mountain is covered with snow all year round."
+        },
+        {
+          "number": 9,
+          "text": "My brother sometimes play tennis after school."
+        },
+        {
+          "number": 10,
+          "text": "When he comes back, please tell him call me back."
+        }
+      ],
+      "answerSpec": {
+        "errorNumbers": [
+          1,
+          4,
+          7,
+          9,
+          10
+        ],
+        "corrections": {
+          "1": [
+            "The movie was very interesting."
+          ],
+          "4": [
+            "This is the cheapest of all the smartphones in this shop."
+          ],
+          "7": [
+            "If it is fine tomorrow, shall we go on a picnic?"
+          ],
+          "9": [
+            "My brother sometimes plays tennis after school."
+          ],
+          "10": [
+            "When he comes back, please tell him to call me back."
+          ]
+        }
+      }
+    },
+    {
+      "id": "R26-ENG-B-G5",
+      "majorQuestion": 5,
+      "groupType": "reading_group",
+      "sourcePages": [
+        5,
+        6,
+        7
+      ],
+      "primarySkill": "long_reading",
+      "passageId": "R26-ENG-B-P5",
+      "autoGradeAllowed": true,
+      "subItems": [
+        {
+          "n": 1,
+          "type": "text",
+          "answer": "since"
+        },
+        {
+          "n": 2,
+          "type": "single_choice",
+          "options": [
+            "walk after",
+            "listen to",
+            "be interested in"
+          ],
+          "answer": "イ"
+        },
+        {
+          "n": 3,
+          "type": "text",
+          "answer": "and"
+        },
+        {
+          "n": 4,
+          "type": "word_order_missing_unused",
+          "answerSentence": "You have been playing the game for two hours.",
+          "unused": "since"
+        },
+        {
+          "n": 5,
+          "type": "reference_phrase",
+          "answer": "to take this chair to a charity shop in the village"
+        },
+        {
+          "n": 6,
+          "type": "word_order",
+          "answerSentence": "What a good idea it is!"
+        },
+        {
+          "n": 7,
+          "type": "translation_choice",
+          "answer": "ウ"
+        },
+        {
+          "n": 8,
+          "type": "choose_three_incorrect",
+          "answer": [
+            "イ",
+            "エ",
+            "キ"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R26-ENG-B-G6",
+      "majorQuestion": 6,
+      "groupType": "short_text_multiple_choice_group",
+      "sourcePages": [
+        8,
+        9
+      ],
+      "primarySkill": "short_text_multiple_choice",
+      "autoGradeAllowed": true,
+      "texts": [
+        {
+          "id": "notice-library",
+          "text": "The library will close at 4pm on Wednesday for a stock check. All students are asked to return all borrowed books before 4:30pm on Tuesday. New books on science and technology are now available in the reading section."
+        },
+        {
+          "id": "notice-workshop",
+          "text": "Creative Writing Workshop. Join us on Saturday from 9:00am to 12 noon in Room 5 for a workshop on creative writing. This is suitable for all students who want to become better writers. Please bring a notebook and a pen. Refreshments will be provided."
+        },
+        {
+          "id": "email-ken",
+          "text": "Hi Rina, Don’t forget the science presentation is on Friday. I’ve completed my research on climate change, but we need to prepare the slides together and practise the presentation. Can we meet in the science lab after school on Wednesday afternoon? Also, are you joining the park clean-up tomorrow afternoon? We are collecting recyclable plastics to help protect local wildlife and plants. If you are available, it would be great for you to participate. Thanks, Ken"
+        }
+      ],
+      "subItems": [
+        {
+          "n": 1,
+          "prompt": "Why will the library close on Wednesday?",
+          "options": [
+            "For cleaning",
+            "For repairs",
+            "For a stock check"
+          ],
+          "answer": "C"
+        },
+        {
+          "n": 2,
+          "prompt": "Who is this notice for?",
+          "options": [
+            "Teachers",
+            "All students",
+            "Librarians"
+          ],
+          "answer": "B"
+        },
+        {
+          "n": 3,
+          "prompt": "What day is the workshop?",
+          "options": [
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "answer": "B"
+        },
+        {
+          "n": 4,
+          "prompt": "What should students bring?",
+          "options": [
+            "A laptop",
+            "Notebook and pen",
+            "Snacks"
+          ],
+          "answer": "B"
+        },
+        {
+          "n": 5,
+          "prompt": "When is the presentation due?",
+          "options": [
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "answer": "C"
+        },
+        {
+          "n": 6,
+          "prompt": "What topic has Ken researched?",
+          "options": [
+            "Recycling",
+            "Climate change",
+            "Energy sources"
+          ],
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "R26-ENG-B-G7",
+      "majorQuestion": 7,
+      "groupType": "reading_short_answer_group",
+      "sourcePage": 9,
+      "primarySkill": "reading_short_answer",
+      "autoGradeAllowed": false,
+      "text": "Ms. Tanaka teaches biology. Last week, her students studied plant growth in different soil types. They planted seeds in sand, clay, and garden soil. After ten days, the plants in the garden soil were tall and looked strong, the clay plants were small and yellow, and the plants in the sand were growing very slowly. Ms. Tanaka explained that soil type affects water retention and nutrients, which are important for plant growth. Students said that the experiment helped them understand how plants grow in different environments.",
+      "subItems": [
+        {
+          "n": 1,
+          "prompt": "What experiment did the students do?",
+          "answerGuidance": "They studied plant growth in different soil types / planted seeds in different soils."
+        },
+        {
+          "n": 2,
+          "prompt": "What were the three types of soil used?",
+          "answerGuidance": "Sand, clay, and garden soil."
+        },
+        {
+          "n": 3,
+          "prompt": "Which plants were healthy?",
+          "answerGuidance": "The plants in the garden soil."
+        },
+        {
+          "n": 4,
+          "prompt": "How did the students feel about the experiment?",
+          "answerGuidance": "They thought it was helpful because it helped them understand plant growth in different environments."
+        }
+      ]
+    },
+    {
+      "id": "R26-ENG-B-Q8",
+      "majorQuestion": 8,
+      "groupType": "open_writing",
+      "sourcePage": 10,
+      "primarySkill": "writing",
+      "autoGradeAllowed": false,
+      "prompt": "Imagine that one morning you find a mysterious door in your school that you've never seen before. Write a short story about what happens when you go through it. Describe what you see, how you feel, and any problems or adventures you experience.",
+      "approxWords": "80-100",
+      "instructions": [
+        "Use full sentences and paragraphs.",
+        "Check your spelling and grammar."
+      ]
+    }
+  ],
+  "passages": [
+    {
+      "passageId": "R26-ENG-B-P5",
+      "title": "The Broken Chair",
+      "sourceAttribution": "Paul Kurashina, The Broken Chair (2025)",
+      "sourcePages": [
+        5,
+        6
+      ],
+      "transcriptionStatus": "source_checked_visual_v1",
+      "text": "Joe is a good rugby player. He has been a member of the local rugby club (1)(　　　) he was seven years old. He is now fifteen and is the team captain. One day, when his team was having a match with another team, he got injured on his left leg. He experienced pain and was not able to play anymore. His coach told him to stop playing. Joe didn’t want to, but he had to (2) follow his coach’s *instructions.\n\nThen another member of his team played as a *replacement of him. Unfortunately his team lost the match. Joe and his entire team were very disappointed at the result.\n\nJoe was taken to the hospital by his father. The doctor said, “You *sprained your left *ankle, Joe. But don’t worry. (3) Stop playing rugby for two weeks, (　　　) your ankle will recover.”\n\nNext Sunday Joe didn’t go playing rugby and stayed at home. He was *bored and decided to play an online game with his younger brother, Tom. They played the game for two hours and got so excited. Their mother saw them still playing and said to them, “(4) ( hours / since / been / two / the game / have / for / playing / you / . ) Stop it! If you have time to play the game, tidy up your bedrooms!” The two boys didn’t say anything because they knew that their mother would get angry if they didn’t stop it. They went to each room and started cleaning. Joe’s bedroom was larger than his brother’s and there was a *closet. Inside the closet he kept toy boxes, old magazines and many other things. When he opened the closet, he found a small chair. The chair had a broken leg and he didn’t use it anymore. The chair had been a present from his grandfather for his fifth birthday.\n\nHis grandfather died two years later and he was very sad. The chair was full of memories of the days with his grandfather, so he didn’t want to *discard it. He didn’t know what to do with the chair and said to Tom, “Do you think (5) it is a good idea to take this chair to a charity shop in the village?” “No, I don’t think so. The chair has a broken leg.” So Joe gave up the idea. He said to himself, “I’m too big to sit on this chair now. Even if I repair it, I can’t use it.” Then Tom said to Joe, “Look outside, Joe. There are two *robins on the *bird feeder. They are watching us!” Joe said, “Maybe they want food. I have to feed them.”\n\nJoe went out of the house and walked to the bird feeder hanging from the apple tree in the garden. Then he suddenly came up with an idea. He went to Tom’s bedroom and whispered something in a low voice to Tom. Tom said, “Wow! (6) ( it / a / what / is / idea / good / ! ) I like it.”\n\nJoe and Tom went to the garage and brought a rope to the apple tree. They cut the rope into pieces and tied them on the small chair. Then they hung the chair from branches of the apple tree using ropes. The chair was like a swing.\n\nTom said, “Let’s put bird food on this chair as you said. It’s a good idea. Many birds will come and eat food on this chair. Robins will come, too!” Both Joe and Tom were so excited to think about the idea and put bird food on the chair. They imagined that birds would sit on the chair. Before going to bed, Joe and Tom decided to get up earlier than usual the next day.\n\nThe next morning Joe and Tom got up at six and walked to the apple tree. Their cat, Mew, followed them. They thought that they could see birds but there were not any birds on the chair. They were disappointed. Tom said, “Oh, no. Why can’t we see birds?” Joe said, “Mew is with us. (7) Birds must be watching us somewhere. They don’t like cats.” Then Tom said to Mew by joke, “What do you think?” Hearing the words, Mew jumped on to the chair and sat on it. It was very comfortable for Mew and she didn’t move. The chair was not for birds but for Mew. Joe and Tom both laughed to see it. Tom said to Joe, “I think our grandpa is also laughing from heaven, Joe.”"
+    }
+  ]
+}

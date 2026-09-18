@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "papers": [
+    {
+      "paperId": "FY24A",
+      "year": 2024,
+      "schedule": "A",
+      "sourceFile": "立教_FY24_英語A_問題.pdf",
+      "pageCount": 7,
+      "sourceCompleteness": "partial",
+      "observedSections": [
+        "listening_placeholder",
+        "guided_completion",
+        "word_order",
+        "error_correction",
+        "paraphrase",
+        "long_reading"
+      ],
+      "sourceMissing": [
+        "Q7",
+        "Q8",
+        "Q9"
+      ]
+    },
+    {
+      "paperId": "FY24B",
+      "year": 2024,
+      "schedule": "B",
+      "sourceFile": "立教_FY24_英語B_問題.pdf",
+      "pageCount": 7,
+      "sourceCompleteness": "partial",
+      "observedSections": [
+        "listening_placeholder",
+        "guided_completion",
+        "word_order",
+        "error_correction",
+        "paraphrase",
+        "long_reading"
+      ],
+      "sourceMissing": [
+        "Q7",
+        "Q8",
+        "Q9"
+      ]
+    },
+    {
+      "paperId": "FY25A",
+      "year": 2025,
+      "schedule": "A",
+      "sourceFile": "立教_FY25_英語A_問題.pdf",
+      "pageCount": 7,
+      "sourceCompleteness": "partial",
+      "observedSections": [
+        "listening_placeholder",
+        "guided_completion",
+        "word_order",
+        "error_correction",
+        "paraphrase",
+        "long_reading",
+        "writing_picture_story"
+      ],
+      "sourceMissing": [
+        "Q7",
+        "Q8"
+      ],
+      "writing": {
+        "question": "Q9",
+        "approxWords": "80-100"
+      }
+    },
+    {
+      "paperId": "FY25B",
+      "year": 2025,
+      "schedule": "B",
+      "sourceFile": "立教_FY25_英語B_問題.pdf",
+      "pageCount": 7,
+      "sourceCompleteness": "partial",
+      "observedSections": [
+        "listening_placeholder",
+        "guided_completion",
+        "word_order",
+        "error_correction",
+        "paraphrase",
+        "long_reading",
+        "writing_picture_story"
+      ],
+      "sourceMissing": [
+        "Q7",
+        "Q8"
+      ],
+      "writing": {
+        "question": "Q9",
+        "approxWords": "80-100"
+      }
+    },
+    {
+      "paperId": "FY26A",
+      "year": 2026,
+      "schedule": "A",
+      "sourceFile": "立教_FY26_英語A_問題.pdf",
+      "pageCount": 10,
+      "sourceCompleteness": "visible_supplied_pages",
+      "observedSections": [
+        "listening_mc",
+        "listening_short_answer",
+        "guided_completion",
+        "word_order",
+        "error_correction_rewrite",
+        "long_reading",
+        "short_text_mc",
+        "reading_short_answer",
+        "open_writing"
+      ],
+      "writing": {
+        "question": "Q8",
+        "approxWords": "80-100"
+      }
+    },
+    {
+      "paperId": "FY26B",
+      "year": 2026,
+      "schedule": "B",
+      "sourceFile": "立教_FY26_英語B_問題.pdf",
+      "pageCount": 10,
+      "sourceCompleteness": "visible_supplied_pages",
+      "observedSections": [
+        "listening_mc",
+        "listening_short_answer",
+        "guided_completion",
+        "word_order",
+        "error_correction_rewrite",
+        "long_reading",
+        "short_text_mc",
+        "reading_short_answer",
+        "open_writing"
+      ],
+      "writing": {
+        "question": "Q8",
+        "approxWords": "80-100"
+      }
+    }
+  ]
+}

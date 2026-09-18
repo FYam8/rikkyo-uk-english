@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "scoringPolicy": "unscored_until_authority_established",
+  "exams": [
+    {
+      "examId": "FY24A",
+      "year": 2024,
+      "schedule": "A",
+      "subject": "english",
+      "sourceDocument": "立教_FY24_英語A_問題.pdf",
+      "sourceCompleteness": "partial",
+      "runtimeEnabled": true,
+      "runtimeMode": "supplied_subset",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "runtimeNotice": "原本で確認できるQ2-Q6を学習用subsetとして提供。リスニング・省略部・FY25 Q9画像作文の未実装部分を完全版として扱わない。"
+    },
+    {
+      "examId": "FY24B",
+      "year": 2024,
+      "schedule": "B",
+      "subject": "english",
+      "sourceDocument": "立教_FY24_英語B_問題.pdf",
+      "sourceCompleteness": "partial",
+      "runtimeEnabled": true,
+      "runtimeMode": "supplied_subset",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "runtimeNotice": "原本で確認できるQ2-Q6を学習用subsetとして提供。リスニング・省略部・FY25 Q9画像作文の未実装部分を完全版として扱わない。"
+    },
+    {
+      "examId": "FY25A",
+      "year": 2025,
+      "schedule": "A",
+      "subject": "english",
+      "sourceDocument": "立教_FY25_英語A_問題.pdf",
+      "sourceCompleteness": "partial",
+      "runtimeEnabled": true,
+      "runtimeMode": "supplied_subset",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "runtimeNotice": "原本で確認できるQ2-Q6を学習用subsetとして提供。リスニング・省略部・FY25 Q9画像作文の未実装部分を完全版として扱わない。"
+    },
+    {
+      "examId": "FY25B",
+      "year": 2025,
+      "schedule": "B",
+      "subject": "english",
+      "sourceDocument": "立教_FY25_英語B_問題.pdf",
+      "sourceCompleteness": "partial",
+      "runtimeEnabled": true,
+      "runtimeMode": "supplied_subset",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "runtimeNotice": "原本で確認できるQ2-Q6を学習用subsetとして提供。リスニング・省略部・FY25 Q9画像作文の未実装部分を完全版として扱わない。"
+    },
+    {
+      "examId": "FY26A",
+      "year": 2026,
+      "schedule": "A",
+      "subject": "english",
+      "sourceDocument": "立教_FY26_英語A_問題.pdf",
+      "sourceCompleteness": "visible_supplied_pages",
+      "role": "diagnostic",
+      "runtimeEnabled": true,
+      "runtimeMode": "diagnostic_mvp",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "runtimeNotice": "FY26AはQ2-Q7を診断用に提供。Q1リスニングは音源未入手のため採点しない。Q8 Writingは公式採点authority未確認かつRikkyo AI Writing無効のため、原本情報のみ保持して現ランタイムでは採点対象外。"
+    },
+    {
+      "examId": "FY26B",
+      "year": 2026,
+      "schedule": "B",
+      "subject": "english",
+      "sourceDocument": "立教_FY26_英語B_問題.pdf",
+      "sourceCompleteness": "visible_supplied_pages",
+      "role": "final_holdout",
+      "trainingExcluded": true,
+      "runtimeEnabled": false,
+      "runtimeMode": "holdout_locked"
+    }
+  ]
+}

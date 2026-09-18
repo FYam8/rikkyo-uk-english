@@ -1,0 +1,23 @@
+{
+  "sourceRepository": "FYam8/waseshibu-english",
+  "sourceCommit": "786d743978a4a498595ee90686ada07f3fddbf4a",
+  "engineVersion": "1.1.0",
+  "contractVersion": 1,
+  "artifactRoots": [
+    "engine/"
+  ],
+  "consumerPolicy": "pinned-vendor-pr-only",
+  "sourceBlobs": {
+    "engine/contract.js": "6b6152279f9d1ac6a34e59c58d26e7ed00aaea4b",
+    "engine/bootstrap.js": "94753ada179cae3e4c61d8805613fe23d474066e",
+    "engine/core.js": "44d068f077c09b2b2dda4bd4f08991ac025e3f7d",
+    "engine/manifest.json": "b1690d087b73ce9f487c32d9378902a2d19568e0"
+  },
+  "verifiedWaseda": {
+    "verifyRun": 35345246450,
+    "verifyAttempt": 1,
+    "verifyConclusion": "success",
+    "pagesRun": 35345245633,
+    "pagesConclusion": "success"
+  }
+}

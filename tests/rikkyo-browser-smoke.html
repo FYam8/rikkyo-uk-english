@@ -1,0 +1,168 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Rikkyo browser smoke</title></head>
+<body data-test-result="RUNNING"><div id="msg">running</div><iframe id="frame" src="../index.html" style="width:900px;height:700px"></iframe>
+<script>
+(async()=>{
+ const out=document.getElementById('msg'),frame=document.getElementById('frame'),scenario=new URLSearchParams(location.search).get('case')||'fresh';
+ if(scenario==='mobile'){frame.style.width='390px';frame.style.height='844px'}
+ const fail=m=>{document.body.dataset.testResult='FAIL';out.textContent='Rikkyo browser smoke: FAIL: '+m;throw new Error(m)};
+ const wait=async fn=>{for(let i=0;i<80;i++){try{if(fn())return}catch(e){}await new Promise(r=>setTimeout(r,75))}fail('timeout')};
+ await wait(()=>frame.contentWindow&&frame.contentWindow.__RIKKYO_APP_READY__&&frame.contentWindow.__RIKKYO_APP__);
+ let w=frame.contentWindow,a=w.__RIKKYO_APP__;w.alert=()=>{};w.confirm=()=>true;w.localStorage.setItem('waseshibu.adaptive.v3','WASEDA-SENTINEL');a.resetForTest();if(w.localStorage.getItem('waseshibu.adaptive.v3')!=='WASEDA-SENTINEL')fail('Waseda storage touched');
+ await wait(()=>a.getState().selectedExamId==='FY26A');
+ if(scenario==='fresh'){
+   if(a.getState().currentAttempt)fail('fresh currentAttempt');
+   if(!frame.contentDocument.body.textContent.includes('FY26A'))fail('fresh FY26A not visible');
+ }
+ if(scenario==='attempt'||scenario==='drill'||scenario==='resume'){
+   a.beginAttempt('FY26A');
+   if(a.getState().currentAttempt?.examId!=='FY26A')fail('attempt identity');
+   a.submitAttempt();
+   await wait(()=>a.getState().attempts.length===1);
+   if(Object.keys(a.getState().weak).length!==29)fail('wrong weakness count');
+ }
+ if(scenario==='subset'){
+   a.openExam('FY24A');
+   a.beginAttempt('FY24A');
+   a.goto('exam');
+   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===24);
+   const text=frame.contentDocument.body.textContent;
+   if(!text.includes('原本Q2-Q6 subset'))fail('subset attempt scope missing');
+   if(!text.includes('原本subset'))fail('subset limitation notice missing');
+   if(!text.includes('The Shoemaker and the Elves'))fail('FY24A supplied passage missing');
+   if(frame.contentDocument.querySelectorAll('.question').length!==24)fail('FY24A subset question count');
+   a.submitAttempt();
+   await wait(()=>a.getState().attempts.some(x=>x.examId==='FY24A'));
+   if(Object.keys(a.getState().weak).length!==24)fail('FY24A subset weakness count');
+   const first=Object.keys(a.getState().weak)[0];
+   a.startWeak(first);
+   await wait(()=>a.getState().currentDrill?.q?.id);
+   if(!a.getState().currentDrill.q.id)fail('subset weakness has no practice');
+ }
+ if(scenario==='reading'){
+   a.openExam('FY25A');
+   a.beginAttempt('FY25A');
+   a.goto('exam');
+   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===23);
+   const doc=frame.contentDocument;
+   if(!doc.body.textContent.includes('A Gift from Nature'))fail('FY25A supplied passage missing');
+   const manual=doc.querySelector('textarea');
+   if(!manual)fail('manual reading textarea missing');
+   const manualId=a.data().questions.find(q=>q.examId==='FY25A'&&q.scoringType==='manual_reading')?.id;
+   if(!manualId)fail('manual reading record missing');
+   a.setResponse(manualId,'Goldie liked seeing the apple tree from the living room.');
+   a.submitAttempt();
+   await wait(()=>a.getState().attempts.some(x=>x.examId==='FY25A'));
+   const attempt=a.getState().attempts.find(x=>x.examId==='FY25A');
+   if(attempt.totalTasks!==23)fail('FY25A reading task count');
+   if(attempt.results[manualId]!==true)fail('manual reading self-check result');
+ }
+ if(scenario==='renderer'){
+   a.beginAttempt('FY26A');
+   a.goto('exam');
+   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===29);
+   const doc=frame.contentDocument;
+   if(doc.querySelectorAll('.question').length!==29)fail('renderer question count');
+   if(doc.querySelectorAll('.slot-row input[type="text"]').length!==10)fail('guided completion renderer');
+   if(doc.querySelectorAll('.correction-row').length!==10)fail('correction group renderer');
+   if(doc.querySelectorAll('.choice-grid input[type="radio"]').length<3)fail('single-choice renderer');
+   if(doc.querySelectorAll('.choice-grid input[type="checkbox"]').length<8)fail('multi-choice renderer');
+   if(doc.querySelectorAll('textarea').length<4)fail('reading short-answer renderer');
+   if(!doc.body.textContent.includes('Saturday Support Club'))fail('FY26A Q6 source text missing');
+   if(!doc.body.textContent.includes('Dr. Smith is a science teacher'))fail('FY26A Q7 source text missing');
+   const groupCheckbox=doc.querySelector('.correction-row input[type="checkbox"]');
+   if(!groupCheckbox)fail('correction checkbox missing');
+   groupCheckbox.click();
+   await new Promise(r=>setTimeout(r,50));
+   if(!doc.querySelector('.correction-row input[type="text"]'))fail('correction rewrite input did not appear');
+   if(!doc.querySelector('.attempt-bar'))fail('shared attempt bar missing');
+   if(!doc.querySelector('header')||!doc.querySelector('nav')||!doc.querySelector('footer'))fail('shared shell missing');
+   if(!doc.querySelector('.paper-page')&&doc.querySelector('.passage')===null)fail('past-paper presentation missing');
+ }
+ if(scenario==='drill'||scenario==='resume'){
+   const key=Object.keys(a.getState().weak)[0];a.startWeak(key);
+   await wait(()=>a.getState().currentDrill?.q?.id);
+   if(scenario==='resume'){
+     const qid=a.getState().currentDrill.q.id;
+     frame.contentWindow.location.reload();
+     await wait(()=>frame.contentWindow.__RIKKYO_APP_READY__&&frame.contentWindow.__RIKKYO_APP__?.getState().currentDrill?.q?.id);
+     w=frame.contentWindow;a=w.__RIKKYO_APP__;
+     if(a.getState().currentDrill.q.id!==qid)fail('drill resume q mismatch');
+   }else{
+     for(let i=0;i<3;i++){
+       const d=a.getState().currentDrill,q=d.q,ans=q.type==='choice'?q.answer:(q.answer||q.answerText);
+       a.setPractice(ans);a.finishPractice();
+       if(i<2)a.continuePractice();
+     }
+     const weak=a.getState().weak[key];
+     if(weak.status!=='pending'||weak.streak<3)fail('train3 transition');
+     if(!weak.next||weak.next<=new Date().toISOString().slice(0,10))fail('next-day reservation');
+   }
+ }
+ if(scenario==='backup'){
+   a.beginAttempt('FY26A');a.submitAttempt();await wait(()=>a.getState().attempts.length===1);
+   const saved={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:a.getState()};
+   a.resetForTest();if(a.getState().attempts.length!==0)fail('reset before backup restore');
+   a.importPayload(saved,'replace');
+   if(a.getState().attempts.length!==1||Object.keys(a.getState().weak).length!==29)fail('replace restore');
+   if(a.recoveryKeys().length!==1)fail('pre-import recovery missing');
+   const incoming={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:{...a.getState(),dailyProgress:{date:new Date().toISOString().slice(0,10),answeredCount:7}}};
+   a.importPayload(incoming,'merge');
+   if(a.getState().dailyProgress?.answeredCount!==7)fail('merge daily progress');
+   if(a.recoveryKeys().length!==2)fail('second recovery missing');
+   if(w.localStorage.getItem('waseshibu.adaptive.v3')!=='WASEDA-SENTINEL')fail('Waseda storage touched by import');
+ }
+ if(scenario==='mobile'){
+   const doc=frame.contentDocument;
+   const win=frame.contentWindow;
+   if(win.innerWidth>400)fail('mobile iframe width not applied');
+   const grid=doc.querySelector('.grid.two');
+   if(!grid)fail('mobile Today grid missing');
+   const cols=win.getComputedStyle(grid).gridTemplateColumns;
+   if(cols.split(' ').filter(Boolean).length!==1)fail('mobile two-column grid did not collapse');
+   a.goto('route');
+   await new Promise(r=>setTimeout(r,50));
+   const step=doc.querySelector('.route-step');
+   if(!step)fail('mobile route step missing');
+   const stepCols=win.getComputedStyle(step).gridTemplateColumns;
+   if(!stepCols.startsWith('38px'))fail('mobile route step columns');
+   const root=doc.documentElement;
+   if(root.scrollWidth>root.clientWidth+2)fail('mobile horizontal overflow');
+ }
+ if(scenario==='coverage'){
+   a.openExam('FY24A');
+   await new Promise(r=>setTimeout(r,50));
+   const text=frame.contentDocument.body.textContent;
+   if(!text.includes('原本subset'))fail('source subset notice missing');
+   if(!text.includes('リスニング')||!text.includes('省略部'))fail('source limitation wording missing');
+   if(!text.includes('完全版として扱わない'))fail('partial-source warning missing');
+   if(!text.includes('この過去問を始める'))fail('audited source subset not enabled');
+   a.openExam('FY26B');
+   await new Promise(r=>setTimeout(r,50));
+   const holdoutText=frame.contentDocument.body.textContent;
+   if(!holdoutText.includes('最終判定用holdout'))fail('holdout notice missing');
+   if(!holdoutText.includes('リスニングは音源未入手'))fail('listening limitation missing');
+ }
+ if(scenario==='crossyear'){
+   const expected={FY26A:29,FY24A:24,FY24B:23,FY25A:23,FY25B:23};
+   for(const [id,count] of Object.entries(expected)){
+     a.resetForTest();a.openExam(id);a.beginAttempt(id);a.goto('exam');
+     await wait(()=>frame.contentDocument.querySelectorAll('.question').length===count);
+     if(a.getState().currentAttempt?.examId!==id)fail('crossyear identity '+id);
+     if(frame.contentDocument.querySelectorAll('.question').length!==count)fail('crossyear count '+id);
+     const text=frame.contentDocument.body.textContent;
+     if(id==='FY26A'&&!text.includes('現在の実施範囲'))fail('FY26A runtime scope notice');
+     if(id!=='FY26A'&&!text.includes('原本Q2-Q6 subset'))fail('subset scope '+id);
+   }
+   a.resetForTest();a.goto('route');await new Promise(r=>setTimeout(r,50));
+   const routeIds=[...frame.contentDocument.querySelectorAll('.route-step h3')].map(x=>x.textContent.trim());
+   if(JSON.stringify(routeIds)!==JSON.stringify(['FY26A','FY24A','FY24B','FY25A','FY25B','FY26B']))fail('route order');
+   a.beginAttempt('FY26B');
+   if(a.getState().currentAttempt)fail('crossyear holdout opened');
+ }
+ if(scenario==='holdout'){
+   a.beginAttempt('FY26B');
+   if(a.getState().currentAttempt)fail('holdout opened');
+ }
+ document.body.dataset.testResult='CLEAN';out.textContent='Rikkyo browser smoke '+scenario+': CLEAN';
+})().catch(e=>console.error(e));
+</script></body></html>
