@@ -9,10 +9,11 @@ const manifest=JSON.parse(read('ui/manifest.json'));
 
 assert.equal(gate.deployAllowed,false,'Rikkyo remains blocked until its own final compatibility gates');
 assert.deepEqual(gate.blockers,[
-  'remaining past-paper/answer coverage',
+  'runtime promotion or explicit non-runtime policy for FY24/FY25 Q6 reading and FY25 Q9 picture writing',
+  'final cross-year route/browser regression',
   'two consecutive CLEAN loops'
 ]);
-for(const completed of ['Rikkyo question renderer compatibility','desktop browser parity','mobile browser parity','backup/import browser parity'])assert.ok(gate.completedGates.includes(completed),completed+' completion marker missing');
+for(const completed of ['Rikkyo question renderer compatibility','desktop browser parity','mobile browser parity','backup/import browser parity','supplied-source transcription/answer audit complete with explicit missing-source limitations','FY24/FY25 Q2-Q5 source subsets runnable'])assert.ok(gate.completedGates.includes(completed),completed+' completion marker missing');
 
 assert.equal(lock.sourceRepository,'FYam8/waseshibu-english');
 assert.equal(lock.sourceCommit,'ff379eb24808449f0387e58b0dcc493453dc9531');
