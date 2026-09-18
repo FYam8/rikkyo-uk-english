@@ -3,6 +3,7 @@
 <script>
 (async()=>{
  const out=document.getElementById('msg'),frame=document.getElementById('frame'),scenario=new URLSearchParams(location.search).get('case')||'fresh';
+ if(scenario==='mobile'){frame.style.width='390px';frame.style.height='844px'}
  const fail=m=>{document.body.dataset.testResult='FAIL';out.textContent='Rikkyo browser smoke: FAIL: '+m;throw new Error(m)};
  const wait=async fn=>{for(let i=0;i<80;i++){try{if(fn())return}catch(e){}await new Promise(r=>setTimeout(r,75))}fail('timeout')};
  await wait(()=>frame.contentWindow&&frame.contentWindow.__RIKKYO_APP_READY__&&frame.contentWindow.__RIKKYO_APP__);
@@ -51,6 +52,23 @@
    if(a.getState().dailyProgress?.answeredCount!==7)fail('merge daily progress');
    if(a.recoveryKeys().length!==2)fail('second recovery missing');
    if(w.localStorage.getItem('waseshibu.adaptive.v3')!=='WASEDA-SENTINEL')fail('Waseda storage touched by import');
+ }
+ if(scenario==='mobile'){
+   const doc=frame.contentDocument;
+   const win=frame.contentWindow;
+   if(win.innerWidth>400)fail('mobile iframe width not applied');
+   const grid=doc.querySelector('.grid.two');
+   if(!grid)fail('mobile Today grid missing');
+   const cols=win.getComputedStyle(grid).gridTemplateColumns;
+   if(cols.split(' ').filter(Boolean).length!==1)fail('mobile two-column grid did not collapse');
+   a.goto('route');
+   await new Promise(r=>setTimeout(r,50));
+   const step=doc.querySelector('.route-step');
+   if(!step)fail('mobile route step missing');
+   const stepCols=win.getComputedStyle(step).gridTemplateColumns;
+   if(!stepCols.startsWith('38px'))fail('mobile route step columns');
+   const root=doc.documentElement;
+   if(root.scrollWidth>root.clientWidth+2)fail('mobile horizontal overflow');
  }
  if(scenario==='holdout'){
    a.beginAttempt('FY26B');
