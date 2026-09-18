@@ -8,29 +8,22 @@
 <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
 <meta name="description" content="立教英国学院 英語 FY24〜FY26 A/B 過去問×弱点克服">
 <title>立教英国学院 英語｜過去問×弱点克服</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="schools/rikkyo/theme.css">\n<link rel="stylesheet" href="ui/base.css">\n<link rel="stylesheet" href="schools/rikkyo/ui-compat.css">
 </head>
 <body>
-<header>
-  <div><div class="eyebrow">RIKKYO UK ENGLISH</div><h1>過去問 × 弱点克服</h1></div>
-  <button id="dark" aria-label="表示テーマを切り替える">◐</button>
-</header>
-<nav>
-  <button data-v="home" class="active">今日やること</button>
-  <button data-v="route">学習ルート</button>
-  <button data-v="exam">過去問</button>
-  <button data-v="review">間違い対策</button>
-  <button data-v="drill">克服ドリル</button>
-  <button data-v="stats">進捗</button>
-  <button data-v="guide">使い方</button>
-</nav>
+<div id="shared-ui-header"></div>\n<div id="shared-ui-nav"></div>
 <main id="app"><section class="card">読み込み中…</section></main>
-<footer>FY24〜FY26 A/B。過去問由来とオリジナル練習を区別し、非公式解答はその旨を明示します。</footer>
+<div id="shared-ui-footer"></div>
 <script src="engine/core.js"></script>
 <script src="engine/contract.js"></script>
 <script src="schools/rikkyo/config.js"></script>
 <script src="schools/rikkyo/policy.js"></script>
 <script src="engine/bootstrap.js"></script>
+<script src="ui/contract.js"></script>
+<script src="schools/rikkyo/ui.js"></script>
+<script src="ui/shell.js"></script>
+<script src="ui/components.js"></script>
+<script>window.ENGLISH_UI_SHELL.mount(window.ENGLISH_SCHOOL_UI);</script>
 <script src="app.js"></script>
 </body>
 </html>
