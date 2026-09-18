@@ -1,6 +1,6 @@
 {
   "name": "shared-english-engine",
-  "engineVersion": "1.0.0",
+  "engineVersion": "1.1.0",
   "contractVersion": 1,
   "status": "production-waseda-commonized",
   "sourceRepository": "FYam8/waseshibu-english",
@@ -107,8 +107,8 @@
   "releaseGate": "waseda-parity-before-consumer-sync",
   "schoolSpecificFilesExcluded": true,
   "baselineMain": "44154a777b2d6c584a1eba4a38bb782c6b70d0bb",
-  "notes": "Shared English Engine v1 is now the production Waseda runtime after two consecutive full CLEAN candidate runs, a successful main verification run and a successful GitHub Pages deployment. The vendorable engine artifact contains only generic contract/bootstrap/core/manifest files; Waseda config/policy/compatibility and all school data remain outside engine/. Existing Waseda storage/cloud identities, stable problem data and user-visible learning behavior are preserved. Rikkyo may now begin consumer onboarding through a separate repository using a pinned vendored engine revision and its own compatibility gates.",
-  "nextGate": "rikkyo-consumer-onboarding-via-pinned-vendor-pr",
+  "notes": "Shared English Engine v1.1 keeps the production Waseda runtime unchanged while extending the school contract for a second consumer: opaque examId identity and explicitly unscored exam models. Legacy Waseda year/score config remains valid without new fields. Rikkyo can therefore keep FY24-FY26 A/B as six distinct exam IDs and avoid inventing official scores.",
+  "nextGate": "rikkyo-examid-unscored-consumer-onboarding",
   "remediationMasteryDelegated": true,
   "dailyRemediationSchedulingDelegated": true,
   "dailyPlanConstructionDelegated": true,
@@ -133,5 +133,6 @@
   "productionBehaviorDelegation": true,
   "productionCutoverCommit": "70644a9bb891f7c99bd7a08f7beeb941b3ed6807",
   "postCutoverVerifyRun": 35334219119,
-  "postCutoverPagesRun": 35334217904
+  "postCutoverPagesRun": 35334217904,
+  "consumerContractV11": true
 }
