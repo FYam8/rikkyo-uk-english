@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Rikkyo browser smoke</title></head>
+<body data-test-result="RUNNING"><div id="msg">running</div><iframe id="frame" src="../index.html" style="width:900px;height:700px"></iframe>
+<script>
+(async()=>{
+ const out=document.getElementById('msg'),frame=document.getElementById('frame'),scenario=new URLSearchParams(location.search).get('case')||'fresh';
+ const fail=m=>{document.body.dataset.testResult='FAIL';out.textContent='Rikkyo browser smoke: FAIL: '+m;throw new Error(m)};
+ const wait=async fn=>{for(let i=0;i<80;i++){try{if(fn())return}catch(e){}await new Promise(r=>setTimeout(r,75))}fail('timeout')};
+ await wait(()=>frame.contentWindow&&frame.contentWindow.__RIKKYO_APP_READY__&&frame.contentWindow.__RIKKYO_APP__);
+ let w=frame.contentWindow,a=w.__RIKKYO_APP__;w.alert=()=>{};w.confirm=()=>true;a.resetForTest();
+ await wait(()=>a.getState().selectedExamId==='FY26A');
+ if(scenario==='fresh'){
+   if(a.getState().currentAttempt)fail('fresh currentAttempt');
+   if(!frame.contentDocument.body.textContent.includes('FY26A'))fail('fresh FY26A not visible');
+ }
+ if(scenario==='attempt'||scenario==='drill'||scenario==='resume'){
+   a.beginAttempt('FY26A');
+   if(a.getState().currentAttempt?.examId!=='FY26A')fail('attempt identity');
+   a.submitAttempt();
+   await wait(()=>a.getState().attempts.length===1);
+   if(Object.keys(a.getState().weak).length!==19)fail('wrong weakness count');
+ }
+ if(scenario==='drill'||scenario==='resume'){
+   const key=Object.keys(a.getState().weak)[0];a.startWeak(key);
+   await wait(()=>a.getState().currentDrill?.q?.id);
+   if(scenario==='resume'){
+     const qid=a.getState().currentDrill.q.id;
+     frame.contentWindow.location.reload();
+     await wait(()=>frame.contentWindow.__RIKKYO_APP_READY__&&frame.contentWindow.__RIKKYO_APP__?.getState().currentDrill?.q?.id);
+     w=frame.contentWindow;a=w.__RIKKYO_APP__;
+     if(a.getState().currentDrill.q.id!==qid)fail('drill resume q mismatch');
+   }else{
+     for(let i=0;i<3;i++){
+       const d=a.getState().currentDrill,q=d.q,ans=q.type==='choice'?q.answer:(q.answer||q.answerText);
+       a.setPractice(ans);a.finishPractice();
+       if(i<2)a.continuePractice();
+     }
+     const weak=a.getState().weak[key];
+     if(weak.status!=='pending'||weak.streak<3)fail('train3 transition');
+     if(!weak.next||weak.next<=new Date().toISOString().slice(0,10))fail('next-day reservation');
+   }
+ }
+ if(scenario==='holdout'){
+   a.beginAttempt('FY26B');
+   if(a.getState().currentAttempt)fail('holdout opened');
+ }
+ document.body.dataset.testResult='CLEAN';out.textContent='Rikkyo browser smoke '+scenario+': CLEAN';
+})().catch(e=>console.error(e));
+</script></body></html>
