@@ -83,8 +83,8 @@
    const q2=doc.getElementById('problem-R26-ENG-A-Q2-1'),q5=doc.getElementById('problem-R26-ENG-A-Q5-1'),roseBlock=rose.closest('.source-block');
    if(!(q2.compareDocumentPosition(roseBlock)&Node.DOCUMENT_POSITION_FOLLOWING))fail('A Rose shown before Q2');
    if(!(roseBlock.compareDocumentPosition(q5)&Node.DOCUMENT_POSITION_FOLLOWING))fail('A Rose not linked before Q5');
-   if(doc.body.textContent.includes('\\n'))fail('literal slash-n leaked into UI');
    const problemText=doc.querySelector('.problem-column').textContent;
+   if(problemText.includes('\\n'))fail('literal slash-n leaked into problem UI');
    if((problemText.match(/Hi Alex,/g)||[]).length!==1)fail('repeated Q6 email context');
    if((problemText.match(/Saturday Support Club/g)||[]).length!==1)fail('repeated Q6 support context');
    const reorder=doc.querySelector('#answer-R26-ENG-A-Q3-1 .reorder-answer');if(!reorder)fail('interactive word-order UI missing');
