@@ -20,6 +20,24 @@
    await wait(()=>a.getState().attempts.length===1);
    if(Object.keys(a.getState().weak).length!==19)fail('wrong weakness count');
  }
+ if(scenario==='renderer'){
+   a.beginAttempt('FY26A');
+   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===19);
+   const doc=frame.contentDocument;
+   if(doc.querySelectorAll('.question').length!==19)fail('renderer question count');
+   if(doc.querySelectorAll('.slot-row input[type="text"]').length!==10)fail('guided completion renderer');
+   if(doc.querySelectorAll('.correction-row').length!==10)fail('correction group renderer');
+   if(doc.querySelectorAll('.choice-grid input[type="radio"]').length<3)fail('single-choice renderer');
+   if(doc.querySelectorAll('.choice-grid input[type="checkbox"]').length<8)fail('multi-choice renderer');
+   const groupCheckbox=doc.querySelector('.correction-row input[type="checkbox"]');
+   if(!groupCheckbox)fail('correction checkbox missing');
+   groupCheckbox.click();
+   await new Promise(r=>setTimeout(r,50));
+   if(!doc.querySelector('.correction-row input[type="text"]'))fail('correction rewrite input did not appear');
+   if(!doc.querySelector('.attempt-bar'))fail('shared attempt bar missing');
+   if(!doc.querySelector('header')||!doc.querySelector('nav')||!doc.querySelector('footer'))fail('shared shell missing');
+   if(!doc.querySelector('.paper-page')&&doc.querySelector('.passage')===null)fail('past-paper presentation missing');
+ }
  if(scenario==='drill'||scenario==='resume'){
    const key=Object.keys(a.getState().weak)[0];a.startWeak(key);
    await wait(()=>a.getState().currentDrill?.q?.id);
