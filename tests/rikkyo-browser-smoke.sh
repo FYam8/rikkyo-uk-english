@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-PORT="\${RIKKYO_TEST_PORT:-8766}"
+PORT="${RIKKYO_TEST_PORT:-8766}"
 TMP="$(mktemp -d)"
-cleanup(){ if [[ -n "\${SERVER_PID:-}" ]]; then kill "$SERVER_PID" 2>/dev/null || true; fi; rm -rf "$TMP"; }
+cleanup(){ if [[ -n "${SERVER_PID:-}" ]]; then kill "$SERVER_PID" 2>/dev/null || true; fi; rm -rf "$TMP"; }
 trap cleanup EXIT
 cd "$ROOT"
 python3 -m http.server "$PORT" --bind 127.0.0.1 >"$TMP/server.log" 2>&1 &
