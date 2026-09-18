@@ -178,7 +178,7 @@ function inputFor(q){
 function questionCard(q){return '<article class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(q.japanese?'<div class="jp">'+h(q.japanese)+'</div>':'')+(q.context?'<div class="practice-context">'+h(q.context)+'</div>':'')+(q.prompt?'<div class="prompt">'+h(q.prompt)+'</div>':'')+inputFor(q)+'</article>'}
 function examAttempt(){
   const a=S.currentAttempt,ex=examById(a.examId),passes=DATA.passages.filter(function(p){return p.examId===a.examId});
-  const scope=a.runtimeMode==='supplied_subset'?'原本Q2-Q5 subset':'過去問学習中';
+  const majors=Array.isArray(ex.runtimeMajors)?ex.runtimeMajors:[],scope=a.runtimeMode==='supplied_subset'?(majors.length?'原本Q'+majors[0]+'-Q'+majors[majors.length-1]+' subset':'原本subset'):'過去問学習中';
   const summary='<div class=attempt-summary><b>'+h(a.examId)+'</b><span class=attempt-detail>'+h(scope)+' · 点数換算なし</span></div>';
   const actions='<div class=attempt-actions><button onclick="__RIKKYO_APP__.goto(\'home\')">保存して戻る</button></div>';
   const subsetNotice=a.runtimeMode==='supplied_subset'?'<section class="card warnbox"><b>原本subset</b><p>'+h(ex.runtimeNotice||'この年度は原本で利用可能な範囲のみを出題します。')+'</p></section>':'';
