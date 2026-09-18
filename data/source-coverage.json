@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "status": "supplied_source_transcribed_and_audited",
+  "examinedPapers": [
+    "FY24A",
+    "FY24B",
+    "FY25A",
+    "FY25B",
+    "FY26A",
+    "FY26B"
+  ],
+  "suppliedWrittenCoverage": {
+    "FY24A": {
+      "covered": [
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6"
+      ],
+      "sourceMissing": [
+        "Q1 listening audio/content",
+        "Q7",
+        "Q8",
+        "Q9"
+      ]
+    },
+    "FY24B": {
+      "covered": [
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6"
+      ],
+      "sourceMissing": [
+        "Q1 listening audio/content",
+        "Q7",
+        "Q8",
+        "Q9"
+      ]
+    },
+    "FY25A": {
+      "covered": [
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q9 text/pictures in supplied PDF"
+      ],
+      "sourceMissing": [
+        "Q1 listening audio/content",
+        "Q7",
+        "Q8"
+      ],
+      "runtimeAssetGap": [
+        "Q9 picture asset not yet vendored"
+      ]
+    },
+    "FY25B": {
+      "covered": [
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q9 text/pictures in supplied PDF"
+      ],
+      "sourceMissing": [
+        "Q1 listening audio/content",
+        "Q7",
+        "Q8"
+      ],
+      "runtimeAssetGap": [
+        "Q9 picture asset not yet vendored"
+      ]
+    },
+    "FY26A": {
+      "covered": [
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5"
+      ],
+      "sourceMissing": [
+        "Q1 audio/transcript unavailable for authoritative listening grading"
+      ],
+      "notes": [
+        "FY26A diagnostic MVP currently exposes 19 non-listening tasks; supplied later sections were already structurally inventoried"
+      ]
+    },
+    "FY26B": {
+      "covered": [
+        "Q1 question sheet",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q7",
+        "Q8"
+      ],
+      "sourceMissing": [
+        "Q1 listening audio/transcript"
+      ],
+      "notes": [
+        "Q1 answers deliberately unavailable without audio",
+        "entire FY26B source remains runtime-disabled holdout"
+      ]
+    }
+  },
+  "policy": {
+    "doNotInventMissingSource": true,
+    "nonOfficialAnswersLabelRequired": true,
+    "unavailableListeningMustNotCountWrong": true,
+    "holdoutMustRemainTrainingExcluded": true
+  }
+}
