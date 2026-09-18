@@ -16,29 +16,58 @@ function validateConfig(config){
   else if(!/^[a-z0-9]+(?:[._-][a-z0-9]+)*$/.test(config.schoolId))errors.push('schoolId must be a stable lowercase slug');
   if(!nonEmpty(config.brand?.title))errors.push('brand.title is required');
 
-  const years=Array.isArray(config.exam?.years)?config.exam.years:[];
-  const route=Array.isArray(config.exam?.route)?config.exam.route:[];
-  const goalTiers=Array.isArray(config.exam?.goalTiers)?config.exam.goalTiers:[];
+  const exam=config.exam||{};
+  const years=Array.isArray(exam.years)?exam.years:[];
+  const examIds=Array.isArray(exam.examIds)?exam.examIds:[];
+  const identityMode=exam.identityMode||'year';
+  const route=Array.isArray(exam.route)?exam.route:[];
+  const goalTiers=Array.isArray(exam.goalTiers)?exam.goalTiers:[];
+  const goalMode=exam.goalMode||((exam.scoring&&exam.scoring.enabled===false)?'stage':'score');
+  const scoringEnabled=exam.scoring?.enabled!==false;
+
   if(!years.length)errors.push('exam.years must be a non-empty array');
   else if(!unique(years))errors.push('exam.years must not contain duplicates');
+  if(!['year','examId'].includes(identityMode))errors.push('exam.identityMode must be year or examId');
+  if(identityMode==='examId'){
+    if(!examIds.length)errors.push('exam.examIds must be a non-empty array when identityMode is examId');
+    else{
+      if(!examIds.every(nonEmpty))errors.push('exam.examIds must contain non-empty strings');
+      if(!unique(examIds))errors.push('exam.examIds must not contain duplicates');
+    }
+    if(!nonEmpty(exam.defaultExamId))errors.push('exam.defaultExamId is required when identityMode is examId');
+    else if(examIds.length&&!examIds.includes(exam.defaultExamId))errors.push('exam.defaultExamId must exist in exam.examIds');
+    if(exam.defaultYear!==undefined&&years.length&&!years.includes(exam.defaultYear))errors.push('exam.defaultYear must exist in exam.years when provided');
+  }else if(years.length&&!years.includes(exam.defaultYear))errors.push('exam.defaultYear must exist in exam.years');
+
   if(!route.length)errors.push('exam.route must be a non-empty array');
   else{
     if(!unique(route))errors.push('exam.route must not contain duplicates');
-    for(const year of route)if(!years.includes(year))errors.push(`exam.route contains unknown year ${String(year)}`);
+    const known=identityMode==='examId'?examIds:years,label=identityMode==='examId'?'examId':'year';
+    for(const value of route)if(!known.includes(value))errors.push(`exam.route contains unknown ${label} ${String(value)}`);
   }
+
   if(!goalTiers.length)errors.push('exam.goalTiers must be a non-empty array');
   else{
     if(!goalTiers.every(finiteNumber))errors.push('exam.goalTiers must contain finite numbers');
     if(!unique(goalTiers))errors.push('exam.goalTiers must not contain duplicates');
   }
-  if(goalTiers.length&&!goalTiers.includes(config.exam?.defaultGoal))errors.push('exam.defaultGoal must exist in exam.goalTiers');
-  if(years.length&&!years.includes(config.exam?.defaultYear))errors.push('exam.defaultYear must exist in exam.years');
-  if(!finiteNumber(config.exam?.writtenMaxScore)||config.exam.writtenMaxScore<=0)errors.push('exam.writtenMaxScore must be a positive number');
-  if(!finiteNumber(config.exam?.listeningMaxScore)||config.exam.listeningMaxScore<0)errors.push('exam.listeningMaxScore must be a non-negative number');
-  if(!finiteNumber(config.exam?.totalMaxScore)||config.exam.totalMaxScore<=0)errors.push('exam.totalMaxScore must be a positive number');
-  if(finiteNumber(config.exam?.writtenMaxScore)&&finiteNumber(config.exam?.listeningMaxScore)&&finiteNumber(config.exam?.totalMaxScore)&&config.exam.totalMaxScore!==config.exam.writtenMaxScore+config.exam.listeningMaxScore)errors.push('exam.totalMaxScore must equal writtenMaxScore + listeningMaxScore');
-  if(goalTiers.some(x=>finiteNumber(x)&&finiteNumber(config.exam?.totalMaxScore)&&x>config.exam.totalMaxScore))errors.push('exam.goalTiers must not exceed exam.totalMaxScore');
-  if(!positiveInteger(config.exam?.dailyTaskTarget))errors.push('exam.dailyTaskTarget must be a positive integer');
+  if(goalTiers.length&&!goalTiers.includes(exam.defaultGoal))errors.push('exam.defaultGoal must exist in exam.goalTiers');
+  if(!['score','stage'].includes(goalMode))errors.push('exam.goalMode must be score or stage');
+  if(exam.scoring!==undefined&&typeof exam.scoring?.enabled!=='boolean')errors.push('exam.scoring.enabled must be a boolean when exam.scoring is provided');
+  if(!scoringEnabled&&goalMode==='score')errors.push('exam.goalMode cannot be score when scoring is disabled');
+
+  if(scoringEnabled){
+    if(!finiteNumber(exam.writtenMaxScore)||exam.writtenMaxScore<=0)errors.push('exam.writtenMaxScore must be a positive number when scoring is enabled');
+    if(!finiteNumber(exam.listeningMaxScore)||exam.listeningMaxScore<0)errors.push('exam.listeningMaxScore must be a non-negative number when scoring is enabled');
+    if(!finiteNumber(exam.totalMaxScore)||exam.totalMaxScore<=0)errors.push('exam.totalMaxScore must be a positive number when scoring is enabled');
+    if(finiteNumber(exam.writtenMaxScore)&&finiteNumber(exam.listeningMaxScore)&&finiteNumber(exam.totalMaxScore)&&exam.totalMaxScore!==exam.writtenMaxScore+exam.listeningMaxScore)errors.push('exam.totalMaxScore must equal writtenMaxScore + listeningMaxScore');
+    if(goalMode==='score'&&goalTiers.some(x=>finiteNumber(x)&&finiteNumber(exam.totalMaxScore)&&x>exam.totalMaxScore))errors.push('exam.goalTiers must not exceed exam.totalMaxScore in score mode');
+  }else{
+    for(const [name,value,min] of [['writtenMaxScore',exam.writtenMaxScore,0],['listeningMaxScore',exam.listeningMaxScore,0],['totalMaxScore',exam.totalMaxScore,0]]){
+      if(value!==undefined&&value!==null&&(!finiteNumber(value)||value<min))errors.push(`exam.${name} must be a non-negative number when provided`);
+    }
+  }
+  if(!positiveInteger(exam.dailyTaskTarget))errors.push('exam.dailyTaskTarget must be a positive integer');
 
   const storage=config.storage||{};
   const legacyKeys=Array.isArray(storage.legacyKeys)?storage.legacyKeys:[];
