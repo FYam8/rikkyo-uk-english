@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const p=JSON.parse(fs.readFileSync(new URL('../data/writing-runtime-policy.json',import.meta.url),'utf8'));
+assert.equal(p.status,'explicit_non_runtime_until_marking_authority');
+assert.equal(p.aiWritingEnabled,false);
+assert.equal(p.officialMarkingAuthorityAvailable,false);
+assert.equal(p.rules.doNotInventPictureAssets,true);
+assert.equal(p.rules.doNotAutoScoreOpenWriting,true);
+assert.deepEqual(p.tasks.map(x=>x.examId),['FY25A','FY25B','FY26A','FY26B']);
+assert.ok(p.tasks.every(x=>x.runtimeEnabled===false&&x.approxWords==='80-100'));
+assert.ok(p.tasks.filter(x=>x.type==='picture_story_writing').every(x=>/must not recreate or replace/i.test(x.reason)));
+console.log('Rikkyo writing runtime policy: CLEAN');
