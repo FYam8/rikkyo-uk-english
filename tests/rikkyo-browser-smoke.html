@@ -22,6 +22,7 @@
  }
  if(scenario==='renderer'){
    a.beginAttempt('FY26A');
+   a.goto('exam');
    await wait(()=>frame.contentDocument.querySelectorAll('.question').length===19);
    const doc=frame.contentDocument;
    if(doc.querySelectorAll('.question').length!==19)fail('renderer question count');
