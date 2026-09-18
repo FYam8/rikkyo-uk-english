@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "authored-practice-0.1",
+  "datasetVersion": "authored-practice-0.2",
   "holdoutSourceExamIds": [],
   "items": [
     {
@@ -453,6 +453,90 @@
       ],
       "answer": "B",
       "explanation": "2階は4:30に閉まりますが、1階の返却は6:00まで可能です。"
+    },
+    {
+      "id": "rpa01",
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "targetId": "paraphrase-conditional",
+      "familyId": "practice-pa-01",
+      "skill": "paraphrase",
+      "type": "text",
+      "prompt": "Rewrite with the same meaning: He doesn't have enough time, so he can't join us. → If he ( _____ ) enough time, he could join us.",
+      "answerText": "had",
+      "explanation": "現在の事実に反する仮定なので If + 過去形, could ... を使います。"
+    },
+    {
+      "id": "rpa02",
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "targetId": "paraphrase-comparison",
+      "familyId": "practice-pa-02",
+      "skill": "paraphrase",
+      "type": "text",
+      "prompt": "Rewrite with the same meaning: No other student in the class runs faster than Ken. → Ken runs the ( _____ ) in the class.",
+      "answerText": "fastest",
+      "explanation": "No other ... 比較級 than ～ は、主語を変えて最上級で言い換えられます。"
+    },
+    {
+      "id": "rpa03",
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "targetId": "paraphrase-dative",
+      "familyId": "practice-pa-03",
+      "skill": "paraphrase",
+      "type": "text",
+      "prompt": "Rewrite with the same meaning: My aunt gave me this watch. → My aunt gave this watch ( _____ ) me.",
+      "answerText": "to",
+      "explanation": "give 人 物 は give 物 to 人 に言い換えられます。"
+    },
+    {
+      "id": "rpa04",
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "targetId": "paraphrase-before-after",
+      "familyId": "practice-pa-04",
+      "skill": "paraphrase",
+      "type": "text",
+      "prompt": "Rewrite with the same meaning: I did my homework after dinner. → I had dinner ( _____ ) doing my homework.",
+      "answerText": "before",
+      "explanation": "A after B は、順序を入れ替えて B before A と表せます。"
+    },
+    {
+      "id": "rpa05",
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "targetId": "paraphrase-make",
+      "familyId": "practice-pa-05",
+      "skill": "paraphrase",
+      "type": "text",
+      "prompt": "Rewrite with the same meaning: The news made my mother happy. → My mother became happy ( _____ ) of the news.",
+      "answerText": "because",
+      "explanation": "原因を表す because of を使って言い換えられます。"
+    },
+    {
+      "id": "rpa06",
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "targetId": "paraphrase-as-as",
+      "familyId": "practice-pa-06",
+      "skill": "paraphrase",
+      "type": "text",
+      "prompt": "Rewrite with the same meaning: My brother and I are the same height. → I am as ( _____ ) as my brother.",
+      "answerText": "tall",
+      "explanation": "同じ程度は as + 形容詞 + as で表せます。"
     }
   ]
 }
