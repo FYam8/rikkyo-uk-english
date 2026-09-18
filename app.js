@@ -30,9 +30,50 @@ function setTheme(t){S.theme=t==='dark'?'dark':'light';document.documentElement.
 setTheme(S.theme);document.getElementById('dark').onclick=function(){setTheme(S.theme==='dark'?'light':'dark')};
 
 async function loadData(){
-  const names=['exams','papers','sections','questions','passages','practice','source-coverage'];
+  const names=['exams','papers','sections','questions','passages','practice','source-coverage','supplied-source-questions'];
   const vals=await Promise.all(names.map(function(n){return fetch('data/'+n+'.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})}));
-  DATA={exams:vals[0].exams,papers:vals[1].papers,sections:vals[2].papers,questions:vals[3].records,questionsMeta:vals[3],passages:vals[4].passages,practice:vals[5].items,sourceCoverage:vals[6]};
+  const suppliedRuntime=flattenSuppliedRuntime(vals[7]);
+  DATA={exams:vals[0].exams,papers:vals[1].papers,sections:vals[2].papers,questions:[...vals[3].records,...suppliedRuntime],questionsMeta:vals[3],passages:vals[4].passages,practice:vals[5].items,sourceCoverage:vals[6],suppliedSource:vals[7]};
+}
+function flattenSuppliedRuntime(source){
+  const out=[];if(!source||!source.exams)return out;
+  for(const [examId,records] of Object.entries(source.exams)){
+    for(const group of records){
+      if(![2,3,4,5].includes(Number(group.majorQuestion)))continue;
+      if(group.groupType==='guided_completion_group'){
+        for(const item of group.subItems)out.push({
+          id:group.id+'-'+item.n,examId,majorQuestion:2,minorQuestion:item.n,sourcePage:group.sourcePage,
+          sourceType:'past_exam',sourceSubset:true,primarySkill:'guided_completion',scoringType:'multi_slot_text',
+          prompt:item.prompt,answerSpec:{slots:item.answerSlots},targetId:examId.toLowerCase()+'-guided-'+item.n,
+          answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
+        });
+      }else if(group.groupType==='word_order_group'){
+        for(const item of group.subItems)out.push({
+          id:group.id+'-'+item.n,examId,majorQuestion:3,minorQuestion:item.n,sourcePage:group.sourcePage,
+          sourceType:'past_exam',sourceSubset:true,primarySkill:'word_order',scoringType:'word_order',
+          prompt:'語句を並べ替えて英文を完成させなさい（不要語1語あり）。',tokens:item.tokens,
+          answerSpec:{sentence:item.answerSentence,unused:item.unused},targetId:examId.toLowerCase()+'-word-order-'+item.n,
+          answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
+        });
+      }else if(group.groupType==='error_correction_group'){
+        for(const item of group.subItems)out.push({
+          id:group.id+'-'+item.n,examId,majorQuestion:4,minorQuestion:item.n,sourcePage:group.sourcePage,
+          sourceType:'past_exam',sourceSubset:true,primarySkill:'error_correction_rewrite',scoringType:'multi_slot_text',
+          prompt:item.sentence+'\n誤りの記号と訂正後の語句を書きなさい。',answerSpec:{slots:[[item.errorLabel],[item.correction]],correctedSentence:item.correctedSentence},
+          targetId:examId.toLowerCase()+'-error-correction-'+item.n,
+          answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
+        });
+      }else if(group.groupType==='paraphrase_group'){
+        for(const item of group.subItems)out.push({
+          id:group.id+'-'+item.n,examId,majorQuestion:5,minorQuestion:item.n,sourcePage:group.sourcePage,
+          sourceType:'past_exam',sourceSubset:true,primarySkill:'paraphrase',scoringType:'multi_slot_text',
+          context:'A: '+item.a,prompt:'B: '+item.b,answerSpec:{slots:item.answerSlots},targetId:examId.toLowerCase()+'-paraphrase-'+item.n,
+          answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
+        });
+      }
+    }
+  }
+  return out;
 }
 function examById(id){return DATA.exams.find(function(x){return x.examId===id})}
 function paperById(id){return DATA.papers.find(function(x){return x.paperId===id})}
@@ -52,7 +93,7 @@ function eligible(x){return E.isRemediationEligible(x[1],today())}
 function weakSort(a,b){return E.compareRemediationEntries(a,b,function(w){return P.priorityOrder(w.priority)})}
 function dailyCount(){return S.dailyProgress&&S.dailyProgress.date===today()?Math.max(0,Number(S.dailyProgress.answeredCount)||0):0}
 function bumpDaily(){const n=dailyCount()+1;S.dailyProgress={date:today(),answeredCount:n};if(S.dailyPlan&&S.dailyPlan.date===today())S.dailyPlan.answeredCount=n}
-function nextExam(){return C.exam.route.find(function(id){return id!==C.exam.holdoutExamId&&!completed(id)&&qsFor(id).length})||null}
+function nextExam(){return C.exam.route.find(function(id){const ex=examById(id);return ex?.runtimeEnabled!==false&&id!==C.exam.holdoutExamId&&!completed(id)&&qsFor(id).length})||null}
 function qLabel(q){return q.id==='R26-ENG-A-G4'?'大問4':'大問'+q.majorQuestion+' 問'+q.minorQuestion}
 
 function goto(v){view=v;document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v===v)});render();scrollTo({top:0,behavior:'smooth'})}
@@ -88,10 +129,11 @@ function exam(){
 function selectExam(id){selectedExamId=id;save();render()}
 function openExam(id){selectedExamId=id;view='exam';document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v==='exam')});save();render();scrollTo({top:0})}
 function beginAttempt(id){
-  if(id===C.exam.holdoutExamId)return alert('FY26Bは最終判定用holdoutです。');
+  const ex=examById(id);
+  if(id===C.exam.holdoutExamId||ex?.runtimeEnabled===false)return alert('この試験は現在の学習用には開放していません。');
   if(!qsFor(id).length)return alert('問題データ整備中です。');
   if(S.currentAttempt&&S.currentAttempt.status==='active'&&S.currentAttempt.examId!==id)return alert(S.currentAttempt.examId+' が途中です。');
-  if(!S.currentAttempt||S.currentAttempt.status!=='active')S.currentAttempt={id:'attempt-'+Date.now(),examId:id,year:examById(id).year,status:'active',startedAt:now(),responses:{},questionOrder:qsFor(id).map(function(q){return q.id})};
+  if(!S.currentAttempt||S.currentAttempt.status!=='active')S.currentAttempt={id:'attempt-'+Date.now(),examId:id,year:ex.year,status:'active',runtimeMode:ex.runtimeMode||'full',startedAt:now(),responses:{},questionOrder:qsFor(id).map(function(q){return q.id})};
   save();render()
 }
 function response(id){return S.currentAttempt&&S.currentAttempt.responses[id]}
@@ -119,12 +161,15 @@ function inputFor(q){
   if(q.scoringType==='select_five_and_rewrite'){const cur=r||{selected:[],corrections:{}},s=new Set(cur.selected||[]);return q.subItems.map(function(x){return '<div class="correction-row"><label><input type="checkbox" '+(s.has(x.number)?'checked':'')+' onchange="__RIKKYO_APP__.toggleGroup(\''+q.id+'\','+x.number+',this.checked)">'+x.number+'. '+h(x.text)+'</label>'+(s.has(x.number)?'<input type="text" value="'+h(cur.corrections&&cur.corrections[x.number])+'" placeholder="訂正後の全文" oninput="__RIKKYO_APP__.setCorrection(\''+q.id+'\','+x.number+',this.value)">':'')+'</div>'}).join('')}
   return '<input type="text" value="'+h(r)+'" placeholder="解答を入力" oninput="__RIKKYO_APP__.setResponse(\''+q.id+'\',this.value)">'+(q.tokens?'<div class="token-list">'+q.tokens.map(function(t){return '<span class="token">'+h(t)+'</span>'}).join('')+'</div>':'')
 }
-function questionCard(q){return '<article class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+'</span></div>'+(q.japanese?'<div class="jp">'+h(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+h(q.prompt)+'</div>':'')+inputFor(q)+'</article>'}
+function questionCard(q){return '<article class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(q.japanese?'<div class="jp">'+h(q.japanese)+'</div>':'')+(q.context?'<div class="practice-context">'+h(q.context)+'</div>':'')+(q.prompt?'<div class="prompt">'+h(q.prompt)+'</div>':'')+inputFor(q)+'</article>'}
 function examAttempt(){
-  const a=S.currentAttempt,pass=DATA.passages.find(function(p){return p.passageId==='R26-ENG-A-P5'});
-  const summary='<div class=attempt-summary><b>'+h(a.examId)+'</b><span class=attempt-detail>過去問学習中 · 点数換算なし</span></div>';
+  const a=S.currentAttempt,ex=examById(a.examId),passes=DATA.passages.filter(function(p){return p.examId===a.examId});
+  const scope=a.runtimeMode==='supplied_subset'?'原本Q2-Q5 subset':'過去問学習中';
+  const summary='<div class=attempt-summary><b>'+h(a.examId)+'</b><span class=attempt-detail>'+h(scope)+' · 点数換算なし</span></div>';
   const actions='<div class=attempt-actions><button onclick="__RIKKYO_APP__.goto(\'home\')">保存して戻る</button></div>';
-  return U.attemptBar({summaryHtml:summary,actionsHtml:actions})+'<section class="card notice"><b>アプリ解答は非公式です。</b></section>'+(pass?'<details class="card"><summary><b>大問5 長文「A Rose」</b></summary><div class="passage">'+h(pass.text)+'</div></details>':'')+qsFor(a.examId).map(questionCard).join('')+'<section class="card"><button class="primary" onclick="__RIKKYO_APP__.submitAttempt()">解答を確認して弱点を登録</button></section>';
+  const subsetNotice=a.runtimeMode==='supplied_subset'?'<section class="card warnbox"><b>原本subset</b><p>'+h(ex.runtimeNotice||'この年度は原本で利用可能な範囲のみを出題します。')+'</p></section>':'';
+  const passageHtml=passes.map(function(pass){return '<details class="card"><summary><b>'+h(pass.title||'長文')+'</b></summary><div class="passage">'+h(pass.text)+'</div></details>'}).join('');
+  return U.attemptBar({summaryHtml:summary,actionsHtml:actions})+'<section class="card notice"><b>アプリ解答は非公式です。</b></section>'+subsetNotice+passageHtml+qsFor(a.examId).map(questionCard).join('')+'<section class="card"><button class="primary" onclick="__RIKKYO_APP__.submitAttempt()">解答を確認して弱点を登録</button></section>';
 }
 function createWeak(q,r){const key=q.examId+':'+q.id,old=S.weak[key]||{},base=E.buildWrongWeaknessState(old,{year:examById(q.examId).year,id:q.id,label:qLabel(q),category:P.skillName(q.primarySkill),component:'main',skill:q.primarySkill,targetId:q.targetId,focusTag:q.targetId,examFormat:q.scoringType,trap:q.primarySkill,priority:P.resolveQuestionPriority(q),user:String(r==null?'':typeof r==='object'?JSON.stringify(r):r),today:today(),manualComponents:[]});base.examId=q.examId;base.questionId=q.id;delete base.points;S.weak[key]=base}
 function submitAttempt(){
