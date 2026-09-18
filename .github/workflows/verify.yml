@@ -17,6 +17,9 @@ jobs:
       - run: node tests/paper-structure.test.mjs
       - run: node tests/rikkyo-adapter-contract.test.mjs
       - run: node tests/fy26a-mvp-data.test.mjs
+      - run: bash tests/rikkyo-browser-smoke.sh
+      - run: node --check app.js
+      - run: node tests/practice-bank.test.mjs
       - run: node --check engine/core.js
       - run: node --check engine/contract.js
       - run: node --check engine/bootstrap.js
