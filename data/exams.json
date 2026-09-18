@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "scoringPolicy": "unscored_until_authority_established",
+  "exams": [
+    {
+      "examId": "FY24A",
+      "year": 2024,
+      "schedule": "A",
+      "subject": "english",
+      "sourceDocument": "立教_FY24_英語A_問題.pdf",
+      "sourceCompleteness": "partial"
+    },
+    {
+      "examId": "FY24B",
+      "year": 2024,
+      "schedule": "B",
+      "subject": "english",
+      "sourceDocument": "立教_FY24_英語B_問題.pdf",
+      "sourceCompleteness": "partial"
+    },
+    {
+      "examId": "FY25A",
+      "year": 2025,
+      "schedule": "A",
+      "subject": "english",
+      "sourceDocument": "立教_FY25_英語A_問題.pdf",
+      "sourceCompleteness": "partial"
+    },
+    {
+      "examId": "FY25B",
+      "year": 2025,
+      "schedule": "B",
+      "subject": "english",
+      "sourceDocument": "立教_FY25_英語B_問題.pdf",
+      "sourceCompleteness": "partial"
+    },
+    {
+      "examId": "FY26A",
+      "year": 2026,
+      "schedule": "A",
+      "subject": "english",
+      "sourceDocument": "立教_FY26_英語A_問題.pdf",
+      "sourceCompleteness": "visible_supplied_pages",
+      "role": "diagnostic"
+    },
+    {
+      "examId": "FY26B",
+      "year": 2026,
+      "schedule": "B",
+      "subject": "english",
+      "sourceDocument": "立教_FY26_英語B_問題.pdf",
+      "sourceCompleteness": "visible_supplied_pages",
+      "role": "final_holdout",
+      "trainingExcluded": true
+    }
+  ]
+}
