@@ -1,0 +1,1306 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "supplied-source-coverage-v1",
+  "runtimeEnabled": false,
+  "policy": {
+    "officialKeyAvailable": false,
+    "answerAuthority": "independent_solution_nonofficial",
+    "missingSourceSectionsAreNotReconstructed": true,
+    "note": "Covers all supplied written sections currently transcribed for FY24/FY25. Omitted Q1/Q7/Q8/Q9 sections remain source_missing where applicable."
+  },
+  "exams": {
+    "FY24A": [
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24A",
+        "id": "R24-ENG-A-G2",
+        "majorQuestion": 2,
+        "groupType": "guided_completion_group",
+        "subItems": [
+          {
+            "n": 1,
+            "prompt": "Please give him this package when he (　　　) (　　　).",
+            "answerSlots": [
+              [
+                "comes"
+              ],
+              [
+                "here"
+              ]
+            ]
+          },
+          {
+            "n": 2,
+            "prompt": "This research suggests that fathers may live longer (　　　) (　　　) care of children.",
+            "answerSlots": [
+              [
+                "by"
+              ],
+              [
+                "taking"
+              ]
+            ]
+          },
+          {
+            "n": 3,
+            "prompt": "You just missed the best part of this drama. What (　　　) you (　　　)?",
+            "answerSlots": [
+              [
+                "were"
+              ],
+              [
+                "doing"
+              ]
+            ]
+          },
+          {
+            "n": 4,
+            "prompt": "Everyone (　　　) (　　　) learn French in this school.",
+            "answerSlots": [
+              [
+                "has"
+              ],
+              [
+                "to"
+              ]
+            ]
+          }
+        ],
+        "sourcePage": 3,
+        "primarySkill": "guided_completion"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24A",
+        "id": "R24-ENG-A-G3",
+        "majorQuestion": 3,
+        "groupType": "word_order_group",
+        "subItems": [
+          {
+            "n": 1,
+            "tokens": [
+              "students",
+              "language",
+              "is",
+              "which",
+              "English",
+              "to",
+              "teaches",
+              "not",
+              "native",
+              "whose"
+            ],
+            "answerSentence": "Ms. White teaches English to students whose native language is not English.",
+            "unused": "which"
+          },
+          {
+            "n": 2,
+            "tokens": [
+              "long",
+              "never",
+              "I",
+              "not",
+              "such",
+              "have",
+              "a",
+              "novel",
+              "read"
+            ],
+            "answerSentence": "I have never read such a long novel.",
+            "unused": "not"
+          },
+          {
+            "n": 3,
+            "tokens": [
+              "had",
+              "who",
+              "don't",
+              "selected",
+              "I",
+              "song",
+              "know",
+              "this"
+            ],
+            "answerSentence": "I don't know who selected this song.",
+            "unused": "had"
+          },
+          {
+            "n": 4,
+            "tokens": [
+              "eat",
+              "curry",
+              "it",
+              "for",
+              "is",
+              "to",
+              "this",
+              "spicy",
+              "me",
+              "too"
+            ],
+            "answerSentence": "This curry is too spicy for me to eat.",
+            "unused": "it"
+          }
+        ],
+        "sourcePage": 3,
+        "primarySkill": "word_order"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24A",
+        "id": "R24-ENG-A-G4",
+        "majorQuestion": 4,
+        "groupType": "error_correction_group",
+        "subItems": [
+          {
+            "n": 1,
+            "sentence": "We have to submit this homework today, haven't we?",
+            "errorLabel": "イ",
+            "correction": "don't",
+            "correctedSentence": "We have to submit this homework today, don't we?"
+          },
+          {
+            "n": 2,
+            "sentence": "Who was this book wrote by?",
+            "errorLabel": "イ",
+            "correction": "written",
+            "correctedSentence": "Who was this book written by?"
+          },
+          {
+            "n": 3,
+            "sentence": "I was very tired that I couldn't eat dinner last night.",
+            "errorLabel": "ア",
+            "correction": "so",
+            "correctedSentence": "I was so tired that I couldn't eat dinner last night."
+          },
+          {
+            "n": 4,
+            "sentence": "She often invites her friends to dinner at home. I think she prefers cooking for someone as going out for a meal.",
+            "errorLabel": "ウ",
+            "correction": "to",
+            "correctedSentence": "She often invites her friends to dinner at home. I think she prefers cooking for someone to going out for a meal."
+          }
+        ],
+        "sourcePage": 4,
+        "primarySkill": "error_correction"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24A",
+        "id": "R24-ENG-A-G5",
+        "majorQuestion": 5,
+        "groupType": "paraphrase_group",
+        "subItems": [
+          {
+            "n": 1,
+            "a": "He doesn't have a car, so he can't go to many places.",
+            "b": "(　　　) he (　　　) a car, he could go to many places.",
+            "answerSlots": [
+              [
+                "If"
+              ],
+              [
+                "had"
+              ]
+            ]
+          },
+          {
+            "n": 2,
+            "a": "No other girl in the club sings better than Mary.",
+            "b": "Mary sings (　　　) (　　　) all the girls in the club.",
+            "answerSlots": [
+              [
+                "best"
+              ],
+              [
+                "of"
+              ]
+            ]
+          },
+          {
+            "n": 3,
+            "a": "My mother baked me cookies yesterday.",
+            "b": "My mother baked cookies (　　　) (　　　) yesterday.",
+            "answerSlots": [
+              [
+                "for"
+              ],
+              [
+                "me"
+              ]
+            ]
+          }
+        ],
+        "sourcePage": 4,
+        "primarySkill": "paraphrase"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24A",
+        "id": "R24-ENG-A-G6",
+        "majorQuestion": 6,
+        "groupType": "reading_group",
+        "subItems": [
+          {
+            "n": 1,
+            "type": "single_choice",
+            "options": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ],
+            "answer": "イ"
+          },
+          {
+            "n": 2,
+            "type": "word_order",
+            "answerSentence": "four elves came to their house and heard them talking outside the window of the workshop"
+          },
+          {
+            "n": 3,
+            "type": "word_form",
+            "answer": "flew"
+          },
+          {
+            "n": 4,
+            "type": "single_choice",
+            "options": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ],
+            "answer": "ウ"
+          },
+          {
+            "n": 5,
+            "type": "text",
+            "accepted": [
+              "which",
+              "that"
+            ]
+          },
+          {
+            "n": 6,
+            "type": "initial_letter",
+            "initial": "f",
+            "accepted": [
+              "favorite",
+              "favourite"
+            ]
+          },
+          {
+            "n": 7,
+            "type": "insertion",
+            "answer": "A",
+            "sentence": "They all agreed."
+          },
+          {
+            "n": 8,
+            "type": "sequence_two",
+            "answer": [
+              "ア",
+              "エ"
+            ]
+          },
+          {
+            "n": 9,
+            "type": "choose_three_incorrect",
+            "answer": [
+              "ア",
+              "ウ",
+              "オ"
+            ]
+          }
+        ],
+        "sourcePages": [
+          5,
+          6
+        ],
+        "primarySkill": "long_reading",
+        "passageId": "R24-ENG-A-P6"
+      }
+    ],
+    "FY24B": [
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24B",
+        "id": "R24-ENG-B-G2",
+        "majorQuestion": 2,
+        "groupType": "guided_completion_group",
+        "subItems": [
+          {
+            "n": 1,
+            "prompt": "John (　　　) (　　　) at seven o'clock every morning.",
+            "answerSlots": [
+              [
+                "gets"
+              ],
+              [
+                "up"
+              ]
+            ]
+          },
+          {
+            "n": 2,
+            "prompt": "I want something (　　　) (　　　) drink.",
+            "answerSlots": [
+              [
+                "hot",
+                "warm"
+              ],
+              [
+                "to"
+              ]
+            ]
+          },
+          {
+            "n": 3,
+            "prompt": "I am (　　　) (　　　) with Mary at noon.",
+            "answerSlots": [
+              [
+                "having"
+              ],
+              [
+                "lunch"
+              ]
+            ]
+          },
+          {
+            "n": 4,
+            "prompt": "He (　　　) (　　　) coffee.",
+            "answerSlots": [
+              [
+                "must"
+              ],
+              [
+                "like"
+              ]
+            ]
+          }
+        ],
+        "sourcePage": 3,
+        "primarySkill": "guided_completion"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24B",
+        "id": "R24-ENG-B-G3",
+        "majorQuestion": 3,
+        "groupType": "word_order_group",
+        "subItems": [
+          {
+            "n": 1,
+            "tokens": [
+              "use",
+              "are",
+              "animals",
+              "the",
+              "fire",
+              "humans",
+              "can",
+              "that",
+              "which",
+              "only"
+            ],
+            "answerSentence": "Humans are the only animals that can use fire.",
+            "unused": "which"
+          },
+          {
+            "n": 2,
+            "tokens": [
+              "been",
+              "Africa",
+              "never",
+              "gone",
+              "Yumi",
+              "to",
+              "has"
+            ],
+            "answerSentence": "Yumi has never been to Africa.",
+            "unused": "gone"
+          },
+          {
+            "n": 3,
+            "tokens": [
+              "as",
+              "much",
+              "see",
+              "you",
+              "a",
+              "possible",
+              "doctor",
+              "as",
+              "should",
+              "soon"
+            ],
+            "answerSentence": "You should see a doctor as soon as possible.",
+            "unused": "much"
+          },
+          {
+            "n": 4,
+            "tokens": [
+              "story",
+              "this",
+              "strange",
+              "what",
+              "is",
+              "how"
+            ],
+            "answerSentence": "What a strange story this is!",
+            "unused": "how"
+          }
+        ],
+        "sourcePage": 3,
+        "primarySkill": "word_order"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24B",
+        "id": "R24-ENG-B-G4",
+        "majorQuestion": 4,
+        "groupType": "error_correction_group",
+        "subItems": [
+          {
+            "n": 1,
+            "sentence": "Unlike Takashi, I can neither write or speak Chinese.",
+            "errorLabel": "ウ",
+            "correction": "nor",
+            "correctedSentence": "Unlike Takashi, I can neither write nor speak Chinese."
+          },
+          {
+            "n": 2,
+            "sentence": "I was very surprising at the latest news article published yesterday.",
+            "errorLabel": "ア",
+            "correction": "surprised",
+            "correctedSentence": "I was very surprised at the latest news article published yesterday."
+          },
+          {
+            "n": 3,
+            "sentence": "The neighbor's house was broken into last week. Remember locking the door when you go out.",
+            "errorLabel": "イ",
+            "correction": "to lock",
+            "correctedSentence": "The neighbor's house was broken into last week. Remember to lock the door when you go out."
+          },
+          {
+            "n": 4,
+            "sentence": "I went to a stadium to watch a football game yesterday. Even though it was raining, the football game was really excited.",
+            "errorLabel": "ウ",
+            "correction": "exciting",
+            "correctedSentence": "I went to a stadium to watch a football game yesterday. Even though it was raining, the football game was really exciting."
+          }
+        ],
+        "sourcePage": 4,
+        "primarySkill": "error_correction"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24B",
+        "id": "R24-ENG-B-G5",
+        "majorQuestion": 5,
+        "groupType": "paraphrase_group",
+        "subItems": [
+          {
+            "n": 1,
+            "a": "You don't practice a lot, so you won't be a better player.",
+            "b": "(　　　) you (　　　) more, you would be a better player.",
+            "answerSlots": [
+              [
+                "If"
+              ],
+              [
+                "practiced",
+                "practised"
+              ]
+            ]
+          },
+          {
+            "n": 2,
+            "a": "Tokyo Sky Tree is the tallest building in Japan.",
+            "b": "Tokyo Sky Tree is taller than (　　　) other (　　　) in Japan.",
+            "answerSlots": [
+              [
+                "any"
+              ],
+              [
+                "building"
+              ]
+            ]
+          },
+          {
+            "n": 3,
+            "a": "My grandfather showed me his old album.",
+            "b": "My grandfather showed his old album (　　　) (　　　).",
+            "answerSlots": [
+              [
+                "to"
+              ],
+              [
+                "me"
+              ]
+            ]
+          }
+        ],
+        "sourcePage": 4,
+        "primarySkill": "paraphrase"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY24B",
+        "id": "R24-ENG-B-G6",
+        "majorQuestion": 6,
+        "groupType": "reading_group",
+        "subItems": [
+          {
+            "n": 1,
+            "type": "word_order",
+            "answerSentence": "How much will it cost to repair the roof and the ceiling?"
+          },
+          {
+            "n": 2,
+            "type": "ellipsis",
+            "answer": "run away"
+          },
+          {
+            "n": 3,
+            "type": "word_order",
+            "answerSentence": "whose cat it was"
+          },
+          {
+            "n": 4,
+            "type": "tag_question",
+            "answerSlots": [
+              "isn't",
+              "it"
+            ]
+          },
+          {
+            "n": 5,
+            "type": "extract_sentence",
+            "answer": "Black cats may bring us a good luck!"
+          },
+          {
+            "n": 6,
+            "type": "connector_four",
+            "answer": {
+              "A1": "So",
+              "A2": "Though",
+              "A3": "As",
+              "A4": "After"
+            }
+          },
+          {
+            "n": 7,
+            "type": "dialogue_four",
+            "answer": {
+              "B1": "エ",
+              "B2": "イ",
+              "B3": "ウ",
+              "B4": "ア"
+            }
+          },
+          {
+            "n": 8,
+            "type": "choose_two_match",
+            "answer": [
+              "ア",
+              "エ"
+            ]
+          }
+        ],
+        "sourcePages": [
+          5,
+          6
+        ],
+        "primarySkill": "long_reading",
+        "passageId": "R24-ENG-B-P6"
+      }
+    ],
+    "FY25A": [
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25A",
+        "id": "R25-ENG-A-G2",
+        "majorQuestion": 2,
+        "groupType": "guided_completion_group",
+        "subItems": [
+          {
+            "n": 1,
+            "prompt": "How (　　　) this rose (　　　)!",
+            "answerSlots": [
+              [
+                "beautiful"
+              ],
+              [
+                "is"
+              ]
+            ]
+          },
+          {
+            "n": 2,
+            "prompt": "He is a good singer, (　　　) (　　　)?",
+            "answerSlots": [
+              [
+                "isn't"
+              ],
+              [
+                "he"
+              ]
+            ]
+          },
+          {
+            "n": 3,
+            "prompt": "I don't know (　　　) this word (　　　).",
+            "answerSlots": [
+              [
+                "what"
+              ],
+              [
+                "means"
+              ]
+            ]
+          },
+          {
+            "n": 4,
+            "prompt": "Santa Claus (　　　) bring (　　　) a present.",
+            "answerSlots": [
+              [
+                "will"
+              ],
+              [
+                "you"
+              ]
+            ]
+          }
+        ],
+        "sourcePage": 3,
+        "primarySkill": "guided_completion"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25A",
+        "id": "R25-ENG-A-G3",
+        "majorQuestion": 3,
+        "groupType": "word_order_group",
+        "subItems": [
+          {
+            "n": 1,
+            "tokens": [
+              "a",
+              "astronaut",
+              "is",
+              "an",
+              "dream",
+              "to",
+              "be",
+              "my"
+            ],
+            "answerSentence": "My dream is to be an astronaut.",
+            "unused": "a"
+          },
+          {
+            "n": 2,
+            "tokens": [
+              "is",
+              "spoken",
+              "Australia",
+              "language",
+              "in",
+              "the",
+              "speaking",
+              "what"
+            ],
+            "answerSentence": "What is the language spoken in Australia?",
+            "unused": "speaking"
+          },
+          {
+            "n": 3,
+            "tokens": [
+              "been",
+              "on",
+              "bed",
+              "he",
+              "since",
+              "in",
+              "has",
+              "last",
+              "sick",
+              "night"
+            ],
+            "answerSentence": "He has been sick in bed since last night.",
+            "unused": "on"
+          },
+          {
+            "n": 4,
+            "tokens": [
+              "to",
+              "going",
+              "night",
+              "are",
+              "all",
+              "long",
+              "be",
+              "study",
+              "you"
+            ],
+            "answerSentence": "Are you going to study all night long?",
+            "unused": "be"
+          }
+        ],
+        "sourcePage": 3,
+        "primarySkill": "word_order"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25A",
+        "id": "R25-ENG-A-G4",
+        "majorQuestion": 4,
+        "groupType": "error_correction_group",
+        "subItems": [
+          {
+            "n": 1,
+            "sentence": "It was kind for you to carry my suitcase to the room.",
+            "errorLabel": "ア",
+            "correction": "of",
+            "correctedSentence": "It was kind of you to carry my suitcase to the room."
+          },
+          {
+            "n": 2,
+            "sentence": "I remember to see her somewhere in Tokyo.",
+            "errorLabel": "イ",
+            "correction": "seeing",
+            "correctedSentence": "I remember seeing her somewhere in Tokyo."
+          },
+          {
+            "n": 3,
+            "sentence": "The more you studies English, the more you will like it.",
+            "errorLabel": "ア",
+            "correction": "study",
+            "correctedSentence": "The more you study English, the more you will like it."
+          },
+          {
+            "n": 4,
+            "sentence": "If I had enough money, I can buy a big house.",
+            "errorLabel": "イ",
+            "correction": "could",
+            "correctedSentence": "If I had enough money, I could buy a big house."
+          }
+        ],
+        "sourcePage": 4,
+        "primarySkill": "error_correction"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25A",
+        "id": "R25-ENG-A-G5",
+        "majorQuestion": 5,
+        "groupType": "paraphrase_group",
+        "subItems": [
+          {
+            "n": 1,
+            "a": "I think Spanish is easier than English.",
+            "b": "I think English is (　　　) (　　　) than Spanish.",
+            "answerSlots": [
+              [
+                "more"
+              ],
+              [
+                "difficult"
+              ]
+            ]
+          },
+          {
+            "n": 2,
+            "a": "I took a bath after dinner.",
+            "b": "I had dinner (　　　) (　　　) a bath.",
+            "answerSlots": [
+              [
+                "before"
+              ],
+              [
+                "taking"
+              ]
+            ]
+          },
+          {
+            "n": 3,
+            "a": "Your grandma will be happy when she gets your present.",
+            "b": "Your present will (　　　) your grandma (　　　).",
+            "answerSlots": [
+              [
+                "make"
+              ],
+              [
+                "happy"
+              ]
+            ]
+          }
+        ],
+        "sourcePage": 4,
+        "primarySkill": "paraphrase"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25A",
+        "id": "R25-ENG-A-G6",
+        "majorQuestion": 6,
+        "groupType": "reading_group",
+        "subItems": [
+          {
+            "n": 1,
+            "type": "text",
+            "answer": "named"
+          },
+          {
+            "n": 2,
+            "type": "word_form",
+            "answer": "caught"
+          },
+          {
+            "n": 3,
+            "type": "extract_phrase",
+            "answer": "took its last breath"
+          },
+          {
+            "n": 4,
+            "type": "short_answer",
+            "answerSummary": "Goldie liked to see the apple tree through the living-room windows when he was alive."
+          },
+          {
+            "n": 5,
+            "type": "word_order",
+            "answerSentence": "Mark was very glad to see Daisy eating mealworms."
+          },
+          {
+            "n": 6,
+            "type": "reference_phrase",
+            "answer": "fly to warm countries before winter"
+          },
+          {
+            "n": 7,
+            "type": "initial_letter",
+            "initial": "s",
+            "answer": "stopped"
+          },
+          {
+            "n": 8,
+            "type": "choose_three_match",
+            "answer": [
+              "ウ",
+              "エ",
+              "カ"
+            ]
+          }
+        ],
+        "sourcePages": [
+          5,
+          6
+        ],
+        "primarySkill": "long_reading",
+        "passageId": "R25-ENG-A-P6"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25A",
+        "id": "R25-ENG-A-Q9",
+        "majorQuestion": 9,
+        "groupType": "picture_story_writing",
+        "sourcePage": 7,
+        "primarySkill": "writing",
+        "autoGradeAllowed": false,
+        "prompt": "Look at the three pictures. Write the story shown in the pictures starting with this sentence.",
+        "starter": "Jack and Jane climbed out of the boat...",
+        "approxWords": "80-100",
+        "imageRequired": true
+      }
+    ],
+    "FY25B": [
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25B",
+        "id": "R25-ENG-B-G2",
+        "majorQuestion": 2,
+        "groupType": "guided_completion_group",
+        "subItems": [
+          {
+            "n": 1,
+            "prompt": "We (　　　) keep this plan (　　　).",
+            "answerSlots": [
+              [
+                "must"
+              ],
+              [
+                "secret"
+              ]
+            ]
+          },
+          {
+            "n": 2,
+            "prompt": "(　　　) an exciting (　　　) this is!",
+            "answerSlots": [
+              [
+                "What"
+              ],
+              [
+                "movie",
+                "film"
+              ]
+            ]
+          },
+          {
+            "n": 3,
+            "prompt": "The story (　　　) us (　　　).",
+            "answerSlots": [
+              [
+                "made"
+              ],
+              [
+                "sad"
+              ]
+            ]
+          },
+          {
+            "n": 4,
+            "prompt": "(　　　) keep promises is (　　　).",
+            "answerSlots": [
+              [
+                "To"
+              ],
+              [
+                "important"
+              ]
+            ]
+          }
+        ],
+        "sourcePage": 3,
+        "primarySkill": "guided_completion"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25B",
+        "id": "R25-ENG-B-G3",
+        "majorQuestion": 3,
+        "groupType": "word_order_group",
+        "subItems": [
+          {
+            "n": 1,
+            "tokens": [
+              "Anne",
+              "now",
+              "named",
+              "calling",
+              "just",
+              "someone",
+              "you",
+              "called"
+            ],
+            "answerSentence": "Someone named Anne called you just now.",
+            "unused": "calling"
+          },
+          {
+            "n": 2,
+            "tokens": [
+              "home",
+              "at",
+              "won't",
+              "next",
+              "I",
+              "be",
+              "Sunday",
+              "on"
+            ],
+            "answerSentence": "I won't be at home next Sunday.",
+            "unused": "on"
+          },
+          {
+            "n": 3,
+            "tokens": [
+              "time",
+              "you",
+              "what",
+              "doing",
+              "were",
+              "there",
+              "at",
+              "that"
+            ],
+            "answerSentence": "What were you doing at that time?",
+            "unused": "there"
+          },
+          {
+            "n": 4,
+            "tokens": [
+              "have",
+              "station",
+              "I",
+              "gone",
+              "the",
+              "been",
+              "to",
+              "just"
+            ],
+            "answerSentence": "I have just been to the station.",
+            "unused": "gone"
+          }
+        ],
+        "sourcePage": 3,
+        "primarySkill": "word_order"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25B",
+        "id": "R25-ENG-B-G4",
+        "majorQuestion": 4,
+        "groupType": "error_correction_group",
+        "subItems": [
+          {
+            "n": 1,
+            "sentence": "Thank you for to give me the chance to visit your school.",
+            "errorLabel": "イ",
+            "correction": "giving",
+            "correctedSentence": "Thank you for giving me the chance to visit your school."
+          },
+          {
+            "n": 2,
+            "sentence": "Tomorrow is the national championship. I want Ken win the race.",
+            "errorLabel": "ウ",
+            "correction": "to win",
+            "correctedSentence": "Tomorrow is the national championship. I want Ken to win the race."
+          },
+          {
+            "n": 3,
+            "sentence": "Your mother hasn't cooked dinner for you yet, hasn't she?",
+            "errorLabel": "イ",
+            "correction": "has",
+            "correctedSentence": "Your mother hasn't cooked dinner for you yet, has she?"
+          },
+          {
+            "n": 4,
+            "sentence": "I was spoken by a stranger in the shop.",
+            "errorLabel": "ア",
+            "correction": "was spoken to",
+            "correctedSentence": "I was spoken to by a stranger in the shop."
+          }
+        ],
+        "sourcePage": 4,
+        "primarySkill": "error_correction"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25B",
+        "id": "R25-ENG-B-G5",
+        "majorQuestion": 5,
+        "groupType": "paraphrase_group",
+        "subItems": [
+          {
+            "n": 1,
+            "a": "“Clean your room,” my father said to me.",
+            "b": "My father (　　　) me (　　　) clean my room.",
+            "answerSlots": [
+              [
+                "told"
+              ],
+              [
+                "to"
+              ]
+            ]
+          },
+          {
+            "n": 2,
+            "a": "We don't know where to wait for the bus.",
+            "b": "We don't know (　　　) (　　　) should wait for the bus.",
+            "answerSlots": [
+              [
+                "where"
+              ],
+              [
+                "we"
+              ]
+            ]
+          },
+          {
+            "n": 3,
+            "a": "Your brother and I are the same age.",
+            "b": "I'm (　　　) (　　　) as your brother.",
+            "answerSlots": [
+              [
+                "as"
+              ],
+              [
+                "old"
+              ]
+            ]
+          }
+        ],
+        "sourcePage": 4,
+        "primarySkill": "paraphrase"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25B",
+        "id": "R25-ENG-B-G6",
+        "majorQuestion": 6,
+        "groupType": "reading_group",
+        "subItems": [
+          {
+            "n": 1,
+            "type": "text",
+            "accepted": [
+              "that",
+              "which"
+            ]
+          },
+          {
+            "n": 2,
+            "type": "word_order",
+            "answerSentence": "the vine will be big and thick enough for someone to climb up"
+          },
+          {
+            "n": 3,
+            "type": "single_choice",
+            "answer": "ウ"
+          },
+          {
+            "n": 4,
+            "type": "word_order",
+            "answerSentence": "why it was so big and thick"
+          },
+          {
+            "n": 5,
+            "type": "word_form",
+            "answer": "is thrown"
+          },
+          {
+            "n": 6,
+            "type": "single_choice",
+            "answer": "イ"
+          },
+          {
+            "n": 7,
+            "type": "insertion",
+            "answer": "B",
+            "sentence": "Don't you remember?"
+          },
+          {
+            "n": 8,
+            "type": "choose_three_match",
+            "answer": [
+              "ア",
+              "ウ",
+              "エ"
+            ]
+          }
+        ],
+        "sourcePages": [
+          5,
+          6
+        ],
+        "primarySkill": "long_reading",
+        "passageId": "R25-ENG-B-P6"
+      },
+      {
+        "sourceType": "past_exam",
+        "answerAuthority": "independent_solution_nonofficial",
+        "officialKeyAvailable": false,
+        "verificationStatus": "source_context_reviewed_v1",
+        "contentVersion": 1,
+        "examId": "FY25B",
+        "id": "R25-ENG-B-Q9",
+        "majorQuestion": 9,
+        "groupType": "picture_story_writing",
+        "sourcePage": 7,
+        "primarySkill": "writing",
+        "autoGradeAllowed": false,
+        "prompt": "Look at the three pictures. Write the story shown in the pictures starting with this sentence.",
+        "starter": "It was a warm and sunny Saturday afternoon...",
+        "approxWords": "80-100",
+        "imageRequired": true
+      }
+    ]
+  }
+}
