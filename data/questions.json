@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "fy26a-mvp-0.1",
+  "examId": "FY26A",
+  "diagnostic": true,
+  "sourceDocument": "立教_FY26_英語A_問題.pdf",
+  "answerPolicy": {
+    "authority": "independently_solved",
+    "officialKeyAvailable": false,
+    "autoGradeAllowed": false
+  },
+  "learnerVisibleTaskCount": 19,
+  "records": [
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q2-1",
+      "majorQuestion": 2,
+      "minorQuestion": 1,
+      "sourcePage": 4,
+      "primarySkill": "guided_completion",
+      "skillTags": [
+        "GRAMMAR",
+        "GERUND"
+      ],
+      "scoringType": "multi_slot_text",
+      "prompt": "My father enjoys (　　　) (　　　) on weekends.",
+      "japanese": "私の父は週末にゴルフをして楽しんでいます。",
+      "responseSlots": 2,
+      "answerSpec": {
+        "slots": [
+          [
+            "playing"
+          ],
+          [
+            "golf"
+          ]
+        ]
+      },
+      "targetId": "grammar-gerund-enjoy"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q2-2",
+      "majorQuestion": 2,
+      "minorQuestion": 2,
+      "sourcePage": 4,
+      "primarySkill": "guided_completion",
+      "skillTags": [
+        "GRAMMAR",
+        "INDIRECT_QUESTION",
+        "FUTURE"
+      ],
+      "scoringType": "multi_slot_text",
+      "prompt": "I don't know (　　　) he (　　　) come to the party.",
+      "japanese": "私は彼がそのパーティーに来るかどうかわかりません。",
+      "responseSlots": 2,
+      "answerSpec": {
+        "slots": [
+          [
+            "whether",
+            "if"
+          ],
+          [
+            "will"
+          ]
+        ]
+      },
+      "targetId": "grammar-whether-if-future"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q2-3",
+      "majorQuestion": 2,
+      "minorQuestion": 3,
+      "sourcePage": 4,
+      "primarySkill": "guided_completion",
+      "skillTags": [
+        "GRAMMAR",
+        "PARTICIPLE",
+        "PASSIVE"
+      ],
+      "scoringType": "multi_slot_text",
+      "prompt": "The language (　　　) in that country (　　　) very difficult.",
+      "japanese": "その国で話されている言語はとても難しい。",
+      "responseSlots": 2,
+      "answerSpec": {
+        "slots": [
+          [
+            "spoken"
+          ],
+          [
+            "is"
+          ]
+        ]
+      },
+      "targetId": "grammar-past-participle-modifier"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q2-4",
+      "majorQuestion": 2,
+      "minorQuestion": 4,
+      "sourcePage": 4,
+      "primarySkill": "guided_completion",
+      "skillTags": [
+        "GRAMMAR",
+        "SUBJUNCTIVE"
+      ],
+      "scoringType": "multi_slot_text",
+      "prompt": "If I (　　　) a bird, I (　　　) fly to you.",
+      "japanese": "もし私が鳥だったら君のところに飛んでいくのになぁ。",
+      "responseSlots": 2,
+      "answerSpec": {
+        "slots": [
+          [
+            "were"
+          ],
+          [
+            "would"
+          ]
+        ]
+      },
+      "targetId": "grammar-counterfactual-if"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q2-5",
+      "majorQuestion": 2,
+      "minorQuestion": 5,
+      "sourcePage": 4,
+      "primarySkill": "guided_completion",
+      "skillTags": [
+        "GRAMMAR",
+        "MODAL",
+        "PASSIVE"
+      ],
+      "scoringType": "multi_slot_text",
+      "prompt": "This problem (　　　) (　　　) solved at once.",
+      "japanese": "この問題はすぐに解決しなければならない。",
+      "responseSlots": 2,
+      "answerSpec": {
+        "slots": [
+          [
+            "must"
+          ],
+          [
+            "be"
+          ]
+        ]
+      },
+      "targetId": "grammar-modal-passive"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q3-1",
+      "majorQuestion": 3,
+      "minorQuestion": 1,
+      "sourcePage": 4,
+      "primarySkill": "word_order",
+      "skillTags": [
+        "WORD_ORDER",
+        "PAST_PERFECT"
+      ],
+      "scoringType": "word_order_missing_word",
+      "japanese": "彼は財布をなくしたことに気づいた。",
+      "tokens": [
+        "realised",
+        "he",
+        "his",
+        "wallet",
+        "that",
+        "lost"
+      ],
+      "missingWord": "had",
+      "answerSpec": {
+        "sentence": "He realised that he had lost his wallet."
+      },
+      "targetId": "word-order-past-perfect"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q3-2",
+      "majorQuestion": 3,
+      "minorQuestion": 2,
+      "sourcePage": 4,
+      "primarySkill": "word_order",
+      "skillTags": [
+        "WORD_ORDER",
+        "PARTICIPLE"
+      ],
+      "scoringType": "word_order_missing_word",
+      "japanese": "私はある有名な小説家によって書かれた本を読みました。",
+      "tokens": [
+        "by",
+        "novelist",
+        "famous",
+        "a"
+      ],
+      "missingWord": "written",
+      "answerSpec": {
+        "sentence": "I read a book written by a famous novelist."
+      },
+      "targetId": "word-order-participle-modifier"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q3-3",
+      "majorQuestion": 3,
+      "minorQuestion": 3,
+      "sourcePage": 4,
+      "primarySkill": "word_order",
+      "skillTags": [
+        "WORD_ORDER",
+        "FUTURE_PROGRESSIVE"
+      ],
+      "scoringType": "word_order_missing_word",
+      "japanese": "私は明日の今頃は寝ているでしょう。",
+      "tokens": [
+        "will",
+        "sleeping",
+        "time",
+        "this"
+      ],
+      "missingWord": "be",
+      "answerSpec": {
+        "sentence": "I will be sleeping this time tomorrow."
+      },
+      "targetId": "word-order-future-progressive"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q3-4",
+      "majorQuestion": 3,
+      "minorQuestion": 4,
+      "sourcePage": 4,
+      "primarySkill": "word_order",
+      "skillTags": [
+        "WORD_ORDER",
+        "RELATIVE_CLAUSE",
+        "PREPOSITION"
+      ],
+      "scoringType": "word_order_missing_word",
+      "japanese": "これは私が探していた鍵です。",
+      "tokens": [
+        "I",
+        "that",
+        "was",
+        "looking"
+      ],
+      "missingWord": "for",
+      "answerSpec": {
+        "sentence": "This is the key that I was looking for."
+      },
+      "targetId": "word-order-relative-preposition"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q3-5",
+      "majorQuestion": 3,
+      "minorQuestion": 5,
+      "sourcePage": 4,
+      "primarySkill": "word_order",
+      "skillTags": [
+        "WORD_ORDER",
+        "PHRASE",
+        "GERUND"
+      ],
+      "scoringType": "word_order_missing_word",
+      "japanese": "私はサッカー観戦に興味があります。",
+      "tokens": [
+        "interested",
+        "watching",
+        "football",
+        "am",
+        "games"
+      ],
+      "missingWord": "in",
+      "answerSpec": {
+        "sentence": "I am interested in watching football games."
+      },
+      "targetId": "word-order-interested-in"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-G4",
+      "majorQuestion": 4,
+      "minorQuestion": null,
+      "sourcePage": 5,
+      "primarySkill": "error_correction_rewrite",
+      "skillTags": [
+        "GRAMMAR",
+        "ERROR_CORRECTION",
+        "REWRITE"
+      ],
+      "scoringType": "select_five_and_rewrite",
+      "learnerVisibleTaskCount": 1,
+      "targetId": "grammar-error-correction-group",
+      "prompt": "次の中から誤りがある文を5つ選び、訂正して全文を書き直しなさい。",
+      "subItems": [
+        {
+          "number": 1,
+          "text": "You must be quiet in the library."
+        },
+        {
+          "number": 2,
+          "text": "I have lived in this town since five years."
+        },
+        {
+          "number": 3,
+          "text": "I don't know what is her name."
+        },
+        {
+          "number": 4,
+          "text": "My sister has just come home."
+        },
+        {
+          "number": 5,
+          "text": "She is from Canada, isn’t she?"
+        },
+        {
+          "number": 6,
+          "text": "This is the city who is known all over the world."
+        },
+        {
+          "number": 7,
+          "text": "This desk was made by my grandfather."
+        },
+        {
+          "number": 8,
+          "text": "I am knowing his phone number."
+        },
+        {
+          "number": 9,
+          "text": "My parents made me to clean the room."
+        },
+        {
+          "number": 10,
+          "text": "I want to go to the new amusement park."
+        }
+      ],
+      "answerSpec": {
+        "errorNumbers": [
+          2,
+          3,
+          6,
+          8,
+          9
+        ],
+        "corrections": {
+          "2": [
+            "I have lived in this town for five years."
+          ],
+          "3": [
+            "I don't know what her name is."
+          ],
+          "6": [
+            "This is the city which is known all over the world.",
+            "This is the city that is known all over the world."
+          ],
+          "8": [
+            "I know his phone number."
+          ],
+          "9": [
+            "My parents made me clean the room."
+          ]
+        }
+      }
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q5-1",
+      "majorQuestion": 5,
+      "minorQuestion": 1,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "passageId": "R26-ENG-A-P5",
+      "primarySkill": "long_reading",
+      "skillTags": [
+        "READING",
+        "GRAMMAR_IN_CONTEXT"
+      ],
+      "scoringType": "single_choice",
+      "prompt": "下線部(1)の中から適切なものを選び、記号で答えなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "walk"
+        },
+        {
+          "id": "イ",
+          "text": "walked"
+        },
+        {
+          "id": "ウ",
+          "text": "walking"
+        },
+        {
+          "id": "エ",
+          "text": "was walking"
+        }
+      ],
+      "answerSpec": {
+        "choice": "ウ"
+      },
+      "targetId": "reading-grammar-see-object-ing"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q5-2",
+      "majorQuestion": 5,
+      "minorQuestion": 2,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "passageId": "R26-ENG-A-P5",
+      "primarySkill": "long_reading",
+      "skillTags": [
+        "READING",
+        "CONTEXT",
+        "GRAMMAR"
+      ],
+      "scoringType": "context_text",
+      "prompt": "文脈から判断して、下線部(2)の（　）内に入る語を書きなさい。",
+      "answerSpec": {
+        "text": [
+          "not"
+        ]
+      },
+      "targetId": "reading-context-not-enough"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q5-3",
+      "majorQuestion": 5,
+      "minorQuestion": 3,
+      "sourcePages": [
+        5,
+        6
+      ],
+      "passageId": "R26-ENG-A-P5",
+      "primarySkill": "long_reading",
+      "skillTags": [
+        "READING",
+        "RELATIVE_PRONOUN"
+      ],
+      "scoringType": "context_text",
+      "prompt": "下線部(3)の（　）内に入る語を書きなさい。",
+      "answerSpec": {
+        "preferred": "who",
+        "possibleGrammarAlternatives": [
+          "that"
+        ],
+        "requiresAuthorityReview": true
+      },
+      "targetId": "reading-relative-pronoun-person"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q5-4",
+      "majorQuestion": 5,
+      "minorQuestion": 4,
+      "sourcePages": [
+        5,
+        6,
+        7
+      ],
+      "passageId": "R26-ENG-A-P5",
+      "primarySkill": "long_reading",
+      "skillTags": [
+        "READING",
+        "PARAPHRASE"
+      ],
+      "scoringType": "single_choice",
+      "prompt": "下線部(4)の内容を表わすものを以下から選び、記号で答えなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "stop planting the rose stem"
+        },
+        {
+          "id": "イ",
+          "text": "stop looking at the rose stem"
+        },
+        {
+          "id": "ウ",
+          "text": "stop watering the rose stem"
+        }
+      ],
+      "answerSpec": {
+        "choice": "イ",
+        "requiresAuthorityReview": true
+      },
+      "targetId": "reading-paraphrase-give-up"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q5-5",
+      "majorQuestion": 5,
+      "minorQuestion": 5,
+      "sourcePages": [
+        5,
+        6,
+        7
+      ],
+      "passageId": "R26-ENG-A-P5",
+      "primarySkill": "long_reading",
+      "skillTags": [
+        "READING",
+        "WORD_ORDER",
+        "RELATIVE_CLAUSE"
+      ],
+      "scoringType": "word_order",
+      "prompt": "下線部(5)の意味が「私が植えたバラが育った。」となるように、（　）内の語句を並べかえなさい。",
+      "tokens": [
+        "I",
+        "grown",
+        "the rose",
+        "planted",
+        "that",
+        "has"
+      ],
+      "answerSpec": {
+        "sentence": "The rose that I planted has grown."
+      },
+      "targetId": "reading-word-order-relative-perfect"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q5-6",
+      "majorQuestion": 5,
+      "minorQuestion": 6,
+      "sourcePages": [
+        6,
+        7
+      ],
+      "passageId": "R26-ENG-A-P5",
+      "primarySkill": "long_reading",
+      "skillTags": [
+        "READING",
+        "GERUND"
+      ],
+      "scoringType": "word_form",
+      "prompt": "下線部(6)の語 see を適切な形にしなさい。",
+      "answerSpec": {
+        "text": [
+          "seeing"
+        ]
+      },
+      "targetId": "reading-remember-gerund"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q5-7",
+      "majorQuestion": 5,
+      "minorQuestion": 7,
+      "sourcePages": [
+        6,
+        7
+      ],
+      "passageId": "R26-ENG-A-P5",
+      "primarySkill": "long_reading",
+      "skillTags": [
+        "READING",
+        "ELLIPSIS"
+      ],
+      "scoringType": "single_choice",
+      "prompt": "下線部(7)の内容を表わすものを以下から選び、記号で答えなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "look after dogs"
+        },
+        {
+          "id": "イ",
+          "text": "want to have dogs"
+        },
+        {
+          "id": "ウ",
+          "text": "like dogs"
+        }
+      ],
+      "answerSpec": {
+        "choice": "ウ"
+      },
+      "targetId": "reading-ellipsis-do"
+    },
+    {
+      "examId": "FY26A",
+      "sourceType": "past_exam",
+      "contentVersion": 1,
+      "answerAuthority": "independently_solved",
+      "verificationStatus": "provisional_needs_second_check",
+      "autoGradeAllowed": false,
+      "active": true,
+      "id": "R26-ENG-A-Q5-8",
+      "majorQuestion": 5,
+      "minorQuestion": 8,
+      "sourcePage": 7,
+      "passageId": "R26-ENG-A-P5",
+      "primarySkill": "long_reading",
+      "skillTags": [
+        "READING",
+        "CONTENT_MATCH"
+      ],
+      "scoringType": "multiple_choice",
+      "prompt": "以下の文の中から本文の内容と同じものを3つ選び、記号で答えなさい。",
+      "options": [
+        {
+          "id": "ア",
+          "text": "スザンナは、犬を飼うことに関して姉に意見を求めたが、姉は反対だった。"
+        },
+        {
+          "id": "イ",
+          "text": "スザンナが公園の近くで出会った年配の女性は、すすんで怪我をしていた。"
+        },
+        {
+          "id": "ウ",
+          "text": "年配の女性は、心配してくれたことへの感謝の気持ちでスザンナにバラを渡した。"
+        },
+        {
+          "id": "エ",
+          "text": "年配の女性がくれたバラの茎を挿し木するというのは、母親のアイディアだった。"
+        },
+        {
+          "id": "オ",
+          "text": "スザンナは、11歳になった時から庭の植物の世話を自分でするようにした。"
+        },
+        {
+          "id": "カ",
+          "text": "スザンナは、コマドリが自分の手の上に乗ったので、とても喜んだ。"
+        },
+        {
+          "id": "キ",
+          "text": "年配の女性は、スザンナが大きくなったので最初スザンナだとは気が付かなかった。"
+        },
+        {
+          "id": "ク",
+          "text": "スザンナは、年配の女性の犬の世話をすることを許してもらえるか心配だった。"
+        }
+      ],
+      "answerSpec": {
+        "choices": [
+          "ウ",
+          "エ",
+          "キ"
+        ]
+      },
+      "targetId": "reading-content-match"
+    }
+  ]
+}
