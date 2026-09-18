@@ -30,12 +30,20 @@ function setTheme(t){S.theme=t==='dark'?'dark':'light';document.documentElement.
 setTheme(S.theme);document.getElementById('dark').onclick=function(){setTheme(S.theme==='dark'?'light':'dark')};
 
 async function loadData(){
-  const names=['exams','papers','sections','questions','passages','practice'];
+  const names=['exams','papers','sections','questions','passages','practice','source-coverage'];
   const vals=await Promise.all(names.map(function(n){return fetch('data/'+n+'.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})}));
-  DATA={exams:vals[0].exams,papers:vals[1].papers,sections:vals[2].papers,questions:vals[3].records,questionsMeta:vals[3],passages:vals[4].passages,practice:vals[5].items};
+  DATA={exams:vals[0].exams,papers:vals[1].papers,sections:vals[2].papers,questions:vals[3].records,questionsMeta:vals[3],passages:vals[4].passages,practice:vals[5].items,sourceCoverage:vals[6]};
 }
 function examById(id){return DATA.exams.find(function(x){return x.examId===id})}
 function paperById(id){return DATA.papers.find(function(x){return x.paperId===id})}
+function sourceCoverageFor(id){return DATA.sourceCoverage?.suppliedWrittenCoverage?.[id]||null}
+function sourceCoverageNote(id){
+  const c=sourceCoverageFor(id);if(!c)return '';
+  const missing=(c.sourceMissing||[]).join(' ／ ');
+  const asset=(c.runtimeAssetGap||[]).join(' ／ ');
+  if(qsFor(id).length)return '現在アプリで解答可能な問題データがあります。'+(missing?' 原本上の未提供: '+missing:'');
+  return '原本で確認できる範囲は転記・監査済みです。'+(missing?' 未提供: '+missing+'。':'')+(asset?' 追加整備: '+asset+'。':'')+' 不足部分は推測で補完しません。';
+}
 function qsFor(id){return DATA.questions.filter(function(x){return x.examId===id})}
 function completed(id){return S.attempts.some(function(x){return x.examId===id&&x.status==='graded'})}
 function weakEntries(){return Object.entries(S.weak)}
@@ -67,7 +75,7 @@ function home(){
 function route(){
   return '<section class="card hero"><div class="eyebrow">LEARNING ROUTE</div><h2>学習ルート</h2><p>A/Bを別examIdで管理します。</p></section><section class="route-list">'+C.exam.route.map(function(id,i){
     const ex=examById(id),hold=id===C.exam.holdoutExamId,has=qsFor(id).length>0;
-    const description=ex.year+'年度 '+ex.schedule+'日程 · '+(hold?'最終判定前は学習に使用しません。':has?'問題データ利用可能':'構造登録済み・問題本文整備中');
+    const description=ex.year+'年度 '+ex.schedule+'日程 · '+(hold?'最終判定前は学習に使用しません。':has?'問題データ利用可能':sourceCoverageNote(id));
     const actionHtml=has&&!hold?'<button onclick="__RIKKYO_APP__.openExam(\''+id+'\')">過去問を開く</button>':'';
     return U.routeStepCard({index:i+1,title:id,role:P.routeRole(id),status:hold?'初見温存中':has?'利用可能':'整備中',description:description,protectedCard:hold,actionHtml:actionHtml});
   }).join('')+'</section>';
@@ -75,7 +83,7 @@ function route(){
 function exam(){
   const id=selectedExamId,ex=examById(id),paper=paperById(id),qs=qsFor(id),hold=id===C.exam.holdoutExamId;
   if(S.currentAttempt&&S.currentAttempt.status==='active'&&S.currentAttempt.examId===id)return examAttempt();
-  return '<section class="card hero"><div class="eyebrow">PAST EXAMS</div><h2>過去問</h2></section><section class="exam-list">'+C.exam.examIds.map(function(x){const e=examById(x);return '<article class="exam-card '+(x===id?'selected':'')+'"><div class="row space"><h3>'+x+'</h3><span class="badge '+(x===C.exam.holdoutExamId?'holdout':'')+'">'+h(P.routeRole(x))+'</span></div><div class="muted">'+e.year+'年度 '+e.schedule+'日程 · '+(qsFor(x).length?'問題データあり':'構造のみ')+'</div><button onclick="__RIKKYO_APP__.selectExam(\''+x+'\')">表示</button></article>'}).join('')+'</section><section class="card"><h2>'+id+' · '+h(P.routeRole(id))+'</h2><p>'+ex.year+'年度 '+ex.schedule+'日程 ／ supplied pages: '+paper.pageCount+'</p>'+(hold?'<div class="badbox"><b>最終判定用holdout</b><p>現在は開始できません。</p></div>':qs.length?'<div class="notice"><b>非公式解答</b><p>原本から独立に検討したアプリ解答で、学校公式解答ではありません。</p></div><p>学習タスク: <b>'+qs.length+'</b></p><button class="primary" onclick="__RIKKYO_APP__.beginAttempt(\''+id+'\')">この過去問を始める</button>':'<div class="warnbox">問題本文データを整備中です。省略部分は推測で補完しません。</div>')+'</section>';
+  return '<section class="card hero"><div class="eyebrow">PAST EXAMS</div><h2>過去問</h2></section><section class="exam-list">'+C.exam.examIds.map(function(x){const e=examById(x);return '<article class="exam-card '+(x===id?'selected':'')+'"><div class="row space"><h3>'+x+'</h3><span class="badge '+(x===C.exam.holdoutExamId?'holdout':'')+'">'+h(P.routeRole(x))+'</span></div><div class="muted">'+e.year+'年度 '+e.schedule+'日程 · '+(qsFor(x).length?'問題データあり':'原本範囲監査済み')+'</div><button onclick="__RIKKYO_APP__.selectExam(\''+x+'\')">表示</button></article>'}).join('')+'</section><section class="card"><h2>'+id+' · '+h(P.routeRole(id))+'</h2><p>'+ex.year+'年度 '+ex.schedule+'日程 ／ supplied pages: '+paper.pageCount+'</p>'+(hold?'<div class="badbox"><b>最終判定用holdout</b><p>問題本文の転記・非公式解答監査は別データとして完了していますが、最終判定前の学習には公開しません。リスニングは音源未入手のため採点対象外です。</p></div>':qs.length?'<div class="notice"><b>非公式解答</b><p>原本から独立に検討したアプリ解答で、学校公式解答ではありません。</p></div><p>学習タスク: <b>'+qs.length+'</b></p><button class="primary" onclick="__RIKKYO_APP__.beginAttempt(\''+id+'\')">この過去問を始める</button>':'<div class="warnbox">'+h(sourceCoverageNote(id))+'</div>')+'</section>';
 }
 function selectExam(id){selectedExamId=id;save();render()}
 function openExam(id){selectedExamId=id;view='exam';document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v==='exam')});save();render();scrollTo({top:0})}
