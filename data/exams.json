@@ -8,7 +8,16 @@
       "schedule": "A",
       "subject": "english",
       "sourceDocument": "立教_FY24_英語A_問題.pdf",
-      "sourceCompleteness": "partial"
+      "sourceCompleteness": "partial",
+      "runtimeEnabled": true,
+      "runtimeMode": "supplied_subset",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "runtimeNotice": "原本で確認できるQ2-Q5を学習用subsetとして提供。リスニング・省略部・長文/作文の未実装部分を完全版として扱わない。"
     },
     {
       "examId": "FY24B",
@@ -16,7 +25,16 @@
       "schedule": "B",
       "subject": "english",
       "sourceDocument": "立教_FY24_英語B_問題.pdf",
-      "sourceCompleteness": "partial"
+      "sourceCompleteness": "partial",
+      "runtimeEnabled": true,
+      "runtimeMode": "supplied_subset",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "runtimeNotice": "原本で確認できるQ2-Q5を学習用subsetとして提供。リスニング・省略部・長文/作文の未実装部分を完全版として扱わない。"
     },
     {
       "examId": "FY25A",
@@ -24,7 +42,16 @@
       "schedule": "A",
       "subject": "english",
       "sourceDocument": "立教_FY25_英語A_問題.pdf",
-      "sourceCompleteness": "partial"
+      "sourceCompleteness": "partial",
+      "runtimeEnabled": true,
+      "runtimeMode": "supplied_subset",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "runtimeNotice": "原本で確認できるQ2-Q5を学習用subsetとして提供。リスニング・省略部・長文/作文の未実装部分を完全版として扱わない。"
     },
     {
       "examId": "FY25B",
@@ -32,7 +59,16 @@
       "schedule": "B",
       "subject": "english",
       "sourceDocument": "立教_FY25_英語B_問題.pdf",
-      "sourceCompleteness": "partial"
+      "sourceCompleteness": "partial",
+      "runtimeEnabled": true,
+      "runtimeMode": "supplied_subset",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "runtimeNotice": "原本で確認できるQ2-Q5を学習用subsetとして提供。リスニング・省略部・長文/作文の未実装部分を完全版として扱わない。"
     },
     {
       "examId": "FY26A",
@@ -41,7 +77,15 @@
       "subject": "english",
       "sourceDocument": "立教_FY26_英語A_問題.pdf",
       "sourceCompleteness": "visible_supplied_pages",
-      "role": "diagnostic"
+      "role": "diagnostic",
+      "runtimeEnabled": true,
+      "runtimeMode": "diagnostic_mvp",
+      "runtimeMajors": [
+        2,
+        3,
+        4,
+        5
+      ]
     },
     {
       "examId": "FY26B",
@@ -51,7 +95,9 @@
       "sourceDocument": "立教_FY26_英語B_問題.pdf",
       "sourceCompleteness": "visible_supplied_pages",
       "role": "final_holdout",
-      "trainingExcluded": true
+      "trainingExcluded": true,
+      "runtimeEnabled": false,
+      "runtimeMode": "holdout_locked"
     }
   ]
 }
