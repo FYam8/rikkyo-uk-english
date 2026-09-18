@@ -88,8 +88,11 @@
         2,
         3,
         4,
-        5
-      ]
+        5,
+        6,
+        7
+      ],
+      "runtimeNotice": "FY26AはQ2-Q7を診断用に提供。Q1リスニングは音源未入手のため採点しない。Q8 Writingは公式採点authority未確認かつRikkyo AI Writing無効のため、原本情報のみ保持して現ランタイムでは採点対象外。"
     },
     {
       "examId": "FY26B",
