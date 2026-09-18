@@ -142,6 +142,23 @@
    if(!holdoutText.includes('最終判定用holdout'))fail('holdout notice missing');
    if(!holdoutText.includes('リスニングは音源未入手'))fail('listening limitation missing');
  }
+ if(scenario==='crossyear'){
+   const expected={FY26A:29,FY24A:24,FY24B:23,FY25A:23,FY25B:23};
+   for(const [id,count] of Object.entries(expected)){
+     a.resetForTest();a.openExam(id);a.beginAttempt(id);a.goto('exam');
+     await wait(()=>frame.contentDocument.querySelectorAll('.question').length===count);
+     if(a.getState().currentAttempt?.examId!==id)fail('crossyear identity '+id);
+     if(frame.contentDocument.querySelectorAll('.question').length!==count)fail('crossyear count '+id);
+     const text=frame.contentDocument.body.textContent;
+     if(id==='FY26A'&&!text.includes('現在の実施範囲'))fail('FY26A runtime scope notice');
+     if(id!=='FY26A'&&!text.includes('原本Q2-Q6 subset'))fail('subset scope '+id);
+   }
+   a.resetForTest();a.goto('route');await new Promise(r=>setTimeout(r,50));
+   const routeIds=[...frame.contentDocument.querySelectorAll('.route-step h3')].map(x=>x.textContent.trim());
+   if(JSON.stringify(routeIds)!==JSON.stringify(['FY26A','FY24A','FY24B','FY25A','FY25B','FY26B']))fail('route order');
+   a.beginAttempt('FY26B');
+   if(a.getState().currentAttempt)fail('crossyear holdout opened');
+ }
  if(scenario==='holdout'){
    a.beginAttempt('FY26B');
    if(a.getState().currentAttempt)fail('holdout opened');
