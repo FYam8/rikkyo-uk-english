@@ -30,10 +30,11 @@ function setTheme(t){S.theme=t==='dark'?'dark':'light';document.documentElement.
 setTheme(S.theme);document.getElementById('dark').onclick=function(){setTheme(S.theme==='dark'?'light':'dark')};
 
 async function loadData(){
-  const names=['exams','papers','sections','questions','passages','practice','source-coverage','supplied-source-questions'];
+  const names=['exams','papers','sections','questions','passages','practice','source-coverage','supplied-source-questions','supplied-reading-runtime','supplied-source-passages'];
   const vals=await Promise.all(names.map(function(n){return fetch('data/'+n+'.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})}));
-  const suppliedRuntime=flattenSuppliedRuntime(vals[7]);
-  DATA={exams:vals[0].exams,papers:vals[1].papers,sections:vals[2].papers,questions:[...vals[3].records,...suppliedRuntime],questionsMeta:vals[3],passages:vals[4].passages,practice:vals[5].items,sourceCoverage:vals[6],suppliedSource:vals[7]};
+  const suppliedRuntime=flattenSuppliedRuntime(vals[7]),readingRuntime=Array.isArray(vals[8].records)?vals[8].records:[];
+  const suppliedPassages=Array.isArray(vals[9].passages)?vals[9].passages:[];
+  DATA={exams:vals[0].exams,papers:vals[1].papers,sections:vals[2].papers,questions:[...vals[3].records,...suppliedRuntime,...readingRuntime],questionsMeta:vals[3],passages:[...vals[4].passages,...suppliedPassages],practice:vals[5].items,sourceCoverage:vals[6],suppliedSource:vals[7],readingRuntime:vals[8]};
 }
 function flattenSuppliedRuntime(source){
   const out=[];if(!source||!source.exams)return out;
@@ -161,11 +162,13 @@ function evaluate(q,r){
   if(q.scoringType==='context_text'||q.scoringType==='word_form'){const a=q.answerSpec.accepted||q.answerSpec.text||[q.answerSpec.preferred];return a.filter(Boolean).map(norm).includes(norm(r))}
   if(q.scoringType==='multiple_choice')return sameSet(r||[],q.answerSpec.choices||[]);
   if(q.scoringType==='select_five_and_rewrite'){if(!r||!sameSet((r.selected||[]).map(Number),q.answerSpec.errorNumbers))return false;return q.answerSpec.errorNumbers.every(function(n){return q.answerSpec.corrections[String(n)].some(function(x){return norm(x)===norm(r.corrections&&r.corrections[n])})})}
+  if(q.scoringType==='manual_reading')return null;
   return false
 }
 function displayAnswer(q){const a=q.answerSpec;if(q.scoringType==='multi_slot_text')return a.slots.map(function(x){return x.join(' / ')}).join(' ｜ ');if(q.scoringType==='select_five_and_rewrite')return a.errorNumbers.join(', ');if(q.scoringType==='single_choice')return a.choice;if(q.scoringType==='multiple_choice')return a.choices.join('・');return a.sentence||(a.accepted&&a.accepted.join(' / '))||(a.text&&a.text.join(' / '))||a.preferred||''}
 function inputFor(q){
   const r=response(q.id);
+  if(q.scoringType==='manual_reading')return '<div class="warnbox"><b>自己採点の記述問題</b><p>本文を根拠に自分の言葉で答えてください。採点時に確認ポイントを表示します。</p></div><textarea placeholder="答えを入力" oninput="__RIKKYO_APP__.setResponse(\''+q.id+'\',this.value)">'+h(r)+'</textarea>';
   if(q.scoringType==='multi_slot_text')return '<div class="slot-row">'+q.answerSpec.slots.map(function(_,i){return '<input type="text" value="'+h(r&&r[i])+'" placeholder="空所'+(i+1)+'" oninput="__RIKKYO_APP__.setSlot(\''+q.id+'\','+i+',this.value)">'}).join('')+'</div>';
   if(q.scoringType==='single_choice')return '<div class="choice-grid">'+q.options.map(function(o){return '<label><input type="radio" name="'+q.id+'" value="'+o.id+'" '+(r===o.id?'checked':'')+' onchange="__RIKKYO_APP__.setResponse(\''+q.id+'\',this.value)"><b>'+o.id+'</b> '+h(o.text)+'</label>'}).join('')+'</div>';
   if(q.scoringType==='multiple_choice'){const s=new Set(Array.isArray(r)?r:[]);return '<div class="choice-grid">'+q.options.map(function(o){return '<label><input type="checkbox" '+(s.has(o.id)?'checked':'')+' onchange="__RIKKYO_APP__.toggleMulti(\''+q.id+'\',\''+o.id+'\',this.checked)"><b>'+o.id+'</b> '+h(o.text)+'</label>'}).join('')+'</div>'}
@@ -185,7 +188,14 @@ function examAttempt(){
 function createWeak(q,r){const key=q.examId+':'+q.id,old=S.weak[key]||{},base=E.buildWrongWeaknessState(old,{year:examById(q.examId).year,id:q.id,label:qLabel(q),category:P.skillName(q.primarySkill),component:'main',skill:q.primarySkill,targetId:q.targetId,focusTag:q.targetId,examFormat:q.scoringType,trap:q.primarySkill,priority:P.resolveQuestionPriority(q),user:String(r==null?'':typeof r==='object'?JSON.stringify(r):r),today:today(),manualComponents:[]});base.examId=q.examId;base.questionId=q.id;delete base.points;S.weak[key]=base}
 function submitAttempt(){
   const a=S.currentAttempt,qs=qsFor(a.examId),missing=qs.filter(function(q){return !answered(q,a.responses[q.id])});if(missing.length&&!confirm(missing.length+'問が未回答です。要復習として確定しますか？'))return;
-  let correct=0;const results={};qs.forEach(function(q){const ok=answered(q,a.responses[q.id])&&evaluate(q,a.responses[q.id]);results[q.id]=ok;if(ok)correct++;else createWeak(q,a.responses[q.id])});
+  let correct=0;const results={};qs.forEach(function(q){
+    const r=a.responses[q.id],hasAnswer=answered(q,r);let ok=false;
+    if(q.scoringType==='manual_reading'&&hasAnswer){
+      const guidance=q.answerSpec?.guidance||'本文の根拠と設問条件を満たしているか確認してください。';
+      ok=confirm('自己採点（学校公式解答ではありません）\n\n確認ポイント：\n'+guidance+'\n\nあなたの答えはこの内容を満たしていますか？');
+    }else ok=hasAnswer&&evaluate(q,r)===true;
+    results[q.id]=ok;if(ok)correct++;else createWeak(q,r);
+  });
   a.status='graded';a.gradedAt=now();a.correctCount=correct;a.totalTasks=qs.length;a.results=results;a.scoreModel='unscored';S.attempts.push(clone(a));S.currentAttempt=null;S.dailyPlan=null;save();goto('review')
 }
 
