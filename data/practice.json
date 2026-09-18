@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "authored-practice-0.2",
+  "datasetVersion": "authored-practice-0.3",
   "holdoutSourceExamIds": [],
   "items": [
     {
@@ -537,6 +537,294 @@
       "prompt": "Rewrite with the same meaning: My brother and I are the same height. → I am as ( _____ ) as my brother.",
       "answerText": "tall",
       "explanation": "同じ程度は as + 形容詞 + as で表せます。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rst01",
+      "targetId": "short-text-location",
+      "familyId": "practice-st-01",
+      "skill": "short_text_multiple_choice",
+      "type": "choice",
+      "context": "MUSIC CLUB NOTICE\\nFriday practice will be in Room 8 instead of the hall. Please arrive by 3:45 p.m.",
+      "prompt": "Where will the club practise?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Room 8"
+        },
+        {
+          "id": "B",
+          "text": "The hall"
+        },
+        {
+          "id": "C",
+          "text": "The library"
+        }
+      ],
+      "answer": "A",
+      "explanation": "in Room 8 instead of the hall と書かれています。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rst02",
+      "targetId": "short-text-time",
+      "familyId": "practice-st-02",
+      "skill": "short_text_multiple_choice",
+      "type": "choice",
+      "context": "The school bus will leave at 8:20 tomorrow morning. Students should be at the gate ten minutes earlier.",
+      "prompt": "What time should students be at the gate?",
+      "options": [
+        {
+          "id": "A",
+          "text": "8:10"
+        },
+        {
+          "id": "B",
+          "text": "8:20"
+        },
+        {
+          "id": "C",
+          "text": "8:30"
+        }
+      ],
+      "answer": "A",
+      "explanation": "8:20の10分前なので8:10です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rst03",
+      "targetId": "short-text-rule",
+      "familyId": "practice-st-03",
+      "skill": "short_text_multiple_choice",
+      "type": "choice",
+      "context": "SCIENCE ROOM\\nSafety glasses must be worn during experiments. Food and drinks are not allowed.",
+      "prompt": "What is not allowed?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Safety glasses"
+        },
+        {
+          "id": "B",
+          "text": "Food and drinks"
+        },
+        {
+          "id": "C",
+          "text": "Experiments"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Food and drinks are not allowed. が根拠です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rst04",
+      "targetId": "short-text-detail",
+      "familyId": "practice-st-04",
+      "skill": "short_text_multiple_choice",
+      "type": "choice",
+      "context": "Hi Ben, I finished the poster for our geography project, but we still need to practise our talk. Can we meet after school on Thursday? — Mia",
+      "prompt": "What do Ben and Mia still need to do?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Make the poster"
+        },
+        {
+          "id": "B",
+          "text": "Practise their talk"
+        },
+        {
+          "id": "C",
+          "text": "Choose a topic"
+        }
+      ],
+      "answer": "B",
+      "explanation": "we still need to practise our talk が直接の根拠です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rst05",
+      "targetId": "short-text-purpose",
+      "familyId": "practice-st-05",
+      "skill": "short_text_multiple_choice",
+      "type": "choice",
+      "context": "BOOK SALE\\nUsed books will be sold in the school entrance on Monday. The money will be used to buy new books for the library.",
+      "prompt": "Why is the school holding the sale?",
+      "options": [
+        {
+          "id": "A",
+          "text": "To raise money for library books"
+        },
+        {
+          "id": "B",
+          "text": "To close the library"
+        },
+        {
+          "id": "C",
+          "text": "To give students homework"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The money will be used to buy new books for the library. が目的です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rst06",
+      "targetId": "short-text-sequence",
+      "familyId": "practice-st-06",
+      "skill": "short_text_multiple_choice",
+      "type": "choice",
+      "context": "After the football match, players should return their shirts to the coach before going to the changing room.",
+      "prompt": "What should players do first after the match?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Go to the changing room"
+        },
+        {
+          "id": "B",
+          "text": "Return their shirts"
+        },
+        {
+          "id": "C",
+          "text": "Leave school"
+        }
+      ],
+      "answer": "B",
+      "explanation": "before going to the changing room なので、先にシャツを返します。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rsa01",
+      "targetId": "reading-short-answer-detail",
+      "familyId": "practice-sa-01",
+      "skill": "reading_short_answer",
+      "type": "text",
+      "context": "Mr Lee teaches geography. His class is learning about rivers this month.",
+      "prompt": "What subject does Mr Lee teach?",
+      "answerText": "geography",
+      "accepted": [
+        "geography"
+      ],
+      "explanation": "最初の文に Mr Lee teaches geography. とあります。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rsa02",
+      "targetId": "reading-short-answer-detail",
+      "familyId": "practice-sa-02",
+      "skill": "reading_short_answer",
+      "type": "text",
+      "context": "The students put one plant near a sunny window and another plant in a dark box. They watered both plants every day.",
+      "prompt": "Where did they put the second plant?",
+      "answerText": "in a dark box",
+      "accepted": [
+        "in a dark box",
+        "a dark box"
+      ],
+      "explanation": "another plant in a dark box が根拠です。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rsa03",
+      "targetId": "reading-short-answer-summary",
+      "familyId": "practice-sa-03",
+      "skill": "reading_short_answer",
+      "type": "text",
+      "context": "Sara wanted to know which material kept water warm longest. She filled three cups with hot water and wrapped them in different materials.",
+      "prompt": "What did Sara investigate?",
+      "answerText": "which material kept water warm longest",
+      "accepted": [
+        "which material kept water warm longest",
+        "what material kept water warm longest"
+      ],
+      "explanation": "第1文の疑問を実験で調べています。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rsa04",
+      "targetId": "reading-short-answer-detail",
+      "familyId": "practice-sa-04",
+      "skill": "reading_short_answer",
+      "type": "text",
+      "context": "After one week, the plant with enough water was green. The plant without water had brown leaves.",
+      "prompt": "Which plant was unhealthy?",
+      "answerText": "the plant without water",
+      "accepted": [
+        "the plant without water",
+        "the one without water"
+      ],
+      "explanation": "without water の植物は brown leaves になっています。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rsa05",
+      "targetId": "reading-short-answer-inference",
+      "familyId": "practice-sa-05",
+      "skill": "reading_short_answer",
+      "type": "text",
+      "context": "The class compared two paper bridges. The bridge made with folded paper held more books than the flat paper bridge.",
+      "prompt": "What did the students learn?",
+      "answerText": "folded paper made a stronger bridge",
+      "accepted": [
+        "folded paper made a stronger bridge",
+        "folded paper was stronger",
+        "a folded paper bridge was stronger"
+      ],
+      "explanation": "折った紙の橋の方が多くの本を支えたことから判断します。"
+    },
+    {
+      "sourceType": "authored_practice",
+      "contentVersion": 1,
+      "retired": false,
+      "level": 1,
+      "id": "rsa06",
+      "targetId": "reading-short-answer-purpose",
+      "familyId": "practice-sa-06",
+      "skill": "reading_short_answer",
+      "type": "text",
+      "context": "Students recorded the temperature every five minutes so they could compare how quickly the water cooled.",
+      "prompt": "Why did they record the temperature?",
+      "answerText": "to compare how quickly the water cooled",
+      "accepted": [
+        "to compare how quickly the water cooled",
+        "to compare the cooling speed"
+      ],
+      "explanation": "so they could compare how quickly the water cooled が目的です。"
     }
   ]
 }
