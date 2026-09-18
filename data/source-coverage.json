@@ -81,13 +81,21 @@
         "Q2",
         "Q3",
         "Q4",
-        "Q5"
+        "Q5",
+        "Q6",
+        "Q7",
+        "Q8 source prompt"
       ],
       "sourceMissing": [
-        "Q1 audio/transcript unavailable for authoritative listening grading"
+        "Q1 listening audio/transcript"
+      ],
+      "runtimeAssetGap": [],
+      "runtimePolicy": [
+        "Q2-Q7 diagnostic runtime",
+        "Q8 Writing source retained but non-runtime until a Rikkyo-specific marking authority is established"
       ],
       "notes": [
-        "FY26A diagnostic MVP currently exposes 19 non-listening tasks; supplied later sections were already structurally inventoried"
+        "29 non-listening diagnostic tasks are available at runtime; Q8 is not silently auto-scored."
       ]
     },
     "FY26B": {
