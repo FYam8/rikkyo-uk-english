@@ -25,9 +25,9 @@ assert.equal(new Set(questions.records.map(x=>x.id)).size,19);
 for(const q of questions.records){
   assert.equal(q.examId,'FY26A');
   assert.equal(q.sourceType,'past_exam');
-  assert.equal(q.answerAuthority,'independently_solved');
-  assert.equal(q.verificationStatus,'provisional_needs_second_check');
-  assert.equal(q.autoGradeAllowed,false);
+  assert.equal(q.answerAuthority,'independent_solution_nonofficial');
+  assert.equal(q.verificationStatus,'source_context_reviewed_v1');
+  assert.equal(q.autoGradeAllowed,true);
   assert.ok(q.targetId);
 }
 assert.equal(questions.records.filter(x=>x.majorQuestion===2).length,5);
@@ -38,7 +38,9 @@ const group=questions.records.find(x=>x.id==='R26-ENG-A-G4');
 assert.equal(group.subItems.length,10);
 assert.deepEqual(group.answerSpec.errorNumbers,[2,3,6,8,9]);
 const q53=questions.records.find(x=>x.id==='R26-ENG-A-Q5-3');
-assert.equal(q53.answerSpec.requiresAuthorityReview,true);
+assert.deepEqual(q53.answerSpec.accepted,['who','that']);
+assert.equal(questions.answerPolicy.officialKeyAvailable,false);
+assert.equal(questions.answerPolicy.autoGradeAllowed,true);
 
 for(const q of questions.records)assert.notEqual(q.examId,'FY26B','holdout content must not enter diagnostic MVP');
 console.log('Rikkyo FY26A canonical MVP registry: CLEAN');
