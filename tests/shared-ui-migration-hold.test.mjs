@@ -7,10 +7,13 @@ const gate=JSON.parse(read('release-gate.json'));
 const lock=JSON.parse(read('ui.lock.json'));
 const manifest=JSON.parse(read('ui/manifest.json'));
 
-assert.equal(gate.deployAllowed,false,'Rikkyo remains blocked until its own final compatibility gates');
-assert.deepEqual(gate.blockers,['two consecutive CLEAN loops']);
-assert.equal(gate.releaseCandidate,true);
-for(const completed of ['Rikkyo question renderer compatibility','desktop browser parity','mobile browser parity','backup/import browser parity','supplied-source transcription/answer audit complete with explicit missing-source limitations','FY24/FY25 Q2-Q5 source subsets runnable','FY24/FY25 Q6 reading runtime promoted','FY26A Q6-Q7 diagnostic runtime promoted','unsupported writing tasks governed by explicit non-runtime policy','final cross-year route/browser regression'])assert.ok(gate.completedGates.includes(completed),completed+' completion marker missing');
+assert.equal(gate.deployAllowed,true,'Rikkyo deployment gate should be open only after final CLEAN evidence');
+assert.deepEqual(gate.blockers,[]);
+assert.equal(gate.releaseCandidate,false);
+assert.equal(gate.releaseStatus,'production-ready');
+assert.equal(gate.releaseVersion,'1.0.0');
+assert.deepEqual(gate.releaseEvidence.cleanAttempts,[1,2]);
+for(const completed of ['Rikkyo question renderer compatibility','desktop browser parity','mobile browser parity','backup/import browser parity','supplied-source transcription/answer audit complete with explicit missing-source limitations','FY24/FY25 Q2-Q5 source subsets runnable','FY24/FY25 Q6 reading runtime promoted','FY26A Q6-Q7 diagnostic runtime promoted','unsupported writing tasks governed by explicit non-runtime policy' ,'final cross-year route/browser regression','two consecutive CLEAN loops','post-merge main verification'])assert.ok(gate.completedGates.includes(completed),completed+' completion marker missing');
 
 assert.equal(lock.sourceRepository,'FYam8/waseshibu-english');
 assert.equal(lock.sourceCommit,'ff379eb24808449f0387e58b0dcc493453dc9531');
