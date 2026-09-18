@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "status": "explicit_non_runtime_until_marking_authority",
+  "aiWritingEnabled": false,
+  "officialMarkingAuthorityAvailable": false,
+  "rules": {
+    "doNotInventPictureAssets": true,
+    "doNotAutoScoreOpenWriting": true,
+    "preserveSourcePrompt": true,
+    "futureEnablementRequires": [
+      "source asset available in app when required",
+      "Rikkyo-specific marking/self-review contract",
+      "browser regression"
+    ]
+  },
+  "tasks": [
+    {
+      "examId": "FY25A",
+      "questionId": "Q9",
+      "sourcePage": 7,
+      "type": "picture_story_writing",
+      "approxWords": "80-100",
+      "runtimeEnabled": false,
+      "reason": "The supplied PDF contains picture-sequence source material. The app must not recreate or replace those pictures, and no official marking authority is supplied."
+    },
+    {
+      "examId": "FY25B",
+      "questionId": "Q9",
+      "sourcePage": 7,
+      "type": "picture_story_writing",
+      "approxWords": "80-100",
+      "runtimeEnabled": false,
+      "reason": "The supplied PDF contains picture-sequence source material. The app must not recreate or replace those pictures, and no official marking authority is supplied."
+    },
+    {
+      "examId": "FY26A",
+      "questionId": "Q8",
+      "sourcePage": 10,
+      "type": "open_writing",
+      "approxWords": "80-100",
+      "runtimeEnabled": false,
+      "reason": "Prompt is preserved from source, but no official marking authority is supplied and Rikkyo AI Writing is disabled."
+    },
+    {
+      "examId": "FY26B",
+      "questionId": "Q8",
+      "sourcePage": 10,
+      "type": "open_writing",
+      "approxWords": "80-100",
+      "runtimeEnabled": false,
+      "reason": "Final holdout is intentionally runtime-locked; writing remains part of the protected holdout source."
+    }
+  ]
+}
