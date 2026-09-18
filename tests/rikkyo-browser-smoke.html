@@ -20,6 +20,23 @@
    await wait(()=>a.getState().attempts.length===1);
    if(Object.keys(a.getState().weak).length!==19)fail('wrong weakness count');
  }
+ if(scenario==='subset'){
+   a.openExam('FY24A');
+   a.beginAttempt('FY24A');
+   a.goto('exam');
+   await wait(()=>frame.contentDocument.querySelectorAll('.question').length===15);
+   const text=frame.contentDocument.body.textContent;
+   if(!text.includes('原本Q2-Q5 subset'))fail('subset attempt scope missing');
+   if(!text.includes('原本subset'))fail('subset limitation notice missing');
+   if(frame.contentDocument.querySelectorAll('.question').length!==15)fail('FY24A subset question count');
+   a.submitAttempt();
+   await wait(()=>a.getState().attempts.some(x=>x.examId==='FY24A'));
+   if(Object.keys(a.getState().weak).length!==15)fail('FY24A subset weakness count');
+   const first=Object.keys(a.getState().weak)[0];
+   a.startWeak(first);
+   await wait(()=>a.getState().currentDrill?.q?.id);
+   if(!a.getState().currentDrill.q.id)fail('subset weakness has no practice');
+ }
  if(scenario==='renderer'){
    a.beginAttempt('FY26A');
    a.goto('exam');
