@@ -20,6 +20,7 @@ jobs:
       - run: node tests/fy26a-mvp-data.test.mjs
       - run: node tests/supplied-source-coverage.test.mjs
       - run: node tests/fy26b-holdout-source.test.mjs
+      - run: node tests/source-coverage-status.test.mjs
       - run: node --check app.js
       - run: bash tests/rikkyo-browser-smoke.sh
       - run: node tests/practice-bank.test.mjs
