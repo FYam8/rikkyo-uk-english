@@ -12,8 +12,8 @@ const manifest=json('engine/manifest.json');
 const papers=json('data/papers.json');
 
 assert.equal(lock.sourceRepository,'FYam8/waseshibu-english');
-assert.equal(lock.sourceCommit,'7490132b85a40cc91ae3f4570b3bd8551b49e14a');
-assert.equal(lock.engineVersion,'1.0.0');
+assert.equal(lock.sourceCommit,'786d743978a4a498595ee90686ada07f3fddbf4a');
+assert.equal(lock.engineVersion,'1.1.0');
 assert.equal(lock.contractVersion,1);
 assert.equal(lock.consumerPolicy,'pinned-vendor-pr-only');
 assert.equal(manifest.engineVersion,lock.engineVersion);
@@ -42,10 +42,12 @@ for(const p of papers.papers.filter(x=>x.year===2026)){
   assert.ok(p.observedSections.includes('reading_short_answer'));
 }
 
-const configTemplate=read('schools/rikkyo/config.template.js');
-for(const forbidden of ['waseshibu.adaptive','waseshibu-progress-sync','waseshibu-progress-api'])assert.ok(!configTemplate.includes(forbidden));
-assert.match(configTemplate,/rikkyo\.uk\.english\.v1/);
-assert.match(configTemplate,/progress:Object\.freeze\(\{enabled:false/);
-assert.match(configTemplate,/aiWriting:Object\.freeze\(\{enabled:false/);
+const configText=read('schools/rikkyo/config.js');
+for(const forbidden of ['waseshibu.adaptive','waseshibu-progress-sync','waseshibu-progress-api','waseshibu-writing-grader'])assert.ok(!configText.includes(forbidden));
+assert.match(configText,/rikkyo\.uk\.english\.v1/);
+assert.match(configText,/identityMode:'examId'/);
+assert.match(configText,/scoring:Object\.freeze\(\{enabled:false\}\)/);
+assert.match(configText,/progress:Object\.freeze\(\{[\s\S]*?enabled:false/);
+assert.match(configText,/aiWriting:Object\.freeze\(\{[\s\S]*?enabled:false/);
 
 console.log('Rikkyo English bootstrap integrity: CLEAN');
