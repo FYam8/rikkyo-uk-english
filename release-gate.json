@@ -1,10 +1,8 @@
 {
   "schemaVersion": 1,
-  "deployAllowed": false,
-  "reason": "All implementation/source/UI/browser gates that can be satisfied from the supplied materials are complete. Missing listening audio and omitted source sections remain explicitly unavailable, and unsupported writing is explicitly non-runtime rather than invented. The only remaining release gate is two consecutive full CLEAN loops on the exact release-candidate head.",
-  "blockers": [
-    "two consecutive CLEAN loops"
-  ],
+  "deployAllowed": true,
+  "reason": "Release candidate completed two consecutive full CLEAN loops on the exact candidate head and the merged main commit passed the complete verification suite. Deployment is allowed; source limitations remain visible and enforced.",
+  "blockers": [],
   "completedGates": [
     "Shared Engine v1.1 pinned",
     "Shared UI v1.0.0 pinned",
@@ -19,7 +17,22 @@
     "FY24/FY25 Q6 reading runtime promoted",
     "FY26A Q6-Q7 diagnostic runtime promoted",
     "unsupported writing tasks governed by explicit non-runtime policy",
-    "final cross-year route/browser regression"
+    "final cross-year route/browser regression",
+    "two consecutive CLEAN loops",
+    "post-merge main verification"
   ],
-  "releaseCandidate": true
+  "releaseCandidate": false,
+  "releaseStatus": "production-ready",
+  "releaseVersion": "1.0.0",
+  "releaseEvidence": {
+    "candidateHead": "4d4a6a36aa4359f638c3b012db89285cbb56c9f8",
+    "cleanWorkflowRun": 35385550930,
+    "cleanAttempts": [
+      1,
+      2
+    ],
+    "mergeCommit": "178e2563f3e4fa5d97072d6c2fcd72ba3d6de4a4",
+    "postMergeVerifyRun": 35385756089,
+    "postMergeVerifyConclusion": "success"
+  }
 }
