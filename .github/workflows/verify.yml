@@ -16,6 +16,7 @@ jobs:
       - run: node tests/bootstrap-integrity.test.mjs
       - run: node tests/paper-structure.test.mjs
       - run: node tests/rikkyo-adapter-contract.test.mjs
+      - run: node tests/fy26a-mvp-data.test.mjs
       - run: node --check engine/core.js
       - run: node --check engine/contract.js
       - run: node --check engine/bootstrap.js
