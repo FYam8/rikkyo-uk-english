@@ -8,9 +8,13 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const json=p=>JSON.parse(read(p));
 
 const gate=json('release-gate.json');
-assert.equal(gate.deployAllowed,false);
-assert.equal(gate.releaseCandidate,true);
-assert.deepEqual(gate.blockers,['two consecutive CLEAN loops']);
+assert.equal(gate.deployAllowed,true);
+assert.equal(gate.releaseCandidate,false);
+assert.equal(gate.releaseStatus,'production-ready');
+assert.equal(gate.releaseVersion,'1.0.0');
+assert.deepEqual(gate.blockers,[]);
+assert.deepEqual(gate.releaseEvidence.cleanAttempts,[1,2]);
+assert.equal(gate.releaseEvidence.postMergeVerifyConclusion,'success');
 
 const requiredCompleted=[
   'Shared Engine v1.1 pinned',
@@ -26,7 +30,9 @@ const requiredCompleted=[
   'FY24/FY25 Q6 reading runtime promoted',
   'FY26A Q6-Q7 diagnostic runtime promoted',
   'unsupported writing tasks governed by explicit non-runtime policy',
-  'final cross-year route/browser regression'
+  'final cross-year route/browser regression',
+  'two consecutive CLEAN loops',
+  'post-merge main verification'
 ];
 for(const item of requiredCompleted)assert.ok(gate.completedGates.includes(item),item+' gate missing');
 
