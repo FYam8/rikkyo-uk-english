@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "deployAllowed": false,
+  "reason": "Shared UI/UX v1 is not yet pinned from the Waseda source-of-truth.",
+  "blockers": [
+    "shared-ui-v1-production-release",
+    "ui.lock.json pinned to Waseda Shared UI",
+    "replace bespoke shell/CSS with vendored shared UI",
+    "Rikkyo question renderer compatibility",
+    "full desktop/mobile browser parity",
+    "two consecutive CLEAN loops"
+  ]
+}
