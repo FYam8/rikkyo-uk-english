@@ -45,9 +45,12 @@ assert.equal(ctx.ENGLISH_SCHOOL_UI.features.aiWriting,false);
 
 const app=read('app.js');
 assert.ok(app.includes('window.ENGLISH_UI_COMPONENTS'));
-for(const helper of ['todayCard','routeStepCard','weaknessCard','drillCard','metricCard','progressBar','completionMark','backupPanel','attemptBar']){
+for(const helper of ['todayCard','routeStepCard','weaknessCard','drillCard','metricCard','progressBar','completionMark','backupPanel','attemptBar','answerPanel','paperPage']){
   assert.ok(app.includes('U.'+helper),helper+' not consumed by Rikkyo app');
 }
+assert.ok(app.includes('E.buildRemediationDailyPlan'));
+assert.ok(app.includes('E.selectDailyLearningActionDescriptors'));
+assert.ok(app.includes('timerMarkup'));
 assert.doesNotMatch(read('schools/rikkyo/ui.js'),/waseshibu|早稲/i,'Rikkyo UI adapter leaked Waseda identity');
 
 console.log('Rikkyo Shared UI v1 consumer wiring: CLEAN');

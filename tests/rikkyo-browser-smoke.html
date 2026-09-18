@@ -75,8 +75,10 @@
    await new Promise(r=>setTimeout(r,50));
    if(!doc.querySelector('.correction-row input[type="text"]'))fail('correction rewrite input did not appear');
    if(!doc.querySelector('.attempt-bar'))fail('shared attempt bar missing');
+   if(!doc.querySelector('.answerpanel'))fail('shared answer panel missing');
+   if(!doc.querySelector('.answer-sheet-body'))fail('shared answer panel body missing');
+   if(!doc.querySelector('.paper-page'))fail('shared paper page missing');
    if(!doc.querySelector('header')||!doc.querySelector('nav')||!doc.querySelector('footer'))fail('shared shell missing');
-   if(!doc.querySelector('.paper-page')&&doc.querySelector('.passage')===null)fail('past-paper presentation missing');
  }
  if(scenario==='drill'||scenario==='resume'){
    const key=Object.keys(a.getState().weak)[0];a.startWeak(key);
@@ -125,6 +127,10 @@
    if(!step)fail('mobile route step missing');
    const stepCols=win.getComputedStyle(step).gridTemplateColumns;
    if(!stepCols.startsWith('38px'))fail('mobile route step columns');
+   a.openExam('FY26A');a.beginAttempt('FY26A',{mode:'timed',limitMinutes:60});a.goto('exam');
+   await wait(()=>doc.querySelector('.answerpanel')&&doc.querySelector('.paper-page')&&doc.querySelector('#examTimer'));
+   const panel=doc.querySelector('.answerpanel');if(win.getComputedStyle(panel).position!=='fixed')fail('mobile answer panel not fixed');
+   if(!doc.querySelector('.sheet-toggle'))fail('mobile answer panel toggle missing');
    const root=doc.documentElement;
    if(root.scrollWidth>root.clientWidth+2)fail('mobile horizontal overflow');
  }
@@ -158,6 +164,15 @@
    if(JSON.stringify(routeIds)!==JSON.stringify(['FY26A','FY24A','FY24B','FY25A','FY25B','FY26B']))fail('route order');
    a.beginAttempt('FY26B');
    if(a.getState().currentAttempt)fail('crossyear holdout opened');
+ }
+ if(scenario==='scheduler'){
+   a.beginAttempt('FY26A');a.submitAttempt();await wait(()=>Object.keys(a.getState().weak).length===29);a.goto('home');await new Promise(r=>setTimeout(r,50));
+   const state=a.getState();if(state.dailyPlan?.kind!=='weak'||state.dailyPlan.weakKeys.length!==29)fail('shared daily plan not built');
+   const homeText=frame.contentDocument.body.textContent;if(!homeText.includes('ほかにできること'))fail('shared alternative actions missing');
+   const key=Object.keys(state.weak)[0];a.startWeak(key);await wait(()=>a.getState().currentDrill?.q?.id);
+   for(let i=0;i<3;i++){const d=a.getState().currentDrill,q=d.q,ans=q.type==='choice'?q.answer:(q.answer||q.answerText);a.setPractice(ans);a.finishPractice();if(i<2)a.continuePractice()}
+   a.continuePractice();a.goto('home');await new Promise(r=>setTimeout(r,50));
+   if(!frame.contentDocument.body.textContent.includes('定着確認予定'))fail('future confirmation schedule missing');
  }
  if(scenario==='holdout'){
    a.beginAttempt('FY26B');

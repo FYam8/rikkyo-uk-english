@@ -6,7 +6,7 @@ const E=window.ENGLISH_ENGINE_CORE;
 const U=window.ENGLISH_UI_COMPONENTS;
 if(!C||!P||!E||!U)throw new Error('Rikkyo adapter/shared engine/UI not loaded');
 const KEY=C.storage.key,SCHEMA=C.storage.schemaVersion,TARGET=C.exam.dailyTaskTarget,IMPORT_RECOVERY_PREFIX=C.storage.importRecoveryPrefix,app=document.getElementById('app');
-let DATA=null,view='home',selectedExamId=C.exam.defaultExamId,drill=null,renderedDate=E.localDate();
+let DATA=null,view='home',selectedExamId=C.exam.defaultExamId,drill=null,renderedDate=E.localDate(),timerHandle=null;
 
 function h(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function clone(v){return JSON.parse(JSON.stringify(v))}
@@ -15,12 +15,13 @@ function plusDays(n){return E.plusDays(n)}
 function now(){return new Date().toISOString()}
 function norm(v){return String(v==null?'':v).trim().toLowerCase().replace(/[’]/g,"'").replace(/[，]/g,',').replace(/[。.!?！？]+$/g,'').replace(/\s+/g,' ')}
 function sameSet(a,b){return Array.from(new Set(a)).sort().join('|')===Array.from(new Set(b)).sort().join('|')}
-function fresh(){return {schemaVersion:SCHEMA,goal:C.exam.defaultGoal,selectedExamId:C.exam.defaultExamId,attempts:[],currentAttempt:null,weak:{},drillLog:[],currentDrill:null,dailyPlan:null,dailyProgress:null,theme:'light'}}
+function fresh(){return {schemaVersion:SCHEMA,goal:C.exam.defaultGoal,selectedExamId:C.exam.defaultExamId,attempts:[],currentAttempt:null,weak:{},drillLog:[],currentDrill:null,dailyPlan:null,dailyProgress:null,theme:'light',answerSheetOpen:true,answerSheetExpanded:false,examInfoCompact:false}}
 function normalizeState(raw){
   const s=raw&&typeof raw==='object'?Object.assign(fresh(),raw):fresh();
   s.schemaVersion=SCHEMA;s.goal=C.exam.goalTiers.includes(Number(s.goal))?Number(s.goal):C.exam.defaultGoal;
   s.attempts=Array.isArray(s.attempts)?s.attempts:[];s.weak=s.weak&&typeof s.weak==='object'?s.weak:{};s.drillLog=Array.isArray(s.drillLog)?s.drillLog:[];
   s.currentAttempt=s.currentAttempt&&typeof s.currentAttempt==='object'?s.currentAttempt:null;s.currentDrill=E.normalizeDrillState(s.currentDrill);
+  s.answerSheetOpen=s.answerSheetOpen!==false;s.answerSheetExpanded=!!s.answerSheetExpanded;s.examInfoCompact=!!s.examInfoCompact;
   E.applyDailyRolloverState(s,today());return s
 }
 function load(){try{return normalizeState(JSON.parse(localStorage.getItem(KEY)||'null'))}catch(e){return fresh()}}
@@ -92,27 +93,84 @@ function weakEntries(){return Object.entries(S.weak)}
 function activeWeak(){return weakEntries().filter(function(x){return x[1]&&x[1].status!=='mastered'})}
 function eligible(x){return E.isRemediationEligible(x[1],today())}
 function weakSort(a,b){return E.compareRemediationEntries(a,b,function(w){return P.priorityOrder(w.priority)})}
-function dailyCount(){return S.dailyProgress&&S.dailyProgress.date===today()?Math.max(0,Number(S.dailyProgress.answeredCount)||0):0}
-function bumpDaily(){const n=dailyCount()+1;S.dailyProgress={date:today(),answeredCount:n};if(S.dailyPlan&&S.dailyPlan.date===today())S.dailyPlan.answeredCount=n}
+function dailyProgressCount(){return E.remediationDailyProgressCount(S,today())}
+function dailyPlanValid(){return S.dailyPlan&&S.dailyPlan.date===today()&&Number(S.dailyPlan.goal)===Number(S.goal)}
+function dailyAnswered(plan=ensureDailyPlan()){return E.remediationDailyAnsweredCount(S,plan,today())}
+function dailyTargetRemaining(plan=ensureDailyPlan()){return E.remediationDailyTargetRemaining(dailyAnswered(plan),TARGET)}
+function dailyTargetReached(plan=ensureDailyPlan()){return E.remediationDailyTargetReached(dailyAnswered(plan),TARGET)}
 function nextExam(){return C.exam.route.find(function(id){const ex=examById(id);return ex?.runtimeEnabled!==false&&id!==C.exam.holdoutExamId&&!completed(id)&&qsFor(id).length})||null}
+function ensureDailyPlan(){
+  if(dailyPlanValid())return S.dailyPlan;
+  const planToday=today(),result=E.buildRemediationDailyPlan({
+    entries:activeWeak(),goal:S.goal,today:planToday,answeredCount:dailyProgressCount(),routeYear:nextExam(),nowIso:now(),
+    isInGoal:function(){return true},isEligible:eligible,compareEntries:weakSort
+  });
+  for(const key of result.assignedKeys||[]){const w=S.weak[key];if(w)w.lastAssignedDate=planToday}
+  S.dailyPlan=result.plan;save();return S.dailyPlan
+}
+function bumpDaily(){const n=dailyProgressCount()+1;S.dailyProgress={date:today(),answeredCount:n};if(S.dailyPlan&&S.dailyPlan.date===today())S.dailyPlan.answeredCount=n}
+function planBacklog(plan=ensureDailyPlan()){if(!dailyTargetReached(plan))return 0;return activeWeak().filter(eligible).length}
+function nextPendingDate(){return activeWeak().map(function(x){const w=x[1];return w.status==='pending'&&w.next>today()?w.next:null}).filter(Boolean).sort()[0]||null}
+function futureConfirmations(){return activeWeak().filter(function(x){const w=x[1];return w.status==='pending'&&w.next>today()}).sort(function(a,b){return (a[1].next||'').localeCompare(b[1].next||'')||weakSort(a,b)})}
+function completeTodayNote(plan){
+  const backlog=planBacklog(plan),next=nextPendingDate();
+  if(dailyTargetReached(plan)&&backlog)return '今日の目安'+TARGET+'問を達成しました。取り組める弱点があと'+backlog+'件あります。';
+  if(next)return '現在取り組める弱点は完了しました。次の定着チェックは '+next+' です。';
+  if(nextExam())return '現在取り組める弱点は完了しました。次の過去問へ進めます。';
+  return dailyTargetReached(plan)?'今日の目安'+TARGET+'問を達成しました。現在実施できる学習はすべて完了です。':'現在実施できる学習はすべて完了です。'
+}
+function availableLearningActions(){
+  const entries=activeWeak(),byKey=Object.fromEntries(entries),current=S.currentAttempt?Object.assign({},S.currentAttempt,{year:S.currentAttempt.examId}):null;
+  return E.selectDailyLearningActionDescriptors({
+    entries:entries,currentAttempt:current,routeYear:nextExam(),isInGoal:function(){return true},isEligible:eligible,compareEntries:weakSort
+  }).map(function(action){
+    if(action.kind==='weak'){
+      const w=byKey[action.key];if(!w)return null;
+      if(action.stage==='confirm')return {kind:'weak',key:action.key,label:'今日の定着チェックへ',note:w.examId+' '+w.label+'（'+(w.confirmStreak||0)+'/2）'};
+      if(action.stage==='continue')return {kind:'weak',key:action.key,label:'この弱点を続ける',note:w.examId+' '+w.label+'（'+(w.streak||0)+'/3）'};
+      return {kind:'weak',key:action.key,label:'次の弱点へ',note:w.examId+' '+w.label+' · '+P.skillName(w.skill)};
+    }
+    if(action.kind==='attempt')return {kind:'attempt',examId:action.year,label:action.year+' の続きへ',note:'解答途中の過去問があります。'};
+    if(action.kind==='route')return {kind:'route',examId:action.year,label:action.year+' を開く',note:P.routeRole(action.year)+'。問題を開くだけでは採点されません。'};
+    return null
+  }).filter(Boolean)
+}
+function actionCommand(a){
+  if(!a)return "__RIKKYO_APP__.goto('home')";
+  if(a.kind==='weak')return "__RIKKYO_APP__.startWeak('"+String(a.key).replace(/'/g,"\\'")+"')";
+  if(a.examId)return "__RIKKYO_APP__.openExam('"+String(a.examId).replace(/'/g,"\\'")+"')";
+  return "__RIKKYO_APP__.goto('home')"
+}
+function todayAction(){
+  if(drill&&S.weak[drill.key]&&!drill.answered&&S.weak[drill.key].status!=='mastered')return {kind:'resume',label:'途中の1問を再開',note:S.weak[drill.key].examId+' '+S.weak[drill.key].label+' の途中から再開します。'};
+  const action=availableLearningActions()[0];if(action)return action;
+  const plan=ensureDailyPlan();return {complete:true,label:'現在できる学習は完了',note:completeTodayNote(plan)}
+}
+function futureConfirmationMarkup(){
+  const rows=futureConfirmations();if(!rows.length)return '';
+  const shown=rows.slice(0,3),extra=rows.length-shown.length,label=rows.every(function(x){return x[1].next===plusDays(1)})?'明日の定着確認予定（現時点）':'今後の定着確認予定（現時点）';
+  return '<div class="future-confirmations"><b>'+label+'</b>'+shown.map(function(x){return '<div><span>'+h(x[1].next)+'</span><span>'+h(x[1].examId+' '+x[1].label)+'</span></div>'}).join('')+(extra?'<small>ほか'+extra+'件。予定日になったものから優先し、目安'+TARGET+'問の後も続けられます。</small>':'')+'</div>'
+}
+function learningActionsMarkup(action){
+  const available=availableLearningActions();
+  if(action.kind==='resume')return '<div class="resume-action"><button class="primary" onclick="__RIKKYO_APP__.resumeDrill()">'+h(action.label)+'</button><span>'+h(action.note)+'</span></div>'+(available.length?'<div class="queued-actions"><b>この1問の完了後</b>'+available.slice(0,3).map(function(x){return '<span>'+h(x.label)+'：'+h(x.note)+'</span>'}).join('')+'</div>':'');
+  if(action.complete)return '<div class="row">'+U.completionMark('✓ '+action.label)+'<button onclick="__RIKKYO_APP__.goto(\'route\')">学習ルートを見る</button></div>';
+  return '<div class="learning-actions"><div class="resume-action"><button class="primary" onclick="'+actionCommand(action)+'">'+h(action.label)+'</button><span>'+h(action.note)+'</span></div>'+(available.slice(1,4).length?'<div class="alternative-actions"><b>ほかにできること</b>'+available.slice(1,4).map(function(x){return '<button onclick="'+actionCommand(x)+'">'+h(x.label)+'</button>'}).join('')+'</div>':'')+'<button onclick="__RIKKYO_APP__.goto(\'route\')">学習ルートを見る</button></div>'
+}
 function qLabel(q){return q.id==='R26-ENG-A-G4'?'大問4':'大問'+q.majorQuestion+' 問'+q.minorQuestion}
 
 function goto(v){view=v;document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v===v)});render();scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('nav button').forEach(function(b){b.onclick=function(){goto(b.dataset.v)}});
 
-function homeAction(){
-  if(drill&&S.weak[drill.key]&&!drill.answered)return {kind:'drill',label:'途中の克服ドリルを再開',note:S.weak[drill.key].label};
-  if(S.currentAttempt&&S.currentAttempt.status==='active')return {kind:'attempt',examId:S.currentAttempt.examId,label:S.currentAttempt.examId+' の続きへ',note:'解答途中の過去問があります。'};
-  const w=activeWeak().filter(eligible).sort(weakSort)[0];if(w)return {kind:'weak',key:w[0],label:w[1].status==='pending'?'今日の定着チェックへ':'弱点補強を続ける',note:w[1].label+' · '+P.skillName(w[1].skill)};
-  const e=nextExam();if(e)return {kind:'exam',examId:e,label:e+' を始める',note:P.routeRole(e)};
-  return {kind:'complete',label:'現在できる学習は完了',note:'追加年度データまたは次回の定着確認を待っています。'}
-}
-function runAction(a){if(a.kind==='drill')resumeDrill();else if(a.kind==='weak')startWeak(a.key);else if(a.examId)openExam(a.examId)}
 function home(){
-  const a=homeAction(),count=dailyCount(),remain=Math.max(0,TARGET-count),mastered=weakEntries().filter(function(x){return x[1].status==='mastered'}).length;
-  setTimeout(function(){const b=document.getElementById('today-action');if(b)b.onclick=function(){runAction(a)}},0);
-  const todayContent='<div class="eyebrow">TODAY · STANDARD '+TARGET+' QUESTIONS</div><h2>今日やること</h2><p>'+h(a.note)+'</p><div class="daily-summary"><article><b>'+count+'問</b><small>今日の克服ドリル</small></article><article><b>'+TARGET+'問</b><small>標準目安</small></article><article><b>'+(remain?'あと'+remain+'問':'達成')+'</b><small>標準目安まで</small></article></div>'+(a.kind==='complete'?U.completionMark('✓ '+a.label):'<button class="primary" id="today-action">'+h(a.label)+'</button>');
-  return U.todayCard({complete:a.kind==='complete',contentHtml:todayContent})+'<section class="grid two"><div class="card"><h3>学習方針</h3><p><b>過去問 → 弱点抽出 → オリジナル類題 → 翌日定着確認</b></p><p class="muted">初回診断 FY26A。FY26Bは最終holdoutです。</p></div><div class="card"><h3>点数について</h3><p>公式配点が確認できないため点数換算はしません。</p><p class="muted">正答タスク数と弱点分野を記録します。</p></div></section>';
+  const action=todayAction(),plan=ensureDailyPlan(),answered=dailyAnswered(plan),targetReached=dailyTargetReached(plan),extra=Math.max(0,answered-TARGET),active=activeWeak(),mastered=weakEntries().filter(function(x){return x[1].status==='mastered'}).length;
+  const todayContent='<div class="today-head"><div><div class="eyebrow">'+(action.complete?'AVAILABLE WORK COMPLETE':targetReached?'TARGET ACHIEVED · KEEP GOING':'TODAY · STANDARD '+TARGET+' QUESTIONS')+'</div><h2>今日やること</h2><p>'+h(action.note)+'</p></div><div class="goal-block"><span>学習範囲</span><strong>全範囲</strong><small>公式配点が未確認のため点数目標は設定しません</small></div></div>'+
+    '<div class="daily-summary"><article><b>'+answered+'問</b><small>今日の克服ドリル</small></article><article><b>'+TARGET+'問</b><small>標準目安</small></article><article><b>'+(targetReached?extra+'問':'あと'+dailyTargetRemaining(plan)+'問')+'</b><small>'+(targetReached?'目安達成後':'目安まで')+'</small></article></div>'+
+    learningActionsMarkup(action)+futureConfirmationMarkup();
+  return U.todayCard({complete:action.complete,contentHtml:todayContent})+
+    '<section class="grid three">'+U.metricCard(S.attempts.length,'過去問')+U.metricCard(active.length,'未克服')+U.metricCard(mastered,'克服済み')+'</section>'+
+    '<section class="card"><div class="row space"><div><div class="eyebrow">CURRENT STATUS</div><h3>現在の到達状況</h3></div><b>未克服 '+active.length+' ／ 克服済み '+mastered+'</b></div><p>'+h(P.goalAdvice())+'</p></section>'+
+    '<section class="card"><h3>克服ルール</h3><div class="grid three"><div class="bluebox"><b>① ピンポイント類題</b><p>元の誤答と同じ論点を3問連続正解するまで反復。</p></div><div class="warnbox"><b>② 翌日チェック</b><p>3連続正解しても消さず、翌日に2問確認。</p></div><div class="okbox"><b>③ 克服</b><p>翌日の確認も2連続正解で初めて「克服済み」。</p></div></div></section>'
 }
 function route(){
   return '<section class="card hero"><div class="eyebrow">LEARNING ROUTE</div><h2>学習ルート</h2><p>A/Bを別examIdで管理します。</p></section><section class="route-list">'+C.exam.route.map(function(id,i){
@@ -134,19 +192,50 @@ function exam(){
   if(hold)detail='<div class="badbox"><b>最終判定用holdout</b><p>問題本文の転記・非公式解答監査は別データとして完了していますが、最終判定前の学習には公開しません。リスニングは音源未入手のため採点対象外です。</p></div>';
   else if(qs.length){
     const runtimeNote=ex.runtimeNotice?'<div class="warnbox"><b>'+(subset?'原本subset':'現在の実施範囲')+'</b><p>'+h(ex.runtimeNotice)+'</p></div>':'';
-    detail='<div class="notice"><b>非公式解答</b><p>原本から独立に検討したアプリ解答で、学校公式解答ではありません。</p></div>'+runtimeNote+'<p>学習タスク: <b>'+qs.length+'</b></p><button class="primary" onclick="__RIKKYO_APP__.beginAttempt(\''+id+'\')">この過去問を始める</button>';
+    detail='<div class="notice"><b>非公式解答</b><p>原本から独立に検討したアプリ解答で、学校公式解答ではありません。</p></div>'+runtimeNote+'<p>学習タスク: <b>'+qs.length+'</b></p><div class="exam-gate"><fieldset><legend>実施方法</legend><label><input type="radio" name="examMode" value="timed" onchange="document.getElementById(\'limitRow\').hidden=false"> 制限時間を設定して通し演習</label><label><input type="radio" name="examMode" value="untimed" onchange="document.getElementById(\'limitRow\').hidden=true"> 時間無制限で通し演習</label><div id="limitRow" hidden><label>確認した制限時間 <input id="timeLimit" type="number" inputmode="numeric" min="10" max="180" placeholder="分"> 分</label><p class="tiny">公式資料で時間を確認して入力してください。アプリは未確認の制限時間を自動設定しません。</p></div></fieldset><button class="primary" onclick="__RIKKYO_APP__.beginAttemptFromGate(\''+id+'\')">この過去問を始める</button></div>';
   }else detail='<div class="warnbox">'+h(sourceCoverageNote(id))+'</div>';
   return '<section class="card hero"><div class="eyebrow">PAST EXAMS</div><h2>過去問</h2></section><section class="exam-list">'+cards+'</section><section class="card"><h2>'+id+' · '+h(P.routeRole(id))+'</h2><p>'+ex.year+'年度 '+ex.schedule+'日程 ／ supplied pages: '+paper.pageCount+'</p>'+detail+'</section>';
 }
 function selectExam(id){selectedExamId=id;save();render()}
 function openExam(id){selectedExamId=id;view='exam';document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v==='exam')});save();render();scrollTo({top:0})}
-function beginAttempt(id){
-  const ex=examById(id);
+function beginAttemptFromGate(id){
+  const mode=document.querySelector('input[name="examMode"]:checked')?.value;if(!mode)return alert('実施方法を選んでください。');
+  const limit=mode==='timed'?Number(document.getElementById('timeLimit')?.value):null;
+  if(mode==='timed'&&(!Number.isFinite(limit)||limit<10||limit>180))return alert('確認した制限時間を10〜180分で入力してください。');
+  beginAttempt(id,{mode:mode,limitMinutes:limit})
+}
+function beginAttempt(id,options){
+  const ex=examById(id),opts=options&&typeof options==='object'?options:{},mode=opts.mode==='timed'?'timed':'untimed',limit=mode==='timed'?Number(opts.limitMinutes):null;
   if(id===C.exam.holdoutExamId||ex?.runtimeEnabled===false)return alert('この試験は現在の学習用には開放していません。');
   if(!qsFor(id).length)return alert('問題データ整備中です。');
+  if(mode==='timed'&&(!Number.isFinite(limit)||limit<10||limit>180))return alert('制限時間は10〜180分で指定してください。');
   if(S.currentAttempt&&S.currentAttempt.status==='active'&&S.currentAttempt.examId!==id)return alert(S.currentAttempt.examId+' が途中です。');
-  if(!S.currentAttempt||S.currentAttempt.status!=='active')S.currentAttempt={id:'attempt-'+Date.now(),examId:id,year:ex.year,status:'active',runtimeMode:ex.runtimeMode||'full',startedAt:now(),responses:{},questionOrder:qsFor(id).map(function(q){return q.id})};
+  if(!S.currentAttempt||S.currentAttempt.status!=='active')S.currentAttempt={id:'attempt-'+Date.now(),examId:id,year:ex.year,status:'active',runtimeMode:ex.runtimeMode||'full',mode:mode,limitMinutes:limit,startedAt:now(),startedTimezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'local',overtime:false,responses:{},questionOrder:qsFor(id).map(function(q){return q.id})};
   save();render()
+}
+function elapsedSeconds(a){return Math.max(0,Math.floor((Date.now()-new Date(a.startedAt).getTime())/1000))}
+function timerMarkup(a){
+  if(a.mode!=='timed')return '<span class="timer practice">時間無制限</span>';
+  const total=a.limitMinutes*60,remain=total-elapsedSeconds(a);if(remain<=0&&!a.overtime){a.overtime=true;save()}
+  const abs=Math.abs(remain),mm=String(Math.floor(abs/60)).padStart(2,'0'),ss=String(abs%60).padStart(2,'0');
+  return '<span id="examTimer" class="timer '+(remain<=0?'over':'')+'">'+(remain<=0?'時間超過 ':'残り ')+mm+':'+ss+'</span>'
+}
+function updateTimer(){
+  const a=S.currentAttempt,el=document.getElementById('examTimer');if(!el||!a||a.mode!=='timed')return;
+  const total=a.limitMinutes*60,remain=total-elapsedSeconds(a);if(remain<=0&&!a.overtime){a.overtime=true;save()}
+  const abs=Math.abs(remain),mm=String(Math.floor(abs/60)).padStart(2,'0'),ss=String(abs%60).padStart(2,'0');
+  el.textContent=(remain<=0?'時間超過 ':'残り ')+mm+':'+ss;el.classList.toggle('over',remain<=0)
+}
+function toggleAnswerSheet(){S.answerSheetOpen=!S.answerSheetOpen;save();render()}
+function toggleAnswerSize(){S.answerSheetExpanded=!S.answerSheetExpanded;save();render()}
+function toggleExamInfo(){S.examInfoCompact=!S.examInfoCompact;save();render()}
+function jumpAnswerMajor(major){
+  const panel=document.querySelector('.answer-sheet-body'),actual=[...document.querySelectorAll('#answerPanel .q[data-major="'+major+'"]')][0];if(!panel||!actual)return;
+  panel.scrollTo({top:Math.max(0,actual.offsetTop-95),behavior:'smooth'});actual.classList.add('focus-flash');setTimeout(function(){actual.classList.remove('focus-flash')},1200)
+}
+function jumpToProblem(id){
+  const target=document.getElementById('problem-'+id);if(!target)return alert('問題の位置を特定できませんでした。');
+  target.scrollIntoView({behavior:'smooth',block:'start'});target.classList.add('focus-flash');setTimeout(function(){target.classList.remove('focus-flash')},1400)
 }
 function response(id){return S.currentAttempt&&S.currentAttempt.responses[id]}
 function setResponse(id,v){if(S.currentAttempt){S.currentAttempt.responses[id]=v;save()}}
@@ -175,15 +264,24 @@ function inputFor(q){
   if(q.scoringType==='select_five_and_rewrite'){const cur=r||{selected:[],corrections:{}},s=new Set(cur.selected||[]);return q.subItems.map(function(x){return '<div class="correction-row"><label><input type="checkbox" '+(s.has(x.number)?'checked':'')+' onchange="__RIKKYO_APP__.toggleGroup(\''+q.id+'\','+x.number+',this.checked)">'+x.number+'. '+h(x.text)+'</label>'+(s.has(x.number)?'<input type="text" value="'+h(cur.corrections&&cur.corrections[x.number])+'" placeholder="訂正後の全文" oninput="__RIKKYO_APP__.setCorrection(\''+q.id+'\','+x.number+',this.value)">':'')+'</div>'}).join('')}
   return '<input type="text" value="'+h(r)+'" placeholder="解答を入力" oninput="__RIKKYO_APP__.setResponse(\''+q.id+'\',this.value)">'+(q.tokens?'<div class="token-list">'+q.tokens.map(function(t){return '<span class="token">'+h(t)+'</span>'}).join('')+'</div>':'')
 }
-function questionCard(q){return '<article class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(q.japanese?'<div class="jp">'+h(q.japanese)+'</div>':'')+(q.context?'<div class="practice-context">'+h(q.context)+'</div>':'')+(q.prompt?'<div class="prompt">'+h(q.prompt)+'</div>':'')+inputFor(q)+'</article>'}
+function problemQuestionCard(q){return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(q.japanese?'<div class="jp">'+h(q.japanese)+'</div>':'')+(q.context?'<div class="practice-context">'+h(q.context)+'</div>':'')+(q.prompt?'<div class="prompt">'+h(q.prompt)+'</div>':'')+(q.tokens?'<div class="token-list">'+q.tokens.map(function(t){return '<span class="token">'+h(t)+'</span>'}).join('')+'</div>':'')+'</article>'}
+function answerMajors(rows){return [...new Set(rows.map(function(q){return q.majorQuestion}).filter(Boolean))]}
+function answerRow(q){
+  return '<div id="answer-'+q.id+'" data-major="'+q.majorQuestion+'" class="q"><div class="row space"><b>'+h(qLabel(q))+'</b><button type="button" onclick="__RIKKYO_APP__.jumpToProblem(\''+q.id+'\')">問題へ ↑</button></div><div class="q-meta"><span class="tiny muted">'+h(P.skillName(q.primarySkill))+(q.sourceSubset?' ／ supplied subset':'')+'</span></div>'+inputFor(q)+'</div>'
+}
 function examAttempt(){
-  const a=S.currentAttempt,ex=examById(a.examId),passes=DATA.passages.filter(function(p){return p.examId===a.examId});
+  const a=S.currentAttempt,ex=examById(a.examId),passes=DATA.passages.filter(function(p){return p.examId===a.examId}),rows=qsFor(a.examId);
   const majors=Array.isArray(ex.runtimeMajors)?ex.runtimeMajors:[],scope=a.runtimeMode==='supplied_subset'?(majors.length?'原本Q'+majors[0]+'-Q'+majors[majors.length-1]+' subset':'原本subset'):'過去問学習中';
-  const summary='<div class=attempt-summary><b>'+h(a.examId)+'</b><span class=attempt-detail>'+h(scope)+' · 点数換算なし</span></div>';
-  const actions='<div class=attempt-actions><button onclick="__RIKKYO_APP__.goto(\'home\')">保存して戻る</button></div>';
+  const summary='<div class="attempt-summary"><b>'+h(a.examId)+' <span class="attempt-role">'+h(P.routeRole(a.examId))+'</span></b><span class="attempt-detail">'+h(scope)+' ／ '+(a.mode==='timed'?'制限時間あり':'時間無制限')+' ／ 点数換算なし</span></div>';
+  const actions='<div class="attempt-actions"><button onclick="__RIKKYO_APP__.goto(\'home\')">保存して戻る</button><button class="attempt-toggle" onclick="__RIKKYO_APP__.toggleExamInfo()">'+(S.examInfoCompact?'開く':'小さくする')+'</button></div>';
+  const attemptBar=U.attemptBar({compact:S.examInfoCompact,summaryHtml:summary,timerHtml:timerMarkup(a),actionsHtml:actions});
   const runtimeNotice=ex.runtimeNotice?'<section class="card warnbox"><b>'+(a.runtimeMode==='supplied_subset'?'原本subset':'現在の実施範囲')+'</b><p>'+h(ex.runtimeNotice)+'</p></section>':'';
-  const passageHtml=passes.map(function(pass){return '<details class="card"><summary><b>'+h(pass.title||'長文')+'</b></summary><div class="passage">'+h(pass.text)+'</div></details>'}).join('');
-  return U.attemptBar({summaryHtml:summary,actionsHtml:actions})+'<section class="card notice"><b>アプリ解答は非公式です。</b></section>'+runtimeNotice+passageHtml+qsFor(a.examId).map(questionCard).join('')+'<section class="card"><button class="primary" onclick="__RIKKYO_APP__.submitAttempt()">解答を確認して弱点を登録</button></section>';
+  const passageHtml=passes.map(function(pass){return '<details class="card" open><summary><b>'+h(pass.title||'長文')+'</b></summary><div class="passage">'+h(pass.text)+'</div></details>'}).join('');
+  const paperHtml=U.paperPage({year:ex.year,label:a.examId+' · '+scope,bodyHtml:passageHtml+rows.map(problemQuestionCard).join('')});
+  const answerHeader='<div class="answer-sheet-head"><div><h3>解答欄</h3><span>'+rows.length+'タスク</span></div><div class="sheet-actions">'+(S.answerSheetOpen?'<button type="button" class="sheet-toggle size-toggle" onclick="__RIKKYO_APP__.toggleAnswerSize()">'+(S.answerSheetExpanded?'標準':'広げる')+'</button>':'')+'<button type="button" class="sheet-toggle" onclick="__RIKKYO_APP__.toggleAnswerSheet()">'+(S.answerSheetOpen?'閉じる':'解答欄を開く')+'</button></div></div>';
+  const answerBody='<div class="answer-sheet-body"><div class="answer-help"><b>スマホでは問題を上側、解答欄を下側に同時表示</b><span>「問題へ」を押すと、該当設問へ戻れます。</span></div><div class="answer-jumps">'+answerMajors(rows).map(function(m){return '<button type="button" onclick="__RIKKYO_APP__.jumpAnswerMajor('+m+')">大問'+m+'</button>'}).join('')+'</div>'+rows.map(answerRow).join('')+'<button class="primary grade-button" onclick="__RIKKYO_APP__.submitAttempt()">解答を確認して弱点を登録</button></div>';
+  const answerPanel=U.answerPanel({open:S.answerSheetOpen,expanded:S.answerSheetExpanded,headerHtml:answerHeader,bodyHtml:answerBody});
+  return attemptBar+'<section class="card notice"><b>アプリ解答は非公式です。</b><br><span class="muted">問題と解答欄を分離し、早稲田英語と同じShared UIで操作します。</span></section>'+runtimeNotice+'<div class="examgrid"><section class="problem-column">'+paperHtml+'</section>'+answerPanel+'</div>'
 }
 function createWeak(q,r){const key=q.examId+':'+q.id,old=S.weak[key]||{},base=E.buildWrongWeaknessState(old,{year:examById(q.examId).year,id:q.id,label:qLabel(q),category:P.skillName(q.primarySkill),component:'main',skill:q.primarySkill,targetId:q.targetId,focusTag:q.targetId,examFormat:q.scoringType,trap:q.primarySkill,priority:P.resolveQuestionPriority(q),user:String(r==null?'':typeof r==='object'?JSON.stringify(r):r),today:today(),manualComponents:[]});base.examId=q.examId;base.questionId=q.id;delete base.points;S.weak[key]=base}
 function submitAttempt(){
@@ -256,7 +354,7 @@ async function importData(input){
 function applyDay(){const cur=today(),d=E.decideDayRollover({renderedDate:renderedDate,currentDate:cur,isDrillView:view==='drill',hasDrill:!!drill,drillAnswered:!!(drill&&drill.answered)});if(d.kind==='same'||d.kind==='defer')return false;E.applyDailyRolloverState(S,cur);renderedDate=cur;save();return true}
 window.addEventListener('focus',function(){if(applyDay())render()});
 
-function render(){if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,stats:stats,guide:guide}[view];app.innerHTML=f();window.__RIKKYO_APP_READY__=true}
-window.__RIKKYO_APP__={goto:goto,runAction:runAction,selectExam:selectExam,openExam:openExam,beginAttempt:beginAttempt,setResponse:setResponse,setSlot:setSlot,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
+function render(){if(timerHandle){clearInterval(timerHandle);timerHandle=null}if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,stats:stats,guide:guide}[view];app.innerHTML=f();if(view==='exam'&&S.currentAttempt?.status==='active'&&S.currentAttempt.mode==='timed')timerHandle=setInterval(updateTimer,1000);window.__RIKKYO_APP_READY__=true}
+window.__RIKKYO_APP__={goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
 loadData().then(function(){render()}).catch(function(e){console.error(e);app.innerHTML='<section class="card badbox"><h2>読み込みエラー</h2><p>'+h(e.message)+'</p></section>'});
 })();
