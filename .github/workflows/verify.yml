@@ -16,6 +16,7 @@ jobs:
       - run: node tests/bootstrap-integrity.test.mjs
       - run: node tests/paper-structure.test.mjs
       - run: node tests/rikkyo-adapter-contract.test.mjs
+      - run: node tests/shared-ui-migration-hold.test.mjs
       - run: node tests/fy26a-mvp-data.test.mjs
       - run: node --check app.js
       - run: bash tests/rikkyo-browser-smoke.sh
