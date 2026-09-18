@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
   "deployAllowed": false,
-  "reason": "Shared Engine v1.1 and Shared UI v1.0.0 are pinned and wired. Renderer/mobile/browser compatibility is clean; production remains blocked by remaining source/answer coverage and final two-CLEAN release loops.",
+  "reason": "Shared Engine v1.1 and Shared UI v1.0.0 are pinned and wired. All supplied source has been inventoried/transcribed to the extent supported by the PDFs; FY24/FY25 Q2-Q5 subsets are now runnable. Production remains blocked on runtime promotion/handling of the remaining supplied reading/writing formats and final release CLEAN loops.",
   "blockers": [
-    "remaining past-paper/answer coverage",
+    "runtime promotion or explicit non-runtime policy for FY24/FY25 Q6 reading and FY25 Q9 picture writing",
+    "final cross-year route/browser regression",
     "two consecutive CLEAN loops"
   ],
   "completedGates": [
@@ -14,6 +15,8 @@
     "Rikkyo question renderer compatibility",
     "desktop browser parity",
     "mobile browser parity",
-    "backup/import browser parity"
+    "backup/import browser parity",
+    "supplied-source transcription/answer audit complete with explicit missing-source limitations",
+    "FY24/FY25 Q2-Q5 source subsets runnable"
   ]
 }
