@@ -1,12 +1,10 @@
 {
   "schemaVersion": 1,
   "deployAllowed": false,
-  "reason": "Shared UI/UX v1 is not yet pinned from the Waseda source-of-truth.",
+  "reason": "Shared UI v1.0.0 is pinned and wired. Production remains blocked until Rikkyo renderer/data/mobile compatibility and two consecutive CLEAN loops are complete.",
   "blockers": [
-    "shared-ui-v1-production-release",
-    "ui.lock.json pinned to Waseda Shared UI",
-    "replace bespoke shell/CSS with vendored shared UI",
     "Rikkyo question renderer compatibility",
+    "remaining past-paper/answer coverage",
     "full desktop/mobile browser parity",
     "two consecutive CLEAN loops"
   ]
