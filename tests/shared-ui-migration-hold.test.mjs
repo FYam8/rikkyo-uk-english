@@ -62,3 +62,5 @@ for(const [file,sha] of Object.entries(lock.sourceBlobs)){
 }
 assert.ok(index.indexOf('src="ui/exam-session.js"')<index.indexOf('src="app.js"'));
 assert.ok(app.includes('window.ENGLISH_UI_EXAM_SESSION.create'));
+
+assert.ok(!index.includes(String.fromCharCode(92)+'n'),'literal newline escape in HTML shell');

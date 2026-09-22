@@ -49,6 +49,7 @@ try{
   },isRikkyo);
   await page.waitForSelector('#examTimer');
   const state=()=>page.evaluate(isRikkyo=>isRikkyo?window.__RIKKYO_APP__.getState():JSON.parse(JSON.stringify(S)),isRikkyo);
+  assert.ok(!(await page.locator('body').innerText()).includes(String.fromCharCode(92)+'n'),'literal newline escape in rendered page');
   const initial=await state();
   for(const fn of ['toggleAnswerSheet','toggleAnswerSheet','toggleAnswerSize','toggleExamInfo'])await page.evaluate(({isRikkyo,fn})=>{if(isRikkyo)window.__RIKKYO_APP__[fn]();else window[fn]()},{isRikkyo,fn});
   const changed=await state();assert.equal(changed.answerSheetOpen,initial.answerSheetOpen);assert.equal(changed.answerSheetExpanded,!initial.answerSheetExpanded);assert.equal(changed.examInfoCompact,!initial.examInfoCompact);
