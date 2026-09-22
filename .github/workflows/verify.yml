@@ -15,6 +15,7 @@ jobs:
           node-version: 20
       - run: node tests/shared-exam-session.test.mjs
       - run: node tests/shared-answer-widgets.test.mjs
+      - run: node tests/shared-today-presenter.test.mjs
       - run: node tests/bootstrap-integrity.test.mjs
       - run: node tests/paper-structure.test.mjs
       - run: node tests/rikkyo-adapter-contract.test.mjs

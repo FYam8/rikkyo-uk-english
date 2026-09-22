@@ -1,6 +1,6 @@
 {
   "name": "shared-english-ui",
-  "uiVersion": "1.2.0",
+  "uiVersion": "1.3.0",
   "contractVersion": 1,
   "status": "production-waseda-commonized",
   "sourceRepository": "FYam8/waseshibu-english",
@@ -30,7 +30,8 @@
     "progress/stats shell",
     "backup/import presentation",
     "exam timer lifecycle, answer sheet interaction and question navigation",
-    "answer widget rendering, selection and reorder transitions"
+    "answer widget rendering, selection and reorder transitions",
+    "Today summary, Resume queue, learning actions and future confirmation presentation"
   ],
   "excluded": [
     "school branding/theme values",
@@ -66,6 +67,12 @@
     },
     "answerWidgets": {
       "path": "ui/answer-widgets.js",
+      "contractVersion": 1
+    }
+  },
+  "sharedPresenters": {
+    "today": {
+      "path": "ui/today-presenter.js",
       "contractVersion": 1
     }
   }
