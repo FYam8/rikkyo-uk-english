@@ -236,7 +236,7 @@ function changeWordOrder(id,action){
   const result=ANSWER_WIDGETS.reorderChange(response(id),q.tokens||[],action,wordOrderOptions(q));
   if(result.error==='missing-empty')return alert('不足する1語を入力してください。');
   if(!result.changed)return;setResponse(id,result.state);
-  if(action.type==='missing')ANSWER_WIDGETS.refreshReorderPreview(document.getElementById('order-'+id),result.state,q.tokens||[],wordOrderOptions(q));else render();
+  ANSWER_WIDGETS.refreshReorder(document.getElementById('answer-'+id),result.state,q.tokens||[],Object.assign({emptyText:'ここに並べた語句が表示されます'},wordOrderOptions(q)));
 }
 function setWordOrderMissing(id,v){changeWordOrder(id,{type:'missing',value:v})}
 function addWordOrderToken(id,i){changeWordOrder(id,{type:'add',index:i})}

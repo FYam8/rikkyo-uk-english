@@ -17,8 +17,8 @@ assert.deepEqual(gate.releaseEvidence.cleanAttempts,[1,2]);
 for(const completed of ['Rikkyo question renderer compatibility','desktop browser parity','mobile browser parity','backup/import browser parity','supplied-source transcription/answer audit complete with explicit missing-source limitations','FY24/FY25 Q2-Q5 source subsets runnable','FY24/FY25 Q6 reading runtime promoted','FY26A Q6-Q7 diagnostic runtime promoted','unsupported writing tasks governed by explicit non-runtime policy' ,'final cross-year route/browser regression','two consecutive CLEAN loops','post-merge main verification'])assert.ok(gate.completedGates.includes(completed),completed+' completion marker missing');
 
 assert.equal(lock.sourceRepository,'FYam8/waseshibu-english');
-assert.equal(lock.sourceCommit,'7edc6118f9ffc1a980fbe03ee98fe7e7c19747b3');
-assert.equal(lock.uiVersion,'1.3.0');
+assert.equal(lock.sourceCommit,'364af470f503c8424d305bb99168c0aca8d78c8d');
+assert.equal(lock.uiVersion,'1.3.1');
 assert.equal(lock.contractVersion,1);
 assert.equal(lock.consumerPolicy,'pinned-vendor-pr-only');
 assert.equal(manifest.uiVersion,lock.uiVersion);

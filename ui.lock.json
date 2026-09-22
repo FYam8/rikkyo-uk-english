@@ -1,19 +1,19 @@
 {
   "sourceRepository": "FYam8/waseshibu-english",
-  "sourceCommit": "7edc6118f9ffc1a980fbe03ee98fe7e7c19747b3",
-  "uiVersion": "1.3.0",
+  "sourceCommit": "364af470f503c8424d305bb99168c0aca8d78c8d",
+  "uiVersion": "1.3.1",
   "contractVersion": 1,
   "artifactRoots": [
     "ui/"
   ],
   "consumerPolicy": "pinned-vendor-pr-only",
   "sourceBlobs": {
-    "ui/answer-widgets.js": "fec82e54bc93dd25fa9378a6764d5b6af819a128",
+    "ui/answer-widgets.js": "1b75de05bb854bce442311ece6b2b3da135976ef",
     "ui/base.css": "5597065bf212ccc93936f0d2e19fdc3069cb15e2",
     "ui/components.js": "184039e59a5c819520231b4487656ba66f6fd554",
     "ui/contract.js": "e9e22572b0fda31e24e1b24a6dff220e1041ee40",
     "ui/exam-session.js": "09d738c3feae8dd62daaca770403eb66d6a13544",
-    "ui/manifest.json": "fb230109c1ab23a9c223049a2ecf4d645279abfa",
+    "ui/manifest.json": "330b5f7f54ac0d08c54eccb57e9332bdb9810a3d",
     "ui/shell.js": "f073ae36636ab531032bee51c75e8d8320229ed3",
     "ui/today-presenter.js": "df9bc228d007602288c6662a6185c6dd3ff14e31"
   }
