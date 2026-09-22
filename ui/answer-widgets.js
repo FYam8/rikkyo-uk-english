@@ -52,7 +52,19 @@ function reorder({tokens,state,allowMissing=false,disabled=false,handlers,boxId,
   return '<div class="tokens">'+bank+'</div>'+missing+'<div'+attrs({id:boxId,class:'reorder-answer','aria-live':'polite'})+'>'+(built?esc(built):'<span class="muted">'+esc(emptyText)+'</span>')+'</div><div class="row"><button'+attrs({type:'button',disabled,onclick:handlers.undo})+'>1語戻す</button><button'+attrs({type:'button',disabled,onclick:handlers.clear})+'>やり直す</button>'+submitHtml+'</div>';
 }
 function refreshReorderPreview(element,state,tokens,options){if(element)element.textContent=reorderSentence(state,tokens,options)}
-const api=Object.freeze({contractVersion:1,textInput,slots,choices,selection,slot,reorderState,reorderSentence,reorderChange,reorder,refreshReorderPreview});
+// Update existing nodes: replacing the exam/panel DOM resets nested scroll and focus.
+function refreshReorder(container,state,tokens,options={}){
+  if(!container)return false;
+  const s=reorderState(state,tokens,options);
+  container.querySelectorAll('.tokens button').forEach((button,i)=>{const used=s.order.includes(i);button.disabled=!!options.disabled||used;button.classList.toggle('disabled',used)});
+  const input=container.querySelector('.missing-word-row input'),add=container.querySelector('.missing-word-row button');
+  if(input&&input.value!==s.missing)input.value=s.missing;
+  if(add)add.disabled=!!options.disabled||s.order.includes('missing');
+  const preview=container.querySelector('.reorder-answer'),built=reorderSentence(s,tokens,options);
+  if(preview)preview.innerHTML=built?esc(built):'<span class="muted">'+esc(options.emptyText||'')+'</span>';
+  return true;
+}
+const api=Object.freeze({contractVersion:1,textInput,slots,choices,selection,slot,reorderState,reorderSentence,reorderChange,reorder,refreshReorderPreview,refreshReorder});
 if(typeof module!=='undefined'&&module.exports)module.exports=api;
 root.ENGLISH_UI_ANSWER_WIDGETS=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
