@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),ui=require('../ui/today-presenter.js');
+const freeze=x=>{Object.values(x).forEach(v=>{if(v&&typeof v==='object')freeze(v)});return Object.freeze(x)};
+const available=freeze(['confirm','continue','attempt','next','route'].map((kind,i)=>({kind,label:'action '+i,note:'note '+i,command:'run('+i+')'})));
+assert.equal(ui.contractVersion,1);
+const normal=ui.learningActions({action:available[0],available,routeCommand:"goto('route')"});
+assert.match(normal,/action 0/);assert.match(normal,/ほかにできること/);
+assert.equal((normal.match(/<button/g)||[]).length,5);assert.doesNotMatch(normal,/action 4/);
+const resumed=ui.learningActions({action:freeze({kind:'resume',label:'Resume',command:'resume()',note:'draft'}),available});
+assert.match(resumed,/この1問の完了後/);assert.equal((resumed.match(/<button/g)||[]).length,1);assert.doesNotMatch(resumed,/onclick="run/);
+assert.doesNotMatch(ui.learningActions({action:{kind:'resume'},available:[]}),/queued-actions/);
+const complete=ui.learningActions({action:{complete:true,label:'done & safe'},available,routeCommand:'route()'});
+assert.match(complete,/✓ done &amp; safe/);assert.doesNotMatch(complete,/resume-action|alternative-actions/);
+assert.match(complete,/route\(\)/);
+assert.equal(ui.futureConfirmations({rows:[]}), '');
+const rows=freeze([0,1,2,3].map(i=>({date:'2026-09-23',label:'source '+i})));
+const future=ui.futureConfirmations({rows,tomorrow:'2026-09-23',target:10});
+assert.match(future,/明日の定着確認予定/);assert.match(future,/ほか1件/);assert.doesNotMatch(future,/source 3/);
+assert.match(ui.futureConfirmations({rows,tomorrow:'2026-09-24'}),/今後の定着確認予定/);
+for(const answered of [0,9,10,12]){
+ const html=ui.content({action:{note:'continue'},summary:{answered,target:10,remaining:Math.max(0,10-answered),targetReached:answered>=10},goal:{label:'scope',value:'all',note:'policy'},actionsHtml:normal});
+ assert.match(html,new RegExp(answered>=10?'TARGET ACHIEVED · KEEP GOING':'TODAY · STANDARD 10 QUESTIONS'));
+ assert.ok(html.includes(answered>=10?`${answered-10}問`:`あと${10-answered}問`));assert.match(html,/onclick="run\(0\)"/,'target must not disable actions');
+}
+const hostile='<img src=x onerror=alert(1)>',html=ui.content({action:{complete:true,note:hostile},goal:{value:hostile}});
+assert.doesNotMatch(html,/<img/);assert.match(html,/AVAILABLE WORK COMPLETE/);
+assert.doesNotMatch(ui.learningActions({action:{label:hostile,command:'run("x")'}}),/onclick="run\("/);
+assert.match(ui.learningActions({action:{},labels:{route:'custom route'}}),/custom route/);
+const source=fs.readFileSync(new URL('../ui/today-presenter.js',import.meta.url),'utf8');
+assert.doesNotMatch(source,/localStorage|indexedDB|Date\(|waseshibu|rikkyo|FY26|setTimeout/i);
+const app=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8');
+for(const method of ['content','learningActions','futureConfirmations'])assert.ok(app.includes('TODAY_PRESENTER.'+method));
+assert.doesNotMatch(app,/class=["']?(?:future-confirmations|queued-actions|alternative-actions|daily-summary)/,'shared markup duplicated in app');
+const index=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+assert.ok(index.includes('src="ui/today-presenter.js"'));assert.ok(index.indexOf('ui/today-presenter.js')<index.indexOf('src="app.js"'));
+console.log('Shared Today presenter contract, immutability, target continuation, escaping and delegation: CLEAN');

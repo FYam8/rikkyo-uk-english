@@ -4,6 +4,7 @@ const C=window.ENGLISH_ENGINE_ADAPTER&&window.ENGLISH_ENGINE_ADAPTER.config;
 const P=window.ENGLISH_ENGINE_ADAPTER&&window.ENGLISH_ENGINE_ADAPTER.policy;
 const E=window.ENGLISH_ENGINE_CORE;
 const U=window.ENGLISH_UI_COMPONENTS;
+const TODAY_PRESENTER=window.ENGLISH_UI_TODAY;
 const ANSWER_WIDGETS=window.ENGLISH_UI_ANSWER_WIDGETS;
 if(!C||!P||!E||!U)throw new Error('Rikkyo adapter/shared engine/UI not loaded');
 const KEY=C.storage.key,SCHEMA=C.storage.schemaVersion,TARGET=C.exam.dailyTaskTarget,IMPORT_RECOVERY_PREFIX=C.storage.importRecoveryPrefix,app=document.getElementById('app');
@@ -149,15 +150,10 @@ function todayAction(){
   const plan=ensureDailyPlan();return {complete:true,label:'現在できる学習は完了',note:completeTodayNote(plan)}
 }
 function futureConfirmationMarkup(){
-  const rows=futureConfirmations();if(!rows.length)return '';
-  const shown=rows.slice(0,3),extra=rows.length-shown.length,label=rows.every(function(x){return x[1].next===plusDays(1)})?'明日の定着確認予定（現時点）':'今後の定着確認予定（現時点）';
-  return '<div class="future-confirmations"><b>'+label+'</b>'+shown.map(function(x){return '<div><span>'+h(x[1].next)+'</span><span>'+h(x[1].examId+' '+x[1].label)+'</span></div>'}).join('')+(extra?'<small>ほか'+extra+'件。予定日になったものから優先し、目安'+TARGET+'問の後も続けられます。</small>':'')+'</div>'
+  return TODAY_PRESENTER.futureConfirmations({rows:futureConfirmations().map(function(x){return {date:x[1].next,label:x[1].examId+' '+x[1].label}}),tomorrow:plusDays(1),target:TARGET})
 }
 function learningActionsMarkup(action){
-  const available=availableLearningActions();
-  if(action.kind==='resume')return '<div class="resume-action"><button class="primary" onclick="__RIKKYO_APP__.resumeDrill()">'+h(action.label)+'</button><span>'+h(action.note)+'</span></div>'+(available.length?'<div class="queued-actions"><b>この1問の完了後</b>'+available.slice(0,3).map(function(x){return '<span>'+h(x.label)+'：'+h(x.note)+'</span>'}).join('')+'</div>':'');
-  if(action.complete)return '<div class="row">'+U.completionMark('✓ '+action.label)+'<button onclick="__RIKKYO_APP__.goto(\'route\')">学習ルートを見る</button></div>';
-  return '<div class="learning-actions"><div class="resume-action"><button class="primary" onclick="'+actionCommand(action)+'">'+h(action.label)+'</button><span>'+h(action.note)+'</span></div>'+(available.slice(1,4).length?'<div class="alternative-actions"><b>ほかにできること</b>'+available.slice(1,4).map(function(x){return '<button onclick="'+actionCommand(x)+'">'+h(x.label)+'</button>'}).join('')+'</div>':'')+'<button onclick="__RIKKYO_APP__.goto(\'route\')">学習ルートを見る</button></div>'
+  return TODAY_PRESENTER.learningActions({action:Object.assign({},action,{command:action.kind==='resume'?'__RIKKYO_APP__.resumeDrill()':actionCommand(action)}),available:availableLearningActions().map(function(x){return Object.assign({},x,{command:actionCommand(x)})}),routeCommand:"__RIKKYO_APP__.goto('route')"})
 }
 function qLabel(q){return q.id==='R26-ENG-A-G4'?'大問4':'大問'+q.majorQuestion+' 問'+q.minorQuestion}
 
@@ -165,10 +161,8 @@ function goto(v){view=v;document.querySelectorAll('nav button').forEach(function
 document.querySelectorAll('nav button').forEach(function(b){b.onclick=function(){goto(b.dataset.v)}});
 
 function home(){
-  const action=todayAction(),plan=ensureDailyPlan(),answered=dailyAnswered(plan),targetReached=dailyTargetReached(plan),extra=Math.max(0,answered-TARGET),active=activeWeak(),mastered=weakEntries().filter(function(x){return x[1].status==='mastered'}).length;
-  const todayContent='<div class="today-head"><div><div class="eyebrow">'+(action.complete?'AVAILABLE WORK COMPLETE':targetReached?'TARGET ACHIEVED · KEEP GOING':'TODAY · STANDARD '+TARGET+' QUESTIONS')+'</div><h2>今日やること</h2><p>'+h(action.note)+'</p></div><div class="goal-block"><span>学習範囲</span><strong>全範囲</strong><small>公式配点が未確認のため点数目標は設定しません</small></div></div>'+
-    '<div class="daily-summary"><article><b>'+answered+'問</b><small>今日の克服ドリル</small></article><article><b>'+TARGET+'問</b><small>標準目安</small></article><article><b>'+(targetReached?extra+'問':'あと'+dailyTargetRemaining(plan)+'問')+'</b><small>'+(targetReached?'目安達成後':'目安まで')+'</small></article></div>'+
-    learningActionsMarkup(action)+futureConfirmationMarkup();
+  const action=todayAction(),plan=ensureDailyPlan(),answered=dailyAnswered(plan),targetReached=dailyTargetReached(plan),active=activeWeak(),mastered=weakEntries().filter(function(x){return x[1].status==='mastered'}).length;
+  const todayContent=TODAY_PRESENTER.content({action:action,summary:{answered:answered,target:TARGET,targetReached:targetReached,remaining:dailyTargetRemaining(plan)},goal:{label:'学習範囲',value:'全範囲',note:'公式配点が未確認のため点数目標は設定しません'},actionsHtml:learningActionsMarkup(action),futureHtml:futureConfirmationMarkup()});
   return U.todayCard({complete:action.complete,contentHtml:todayContent})+
     '<section class="grid three">'+U.metricCard(S.attempts.length,'過去問')+U.metricCard(active.length,'未克服')+U.metricCard(mastered,'克服済み')+'</section>'+
     '<section class="card"><div class="row space"><div><div class="eyebrow">CURRENT STATUS</div><h3>現在の到達状況</h3></div><b>未克服 '+active.length+' ／ 克服済み '+mastered+'</b></div><p>'+h(P.goalAdvice())+'</p></section>'+
