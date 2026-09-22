@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - run: node tests/shared-exam-session.test.mjs
       - run: node tests/bootstrap-integrity.test.mjs
       - run: node tests/paper-structure.test.mjs
       - run: node tests/rikkyo-adapter-contract.test.mjs
@@ -34,3 +35,11 @@ jobs:
       - run: node --check engine/bootstrap.js
       - run: node --check schools/rikkyo/config.js
       - run: node --check schools/rikkyo/policy.js
+      - name: Install browser parity dependency
+        run: npm install --prefix "$RUNNER_TEMP/exam-session-deps" --no-package-lock --ignore-scripts playwright@1.62.1
+      - name: Install browser for shared interaction checks
+        run: node "$RUNNER_TEMP/exam-session-deps/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Verify shared exam interaction at 390px and 1280px
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/exam-session-deps/node_modules/playwright
+        run: node tests/shared-exam-session-browser.test.mjs .

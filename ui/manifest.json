@@ -1,6 +1,6 @@
 {
   "name": "shared-english-ui",
-  "uiVersion": "1.0.0",
+  "uiVersion": "1.1.0",
   "contractVersion": 1,
   "status": "production-waseda-commonized",
   "sourceRepository": "FYam8/waseshibu-english",
@@ -28,7 +28,8 @@
     "weakness/review list",
     "remediation drill shell and feedback",
     "progress/stats shell",
-    "backup/import presentation"
+    "backup/import presentation",
+    "exam timer lifecycle, answer sheet interaction and question navigation"
   ],
   "excluded": [
     "school branding/theme values",
@@ -56,5 +57,11 @@
   "productionWiring": true,
   "productionCutoverCommit": "ab46ccd86b7bae6ecbedb9ae2acfa7814f38f13d",
   "postCutoverVerifyRun": 35357854853,
-  "postCutoverPagesRun": 35357854834
+  "postCutoverPagesRun": 35357854834,
+  "sharedControllers": {
+    "examSession": {
+      "path": "ui/exam-session.js",
+      "contractVersion": 1
+    }
+  }
 }
