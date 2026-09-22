@@ -6,7 +6,7 @@ const E=window.ENGLISH_ENGINE_CORE;
 const U=window.ENGLISH_UI_COMPONENTS;
 if(!C||!P||!E||!U)throw new Error('Rikkyo adapter/shared engine/UI not loaded');
 const KEY=C.storage.key,SCHEMA=C.storage.schemaVersion,TARGET=C.exam.dailyTaskTarget,IMPORT_RECOVERY_PREFIX=C.storage.importRecoveryPrefix,app=document.getElementById('app');
-let DATA=null,view='home',selectedExamId=C.exam.defaultExamId,drill=null,renderedDate=E.localDate(),timerHandle=null;
+let DATA=null,view='home',selectedExamId=C.exam.defaultExamId,drill=null,renderedDate=E.localDate();
 
 function h(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function sourceText(v){return h(String(v==null?'':v).replace(/\\n/g,'\n'))}
@@ -214,30 +214,18 @@ function beginAttempt(id,options){
   if(!S.currentAttempt||S.currentAttempt.status!=='active')S.currentAttempt={id:'attempt-'+Date.now(),examId:id,year:ex.year,status:'active',runtimeMode:ex.runtimeMode||'full',mode:mode,limitMinutes:limit,startedAt:now(),startedTimezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'local',overtime:false,responses:{},questionOrder:qsFor(id).map(function(q){return q.id})};
   save();render()
 }
-function elapsedSeconds(a){return Math.max(0,Math.floor((Date.now()-new Date(a.startedAt).getTime())/1000))}
-function timerMarkup(a){
-  if(a.mode!=='timed')return '<span class="timer practice">時間無制限</span>';
-  const total=a.limitMinutes*60,remain=total-elapsedSeconds(a);if(remain<=0&&!a.overtime){a.overtime=true;save()}
-  const abs=Math.abs(remain),mm=String(Math.floor(abs/60)).padStart(2,'0'),ss=String(abs%60).padStart(2,'0');
-  return '<span id="examTimer" class="timer '+(remain<=0?'over':'')+'">'+(remain<=0?'時間超過 ':'残り ')+mm+':'+ss+'</span>'
-}
-function updateTimer(){
-  const a=S.currentAttempt,el=document.getElementById('examTimer');if(!el||!a||a.mode!=='timed')return;
-  const total=a.limitMinutes*60,remain=total-elapsedSeconds(a);if(remain<=0&&!a.overtime){a.overtime=true;save()}
-  const abs=Math.abs(remain),mm=String(Math.floor(abs/60)).padStart(2,'0'),ss=String(abs%60).padStart(2,'0');
-  el.textContent=(remain<=0?'時間超過 ':'残り ')+mm+':'+ss;el.classList.toggle('over',remain<=0)
-}
-function toggleAnswerSheet(){S.answerSheetOpen=!S.answerSheetOpen;save();render()}
-function toggleAnswerSize(){S.answerSheetExpanded=!S.answerSheetExpanded;save();render()}
-function toggleExamInfo(){S.examInfoCompact=!S.examInfoCompact;save();render()}
-function jumpAnswerMajor(major){
-  const panel=document.querySelector('.answer-sheet-body'),actual=[...document.querySelectorAll('#answerPanel .q[data-major="'+major+'"]')][0];if(!panel||!actual)return;
-  panel.scrollTo({top:Math.max(0,actual.offsetTop-95),behavior:'smooth'});actual.classList.add('focus-flash');setTimeout(function(){actual.classList.remove('focus-flash')},1200)
-}
-function jumpToProblem(id){
-  const target=document.getElementById('problem-'+id);if(!target)return alert('問題の位置を特定できませんでした。');
-  target.scrollIntoView({behavior:'smooth',block:'start'});target.classList.add('focus-flash');setTimeout(function(){target.classList.remove('focus-flash')},1400)
-}
+const examSession=window.ENGLISH_UI_EXAM_SESSION.create({
+  getState:()=>S,save:save,render:render,
+  problemElementIds:({id})=>['problem-'+id],
+  onMissingProblem:()=>alert('問題の位置を特定できませんでした。')
+});
+function timerMarkup(a){return examSession.timerMarkup(a)}
+function updateTimer(){return examSession.updateTimer()}
+function toggleAnswerSheet(){return examSession.toggleAnswerSheet()}
+function toggleAnswerSize(){return examSession.toggleAnswerSize()}
+function toggleExamInfo(){return examSession.toggleExamInfo()}
+function jumpAnswerMajor(major){return examSession.jumpAnswerMajor(major)}
+function jumpToProblem(id){return examSession.jumpToProblem({id:id})}
 function response(id){return S.currentAttempt&&S.currentAttempt.responses[id]}
 function setResponse(id,v){if(S.currentAttempt){S.currentAttempt.responses[id]=v;save()}}
 function setSlot(id,i,v){const cur=response(id),a=Array.isArray(cur)?cur.slice():[];a[i]=v;setResponse(id,a)}
@@ -399,7 +387,7 @@ async function importData(input){
 function applyDay(){const cur=today(),d=E.decideDayRollover({renderedDate:renderedDate,currentDate:cur,isDrillView:view==='drill',hasDrill:!!drill,drillAnswered:!!(drill&&drill.answered)});if(d.kind==='same'||d.kind==='defer')return false;E.applyDailyRolloverState(S,cur);renderedDate=cur;save();return true}
 window.addEventListener('focus',function(){if(applyDay())render()});
 
-function render(){if(timerHandle){clearInterval(timerHandle);timerHandle=null}if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,stats:stats,guide:guide}[view];app.innerHTML=f();if(view==='exam'&&S.currentAttempt?.status==='active'&&S.currentAttempt.mode==='timed')timerHandle=setInterval(updateTimer,1000);window.__RIKKYO_APP_READY__=true}
+function render(){examSession.stop();if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,stats:stats,guide:guide}[view];app.innerHTML=f();examSession.start(view);window.__RIKKYO_APP_READY__=true}
 window.__RIKKYO_APP__={goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
 loadData().then(function(){render()}).catch(function(e){console.error(e);app.innerHTML='<section class="card badbox"><h2>読み込みエラー</h2><p>'+h(e.message)+'</p></section>'});
 })();

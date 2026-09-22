@@ -38,7 +38,7 @@ for(const item of requiredCompleted)assert.ok(gate.completedGates.includes(item)
 
 const engineLock=json('engine.lock.json'),uiLock=json('ui.lock.json');
 assert.equal(engineLock.engineVersion,'1.1.0');
-assert.equal(uiLock.uiVersion,'1.0.0');
+assert.equal(uiLock.uiVersion,'1.1.0');
 assert.equal(engineLock.consumerPolicy,'pinned-vendor-pr-only');
 assert.equal(uiLock.consumerPolicy,'pinned-vendor-pr-only');
 

@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+let state={currentAttempt:{status:'active',mode:'timed',limitMinutes:10,startedAt:'2026-01-01T00:00:00Z'},answerSheetOpen:true};
+let time=Date.parse('2026-01-01T00:09:59Z'),saves=0,renders=0,timeouts=0,active=0,missing=0;
+const classes=new Set(),timer={textContent:'',classList:{toggle(k,on){on?classes.add(k):classes.delete(k)}}};
+const target={offsetTop:200,getAttribute:()=> '5',classList:{add(){},remove(){}},scrollIntoView(o){this.scroll=o}};
+const panel={scrollTo(o){this.scroll=o}};
+const document={getElementById:id=>id==='examTimer'?timer:id==='problem-5'?target:null,querySelector:()=>panel,querySelectorAll:()=>[target]};
+const ctx={document,setTimeout:fn=>fn(),setInterval:()=>{active++;return active},clearInterval:()=>active--};ctx.globalThis=ctx;vm.createContext(ctx);
+vm.runInContext(fs.readFileSync(new URL('../ui/exam-session.js',import.meta.url),'utf8'),ctx);
+const c=ctx.ENGLISH_UI_EXAM_SESSION.create({getState:()=>state,now:()=>time,save:()=>saves++,render:()=>renders++,onTimeout:()=>timeouts++,problemElementIds:({id})=>['missing','problem-'+id],onMissingProblem:()=>missing++});
+assert.match(c.timerMarkup(state.currentAttempt),/残り 00:01/);
+c.updateTimer();assert.equal(timer.textContent,'残り 00:01');
+time+=1000;c.updateTimer();assert.equal(timer.textContent,'時間超過 00:00');assert.equal(state.currentAttempt.overtime,true);assert.equal(timeouts,1);assert.equal(saves,1);
+c.updateTimer();c.timerMarkup(state.currentAttempt);assert.equal(saves,1);assert.equal(timeouts,1);
+assert.ok(classes.has('over'));
+c.start('exam');c.start('exam');assert.equal(active,1);c.start('home');assert.equal(active,0);
+c.toggleAnswerSheet();assert.equal(state.answerSheetOpen,false);assert.equal(renders,1);
+// Import/replace must resolve the new state object instead of retaining the old one.
+state={answerSheetOpen:true,currentAttempt:{mode:'untimed'}};c.toggleAnswerSheet();assert.equal(state.answerSheetOpen,false);assert.match(c.timerMarkup(state.currentAttempt),/時間無制限/);
+c.toggleAnswerSize();c.toggleExamInfo();assert.equal(state.answerSheetExpanded,true);assert.equal(state.examInfoCompact,true);
+c.jumpAnswerMajor(5);assert.equal(panel.scroll.top,105);c.jumpToProblem({id:5});assert.equal(target.scroll.block,'start');c.jumpToProblem({id:99});assert.equal(missing,1);
+console.log('Shared exam session timeout, lifecycle, state replacement and navigation: CLEAN');

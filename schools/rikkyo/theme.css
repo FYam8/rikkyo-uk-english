@@ -10,3 +10,5 @@ html.dark{--bg:#151918;--card:#222827;--paper:#202524;--ink:#f3f6f5;--muted:#b8c
 .missing-word-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:10px 0}
 .reorder-answer{min-height:52px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-family:Georgia,"Times New Roman",serif}
 @media(max-width:700px){.missing-word-row{grid-template-columns:1fr}.source-block-title{display:grid}}
+/* Source token spans need explicit wrapping on narrow screens. */
+.token-list{display:flex;flex-wrap:wrap;gap:7px}
