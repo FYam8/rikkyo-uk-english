@@ -1,18 +1,19 @@
 {
   "sourceRepository": "FYam8/waseshibu-english",
-  "sourceCommit": "a7d4eea07269bc90093c1056ead79269779718f6",
-  "uiVersion": "1.1.0",
+  "sourceCommit": "90ae0a9b8af6590ca19c83d22ee1cdabf4063ab7",
+  "uiVersion": "1.2.0",
   "contractVersion": 1,
   "artifactRoots": [
     "ui/"
   ],
   "consumerPolicy": "pinned-vendor-pr-only",
   "sourceBlobs": {
+    "ui/answer-widgets.js": "fec82e54bc93dd25fa9378a6764d5b6af819a128",
     "ui/base.css": "5597065bf212ccc93936f0d2e19fdc3069cb15e2",
     "ui/components.js": "184039e59a5c819520231b4487656ba66f6fd554",
     "ui/contract.js": "e9e22572b0fda31e24e1b24a6dff220e1041ee40",
     "ui/exam-session.js": "09d738c3feae8dd62daaca770403eb66d6a13544",
-    "ui/manifest.json": "e76f58b32bb52da9b10ef5220ec45d100f3b73c6",
+    "ui/manifest.json": "18f670c84fd9abc0dd878f5bfa74c2a5a25e64eb",
     "ui/shell.js": "f073ae36636ab531032bee51c75e8d8320229ed3"
   }
 }
