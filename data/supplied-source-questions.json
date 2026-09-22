@@ -99,7 +99,9 @@
               "whose"
             ],
             "answerSentence": "Ms. White teaches English to students whose native language is not English.",
-            "unused": "which"
+            "unused": "which",
+            "prefix": "Ms. White",
+            "suffix": "English."
           },
           {
             "n": 2,
@@ -476,8 +478,8 @@
               "is",
               "how"
             ],
-            "answerSentence": "What a strange story this is!",
-            "unused": "how"
+            "answerSentence": "How strange this story is!",
+            "unused": "what"
           }
         ],
         "sourcePage": 3,

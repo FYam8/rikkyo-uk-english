@@ -1,5 +1,6 @@
 // Real-browser integration. Run with a local repository root; never seed production storage.
 import assert from 'node:assert/strict';
+import {runAnswerWidgetChecks} from './answer-widget-browser-checks.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
@@ -72,4 +73,5 @@ try{
   const resumed=await state();assert.equal(resumed.currentAttempt.id,initial.currentAttempt.id);assert.equal(resumed.answerSheetExpanded,changed.answerSheetExpanded);
   assert.deepEqual(errors,[]);console.log(`${isRikkyo?'Rikkyo':'Waseda'} production index ${width}px interaction, timeout and Resume: CLEAN`);await context.close();
  }
+ await runAnswerWidgetChecks(browser,url,isRikkyo);
 }finally{if(browser)await browser.close();await new Promise(r=>server.close(r))}

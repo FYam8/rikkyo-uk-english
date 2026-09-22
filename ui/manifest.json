@@ -1,6 +1,6 @@
 {
   "name": "shared-english-ui",
-  "uiVersion": "1.1.0",
+  "uiVersion": "1.2.0",
   "contractVersion": 1,
   "status": "production-waseda-commonized",
   "sourceRepository": "FYam8/waseshibu-english",
@@ -29,7 +29,8 @@
     "remediation drill shell and feedback",
     "progress/stats shell",
     "backup/import presentation",
-    "exam timer lifecycle, answer sheet interaction and question navigation"
+    "exam timer lifecycle, answer sheet interaction and question navigation",
+    "answer widget rendering, selection and reorder transitions"
   ],
   "excluded": [
     "school branding/theme values",
@@ -61,6 +62,10 @@
   "sharedControllers": {
     "examSession": {
       "path": "ui/exam-session.js",
+      "contractVersion": 1
+    },
+    "answerWidgets": {
+      "path": "ui/answer-widgets.js",
       "contractVersion": 1
     }
   }

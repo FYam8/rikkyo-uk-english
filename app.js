@@ -4,6 +4,7 @@ const C=window.ENGLISH_ENGINE_ADAPTER&&window.ENGLISH_ENGINE_ADAPTER.config;
 const P=window.ENGLISH_ENGINE_ADAPTER&&window.ENGLISH_ENGINE_ADAPTER.policy;
 const E=window.ENGLISH_ENGINE_CORE;
 const U=window.ENGLISH_UI_COMPONENTS;
+const ANSWER_WIDGETS=window.ENGLISH_UI_ANSWER_WIDGETS;
 if(!C||!P||!E||!U)throw new Error('Rikkyo adapter/shared engine/UI not loaded');
 const KEY=C.storage.key,SCHEMA=C.storage.schemaVersion,TARGET=C.exam.dailyTaskTarget,IMPORT_RECOVERY_PREFIX=C.storage.importRecoveryPrefix,app=document.getElementById('app');
 let DATA=null,view='home',selectedExamId=C.exam.defaultExamId,drill=null,renderedDate=E.localDate();
@@ -54,7 +55,7 @@ function flattenSuppliedRuntime(source){
         for(const item of group.subItems)out.push({
           id:group.id+'-'+item.n,examId,majorQuestion:3,minorQuestion:item.n,sourcePage:group.sourcePage,
           sourceType:'past_exam',sourceSubset:true,primarySkill:'word_order',scoringType:'word_order',
-          prompt:'語句を並べ替えて英文を完成させなさい（不要語1語あり）。',tokens:item.tokens,
+          prompt:'語句を並べ替えて英文を完成させなさい（不要語1語あり）。',tokens:item.tokens,wordOrderPrefix:item.prefix||'',wordOrderSuffix:item.suffix||'',
           answerSpec:{sentence:item.answerSentence,unused:item.unused},targetId:examId.toLowerCase()+'-word-order-'+item.n,
           answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
         });
@@ -228,29 +229,31 @@ function jumpAnswerMajor(major){return examSession.jumpAnswerMajor(major)}
 function jumpToProblem(id){return examSession.jumpToProblem({id:id})}
 function response(id){return S.currentAttempt&&S.currentAttempt.responses[id]}
 function setResponse(id,v){if(S.currentAttempt){S.currentAttempt.responses[id]=v;save()}}
-function setSlot(id,i,v){const cur=response(id),a=Array.isArray(cur)?cur.slice():[];a[i]=v;setResponse(id,a)}
-function toggleMulti(id,v,on){const set=new Set(Array.isArray(response(id))?response(id):[]);on?set.add(v):set.delete(v);setResponse(id,Array.from(set))}
-function toggleGroup(id,n,on){const cur=response(id)||{selected:[],corrections:{}},set=new Set(cur.selected||[]);on?set.add(n):set.delete(n);setResponse(id,{selected:Array.from(set).sort(function(a,b){return a-b}),corrections:Object.assign({},cur.corrections||{})});render()}
+function setSlot(id,i,v){setResponse(id,ANSWER_WIDGETS.slot(response(id),i,v))}
+function toggleMulti(id,v,on){setResponse(id,ANSWER_WIDGETS.selection(response(id),v,{on:on}).values)}
+function toggleGroup(id,n,on){const cur=response(id)||{selected:[],corrections:{}};setResponse(id,{selected:ANSWER_WIDGETS.selection(cur.selected,n,{on:on}).values.sort(function(a,b){return a-b}),corrections:Object.assign({},cur.corrections||{})});render()}
 function setCorrection(id,n,v){const cur=response(id)||{selected:[],corrections:{}};cur.corrections=Object.assign({},cur.corrections||{});cur.corrections[n]=v;setResponse(id,cur)}
 function isWordOrder(q){return q.scoringType==='word_order_missing_word'||q.scoringType==='word_order'}
-function wordOrderState(q,r){
-  if(r&&typeof r==='object'&&!Array.isArray(r)&&Array.isArray(r.order))return {order:r.order.filter(function(x){return x==='missing'||Number.isInteger(x)}),missing:String(r.missing||'')};
-  return {order:[],missing:''}
+function wordOrderOptions(q){return {allowMissing:q.scoringType==='word_order_missing_word'}}
+function wordOrderState(q,r){return ANSWER_WIDGETS.reorderState(r,q.tokens||[],wordOrderOptions(q))}
+function wordOrderSentence(q,r){return [q.wordOrderPrefix,ANSWER_WIDGETS.reorderSentence(r,q.tokens||[],wordOrderOptions(q)),q.wordOrderSuffix].filter(Boolean).join(' ')}
+function changeWordOrder(id,action){
+  const q=S.currentAttempt&&qsFor(S.currentAttempt.examId).find(x=>x.id===id);if(!q)return;
+  const result=ANSWER_WIDGETS.reorderChange(response(id),q.tokens||[],action,wordOrderOptions(q));
+  if(result.error==='missing-empty')return alert('不足する1語を入力してください。');
+  if(!result.changed)return;setResponse(id,result.state);
+  if(action.type==='missing')ANSWER_WIDGETS.refreshReorderPreview(document.getElementById('order-'+id),result.state,q.tokens||[],wordOrderOptions(q));else render();
 }
-function wordOrderSentence(q,r){
-  const s=wordOrderState(q,r);
-  return s.order.map(function(x){return x==='missing'?s.missing:(q.tokens&&q.tokens[x])||''}).filter(Boolean).join(' ')
-}
-function setWordOrderMissing(id,v){const q=qsFor(S.currentAttempt.examId).find(function(x){return x.id===id}),s=wordOrderState(q,response(id));s.missing=v;setResponse(id,s)}
-function addWordOrderToken(id,i){const q=qsFor(S.currentAttempt.examId).find(function(x){return x.id===id}),s=wordOrderState(q,response(id));if(!s.order.includes(i)){s.order.push(i);setResponse(id,s);render()}}
-function addWordOrderMissing(id){const q=qsFor(S.currentAttempt.examId).find(function(x){return x.id===id}),s=wordOrderState(q,response(id));if(!String(s.missing).trim())return alert('不足する1語を入力してください。');if(!s.order.includes('missing')){s.order.push('missing');setResponse(id,s);render()}}
-function undoWordOrder(id){const q=qsFor(S.currentAttempt.examId).find(function(x){return x.id===id}),s=wordOrderState(q,response(id));s.order.pop();setResponse(id,s);render()}
-function clearWordOrder(id){const q=qsFor(S.currentAttempt.examId).find(function(x){return x.id===id}),s=wordOrderState(q,response(id));s.order=[];setResponse(id,s);render()}
+function setWordOrderMissing(id,v){changeWordOrder(id,{type:'missing',value:v})}
+function addWordOrderToken(id,i){changeWordOrder(id,{type:'add',index:i})}
+function addWordOrderMissing(id){changeWordOrder(id,{type:'addMissing'})}
+function undoWordOrder(id){changeWordOrder(id,{type:'undo'})}
+function clearWordOrder(id){changeWordOrder(id,{type:'clear'})}
 function answered(q,r){
   if(q.scoringType==='multi_slot_text')return Array.isArray(r)&&r.some(Boolean);
   if(q.scoringType==='select_five_and_rewrite')return !!(r&&r.selected&&r.selected.length);
   if(q.scoringType==='multiple_choice')return Array.isArray(r)&&r.length;
-  if(isWordOrder(q)){const s=wordOrderState(q,r),needed=(q.tokens||[]).length+(q.scoringType==='word_order_missing_word'?1:0);return s.order.length===needed&&new Set(s.order).size===s.order.length&&(q.scoringType!=='word_order_missing_word'||String(s.missing).trim())}
+  if(isWordOrder(q)){const s=wordOrderState(q,r),needed=(q.tokens||[]).length+(q.scoringType==='word_order_missing_word'?1:0)-(q.scoringType==='word_order'&&q.answerSpec?.unused?1:0);return s.order.length===needed&&new Set(s.order).size===s.order.length&&(q.scoringType!=='word_order_missing_word'||String(s.missing).trim())}
   return !!String(r==null?'':r).trim()
 }
 function evaluate(q,r){
@@ -265,23 +268,21 @@ function evaluate(q,r){
 }
 function displayAnswer(q){const a=q.answerSpec;if(q.scoringType==='multi_slot_text')return a.slots.map(function(x){return x.join(' / ')}).join(' ｜ ');if(q.scoringType==='select_five_and_rewrite')return a.errorNumbers.join(', ');if(q.scoringType==='single_choice')return a.choice;if(q.scoringType==='multiple_choice')return a.choices.join('・');return a.sentence||(a.accepted&&a.accepted.join(' / '))||(a.text&&a.text.join(' / '))||a.preferred||''}
 function wordOrderInput(q,r){
-  const s=wordOrderState(q,r),used=new Set(s.order.filter(Number.isInteger)),built=wordOrderSentence(q,s);
-  const bank=(q.tokens||[]).map(function(t,i){return '<button type="button" class="token '+(used.has(i)?'disabled':'')+'" '+(used.has(i)?'disabled':'')+' onclick="__RIKKYO_APP__.addWordOrderToken(\''+q.id+'\','+i+')">'+h(t)+'</button>'}).join('');
-  const missing=q.scoringType==='word_order_missing_word'?'<div class="missing-word-row"><input type="text" value="'+h(s.missing)+'" placeholder="不足する1語" oninput="__RIKKYO_APP__.setWordOrderMissing(\''+q.id+'\',this.value)"><button type="button" '+(s.order.includes('missing')?'disabled':'')+' onclick="__RIKKYO_APP__.addWordOrderMissing(\''+q.id+'\')">不足語を追加</button></div>':'';
-  return '<div class="input-guide">語句を正しい順にタップしてください。'+(q.scoringType==='word_order_missing_word'?'不足する1語も自分で補います。':'')+'</div><div class="tokens">'+bank+'</div>'+missing+'<div class="reorder-answer">'+(built?h(built):'<span class="muted">ここに並べた語句が表示されます</span>')+'</div><div class="row"><button type="button" onclick="__RIKKYO_APP__.undoWordOrder(\''+q.id+'\')">1語戻す</button><button type="button" onclick="__RIKKYO_APP__.clearWordOrder(\''+q.id+'\')">やり直す</button></div>'
+  return (q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+'<div class="input-guide">語句を正しい順にタップしてください。'+(q.scoringType==='word_order_missing_word'?'不足する1語も自分で補います。':'')+'</div>'+ANSWER_WIDGETS.reorder({tokens:q.tokens||[],state:r,allowMissing:wordOrderOptions(q).allowMissing,boxId:'order-'+q.id,emptyText:'ここに並べた語句が表示されます',handlers:{add:i=>"__RIKKYO_APP__.addWordOrderToken('"+q.id+"',"+i+")",missing:"__RIKKYO_APP__.setWordOrderMissing('"+q.id+"',this.value)",addMissing:"__RIKKYO_APP__.addWordOrderMissing('"+q.id+"')",undo:"__RIKKYO_APP__.undoWordOrder('"+q.id+"')",clear:"__RIKKYO_APP__.clearWordOrder('"+q.id+"')"}});
 }
 function inputFor(q){
-  const r=response(q.id);
-  if(q.scoringType==='manual_reading')return '<div class="warnbox"><b>自己採点の記述問題</b><p>本文を根拠に自分の言葉で答えてください。採点時に確認ポイントを表示します。</p></div><textarea placeholder="答えを入力" oninput="__RIKKYO_APP__.setResponse(\''+q.id+'\',this.value)">'+h(r)+'</textarea>';
-  if(q.scoringType==='multi_slot_text')return '<div class="slot-row">'+q.answerSpec.slots.map(function(_,i){return '<input type="text" value="'+h(r&&r[i])+'" placeholder="空所'+(i+1)+'" oninput="__RIKKYO_APP__.setSlot(\''+q.id+'\','+i+',this.value)">'}).join('')+'</div>';
-  if(q.scoringType==='single_choice')return '<div class="choice-grid">'+q.options.map(function(o){return '<label><input type="radio" name="'+q.id+'" value="'+o.id+'" '+(r===o.id?'checked':'')+' onchange="__RIKKYO_APP__.setResponse(\''+q.id+'\',this.value)"><b>'+o.id+'</b> '+h(o.text)+'</label>'}).join('')+'</div>';
-  if(q.scoringType==='multiple_choice'){const s=new Set(Array.isArray(r)?r:[]);return '<div class="choice-grid">'+q.options.map(function(o){return '<label><input type="checkbox" '+(s.has(o.id)?'checked':'')+' onchange="__RIKKYO_APP__.toggleMulti(\''+q.id+'\',\''+o.id+'\',this.checked)"><b>'+o.id+'</b> '+h(o.text)+'</label>'}).join('')+'</div>'}
-  if(q.scoringType==='select_five_and_rewrite'){const cur=r||{selected:[],corrections:{}},s=new Set(cur.selected||[]);return q.subItems.map(function(x){return '<div class="correction-row"><label><input type="checkbox" '+(s.has(x.number)?'checked':'')+' onchange="__RIKKYO_APP__.toggleGroup(\''+q.id+'\','+x.number+',this.checked)">'+x.number+'. '+h(x.text)+'</label>'+(s.has(x.number)?'<input type="text" value="'+h(cur.corrections&&cur.corrections[x.number])+'" placeholder="訂正後の全文" oninput="__RIKKYO_APP__.setCorrection(\''+q.id+'\','+x.number+',this.value)">':'')+'</div>'}).join('')}
+  const r=response(q.id),onInput="__RIKKYO_APP__.setResponse('"+q.id+"',this.value)";
+  if(q.scoringType==='manual_reading')return '<div class="warnbox"><b>自己採点の記述問題</b><p>本文を根拠に自分の言葉で答えてください。採点時に確認ポイントを表示します。</p></div>'+ANSWER_WIDGETS.textInput({multiline:true,value:r,placeholder:'答えを入力',onInput:onInput});
+  if(q.scoringType==='multi_slot_text')return ANSWER_WIDGETS.slots({count:q.answerSpec.slots.length,values:r,input:i=>({placeholder:'空所'+(i+1),onInput:"__RIKKYO_APP__.setSlot('"+q.id+"',"+i+",this.value)"})});
+  if(q.scoringType==='single_choice'||q.scoringType==='multiple_choice'){
+    const multi=q.scoringType==='multiple_choice';return ANSWER_WIDGETS.choices({options:q.options.map(o=>({value:o.id,labelHtml:'<b>'+h(o.id)+'</b> '+h(o.text)})),selected:multi?(Array.isArray(r)?r:[]):[r],multiple:multi,variant:'inputs',className:'choice-grid',name:q.id,label:qLabel(q)+'の回答',onAction:v=>multi?"__RIKKYO_APP__.toggleMulti('"+q.id+"','"+v+"',this.checked)":onInput});
+  }
+  if(q.scoringType==='select_five_and_rewrite'){const cur=r||{selected:[],corrections:{}},s=new Set(cur.selected||[]);return q.subItems.map(function(x){return '<div class="correction-row"><label><input type="checkbox" '+(s.has(x.number)?'checked':'')+' onchange="__RIKKYO_APP__.toggleGroup(\''+q.id+'\','+x.number+',this.checked)">'+x.number+'. '+h(x.text)+'</label>'+(s.has(x.number)?ANSWER_WIDGETS.textInput({value:cur.corrections&&cur.corrections[x.number],placeholder:'訂正後の全文',onInput:"__RIKKYO_APP__.setCorrection('"+q.id+"',"+x.number+",this.value)"}):'')+'</div>'}).join('')}
   if(isWordOrder(q))return wordOrderInput(q,r);
-  return '<input type="text" value="'+h(r)+'" placeholder="解答を入力" oninput="__RIKKYO_APP__.setResponse(\''+q.id+'\',this.value)">'
+  return ANSWER_WIDGETS.textInput({value:r,placeholder:'解答を入力',onInput:onInput});
 }
 function problemQuestionCard(q){
-  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceText(q.prompt)+'</div>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
+  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceText(q.prompt)+'</div>':'')+(q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
 }
 function sourceBlock(title,text,extra){
   return '<section class="source-block"><div class="source-block-title"><b>'+h(title)+'</b>'+(extra?'<span>'+h(extra)+'</span>':'')+'</div><div class="passage">'+sourceText(text)+'</div></section>'
@@ -350,7 +351,7 @@ function startWeak(key){
 function nextPractice(){const w=S.weak[drill.key],p=pool(w);reserve(w,p);const r=E.selectNextPracticeQuestion({pool:p,reservedIds:w.reservedConfirm,usedIds:drill.used,mode:drill.mode,streak:w.streak,rankChoices:function(items,c){return rank(w,items,c)}});if(!r.question){drill.error='出題できません';return}E.applyPracticeQuestionState(drill,w,r.question,{usedIds:r.usedIds,choiceOrder:[]});drill.response=null;drill.feedback=null;save()}
 function setPractice(v){drill.response=v;save()}
 function practiceCorrect(q,r){if(q.type==='choice')return r===q.answer;if(q.type==='word_order')return norm(r)===norm(q.answer);return (q.accepted||[q.answerText]).map(norm).includes(norm(r))}
-function practiceInput(q){if(q.type==='choice')return '<div class="choice-grid">'+q.options.map(function(o){return '<label><input type="radio" name="practice" value="'+o.id+'" '+(drill.response===o.id?'checked':'')+' onchange="__RIKKYO_APP__.setPractice(this.value)"><b>'+o.id+'</b> '+h(o.text)+'</label>'}).join('')+'</div>';return '<input type="text" value="'+h(drill.response)+'" placeholder="解答を入力" oninput="__RIKKYO_APP__.setPractice(this.value)">'+(q.tokens?'<div class="token-list">'+q.tokens.map(function(t){return '<span class="token">'+h(t)+'</span>'}).join('')+'</div>':'')}
+function practiceInput(q){if(q.type==='choice')return ANSWER_WIDGETS.choices({options:q.options.map(o=>({value:o.id,labelHtml:'<b>'+h(o.id)+'</b> '+h(o.text)})),selected:[drill.response],variant:'inputs',className:'choice-grid',name:'practice',onAction:()=>"__RIKKYO_APP__.setPractice(this.value)"});return ANSWER_WIDGETS.textInput({value:drill.response,placeholder:'解答を入力',onInput:'__RIKKYO_APP__.setPractice(this.value)'})+(q.tokens?'<div class="token-list">'+q.tokens.map(function(t){return '<span class="token">'+h(t)+'</span>'}).join('')+'</div>':'')}
 function finishPractice(){if(!drill||drill.answered)return;if(!String(drill.response||'').trim())return alert('解答を入力してください。');const q=drill.q,w=S.weak[drill.key],ok=practiceCorrect(q,drill.response);drill.answered=true;const t=E.advanceRemediationMastery(w,drill,ok,{today:today(),nextDay:plusDays(1),nowIso:now(),trainTarget:3,confirmTarget:2});if(t.needsConfirmationReserve)reserve(w,pool(w));drill.feedback={ok:ok,answer:q.type==='choice'?q.answer:q.answer||q.answerText,explanation:q.explanation};S.drillLog.push({key:drill.key,skill:w.skill,targetId:w.targetId,q:q.id,ok:ok,at:now(),mode:drill.mode});bumpDaily();save();render()}
 function continuePractice(){const w=S.weak[drill.key];if(w.status==='mastered'||(w.status==='pending'&&drill.mode==='train')){drill=null;save();return goto('home')}nextPractice();render()}
 function resumeDrill(){view='drill';render()}
