@@ -34,10 +34,11 @@ for(const key of ['writtenMaxScore','listeningMaxScore','totalMaxScore'])assert.
 assert.equal(config.storage.key,'rikkyo.uk.english.v1');
 assert.equal(config.storage.recoveryPrefix,'rikkyo.uk.english.pre-migration');
 assert.equal(config.storage.importRecoveryPrefix,'rikkyo.uk.english.pre-import');
-assert.equal(config.storage.syncDb,'rikkyo-uk-english-progress-sync');
-assert.equal(config.progress.enabled,false);
-assert.equal(config.progress.endpoint,'');
-assert.equal(config.progress.appId,'rikkyo-english');
+assert.equal(config.storage.syncDb,'rikkyo-uk-progress-sync');
+assert.equal(config.storage.syncDbVersion,7);
+assert.equal(config.progress.enabled,true);
+assert.equal(config.progress.endpoint,'https://rikkyo-uk-progress-api.fyam8.workers.dev');
+assert.equal(config.progress.appId,'rikkyo-uk-english');
 assert.equal(config.aiWriting.enabled,false);
 
 const serialized=JSON.stringify(plain(config));

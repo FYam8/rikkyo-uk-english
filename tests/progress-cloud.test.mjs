@@ -1,0 +1,7 @@
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+const context=vm.createContext({});for(const file of ['schools/rikkyo/config.js','schools/rikkyo/progressProjection.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context);
+const at='2026-09-30T03:00:00.000Z',state={attempts:[{id:'a',examId:'FY24A',status:'graded',gradedAt:at,correctCount:23,totalTasks:30,responses:{raw:'PRIVATE'}}],currentAttempt:{examId:'FY24B',status:'active',startedAt:at},weak:{a:{status:'pending',user:'PRIVATE'},b:{status:'mastered'}},drillLog:[]},before=JSON.stringify(state);
+const rows=context.RIKKYO_ENGLISH_PROGRESS_PROJECTION.buildStateRecords(state),get=id=>rows.find(x=>x.sourceRecordId===id).payload;
+assert.equal(get('state:exam:FY24A').examStatus,'done');assert.equal(get('state:exam:FY24B').examStatus,'started');assert.equal(get('state:exam:FY26B').examStatus,'holdout');assert.equal(get('state:latest-exam').referenceAccuracy,23/30*100);assert.equal(get('state:latest-exam').score,undefined);assert.equal(get('state:summary').retentionPending,1);assert.equal(get('state:summary').lastLearningAt,at);assert.equal(JSON.stringify(state),before);assert.ok(!JSON.stringify(rows).includes('PRIVATE'));
+state.attempts[0].totalTasks=0;assert.equal(context.RIKKYO_ENGLISH_PROGRESS_PROJECTION.buildStateRecords(state).at(-1).payload.completed,false);
+console.log('English Cloud projection PASS: A/B, real holdout, reference accuracy, ungraded, privacy and local immutability');
