@@ -33,13 +33,13 @@ root.ENGLISH_SCHOOL_CONFIG=Object.freeze({
     recoveryPrefix:'rikkyo.uk.english.pre-migration',
     importRecoveryPrefix:'rikkyo.uk.english.pre-import',
     schemaVersion:1,
-    syncDb:'rikkyo-uk-english-progress-sync',
-    syncDbVersion:1
+    syncDb:'rikkyo-uk-progress-sync',
+    syncDbVersion:7
   }),
   progress:Object.freeze({
-    enabled:false,
-    endpoint:'',
-    appId:'rikkyo-english'
+    enabled:true,
+    endpoint:'https://rikkyo-uk-progress-api.fyam8.workers.dev',
+    appId:'rikkyo-uk-english'
   }),
   aiWriting:Object.freeze({
     enabled:false,

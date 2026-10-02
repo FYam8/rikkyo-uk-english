@@ -1,7 +1,8 @@
 name: pages
 on:
-  push:
-    branches: [main]
+  workflow_run:
+    workflows: [verify]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -15,9 +16,12 @@ concurrency:
 
 jobs:
   verify-release:
+    if: (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -36,6 +40,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
