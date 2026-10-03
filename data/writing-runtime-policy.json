@@ -50,5 +50,17 @@
       "runtimeEnabled": false,
       "reason": "Final holdout is intentionally runtime-locked; writing remains part of the protected holdout source."
     }
-  ]
+  ],
+  "selfReviewPractice": {
+    "enabled": true,
+    "examIds": [
+      "FY26A"
+    ],
+    "sourceQuestionId": "R26-ENG-A-Q8",
+    "official": false,
+    "automaticScoring": false,
+    "countsAsExamCompletion": false,
+    "rawTextCloudUpload": false,
+    "policy": "Local draft and app-authored self-review checklist; original exam marking remains disabled. FY25 images unavailable; FY26B excluded."
+  }
 }
