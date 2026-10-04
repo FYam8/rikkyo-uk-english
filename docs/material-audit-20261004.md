@@ -24,6 +24,7 @@ All 42 authored practice items were reviewed for grammaticality, meaning, answer
 | Short-answer practice rejects full sentences and paraphrases | Register common equivalent sentences for all six items. Unmatched short answers receive explicit self-review against the example and evidence, not an automatic semantic verdict. Log `gradingMode` and `contentVersion`; self-review may advance the existing practice streak. |
 | Saved unfinished practice can retain obsolete question data | Refresh older versions on load and import, preserving the response and historical completed work. |
 | FY26B Q3 preserved records omit fixed parts | Record the five original prefixes and the Q3(3) suffix. Holdout remains locked. |
+| FY26A Q8 truncates original prompt examples and writing instructions | Restore the ability examples, word-count instruction, full-sentence/paragraph and spelling/grammar instructions from PDF p10. The writing exercise remains unscored. |
 
 Unchanged keys were independently checked against context: FY24A Q6 choice/insertion/sequence/incorrect-set, FY24B Q6 ellipsis/tag/extraction/connectors/dialogue/matching, FY25A Q6 narrative and matching, FY25B Q6 relative clause/order/passive/insertion/matching, FY26A Q4 and Q5-Q7, and FY26B Q2-Q7. No invented official key, scores, listening answers or new practice problem was introduced.
 

@@ -56,4 +56,6 @@ assert.ok(find('R25-ENG-A-Q6-3').answerSpec.accepted.includes('die'));
 assert.ok(!find('R25-ENG-A-Q6-3').prompt.includes('soon'));
 assert.ok(find('R25-ENG-A-Q6-4').prompt.includes('日本語'));
 assert.ok(bank.find(q=>q.id==='rec03').accepted.includes('The man that lives next door is a doctor.'));
+const writing=read('fy26a-late-runtime').nonRuntimeSource.find(q=>q.id==='R26-ENG-A-Q8');
+for(const phrase of ['you can fly','you can speak to animals','you can become invisible','Use full sentences and paragraphs.','Check your spelling and grammar.'])assert.ok(writing.prompt.includes(phrase),'FY26A writing source instruction missing: '+phrase);
 console.log('Material integrity: 42 practice items, all runtime/holdout Q3 reorder chunks, 48 Japanese guides, 16 labelled corrections: CLEAN');
