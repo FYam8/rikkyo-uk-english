@@ -12,9 +12,9 @@ assert.equal(gate.deployAllowed,true,'Rikkyo deployment gate should be open only
 assert.deepEqual(gate.blockers,[]);
 assert.equal(gate.releaseCandidate,false);
 assert.equal(gate.releaseStatus,'production-ready');
-assert.equal(gate.releaseVersion,'1.0.0');
+assert.equal(gate.releaseVersion,JSON.parse(read('release.json')).version);
 assert.deepEqual(gate.releaseEvidence.cleanAttempts,[1,2]);
-for(const completed of ['Rikkyo question renderer compatibility','desktop browser parity','mobile browser parity','backup/import browser parity','supplied-source transcription/answer audit complete with explicit missing-source limitations','FY24/FY25 Q2-Q5 source subsets runnable','FY24/FY25 Q6 reading runtime promoted','FY26A Q6-Q7 diagnostic runtime promoted','unsupported writing tasks governed by explicit non-runtime policy' ,'final cross-year route/browser regression','two consecutive CLEAN loops','post-merge main verification'])assert.ok(gate.completedGates.includes(completed),completed+' completion marker missing');
+for(const completed of ['Rikkyo question renderer compatibility','desktop browser parity','mobile browser parity','backup/import browser parity','supplied-source transcription/answer audit complete with explicit missing-source limitations','FY24/FY25 Q2-Q5 source subsets runnable','FY24/FY25 Q6 reading runtime promoted','FY26A Q6-Q7 diagnostic runtime promoted','unsupported writing tasks governed by explicit non-runtime policy' ,'final cross-year route/browser regression','two consecutive CLEAN loops','post-merge main verification enforced by Pages'])assert.ok(gate.completedGates.includes(completed),completed+' completion marker missing');
 
 assert.equal(lock.sourceRepository,'FYam8/waseshibu-english');
 assert.equal(lock.sourceCommit,'364af470f503c8424d305bb99168c0aca8d78c8d');
