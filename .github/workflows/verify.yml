@@ -35,6 +35,7 @@ jobs:
       - run: node --check app.js
       - run: bash tests/rikkyo-browser-smoke.sh
       - run: node tests/practice-bank.test.mjs
+      - run: node tests/material-integrity.test.mjs
       - run: node --check engine/core.js
       - run: node --check engine/contract.js
       - run: node --check engine/bootstrap.js

@@ -279,7 +279,7 @@
       "type": "open_writing",
       "runtimeEnabled": false,
       "reason": "No official marking authority and AI writing is disabled for Rikkyo.",
-      "prompt": "One morning you wake up and discover that you have a new ability. Write a short story about your day. Explain what happens, how you feel, and what problems or adventures you experience.",
+      "prompt": "One morning you wake up and discover that you have a new ability (for example: you can fly, you can speak to animals, you can become invisible, or another power). Write a short story about your day. Explain what happens, how you feel, and what problems or adventures you experience. Write your story in about 80 - 100 words on your answer sheet. Use full sentences and paragraphs. Check your spelling and grammar.",
       "approxWords": "80-100"
     }
   ]

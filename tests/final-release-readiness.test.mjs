@@ -2,23 +2,48 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const json=p=>JSON.parse(read(p));
 
 const gate=json('release-gate.json');
+const release=json('release.json');
+assert.equal(gate.schemaVersion,2);
+assert.equal(release.version,'1.0.1');
+assert.equal(release.status,'production-ready');
 assert.equal(gate.deployAllowed,true);
 assert.equal(gate.releaseCandidate,false);
 assert.equal(gate.releaseStatus,'production-ready');
-assert.equal(gate.releaseVersion,'1.0.0');
+assert.equal(gate.releaseVersion,release.version);
 assert.deepEqual(gate.blockers,[]);
 assert.deepEqual(gate.releaseEvidence.cleanAttempts,[1,2]);
-assert.equal(gate.releaseEvidence.postMergeVerifyConclusion,'success');
+assert.deepEqual(gate.releaseEvidence.cleanConclusions,['success','success']);
+assert.equal(gate.releaseEvidence.candidateHead,release.candidateHead);
+assert.match(release.candidateHead,/^[a-f0-9]{40}$/);
+assert.equal(gate.releaseEvidence.cleanWorkflowRun,release.verification.candidateRun);
+assert.deepEqual(release.verification.candidateAttempts,[1,2]);
+assert.equal(release.verification.conclusion,'success');
+assert.deepEqual(release.verification.audit.additionalFindings,[0,0]);
+assert.equal(release.verification.audit.consecutiveCleanPasses,2);
+assert.deepEqual(gate.releaseEvidence.postMergePolicy,release.verification.postMergePolicy);
+assert.equal(release.verification.postMergePolicy.exactVerifiedMainCommit,true);
+assert.equal(release.verification.postMergePolicy.required,true);
+const pages=read('.github/workflows/pages.yml');
+assert.ok(pages.includes("github.event.workflow_run.conclusion == 'success'"));
+assert.ok(pages.includes('ref: ${{ github.event.workflow_run.head_sha || github.sha }}'));
+const hashes=release.verification.auditedContentSha256;
+assert.ok(Object.keys(hashes).length>=18);
+for(const [file,expected]of Object.entries(hashes))assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex'),expected,file+' changed after CLEAN candidate');
+const inventory=json(release.verification.audit.inventory);
+assert.equal(inventory.sourceFiles.length,6);
+assert.equal(inventory.practiceIds.length,42);
+assert.equal(inventory.runtimeIds.length,122);
 
 const requiredCompleted=[
   'Shared Engine v1.1 pinned',
-  'Shared UI v1.0.0 pinned',
+  'Shared UI v1.3.1 pinned',
   'Rikkyo storage/cloud isolation',
   'FY26B holdout isolation',
   'Rikkyo question renderer compatibility',
@@ -32,13 +57,17 @@ const requiredCompleted=[
   'unsupported writing tasks governed by explicit non-runtime policy',
   'final cross-year route/browser regression',
   'two consecutive CLEAN loops',
-  'post-merge main verification'
+  'post-merge main verification enforced by Pages'
 ];
 for(const item of requiredCompleted)assert.ok(gate.completedGates.includes(item),item+' gate missing');
 
 const engineLock=json('engine.lock.json'),uiLock=json('ui.lock.json');
 assert.equal(engineLock.engineVersion,'1.1.0');
 assert.equal(uiLock.uiVersion,'1.3.1');
+assert.equal(release.sharedUi.version,uiLock.uiVersion);
+assert.equal(release.sharedUi.sourceCommit,uiLock.sourceCommit);
+assert.equal(release.sharedEngine.version,engineLock.engineVersion);
+assert.equal(release.sharedEngine.sourceCommit,engineLock.sourceCommit);
 assert.equal(engineLock.consumerPolicy,'pinned-vendor-pr-only');
 assert.equal(uiLock.consumerPolicy,'pinned-vendor-pr-only');
 

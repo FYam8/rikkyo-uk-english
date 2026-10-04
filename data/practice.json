@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "authored-practice-0.3",
+  "datasetVersion": "authored-practice-0.4",
   "holdoutSourceExamIds": [],
   "items": [
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rgc01",
@@ -13,13 +13,13 @@
       "familyId": "practice-gc-01",
       "skill": "guided_completion",
       "type": "text",
-      "prompt": "Complete: She enjoys ( _____ ) tennis after school.",
+      "prompt": "Complete: She enjoys ( _____ ) tennis after school. （「テニスをするのを楽しむ」の意味に。play を適切な形にして1語で答える。）",
       "answerText": "playing",
       "explanation": "enjoy + -ing: enjoy の後ろは動名詞にします。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rgc02",
@@ -27,13 +27,13 @@
       "familyId": "practice-gc-02",
       "skill": "guided_completion",
       "type": "text",
-      "prompt": "Complete: I don't know whether he ( _____ ) join us tomorrow.",
+      "prompt": "Complete: I don't know whether he ( _____ ) join us tomorrow. （彼が明日参加するかどうか分からない、という未来の予定を表す。助動詞1語で答える。）",
       "answerText": "will",
       "explanation": "whether節の中でも未来のことなら will を使えます。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rgc03",
@@ -41,13 +41,13 @@
       "familyId": "practice-gc-03",
       "skill": "guided_completion",
       "type": "text",
-      "prompt": "Complete: The pictures ( _____ ) by my uncle are on the wall.",
+      "prompt": "Complete: The pictures ( _____ ) by my uncle are on the wall. （「叔父によって撮られた写真」の意味に。take を適切な形にして1語で答える。）",
       "answerText": "taken",
       "explanation": "名詞を後ろから説明する受け身の意味では過去分詞を使います。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rgc04",
@@ -55,13 +55,13 @@
       "familyId": "practice-gc-04",
       "skill": "guided_completion",
       "type": "text",
-      "prompt": "Complete: If I ( _____ ) you, I would talk to the teacher.",
+      "prompt": "Complete: If I ( _____ ) you, I would talk to the teacher.（空所は1語。）",
       "answerText": "were",
       "explanation": "現在の事実に反する仮定では If I were ... が基本です。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rgc05",
@@ -69,13 +69,13 @@
       "familyId": "practice-gc-05",
       "skill": "guided_completion",
       "type": "text",
-      "prompt": "Complete: The door must ( _____ ) before five.",
+      "prompt": "Complete: The door must ( _____ ) before five. （「閉められなければならない」の意味に。close を使って2語で答える。）",
       "answerText": "be closed",
       "explanation": "must の後ろで受け身にするので be + 過去分詞です。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rgc06",
@@ -83,13 +83,13 @@
       "familyId": "practice-gc-06",
       "skill": "guided_completion",
       "type": "text",
-      "prompt": "Complete: This cake was ( _____ ) by my sister.",
+      "prompt": "Complete: This cake was ( _____ ) by my sister. （「姉によって作られた」の意味に。make を適切な形にして1語で答える。）",
       "answerText": "made",
       "explanation": "受け身 was + 過去分詞 made を使います。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rwo01",
@@ -105,14 +105,15 @@
         "key",
         "he",
         "realised",
-        "that"
+        "that",
+        "he"
       ],
       "answer": "He realised that he had forgotten his key.",
       "explanation": "realised より前の出来事なので had forgotten を使います。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rwo02",
@@ -131,11 +132,11 @@
         "This is"
       ],
       "answer": "This is the bag that I was looking for.",
-      "explanation": "look for を離さず、関係節の最後に前置詞 for を置けます。"
+      "explanation": "関係節 that I was looking for が the bag を説明します。look for の前置詞 for は節の最後に置きます。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rwo03",
@@ -153,7 +154,12 @@
         "be"
       ],
       "answer": "I will be studying this time tomorrow.",
-      "explanation": "未来のある時点で進行中の動作は will be -ing です。"
+      "explanation": "未来のある時点で進行中の動作は will be -ing です。",
+      "accepted": [
+        "I will be studying this time tomorrow.",
+        "This time tomorrow I will be studying.",
+        "Tomorrow I will be studying this time."
+      ]
     },
     {
       "sourceType": "authored_practice",
@@ -200,7 +206,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rwo06",
@@ -218,7 +224,12 @@
         "lived"
       ],
       "answer": "They have lived here for five years.",
-      "explanation": "期間の長さには for を使い、現在まで続くので現在完了が自然です。"
+      "explanation": "期間の長さには for を使い、現在まで続くので現在完了が自然です。",
+      "accepted": [
+        "They have lived here for five years.",
+        "For five years they have lived here.",
+        "They have lived for five years here."
+      ]
     },
     {
       "sourceType": "authored_practice",
@@ -250,7 +261,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rec03",
@@ -260,7 +271,11 @@
       "type": "text",
       "prompt": "Correct the sentence: The man which lives next door is a doctor.",
       "answerText": "The man who lives next door is a doctor.",
-      "explanation": "人を先行詞にする関係代名詞には who を使えます。"
+      "explanation": "人を先行詞にする関係代名詞には who を使えます。",
+      "accepted": [
+        "The man who lives next door is a doctor.",
+        "The man that lives next door is a doctor."
+      ]
     },
     {
       "sourceType": "authored_practice",
@@ -335,7 +350,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rrd02",
@@ -344,13 +359,13 @@
       "skill": "long_reading",
       "type": "text",
       "context": "Aya met Mr Brown at a school event last year.",
-      "prompt": "Complete: Aya remembers ( _____ ) Mr Brown at the event.",
+      "prompt": "Complete: Aya remembers ( _____ ) Mr Brown at the event.（空所は1語。）",
       "answerText": "meeting",
       "explanation": "過去にしたことを覚えている、という remember -ing の用法です。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rrd03",
@@ -359,7 +374,7 @@
       "skill": "long_reading",
       "type": "text",
       "context": "A teacher helped Tom when he dropped his books.",
-      "prompt": "Complete: The teacher ( _____ ) helped Tom was very kind.",
+      "prompt": "Complete: The teacher ( _____ ) helped Tom was very kind.（空所は1語。）",
       "answerText": "who",
       "accepted": [
         "who",
@@ -457,84 +472,84 @@
     {
       "id": "rpa01",
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "targetId": "paraphrase-conditional",
       "familyId": "practice-pa-01",
       "skill": "paraphrase",
       "type": "text",
-      "prompt": "Rewrite with the same meaning: He doesn't have enough time, so he can't join us. → If he ( _____ ) enough time, he could join us.",
+      "prompt": "Rewrite with the same meaning: He doesn't have enough time, so he can't join us. → If he ( _____ ) enough time, he could join us.（空所は1語。）",
       "answerText": "had",
       "explanation": "現在の事実に反する仮定なので If + 過去形, could ... を使います。"
     },
     {
       "id": "rpa02",
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "targetId": "paraphrase-comparison",
       "familyId": "practice-pa-02",
       "skill": "paraphrase",
       "type": "text",
-      "prompt": "Rewrite with the same meaning: No other student in the class runs faster than Ken. → Ken runs the ( _____ ) in the class.",
+      "prompt": "Rewrite with the same meaning: No other student in the class runs faster than Ken. → Ken runs the ( _____ ) in the class.（空所は1語。）",
       "answerText": "fastest",
       "explanation": "No other ... 比較級 than ～ は、主語を変えて最上級で言い換えられます。"
     },
     {
       "id": "rpa03",
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "targetId": "paraphrase-dative",
       "familyId": "practice-pa-03",
       "skill": "paraphrase",
       "type": "text",
-      "prompt": "Rewrite with the same meaning: My aunt gave me this watch. → My aunt gave this watch ( _____ ) me.",
+      "prompt": "Rewrite with the same meaning: My aunt gave me this watch. → My aunt gave this watch ( _____ ) me.（空所は1語。）",
       "answerText": "to",
       "explanation": "give 人 物 は give 物 to 人 に言い換えられます。"
     },
     {
       "id": "rpa04",
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "targetId": "paraphrase-before-after",
       "familyId": "practice-pa-04",
       "skill": "paraphrase",
       "type": "text",
-      "prompt": "Rewrite with the same meaning: I did my homework after dinner. → I had dinner ( _____ ) doing my homework.",
+      "prompt": "Rewrite with the same meaning: I did my homework after dinner. → I had dinner ( _____ ) doing my homework.（空所は1語。）",
       "answerText": "before",
       "explanation": "A after B は、順序を入れ替えて B before A と表せます。"
     },
     {
       "id": "rpa05",
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "targetId": "paraphrase-make",
       "familyId": "practice-pa-05",
       "skill": "paraphrase",
       "type": "text",
-      "prompt": "Rewrite with the same meaning: The news made my mother happy. → My mother became happy ( _____ ) of the news.",
+      "prompt": "Rewrite with the same meaning: The news made my mother happy. → My mother became happy ( _____ ) of the news.（空所は1語。）",
       "answerText": "because",
       "explanation": "原因を表す because of を使って言い換えられます。"
     },
     {
       "id": "rpa06",
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "targetId": "paraphrase-as-as",
       "familyId": "practice-pa-06",
       "skill": "paraphrase",
       "type": "text",
-      "prompt": "Rewrite with the same meaning: My brother and I are the same height. → I am as ( _____ ) as my brother.",
+      "prompt": "Rewrite with the same meaning: My brother and I are the same height. → I am as ( _____ ) as my brother.（空所は1語。）",
       "answerText": "tall",
       "explanation": "同じ程度は as + 形容詞 + as で表せます。"
     },
@@ -714,7 +729,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rsa01",
@@ -726,13 +741,15 @@
       "prompt": "What subject does Mr Lee teach?",
       "answerText": "geography",
       "accepted": [
-        "geography"
+        "geography",
+        "Mr Lee teaches geography.",
+        "He teaches geography."
       ],
       "explanation": "最初の文に Mr Lee teaches geography. とあります。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rsa02",
@@ -745,13 +762,16 @@
       "answerText": "in a dark box",
       "accepted": [
         "in a dark box",
-        "a dark box"
+        "a dark box",
+        "They put the second plant in a dark box.",
+        "They put it in a dark box.",
+        "In the dark box."
       ],
       "explanation": "another plant in a dark box が根拠です。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rsa03",
@@ -764,13 +784,16 @@
       "answerText": "which material kept water warm longest",
       "accepted": [
         "which material kept water warm longest",
-        "what material kept water warm longest"
+        "what material kept water warm longest",
+        "Sara investigated which material kept water warm longest.",
+        "She investigated which material kept water warm longest.",
+        "which material kept water warm the longest"
       ],
       "explanation": "第1文の疑問を実験で調べています。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rsa04",
@@ -783,13 +806,15 @@
       "answerText": "the plant without water",
       "accepted": [
         "the plant without water",
-        "the one without water"
+        "the one without water",
+        "The plant without water was unhealthy.",
+        "The plant that had no water."
       ],
       "explanation": "without water の植物は brown leaves になっています。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rsa05",
@@ -803,13 +828,16 @@
       "accepted": [
         "folded paper made a stronger bridge",
         "folded paper was stronger",
-        "a folded paper bridge was stronger"
+        "a folded paper bridge was stronger",
+        "The students learned that folded paper made a stronger bridge.",
+        "They learned that folded paper made a stronger bridge.",
+        "The bridge made with folded paper held more books than the flat paper bridge."
       ],
       "explanation": "折った紙の橋の方が多くの本を支えたことから判断します。"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rsa06",
@@ -822,7 +850,9 @@
       "answerText": "to compare how quickly the water cooled",
       "accepted": [
         "to compare how quickly the water cooled",
-        "to compare the cooling speed"
+        "to compare the cooling speed",
+        "They recorded the temperature to compare how quickly the water cooled.",
+        "So they could compare how quickly the water cooled."
       ],
       "explanation": "so they could compare how quickly the water cooled が目的です。"
     }

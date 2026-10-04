@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "supplied-reading-runtime-v1",
+  "datasetVersion": "supplied-reading-runtime-v2",
   "records": [
     {
       "id": "R24-ENG-A-Q6-1",
@@ -75,7 +75,10 @@
       ],
       "answerSpec": {
         "sentence": "four elves came to their house and heard them talking outside the window of the workshop"
-      }
+      },
+      "wordOrderPrefix": "four elves",
+      "wordOrderSuffix": "the workshop",
+      "contentVersion": 2
     },
     {
       "id": "R24-ENG-A-Q6-3",
@@ -347,7 +350,9 @@
       ],
       "answerSpec": {
         "sentence": "How much will it cost to repair the roof and the ceiling?"
-      }
+      },
+      "wordOrderPrefix": "How",
+      "contentVersion": 2
     },
     {
       "id": "R24-ENG-B-Q6-2",
@@ -621,9 +626,11 @@
       "prompt": "下線部(2) catch を適切な形にしなさい。",
       "answerSpec": {
         "accepted": [
+          "has caught",
           "caught"
         ]
-      }
+      },
+      "contentVersion": 2
     },
     {
       "id": "R25-ENG-A-Q6-3",
@@ -643,12 +650,14 @@
       "autoGradeAllowed": true,
       "passageId": "R25-ENG-A-P6",
       "scoringType": "context_text",
-      "prompt": "pass away soon と同じ意味の語句を本文から抜き出しなさい。",
+      "prompt": "下線部(3) pass away と同じ意味の語句を本文から抜き出しなさい。",
       "answerSpec": {
         "accepted": [
+          "die",
           "took its last breath"
         ]
-      }
+      },
+      "contentVersion": 2
     },
     {
       "id": "R25-ENG-A-Q6-4",
@@ -668,10 +677,11 @@
       "autoGradeAllowed": false,
       "passageId": "R25-ENG-A-P6",
       "scoringType": "manual_reading",
-      "prompt": "マークがGoldieをリンゴの木の下に埋めた理由を説明しなさい。",
+      "prompt": "マークがGoldieをリンゴの木の下に埋めた理由を日本語で説明しなさい。",
       "answerSpec": {
-        "guidance": "Goldie liked to see the apple tree through the windows of the living room when he was alive."
-      }
+        "guidance": "ゴールディは生きていた時、居間の窓からリンゴの木を見るのが好きだったから。"
+      },
+      "contentVersion": 2
     },
     {
       "id": "R25-ENG-A-Q6-5",

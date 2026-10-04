@@ -39,7 +39,9 @@ async function loadData(){
   const suppliedRuntime=flattenSuppliedRuntime(vals[7]),readingRuntime=Array.isArray(vals[8].records)?vals[8].records:[],fy26Late=Array.isArray(vals[10].records)?vals[10].records:[];
   const suppliedPassages=Array.isArray(vals[9].passages)?vals[9].passages:[];
   DATA={exams:vals[0].exams,papers:vals[1].papers,sections:vals[2].papers,questions:[...vals[3].records,...suppliedRuntime,...readingRuntime,...fy26Late],questionsMeta:vals[3],passages:[...vals[4].passages,...suppliedPassages],practice:vals[5].items,sourceCoverage:vals[6],suppliedSource:vals[7],readingRuntime:vals[8],fy26Late:vals[10]};
+  refreshUnfinishedPractice();
 }
+function refreshUnfinishedPractice(){if(DATA&&drill&&!drill.answered){const current=DATA.practice.find(q=>q.id===drill.q?.id);if(current&&current.contentVersion>(drill.q.contentVersion||1)){drill.q=clone(current);save()}}}
 function flattenSuppliedRuntime(source){
   const out=[];if(!source||!source.exams)return out;
   for(const [examId,records] of Object.entries(source.exams)){
@@ -49,22 +51,22 @@ function flattenSuppliedRuntime(source){
         for(const item of group.subItems)out.push({
           id:group.id+'-'+item.n,examId,majorQuestion:2,minorQuestion:item.n,sourcePage:group.sourcePage,
           sourceType:'past_exam',sourceSubset:true,primarySkill:'guided_completion',scoringType:'multi_slot_text',
-          prompt:item.prompt,answerSpec:{slots:item.answerSlots},targetId:examId.toLowerCase()+'-guided-'+item.n,
+          prompt:item.prompt,japanese:item.japanese,contentVersion:group.contentVersion,answerSpec:{slots:item.answerSlots},targetId:examId.toLowerCase()+'-guided-'+item.n,
           answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
         });
       }else if(group.groupType==='word_order_group'){
         for(const item of group.subItems)out.push({
           id:group.id+'-'+item.n,examId,majorQuestion:3,minorQuestion:item.n,sourcePage:group.sourcePage,
           sourceType:'past_exam',sourceSubset:true,primarySkill:'word_order',scoringType:'word_order',
-          prompt:'語句を並べ替えて英文を完成させなさい（不要語1語あり）。',tokens:item.tokens,wordOrderPrefix:item.prefix||'',wordOrderSuffix:item.suffix||'',
-          answerSpec:{sentence:item.answerSentence,unused:item.unused},targetId:examId.toLowerCase()+'-word-order-'+item.n,
+          prompt:'語句を並べ替えて英文を完成させなさい（不要語1語あり）。',japanese:item.japanese,contentVersion:group.contentVersion,tokens:item.tokens,wordOrderPrefix:item.prefix||'',wordOrderSuffix:item.suffix||'',
+          answerSpec:{sentence:item.answerSentence,unused:item.unused,unusedOptions:item.unusedOptions,acceptedSentences:item.acceptedSentences},targetId:examId.toLowerCase()+'-word-order-'+item.n,
           answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
         });
       }else if(group.groupType==='error_correction_group'){
         for(const item of group.subItems)out.push({
           id:group.id+'-'+item.n,examId,majorQuestion:4,minorQuestion:item.n,sourcePage:group.sourcePage,
           sourceType:'past_exam',sourceSubset:true,primarySkill:'error_correction_rewrite',scoringType:'multi_slot_text',
-          prompt:item.sentence+'\n誤りの記号と訂正後の語句を書きなさい。',answerSpec:{slots:[[item.errorLabel],[item.correction]],correctedSentence:item.correctedSentence},
+          prompt:item.labelledSentence+'\n誤りの記号と、その【 】内の語句を訂正して書きなさい。',japanese:item.japanese,contentVersion:group.contentVersion,answerSpec:{slots:[[item.errorLabel],[item.correction]],correctedSentence:item.correctedSentence},
           targetId:examId.toLowerCase()+'-error-correction-'+item.n,
           answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
         });
@@ -72,7 +74,7 @@ function flattenSuppliedRuntime(source){
         for(const item of group.subItems)out.push({
           id:group.id+'-'+item.n,examId,majorQuestion:5,minorQuestion:item.n,sourcePage:group.sourcePage,
           sourceType:'past_exam',sourceSubset:true,primarySkill:'paraphrase',scoringType:'multi_slot_text',
-          context:'A: '+item.a,prompt:'B: '+item.b,answerSpec:{slots:item.answerSlots},targetId:examId.toLowerCase()+'-paraphrase-'+item.n,
+          context:'A: '+item.a,prompt:'B: '+item.b,contentVersion:group.contentVersion,answerSpec:{slots:item.answerSlots,acceptedResponses:item.acceptedResponses},targetId:examId.toLowerCase()+'-paraphrase-'+item.n,
           answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
         });
       }
@@ -252,16 +254,16 @@ function answered(q,r){
   return !!String(r==null?'':r).trim()
 }
 function evaluate(q,r){
-  if(q.scoringType==='multi_slot_text')return Array.isArray(r)&&q.answerSpec.slots.every(function(alts,i){return alts.map(norm).includes(norm(r[i]))});
-  if(isWordOrder(q))return norm(wordOrderSentence(q,r))===norm(q.answerSpec.sentence);
-  if(q.scoringType==='single_choice')return r===q.answerSpec.choice;
+  if(q.scoringType==='multi_slot_text')return Array.isArray(r)&&r.length===q.answerSpec.slots.length&&(q.answerSpec.slots.every(function(alts,i){return alts.map(norm).includes(norm(r[i]))})||(q.answerSpec.acceptedResponses||[]).some(a=>a.every((v,i)=>norm(v)===norm(r[i]))));
+  if(isWordOrder(q))return [q.answerSpec.sentence,...(q.answerSpec.acceptedSentences||[])].map(norm).includes(norm(wordOrderSentence(q,r)));
+  if(q.scoringType==='single_choice')return (q.answerSpec.acceptedChoices||[q.answerSpec.choice]).includes(r);
   if(q.scoringType==='context_text'||q.scoringType==='word_form'){const a=q.answerSpec.accepted||q.answerSpec.text||[q.answerSpec.preferred];return a.filter(Boolean).map(norm).includes(norm(r))}
   if(q.scoringType==='multiple_choice')return sameSet(r||[],q.answerSpec.choices||[]);
   if(q.scoringType==='select_five_and_rewrite'){if(!r||!sameSet((r.selected||[]).map(Number),q.answerSpec.errorNumbers))return false;return q.answerSpec.errorNumbers.every(function(n){return q.answerSpec.corrections[String(n)].some(function(x){return norm(x)===norm(r.corrections&&r.corrections[n])})})}
   if(q.scoringType==='manual_reading')return null;
   return false
 }
-function displayAnswer(q){const a=q.answerSpec;if(q.scoringType==='multi_slot_text')return a.slots.map(function(x){return x.join(' / ')}).join(' ｜ ');if(q.scoringType==='select_five_and_rewrite')return a.errorNumbers.join(', ');if(q.scoringType==='single_choice')return a.choice;if(q.scoringType==='multiple_choice')return a.choices.join('・');return a.sentence||(a.accepted&&a.accepted.join(' / '))||(a.text&&a.text.join(' / '))||a.preferred||''}
+function displayAnswer(q){const a=q.answerSpec;if(q.scoringType==='multi_slot_text')return [a.slots.map(function(x){return x.join(' / ')}).join(' ｜ '),...(a.acceptedResponses||[]).map(x=>x.join(' ｜ '))].join(' または ');if(q.scoringType==='select_five_and_rewrite')return a.errorNumbers.join(', ');if(q.scoringType==='single_choice')return (a.acceptedChoices||[a.choice]).join(' / ')+(a.note?' — '+a.note:'');if(q.scoringType==='multiple_choice')return a.choices.join('・');return a.sentence||(a.accepted&&a.accepted.join(' / '))||(a.text&&a.text.join(' / '))||a.preferred||''}
 function wordOrderInput(q,r){
   return (q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+'<div class="input-guide">語句を正しい順にタップしてください。'+(q.scoringType==='word_order_missing_word'?'不足する1語も自分で補います。':'')+'</div>'+ANSWER_WIDGETS.reorder({tokens:q.tokens||[],state:r,allowMissing:wordOrderOptions(q).allowMissing,boxId:'order-'+q.id,emptyText:'ここに並べた語句が表示されます',handlers:{add:i=>"__RIKKYO_APP__.addWordOrderToken('"+q.id+"',"+i+")",missing:"__RIKKYO_APP__.setWordOrderMissing('"+q.id+"',this.value)",addMissing:"__RIKKYO_APP__.addWordOrderMissing('"+q.id+"')",undo:"__RIKKYO_APP__.undoWordOrder('"+q.id+"')",clear:"__RIKKYO_APP__.clearWordOrder('"+q.id+"')"}});
 }
@@ -345,9 +347,9 @@ function startWeak(key){
 }
 function nextPractice(){const w=S.weak[drill.key],p=pool(w);reserve(w,p);const r=E.selectNextPracticeQuestion({pool:p,reservedIds:w.reservedConfirm,usedIds:drill.used,mode:drill.mode,streak:w.streak,rankChoices:function(items,c){return rank(w,items,c)}});if(!r.question){drill.error='出題できません';return}E.applyPracticeQuestionState(drill,w,r.question,{usedIds:r.usedIds,choiceOrder:[]});drill.response=null;drill.feedback=null;save()}
 function setPractice(v){drill.response=v;save()}
-function practiceCorrect(q,r){if(q.type==='choice')return r===q.answer;if(q.type==='word_order')return norm(r)===norm(q.answer);return (q.accepted||[q.answerText]).map(norm).includes(norm(r))}
+function practiceCorrect(q,r){if(q.type==='choice')return r===q.answer;if(q.type==='word_order')return (q.accepted||[q.answer]).map(norm).includes(norm(r));return (q.accepted||[q.answerText]).map(norm).includes(norm(r))}
 function practiceInput(q){if(q.type==='choice')return ANSWER_WIDGETS.choices({options:q.options.map(o=>({value:o.id,labelHtml:'<b>'+h(o.id)+'</b> '+h(o.text)})),selected:[drill.response],variant:'inputs',className:'choice-grid',name:'practice',onAction:()=>"__RIKKYO_APP__.setPractice(this.value)"});return ANSWER_WIDGETS.textInput({value:drill.response,placeholder:'解答を入力',onInput:'__RIKKYO_APP__.setPractice(this.value)'})+(q.tokens?'<div class="token-list">'+q.tokens.map(function(t){return '<span class="token">'+h(t)+'</span>'}).join('')+'</div>':'')}
-function finishPractice(){if(!drill||drill.answered)return;if(!String(drill.response||'').trim())return alert('解答を入力してください。');const q=drill.q,w=S.weak[drill.key],ok=practiceCorrect(q,drill.response);drill.answered=true;const t=E.advanceRemediationMastery(w,drill,ok,{today:today(),nextDay:plusDays(1),nowIso:now(),trainTarget:3,confirmTarget:2});if(t.needsConfirmationReserve)reserve(w,pool(w));drill.feedback={ok:ok,answer:q.type==='choice'?q.answer:q.answer||q.answerText,explanation:q.explanation};S.drillLog.push({key:drill.key,skill:w.skill,targetId:w.targetId,q:q.id,ok:ok,at:now(),mode:drill.mode});bumpDaily();save();render()}
+function finishPractice(){if(!drill||drill.answered)return;if(!String(drill.response||'').trim())return alert('解答を入力してください。');const q=drill.q,w=S.weak[drill.key];let ok=practiceCorrect(q,drill.response),gradingMode='registered_answer';if(!ok&&q.skill==='reading_short_answer'){gradingMode='self_review';ok=confirm('短答の自己確認（学校公式の採点ではありません）\n\n登録例と一致しませんでした。文で答えたり別の表現を使ったりしても、内容が合えば正答になります。\n\n解答例：'+q.answerText+'\n根拠：'+q.explanation+'\nあなたの答え：'+drill.response+'\n\n本文の根拠と設問の条件を満たしていますか？')}drill.answered=true;const t=E.advanceRemediationMastery(w,drill,ok,{today:today(),nextDay:plusDays(1),nowIso:now(),trainTarget:3,confirmTarget:2});if(t.needsConfirmationReserve)reserve(w,pool(w));drill.feedback={ok:ok,answer:q.type==='choice'?q.answer:q.answer||q.answerText,explanation:q.explanation+(gradingMode==='self_review'?'（今回の判定は自己確認です。）':'')};S.drillLog.push({key:drill.key,skill:w.skill,targetId:w.targetId,q:q.id,contentVersion:q.contentVersion,gradingMode:gradingMode,ok:ok,at:now(),mode:drill.mode});bumpDaily();save();render()}
 function continuePractice(){const w=S.weak[drill.key];if(w.status==='mastered'||(w.status==='pending'&&drill.mode==='train')){drill=null;save();return goto('home')}nextPractice();render()}
 function resumeDrill(){view='drill';render()}
 function drillView(){
@@ -375,7 +377,7 @@ function importPayload(payload,mode){
   validateBackup(payload);saveImportRecovery();const incoming=normalizeState(payload.state);
   if(mode==='replace')S=incoming;
   else {const localWriting=S.writingPractice;S=normalizeState(E.mergeImportedLearningState(S,incoming,{schemaVersion:SCHEMA,todayValue:today(),nowIso:now}));S.writingPractice=localWriting||incoming.writingPractice;}
-  drill=S.currentDrill;selectedExamId=C.exam.examIds.includes(S.selectedExamId)?S.selectedExamId:C.exam.defaultExamId;save();render();return clone(S)
+  drill=S.currentDrill;selectedExamId=C.exam.examIds.includes(S.selectedExamId)?S.selectedExamId:C.exam.defaultExamId;refreshUnfinishedPractice();save();render();return clone(S)
 }
 async function importData(input){
   const file=input&&input.files&&input.files[0];if(!file)return;

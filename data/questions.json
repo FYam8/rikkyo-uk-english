@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "fy26a-mvp-0.1",
+  "datasetVersion": "fy26a-mvp-0.2",
   "examId": "FY26A",
   "diagnostic": true,
   "sourceDocument": "立教_FY26_英語A_問題.pdf",
@@ -185,7 +185,7 @@
     {
       "examId": "FY26A",
       "sourceType": "past_exam",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "answerAuthority": "independent_solution_nonofficial",
       "verificationStatus": "source_context_reviewed_v1",
       "autoGradeAllowed": true,
@@ -213,12 +213,14 @@
       "answerSpec": {
         "sentence": "He realised that he had lost his wallet."
       },
-      "targetId": "word-order-past-perfect"
+      "targetId": "word-order-past-perfect",
+      "wordOrderPrefix": "He",
+      "wordOrderSuffix": ""
     },
     {
       "examId": "FY26A",
       "sourceType": "past_exam",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "answerAuthority": "independent_solution_nonofficial",
       "verificationStatus": "source_context_reviewed_v1",
       "autoGradeAllowed": true,
@@ -244,12 +246,14 @@
       "answerSpec": {
         "sentence": "I read a book written by a famous novelist."
       },
-      "targetId": "word-order-participle-modifier"
+      "targetId": "word-order-participle-modifier",
+      "wordOrderPrefix": "I read a book",
+      "wordOrderSuffix": ""
     },
     {
       "examId": "FY26A",
       "sourceType": "past_exam",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "answerAuthority": "independent_solution_nonofficial",
       "verificationStatus": "source_context_reviewed_v1",
       "autoGradeAllowed": true,
@@ -275,12 +279,14 @@
       "answerSpec": {
         "sentence": "I will be sleeping this time tomorrow."
       },
-      "targetId": "word-order-future-progressive"
+      "targetId": "word-order-future-progressive",
+      "wordOrderPrefix": "I",
+      "wordOrderSuffix": "tomorrow."
     },
     {
       "examId": "FY26A",
       "sourceType": "past_exam",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "answerAuthority": "independent_solution_nonofficial",
       "verificationStatus": "source_context_reviewed_v1",
       "autoGradeAllowed": true,
@@ -307,12 +313,14 @@
       "answerSpec": {
         "sentence": "This is the key that I was looking for."
       },
-      "targetId": "word-order-relative-preposition"
+      "targetId": "word-order-relative-preposition",
+      "wordOrderPrefix": "This is the key",
+      "wordOrderSuffix": ""
     },
     {
       "examId": "FY26A",
       "sourceType": "past_exam",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "answerAuthority": "independent_solution_nonofficial",
       "verificationStatus": "source_context_reviewed_v1",
       "autoGradeAllowed": true,
@@ -340,7 +348,9 @@
       "answerSpec": {
         "sentence": "I am interested in watching football games."
       },
-      "targetId": "word-order-interested-in"
+      "targetId": "word-order-interested-in",
+      "wordOrderPrefix": "I",
+      "wordOrderSuffix": ""
     },
     {
       "examId": "FY26A",
@@ -437,7 +447,7 @@
     {
       "examId": "FY26A",
       "sourceType": "past_exam",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "answerAuthority": "independent_solution_nonofficial",
       "verificationStatus": "source_context_reviewed_v1",
       "autoGradeAllowed": true,
@@ -476,7 +486,12 @@
         }
       ],
       "answerSpec": {
-        "choice": "ウ"
+        "choice": "ウ",
+        "acceptedChoices": [
+          "ウ",
+          "ア"
+        ],
+        "note": "非公式アプリ解答。歩いている場面を描く walking を推奨しますが、知覚動詞 see + 目的語 + 原形の walk も文法的に成立するため受理します。原本の選択肢は変更しません。"
       },
       "targetId": "reading-grammar-see-object-ing"
     },

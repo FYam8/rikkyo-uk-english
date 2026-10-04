@@ -1,33 +1,78 @@
 {
   "name": "rikkyo-uk-english",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "status": "production-ready",
-  "releaseDate": "2026-09-18",
+  "releaseDate": "2026-10-04",
   "sourceRepository": "FYam8/rikkyo-uk-english",
-  "candidateHead": "4d4a6a36aa4359f638c3b012db89285cbb56c9f8",
-  "mergeCommit": "178e2563f3e4fa5d97072d6c2fcd72ba3d6de4a4",
+  "candidateHead": "79c744b8d9477e1eb17d4410ae71ea2cd6293f3c",
   "sharedEngine": {
     "version": "1.1.0",
     "sourceCommit": "786d743978a4a498595ee90686ada07f3fddbf4a"
   },
   "sharedUi": {
-    "version": "1.0.0",
-    "sourceCommit": "ff379eb24808449f0387e58b0dcc493453dc9531"
+    "version": "1.3.1",
+    "sourceCommit": "364af470f503c8424d305bb99168c0aca8d78c8d"
   },
   "verification": {
-    "candidateRun": 35385550930,
+    "candidateRun": 37208182759,
     "candidateAttempts": [
       1,
       2
     ],
-    "postMergeRun": 35385756089,
-    "conclusion": "success"
+    "candidateHead": "79c744b8d9477e1eb17d4410ae71ea2cd6293f3c",
+    "conclusion": "success",
+    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/37208182759",
+    "cleanConclusions": [
+      "success",
+      "success"
+    ],
+    "audit": {
+      "date": "2026-10-04",
+      "practiceItemCount": 42,
+      "runtimeTaskCount": 122,
+      "sourcePdfCount": 6,
+      "consecutiveCleanPasses": 2,
+      "additionalFindings": [
+        0,
+        0
+      ],
+      "report": "docs/material-audit-20261004.md",
+      "inventory": "docs/material-audit-inventory.json"
+    },
+    "auditedContentSha256": {
+      "app.js": "8c52d3d1df8f07cd3b0e604340fc22d657f074b0710f08d187bf63acece718f6",
+      "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
+      "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
+      "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
+      "data/papers.json": "2645b4b086a5c5317948c9ed721f1bd8bee6bd3b8548143b8dd54a46b2e77526",
+      "data/passages.json": "8bc7c98b5534af55c53d1d9ff6b212a8738d5dd08967c5bcb2613d4f91e4187b",
+      "data/practice.json": "aa8c103fce6dd431fc8884dd1c357a1bab3012e27847defe41fb064fc0f9aacb",
+      "data/questions.json": "43b1a1d8ebedf0dd5e92d8e02ab8ba257a6ae1a0b3a5c72549c7275586afc96f",
+      "data/sections.json": "a13f525fcbb048920037249c16d25178a5560fcea85f2964db18d07703f3b87f",
+      "data/source-coverage.json": "81b6b9882ae2a9bc452a605031047e5a3605dca6316cbb15453d5c41a79c1f74",
+      "data/supplied-reading-runtime.json": "2e31c4b50d7746d7423cfbc6ad7496de6a88fba7b86b694f35dba80101f65687",
+      "data/supplied-source-passages.json": "a8e059b9d84d6712541fa3d7a5e93a02d978429da913eb6796745fbdb9071096",
+      "data/supplied-source-questions.json": "71c56ca04a3ffd711effdc970adde0b4b4f51d4ba31e8c9fda9bcc7f3e17796a",
+      "data/writing-runtime-policy.json": "30be88bd918f9cd5b3875018cc50e8a969d2cc0ebae89fbf5640ab6ee5d4cc3a",
+      ".github/workflows/verify.yml": "af5bdb5827b9a154df5a419dd0efe727a3fcb2c0047e1f787ea34d9ff3c96d8d",
+      "tests/material-integrity.test.mjs": "824049b3ad3c58134cba9241cd4c59bef6f31c596de9970bacf0046fef95d3a1",
+      "tests/material-browser-checks.mjs": "6e8eebb7eff9ee99d64790d7e6a177ea05dd17f8a17544a38d7990faa5d08438",
+      "tests/shared-exam-session-browser.test.mjs": "72d8611d83d043a3f87ea16f8ab481193a8f716de641805460b172c69abaa2b2"
+    },
+    "postMergePolicy": {
+      "required": true,
+      "workflow": "verify",
+      "deploymentWorkflow": "pages",
+      "exactVerifiedMainCommit": true
+    }
   },
   "limitations": [
-    "No official answer key or official score model was supplied.",
+    "No official answer key or official score model was supplied; app answers are independent and non-official.",
     "Listening audio/transcripts not supplied are not graded and do not count as wrong.",
     "Omitted FY24/FY25 source sections are not reconstructed.",
-    "Unsupported open/picture writing tasks remain source-preserved but non-runtime until a Rikkyo-specific marking authority exists.",
-    "FY26B remains final holdout and is not used for training."
-  ]
+    "FY25 picture assets are not integrated. Open/picture writing is not automatically graded; FY26A has local drafting and self-review.",
+    "FY26B remains final holdout and is not used for training.",
+    "Unmatched short-answer practice uses explicit learner self-review; it is not automatic semantic grading."
+  ],
+  "schemaVersion": 2
 }

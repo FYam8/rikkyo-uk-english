@@ -177,7 +177,9 @@
             "many"
           ],
           "missingWord": "is",
-          "answerSentence": "English is spoken by many people."
+          "answerSentence": "English is spoken by many people.",
+          "prefix": "English",
+          "suffix": ""
         },
         {
           "n": 2,
@@ -187,7 +189,9 @@
             "is"
           ],
           "missingWord": "where",
-          "answerSentence": "Please tell me where the station is."
+          "answerSentence": "Please tell me where the station is.",
+          "prefix": "Please tell me",
+          "suffix": ""
         },
         {
           "n": 3,
@@ -198,7 +202,9 @@
             "looking"
           ],
           "missingWord": "seeing",
-          "answerSentence": "I am looking forward to seeing you again."
+          "answerSentence": "I am looking forward to seeing you again.",
+          "prefix": "I am",
+          "suffix": "again."
         },
         {
           "n": 4,
@@ -211,7 +217,9 @@
             "father"
           ],
           "missingWord": "bought",
-          "answerSentence": "I was bought a bike by my father."
+          "answerSentence": "I was bought a bike by my father.",
+          "prefix": "I",
+          "suffix": ""
         },
         {
           "n": 5,
@@ -223,7 +231,9 @@
             "how"
           ],
           "missingWord": "to",
-          "answerSentence": "Could you tell me how to get to the airport?"
+          "answerSentence": "Could you tell me how to get to the airport?",
+          "prefix": "Could you tell me",
+          "suffix": ""
         }
       ]
     },
