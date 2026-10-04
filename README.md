@@ -4,9 +4,9 @@
 
 ## Release
 
-- Version: `1.0.0`
+- Version: `1.0.1`
 - Shared English Engine: `1.1.0`
-- Shared English UI: `1.0.0`
+- Shared English UI: `1.3.1`
 - Learning flow: 過去問 → 弱点 → 類題3連続正解 → 翌日2連続正解 → 克服
 - FY26A: 診断
 - FY26B: 最終holdout
@@ -45,4 +45,6 @@ Wasedaの保存キー、Cloud identity、問題データは使用しません。
 
 ## Release QA
 
-Release candidate `4d4a6a36aa4359f638c3b012db89285cbb56c9f8` で完全な検証を2回連続CLEAN。main merge後の完全検証もSUCCESSです。
+教材監査の候補 `79c744b8d9477e1eb17d4410ae71ea2cd6293f3c` で、[全検証](https://github.com/FYam8/rikkyo-uk-english/actions/runs/37208182759)の attempt 1・2 が連続成功。各回の追加修正事項は0件です。類題42問・実施可能な過去問122タスク・FY24〜FY26 A/Bの英語PDF6本を照合しました。main反映後も、同じコミットの verify 成功を条件にPagesへ公開します。
+
+修正内容・原本との対応は [教材監査](docs/material-audit-20261004.md)、リリース内容は [変更履歴](CHANGELOG.md) を参照してください。

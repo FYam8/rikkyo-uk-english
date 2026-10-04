@@ -35,3 +35,11 @@ Unchanged keys were independently checked against context: FY24A Q6 choice/inser
 A CLEAN pass means zero additional actionable findings in this audited scope plus a passing full verification run. Two consecutive passes must refer to unchanged candidate code/data. Failing intermediate development runs do not count. Windows checkout CRLF conversion was normalized to the repository's LF before vendor hash verification; shared vendor files were not modified.
 
 Release evidence is maintained in `release.json` and `release-gate.json`. The Pages workflow deploys the exact main commit whose verification succeeded. Original source omissions, absent official answers/audio, FY25 picture assets not yet integrated, and protected FY26B are explicit boundaries, not claims that those sections are auto-graded.
+
+## Final review record
+
+- Candidate: `79c744b8d9477e1eb17d4410ae71ea2cd6293f3c`.
+- CLEAN 1: full [verify attempt 1](https://github.com/FYam8/rikkyo-uk-english/actions/runs/37208182759/attempts/1) succeeded; all source/data/grading findings rechecked, additional findings 0.
+- CLEAN 2: after attempt 1 completed, reran the complete verify job as [attempt 2](https://github.com/FYam8/rikkyo-uk-english/actions/runs/37208182759/attempts/2); succeeded with unchanged candidate code/data and additional findings 0.
+- Earlier candidate `748cc17` is not counted: follow-up source review found the truncated FY26A writing prompt and the CLEAN count was reset.
+- Release metadata changes are followed by complete PR and main verification. Audited content hashes prevent unreviewed code/data changes during release finalization.

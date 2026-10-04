@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "deployAllowed": true,
-  "reason": "Release candidate completed two consecutive full CLEAN loops on the exact candidate head and the merged main commit passed the complete verification suite. Deployment is allowed; source limitations remain visible and enforced.",
+  "reason": "Two consecutive full verification attempts and source/material reviews completed with zero additional findings on the unchanged candidate. Pages requires a successful verify run on the exact main commit before deployment; no future merge result is pre-claimed.",
   "blockers": [],
   "completedGates": [
     "Shared Engine v1.1 pinned",
-    "Shared UI v1.0.0 pinned",
+    "Shared UI v1.3.1 pinned",
     "Rikkyo storage/cloud isolation",
     "FY26B holdout isolation",
     "Rikkyo question renderer compatibility",
@@ -19,20 +19,31 @@
     "unsupported writing tasks governed by explicit non-runtime policy",
     "final cross-year route/browser regression",
     "two consecutive CLEAN loops",
-    "post-merge main verification"
+    "post-merge main verification enforced by Pages",
+    "42 practice / 122 runtime / six-PDF material audit",
+    "all registered answers graded in mobile and desktop browsers",
+    "audited content hashes pinned"
   ],
   "releaseCandidate": false,
   "releaseStatus": "production-ready",
-  "releaseVersion": "1.0.0",
+  "releaseVersion": "1.0.1",
   "releaseEvidence": {
-    "candidateHead": "4d4a6a36aa4359f638c3b012db89285cbb56c9f8",
-    "cleanWorkflowRun": 35385550930,
+    "candidateHead": "79c744b8d9477e1eb17d4410ae71ea2cd6293f3c",
+    "cleanWorkflowRun": 37208182759,
     "cleanAttempts": [
       1,
       2
     ],
-    "mergeCommit": "178e2563f3e4fa5d97072d6c2fcd72ba3d6de4a4",
-    "postMergeVerifyRun": 35385756089,
-    "postMergeVerifyConclusion": "success"
+    "cleanConclusions": [
+      "success",
+      "success"
+    ],
+    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/37208182759",
+    "postMergePolicy": {
+      "required": true,
+      "workflow": "verify",
+      "deploymentWorkflow": "pages",
+      "exactVerifiedMainCommit": true
+    }
   }
 }
