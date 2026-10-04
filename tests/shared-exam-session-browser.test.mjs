@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import {runTodayPresenterChecks} from './today-presenter-browser-checks.mjs';
 import {runAnswerWidgetChecks} from './answer-widget-browser-checks.mjs';
+import {runMaterialChecks} from './material-browser-checks.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
@@ -76,4 +77,5 @@ try{
  }
  await runAnswerWidgetChecks(browser,url,isRikkyo);
  await runTodayPresenterChecks(browser,url,isRikkyo);
+ if(isRikkyo)await runMaterialChecks(browser,url);
 }finally{if(browser)await browser.close();await new Promise(r=>server.close(r))}

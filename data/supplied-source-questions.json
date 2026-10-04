@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "supplied-source-coverage-v1",
+  "datasetVersion": "supplied-source-coverage-v2",
   "runtimeEnabled": false,
   "policy": {
     "officialKeyAvailable": false,
@@ -15,7 +15,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY24A",
         "id": "R24-ENG-A-G2",
         "majorQuestion": 2,
@@ -31,7 +31,8 @@
               [
                 "here"
               ]
-            ]
+            ],
+            "japanese": "彼がここに来たら、この荷物を彼に渡してください。"
           },
           {
             "n": 2,
@@ -43,7 +44,8 @@
               [
                 "taking"
               ]
-            ]
+            ],
+            "japanese": "この調査は父親が子供の世話をすることで長生きするかもしれないことを示している。"
           },
           {
             "n": 3,
@@ -55,7 +57,8 @@
               [
                 "doing"
               ]
-            ]
+            ],
+            "japanese": "あなたはちょうどこのドラマの良いところを見逃しました。何をしていたのですか。"
           },
           {
             "n": 4,
@@ -67,7 +70,8 @@
               [
                 "to"
               ]
-            ]
+            ],
+            "japanese": "この学校では全員フランス語を学習しなければならない。"
           }
         ],
         "sourcePage": 3,
@@ -78,7 +82,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY24A",
         "id": "R24-ENG-A-G3",
         "majorQuestion": 3,
@@ -101,7 +105,8 @@
             "answerSentence": "Ms. White teaches English to students whose native language is not English.",
             "unused": "which",
             "prefix": "Ms. White",
-            "suffix": "English."
+            "suffix": "English.",
+            "japanese": "ホワイト先生は英語が第一言語ではない生徒に英語を教えている。"
           },
           {
             "n": 2,
@@ -117,7 +122,8 @@
               "read"
             ],
             "answerSentence": "I have never read such a long novel.",
-            "unused": "not"
+            "unused": "not",
+            "japanese": "私は今までそんなに長い小説を読んだことがない。"
           },
           {
             "n": 3,
@@ -132,7 +138,8 @@
               "this"
             ],
             "answerSentence": "I don't know who selected this song.",
-            "unused": "had"
+            "unused": "had",
+            "japanese": "誰がこの曲を選んだのか、私は知らない。"
           },
           {
             "n": 4,
@@ -149,7 +156,8 @@
               "too"
             ],
             "answerSentence": "This curry is too spicy for me to eat.",
-            "unused": "it"
+            "unused": "it",
+            "japanese": "私にとってこのカレーは辛すぎて食べられない。"
           }
         ],
         "sourcePage": 3,
@@ -160,7 +168,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY24A",
         "id": "R24-ENG-A-G4",
         "majorQuestion": 4,
@@ -171,28 +179,36 @@
             "sentence": "We have to submit this homework today, haven't we?",
             "errorLabel": "イ",
             "correction": "don't",
-            "correctedSentence": "We have to submit this homework today, don't we?"
+            "correctedSentence": "We have to submit this homework today, don't we?",
+            "japanese": "私たちはこの宿題を今日中に提出しなければならないのですよね。",
+            "labelledSentence": "We （ア）【have to】 submit this homework today, （イ）【haven't】 （ウ）【we】?"
           },
           {
             "n": 2,
             "sentence": "Who was this book wrote by?",
             "errorLabel": "イ",
             "correction": "written",
-            "correctedSentence": "Who was this book written by?"
+            "correctedSentence": "Who was this book written by?",
+            "japanese": "この本は誰が書いたのですか。",
+            "labelledSentence": "（ア）【Who】 was this book （イ）【wrote】 （ウ）【by】?"
           },
           {
             "n": 3,
             "sentence": "I was very tired that I couldn't eat dinner last night.",
             "errorLabel": "ア",
             "correction": "so",
-            "correctedSentence": "I was so tired that I couldn't eat dinner last night."
+            "correctedSentence": "I was so tired that I couldn't eat dinner last night.",
+            "japanese": "昨晩、私はとても疲れていたので夕食を食べられなかった。",
+            "labelledSentence": "I was （ア）【very】 tired that I （イ）【couldn't】 eat dinner （ウ）【last night】."
           },
           {
             "n": 4,
             "sentence": "She often invites her friends to dinner at home. I think she prefers cooking for someone as going out for a meal.",
             "errorLabel": "ウ",
             "correction": "to",
-            "correctedSentence": "She often invites her friends to dinner at home. I think she prefers cooking for someone to going out for a meal."
+            "correctedSentence": "She often invites her friends to dinner at home. I think she prefers cooking for someone to going out for a meal.",
+            "japanese": "彼女はよく家での夕食に友人を招待している。彼女は外食に出かけるよりも誰かに料理を作るほうが好きなのだと思う。",
+            "labelledSentence": "She often invites her friends （ア）【to】 dinner at home. I think she prefers （イ）【cooking】 for someone （ウ）【as】 going out for a meal."
           }
         ],
         "sourcePage": 4,
@@ -350,7 +366,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY24B",
         "id": "R24-ENG-B-G2",
         "majorQuestion": 2,
@@ -366,7 +382,8 @@
               [
                 "up"
               ]
-            ]
+            ],
+            "japanese": "ジョンは毎朝7時に起きる。"
           },
           {
             "n": 2,
@@ -379,7 +396,8 @@
               [
                 "to"
               ]
-            ]
+            ],
+            "japanese": "温かい飲み物が欲しいです。"
           },
           {
             "n": 3,
@@ -391,11 +409,12 @@
               [
                 "lunch"
               ]
-            ]
+            ],
+            "japanese": "私は正午にメアリーと昼食をとるつもりです。"
           },
           {
             "n": 4,
-            "prompt": "He (　　　) (　　　) coffee.",
+            "prompt": "Mike goes to STARBUCKS every day. He (　　　) (　　　) coffee.",
             "answerSlots": [
               [
                 "must"
@@ -403,7 +422,8 @@
               [
                 "like"
               ]
-            ]
+            ],
+            "japanese": "マイクは毎日STARBUCKSへ行っている。彼はコーヒーが好きに違いない。"
           }
         ],
         "sourcePage": 3,
@@ -414,7 +434,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY24B",
         "id": "R24-ENG-B-G3",
         "majorQuestion": 3,
@@ -435,7 +455,15 @@
               "only"
             ],
             "answerSentence": "Humans are the only animals that can use fire.",
-            "unused": "which"
+            "unused": "which",
+            "japanese": "人間は火を使うことができる唯一の動物だ。",
+            "acceptedSentences": [
+              "Humans are the only animals which can use fire."
+            ],
+            "unusedOptions": [
+              "which",
+              "that"
+            ]
           },
           {
             "n": 2,
@@ -449,7 +477,8 @@
               "has"
             ],
             "answerSentence": "Yumi has never been to Africa.",
-            "unused": "gone"
+            "unused": "gone",
+            "japanese": "ユミはアフリカへ行ったことがない。"
           },
           {
             "n": 3,
@@ -466,7 +495,11 @@
               "soon"
             ],
             "answerSentence": "You should see a doctor as soon as possible.",
-            "unused": "much"
+            "unused": "much",
+            "japanese": "あなたはなるべく早く医者に診てもらうべきだ。",
+            "acceptedSentences": [
+              "As soon as possible you should see a doctor."
+            ]
           },
           {
             "n": 4,
@@ -479,7 +512,8 @@
               "how"
             ],
             "answerSentence": "How strange this story is!",
-            "unused": "what"
+            "unused": "what",
+            "japanese": "なんて不思議な物語なのでしょう。"
           }
         ],
         "sourcePage": 3,
@@ -490,7 +524,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY24B",
         "id": "R24-ENG-B-G4",
         "majorQuestion": 4,
@@ -501,28 +535,36 @@
             "sentence": "Unlike Takashi, I can neither write or speak Chinese.",
             "errorLabel": "ウ",
             "correction": "nor",
-            "correctedSentence": "Unlike Takashi, I can neither write nor speak Chinese."
+            "correctedSentence": "Unlike Takashi, I can neither write nor speak Chinese.",
+            "japanese": "タカシと違い、私は中国語を書くことも話すこともできない。",
+            "labelledSentence": "（ア）【Unlike】 Takashi, I can （イ）【neither】 write （ウ）【or】 speak Chinese."
           },
           {
             "n": 2,
             "sentence": "I was very surprising at the latest news article published yesterday.",
             "errorLabel": "ア",
             "correction": "surprised",
-            "correctedSentence": "I was very surprised at the latest news article published yesterday."
+            "correctedSentence": "I was very surprised at the latest news article published yesterday.",
+            "japanese": "私は昨日発表された最新のニュース記事にとても驚いた。",
+            "labelledSentence": "I was very （ア）【surprising】 （イ）【at】 the latest news article （ウ）【published】 yesterday."
           },
           {
             "n": 3,
             "sentence": "The neighbor's house was broken into last week. Remember locking the door when you go out.",
             "errorLabel": "イ",
             "correction": "to lock",
-            "correctedSentence": "The neighbor's house was broken into last week. Remember to lock the door when you go out."
+            "correctedSentence": "The neighbor's house was broken into last week. Remember to lock the door when you go out.",
+            "japanese": "先週、近所の家が泥棒に入られた。外出をするときにはドアに鍵をかけるのを忘れないように。",
+            "labelledSentence": "The neighbor's house was （ア）【broken into】 last week. Remember （イ）【locking】 the door when you （ウ）【go out】."
           },
           {
             "n": 4,
             "sentence": "I went to a stadium to watch a football game yesterday. Even though it was raining, the football game was really excited.",
             "errorLabel": "ウ",
             "correction": "exciting",
-            "correctedSentence": "I went to a stadium to watch a football game yesterday. Even though it was raining, the football game was really exciting."
+            "correctedSentence": "I went to a stadium to watch a football game yesterday. Even though it was raining, the football game was really exciting.",
+            "japanese": "私は昨日サッカーの試合を見るためにスタジアムへ行った。雨が降っていたが、そのサッカーの試合はとても興奮するものだった。",
+            "labelledSentence": "I went to a stadium （ア）【to watch】 a football game yesterday. Even though it was （イ）【raining】, the football game was really （ウ）【excited】."
           }
         ],
         "sourcePage": 4,
@@ -665,7 +707,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY25A",
         "id": "R25-ENG-A-G2",
         "majorQuestion": 2,
@@ -681,7 +723,8 @@
               [
                 "is"
               ]
-            ]
+            ],
+            "japanese": "このバラはなんて美しいのでしょう。"
           },
           {
             "n": 2,
@@ -693,7 +736,8 @@
               [
                 "he"
               ]
-            ]
+            ],
+            "japanese": "彼は歌が上手ですよね。"
           },
           {
             "n": 3,
@@ -705,7 +749,8 @@
               [
                 "means"
               ]
-            ]
+            ],
+            "japanese": "私はこの単語が何を意味するのかわかりません。"
           },
           {
             "n": 4,
@@ -717,7 +762,8 @@
               [
                 "you"
               ]
-            ]
+            ],
+            "japanese": "サンタクロースがあなたにプレゼントを持ってきてくれるでしょう。"
           }
         ],
         "sourcePage": 3,
@@ -728,7 +774,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY25A",
         "id": "R25-ENG-A-G3",
         "majorQuestion": 3,
@@ -747,7 +793,8 @@
               "my"
             ],
             "answerSentence": "My dream is to be an astronaut.",
-            "unused": "a"
+            "unused": "a",
+            "japanese": "私の夢は宇宙飛行士になることです。"
           },
           {
             "n": 2,
@@ -762,7 +809,8 @@
               "what"
             ],
             "answerSentence": "What is the language spoken in Australia?",
-            "unused": "speaking"
+            "unused": "speaking",
+            "japanese": "オーストラリアで話されている言葉は何ですか？"
           },
           {
             "n": 3,
@@ -779,7 +827,11 @@
               "night"
             ],
             "answerSentence": "He has been sick in bed since last night.",
-            "unused": "on"
+            "unused": "on",
+            "japanese": "彼は昨晩から病気で寝ています。",
+            "acceptedSentences": [
+              "He has been in bed sick since last night."
+            ]
           },
           {
             "n": 4,
@@ -795,7 +847,8 @@
               "you"
             ],
             "answerSentence": "Are you going to study all night long?",
-            "unused": "be"
+            "unused": "be",
+            "japanese": "あなたは一晩中勉強するつもりですか？"
           }
         ],
         "sourcePage": 3,
@@ -806,7 +859,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY25A",
         "id": "R25-ENG-A-G4",
         "majorQuestion": 4,
@@ -817,28 +870,36 @@
             "sentence": "It was kind for you to carry my suitcase to the room.",
             "errorLabel": "ア",
             "correction": "of",
-            "correctedSentence": "It was kind of you to carry my suitcase to the room."
+            "correctedSentence": "It was kind of you to carry my suitcase to the room.",
+            "japanese": "ご親切に私のスーツケースを部屋まで運んでいただきありがとうございます。",
+            "labelledSentence": "It was kind （ア）【for】 you （イ）【to carry】 my suitcase （ウ）【to the room】."
           },
           {
             "n": 2,
             "sentence": "I remember to see her somewhere in Tokyo.",
             "errorLabel": "イ",
             "correction": "seeing",
-            "correctedSentence": "I remember seeing her somewhere in Tokyo."
+            "correctedSentence": "I remember seeing her somewhere in Tokyo.",
+            "japanese": "私は東京のどこかで彼女に会ったことを覚えています。",
+            "labelledSentence": "I （ア）【remember】 （イ）【to see】 her （ウ）【somewhere】 in Tokyo."
           },
           {
             "n": 3,
             "sentence": "The more you studies English, the more you will like it.",
             "errorLabel": "ア",
             "correction": "study",
-            "correctedSentence": "The more you study English, the more you will like it."
+            "correctedSentence": "The more you study English, the more you will like it.",
+            "japanese": "英語は一生懸命勉強すればするほど好きになるものですよ。",
+            "labelledSentence": "The more you （ア）【studies】 English, （イ）【the more】 you （ウ）【will like】 it."
           },
           {
             "n": 4,
             "sentence": "If I had enough money, I can buy a big house.",
             "errorLabel": "イ",
             "correction": "could",
-            "correctedSentence": "If I had enough money, I could buy a big house."
+            "correctedSentence": "If I had enough money, I could buy a big house.",
+            "japanese": "もし私に充分なお金があれば大きな家を買えるのになぁ。",
+            "labelledSentence": "If I （ア）【had】 enough money, I （イ）【can】 （ウ）【buy】 a big house."
           }
         ],
         "sourcePage": 4,
@@ -849,7 +910,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY25A",
         "id": "R25-ENG-A-G5",
         "majorQuestion": 5,
@@ -865,6 +926,12 @@
               ],
               [
                 "difficult"
+              ]
+            ],
+            "acceptedResponses": [
+              [
+                "less",
+                "easy"
               ]
             ]
           },
@@ -903,7 +970,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY25A",
         "id": "R25-ENG-A-G6",
         "majorQuestion": 6,
@@ -912,17 +979,29 @@
           {
             "n": 1,
             "type": "text",
-            "answer": "named"
+            "answer": "named",
+            "accepted": [
+              "named",
+              "called"
+            ]
           },
           {
             "n": 2,
             "type": "word_form",
-            "answer": "caught"
+            "answer": "has caught",
+            "accepted": [
+              "has caught",
+              "caught"
+            ]
           },
           {
             "n": 3,
             "type": "extract_phrase",
-            "answer": "took its last breath"
+            "answer": "die",
+            "accepted": [
+              "die",
+              "took its last breath"
+            ]
           },
           {
             "n": 4,
@@ -987,7 +1066,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY25B",
         "id": "R25-ENG-B-G2",
         "majorQuestion": 2,
@@ -1003,7 +1082,8 @@
               [
                 "secret"
               ]
-            ]
+            ],
+            "japanese": "私たちはこの計画を秘密にしなくてはいけません。"
           },
           {
             "n": 2,
@@ -1016,7 +1096,8 @@
                 "movie",
                 "film"
               ]
-            ]
+            ],
+            "japanese": "これはなんてワクワクする映画なのでしょう。"
           },
           {
             "n": 3,
@@ -1028,11 +1109,12 @@
               [
                 "sad"
               ]
-            ]
+            ],
+            "japanese": "その物語は私たちを悲しくさせました。"
           },
           {
             "n": 4,
-            "prompt": "(　　　) keep promises is (　　　).",
+            "prompt": "(　　　) keep promise is (　　　).",
             "answerSlots": [
               [
                 "To"
@@ -1040,7 +1122,9 @@
               [
                 "important"
               ]
-            ]
+            ],
+            "japanese": "約束を守ることは重要です。",
+            "sourceNote": "原本の keep promise をそのまま転記しています。"
           }
         ],
         "sourcePage": 3,
@@ -1051,7 +1135,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY25B",
         "id": "R25-ENG-B-G3",
         "majorQuestion": 3,
@@ -1070,7 +1154,11 @@
               "called"
             ],
             "answerSentence": "Someone named Anne called you just now.",
-            "unused": "calling"
+            "unused": "calling",
+            "japanese": "アンという名の人がたった今、あなたに電話をかけてきました。",
+            "acceptedSentences": [
+              "Just now someone named Anne called you."
+            ]
           },
           {
             "n": 2,
@@ -1085,7 +1173,11 @@
               "on"
             ],
             "answerSentence": "I won't be at home next Sunday.",
-            "unused": "on"
+            "unused": "on",
+            "japanese": "私は次の日曜日家にいません。",
+            "acceptedSentences": [
+              "Next Sunday I won't be at home."
+            ]
           },
           {
             "n": 3,
@@ -1100,7 +1192,11 @@
               "that"
             ],
             "answerSentence": "What were you doing at that time?",
-            "unused": "there"
+            "unused": "there",
+            "japanese": "あなたはその時何をしていたのですか？",
+            "acceptedSentences": [
+              "At that time what were you doing?"
+            ]
           },
           {
             "n": 4,
@@ -1115,7 +1211,8 @@
               "just"
             ],
             "answerSentence": "I have just been to the station.",
-            "unused": "gone"
+            "unused": "gone",
+            "japanese": "私はたった今、駅から戻ってきたところです。"
           }
         ],
         "sourcePage": 3,
@@ -1126,7 +1223,7 @@
         "answerAuthority": "independent_solution_nonofficial",
         "officialKeyAvailable": false,
         "verificationStatus": "source_context_reviewed_v1",
-        "contentVersion": 1,
+        "contentVersion": 2,
         "examId": "FY25B",
         "id": "R25-ENG-B-G4",
         "majorQuestion": 4,
@@ -1137,28 +1234,36 @@
             "sentence": "Thank you for to give me the chance to visit your school.",
             "errorLabel": "イ",
             "correction": "giving",
-            "correctedSentence": "Thank you for giving me the chance to visit your school."
+            "correctedSentence": "Thank you for giving me the chance to visit your school.",
+            "japanese": "あなたの学校を訪問する機会を作ってくださってありがとうございます。",
+            "labelledSentence": "Thank you （ア）【for】 （イ）【to give】 me the chance （ウ）【to visit】 your school."
           },
           {
             "n": 2,
             "sentence": "Tomorrow is the national championship. I want Ken win the race.",
             "errorLabel": "ウ",
             "correction": "to win",
-            "correctedSentence": "Tomorrow is the national championship. I want Ken to win the race."
+            "correctedSentence": "Tomorrow is the national championship. I want Ken to win the race.",
+            "japanese": "明日は全国大会です。私は健に勝ってほしい。",
+            "labelledSentence": "Tomorrow （ア）【is】 the national championship. I （イ）【want】 Ken （ウ）【win】 the race."
           },
           {
             "n": 3,
             "sentence": "Your mother hasn't cooked dinner for you yet, hasn't she?",
             "errorLabel": "イ",
             "correction": "has",
-            "correctedSentence": "Your mother hasn't cooked dinner for you yet, has she?"
+            "correctedSentence": "Your mother hasn't cooked dinner for you yet, has she?",
+            "japanese": "お母さんはあなたにまだ夕食を作っていないのではないですか？",
+            "labelledSentence": "Your mother （ア）【hasn't cooked】 dinner for you yet, （イ）【hasn't】 （ウ）【she】?"
           },
           {
             "n": 4,
             "sentence": "I was spoken by a stranger in the shop.",
             "errorLabel": "ア",
             "correction": "was spoken to",
-            "correctedSentence": "I was spoken to by a stranger in the shop."
+            "correctedSentence": "I was spoken to by a stranger in the shop.",
+            "japanese": "私は店で知らない人に話しかけられました。",
+            "labelledSentence": "I （ア）【was spoken】 （イ）【by】 a stranger （ウ）【in】 the shop."
           }
         ],
         "sourcePage": 4,
