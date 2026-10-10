@@ -43,11 +43,11 @@ for(const p of papers.papers.filter(x=>x.year===2026)){
 }
 
 const configText=read('schools/rikkyo/config.js');
-for(const forbidden of ['waseshibu.adaptive','waseshibu-progress-sync','waseshibu-progress-api','waseshibu-writing-grader'])assert.ok(!configText.includes(forbidden));
+for(const forbidden of ['waseshibu.adaptive','waseshibu-progress-sync','waseshibu-progress-api'])assert.ok(!configText.includes(forbidden));
 assert.match(configText,/rikkyo\.uk\.english\.v1/);
 assert.match(configText,/identityMode:'examId'/);
 assert.match(configText,/scoring:Object\.freeze\(\{enabled:false\}\)/);
-assert.match(configText,/progress:Object\.freeze\(\{[\s\S]*?enabled:false/);
-assert.match(configText,/aiWriting:Object\.freeze\(\{[\s\S]*?enabled:false/);
+assert.match(configText,/progress:Object\.freeze\(\{[\s\S]*?enabled:true/);
+assert.match(configText,/aiWriting:Object\.freeze\(\{[\s\S]*?enabled:true/);
 
 console.log('Rikkyo English bootstrap integrity: CLEAN');

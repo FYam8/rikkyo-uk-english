@@ -42,9 +42,9 @@ root.ENGLISH_SCHOOL_CONFIG=Object.freeze({
     appId:'rikkyo-uk-english'
   }),
   aiWriting:Object.freeze({
-    enabled:false,
-    endpoint:'',
-    skills:Object.freeze([])
+    enabled:true,
+    endpoint:'https://waseshibu-writing-grader.fyam8.workers.dev',
+    skills:Object.freeze(['story_writing','picture_story_writing'])
   })
 });
 })(typeof globalThis!=='undefined'?globalThis:this);

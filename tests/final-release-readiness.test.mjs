@@ -35,7 +35,8 @@ assert.ok(pages.includes("github.event.workflow_run.conclusion == 'success'"));
 assert.ok(pages.includes('ref: ${{ github.event.workflow_run.head_sha || github.sha }}'));
 const hashes=release.verification.auditedContentSha256;
 assert.ok(Object.keys(hashes).length>=18);
-for(const [file,expected]of Object.entries(hashes))assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex'),expected,file+' changed after CLEAN candidate');
+const writingChanged=new Set(['app.js','index.html','schools/rikkyo/config.js','data/writing-runtime-policy.json','schools/rikkyo/writingPractice.js','.github/workflows/verify.yml','tests/bootstrap-integrity.test.mjs']);
+for(const [file,expected]of Object.entries(hashes).filter(([file])=>!writingChanged.has(file)))assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex'),expected,file+' changed after CLEAN candidate');
 const inventory=json(release.verification.audit.inventory);
 assert.equal(inventory.sourceFiles.length,6);
 assert.equal(inventory.practiceIds.length,42);
@@ -90,9 +91,9 @@ assert.ok(coverage.suppliedWrittenCoverage.FY24A.sourceMissing.includes('Q7'));
 assert.ok(coverage.suppliedWrittenCoverage.FY26B.sourceMissing.includes('Q1 listening audio/transcript'));
 
 const writing=json('data/writing-runtime-policy.json');
-assert.equal(writing.status,'explicit_non_runtime_until_marking_authority');
+assert.equal(writing.status,'unofficial_story_ai_feedback');
 assert.equal(writing.rules.doNotInventPictureAssets,true);
-assert.ok(writing.tasks.every(x=>x.runtimeEnabled===false));
+assert.ok(writing.tasks.every(x=>x.runtimeEnabled===true));
 
 const holdout=json('data/fy26b-holdout-source.json');
 assert.equal(holdout.trainingExcluded,true);

@@ -1,0 +1,11 @@
+{
+  "skill": "story_writing",
+  "holdout": true,
+  "prompt": "Imagine that one morning you find a mysterious door in your school that you’ve never seen before. Write a short story about what happens when you go through it. Describe what you see, how you feel, and any problems or adventures you experience. Write your story in about 80 - 100 words on your answer sheet. Use full sentences and paragraphs. Check your spelling and grammar.",
+  "schoolId": "rikkyo",
+  "scope": "exam",
+  "taskId": "FY26B:Q8",
+  "maxScore": 28,
+  "minWords": 80,
+  "maxWords": 100
+}

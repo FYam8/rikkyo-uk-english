@@ -44,7 +44,7 @@ jobs:
       - name: Install browser parity dependency
         run: npm install --prefix "$RUNNER_TEMP/exam-session-deps" --no-package-lock --ignore-scripts playwright@1.62.1
       - name: Install browser for shared interaction checks
-        run: node "$RUNNER_TEMP/exam-session-deps/node_modules/playwright/cli.js" install --with-deps chromium
+        run: node "$RUNNER_TEMP/exam-session-deps/node_modules/playwright/cli.js" install --with-deps chromium webkit
       - name: Verify shared exam interaction at 390px and 1280px
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/exam-session-deps/node_modules/playwright
@@ -54,3 +54,22 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/exam-session-deps/node_modules/playwright
         run: node tests/writing-practice-browser.test.mjs
+
+      - name: Story writing browser QA
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/exam-session-deps/node_modules/playwright
+        run: |
+          for pass in 1 2; do
+            echo "Writing acceptance loop $pass"
+            node tests/writing-shared.test.mjs
+            node tests/writing-runtime-policy.test.mjs
+            node tests/writing-practice.test.mjs
+            node tests/shared-exam-session-browser.test.mjs .
+            node tests/writing-practice-browser.test.mjs
+            node tests/story-writing-browser.test.mjs
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: story-writing-qa
+          path: test-results/
