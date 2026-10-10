@@ -1,10 +1,10 @@
 {
   "name": "rikkyo-uk-english",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "status": "production-ready",
-  "releaseDate": "2026-10-04",
+  "releaseDate": "2026-10-10",
   "sourceRepository": "FYam8/rikkyo-uk-english",
-  "candidateHead": "79c744b8d9477e1eb17d4410ae71ea2cd6293f3c",
+  "candidateHead": "bd9f1dcac29f39a04a010a877b27870f815ef57d",
   "sharedEngine": {
     "version": "1.1.0",
     "sourceCommit": "786d743978a4a498595ee90686ada07f3fddbf4a"
@@ -14,14 +14,14 @@
     "sourceCommit": "364af470f503c8424d305bb99168c0aca8d78c8d"
   },
   "verification": {
-    "candidateRun": 37208182759,
+    "candidateRun": 38085435636,
     "candidateAttempts": [
       1,
       2
     ],
-    "candidateHead": "79c744b8d9477e1eb17d4410ae71ea2cd6293f3c",
+    "candidateHead": "bd9f1dcac29f39a04a010a877b27870f815ef57d",
     "conclusion": "success",
-    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/37208182759",
+    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38085435636",
     "cleanConclusions": [
       "success",
       "success"
@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "8c52d3d1df8f07cd3b0e604340fc22d657f074b0710f08d187bf63acece718f6",
+      "app.js": "35c8a840e171dffb9ee2e46b02e6174e41e6c3c9fd4c084d9c096f16b0c8dd18",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -53,25 +53,40 @@
       "data/supplied-reading-runtime.json": "2e31c4b50d7746d7423cfbc6ad7496de6a88fba7b86b694f35dba80101f65687",
       "data/supplied-source-passages.json": "a8e059b9d84d6712541fa3d7a5e93a02d978429da913eb6796745fbdb9071096",
       "data/supplied-source-questions.json": "71c56ca04a3ffd711effdc970adde0b4b4f51d4ba31e8c9fda9bcc7f3e17796a",
-      "data/writing-runtime-policy.json": "30be88bd918f9cd5b3875018cc50e8a969d2cc0ebae89fbf5640ab6ee5d4cc3a",
-      ".github/workflows/verify.yml": "af5bdb5827b9a154df5a419dd0efe727a3fcb2c0047e1f787ea34d9ff3c96d8d",
+      "data/writing-runtime-policy.json": "868a7a9be73e708c34d8adab03ecea02dcf002c7560a779f0e774641da1ee4ad",
+      ".github/workflows/verify.yml": "48879d821c2d3fe0d92b5e34368c25b75fb793b28fade3c06872c38433d8b714",
       "tests/material-integrity.test.mjs": "824049b3ad3c58134cba9241cd4c59bef6f31c596de9970bacf0046fef95d3a1",
       "tests/material-browser-checks.mjs": "6e8eebb7eff9ee99d64790d7e6a177ea05dd17f8a17544a38d7990faa5d08438",
-      "tests/shared-exam-session-browser.test.mjs": "72d8611d83d043a3f87ea16f8ab481193a8f716de641805460b172c69abaa2b2"
+      "tests/shared-exam-session-browser.test.mjs": "72d8611d83d043a3f87ea16f8ab481193a8f716de641805460b172c69abaa2b2",
+      "index.html": "d5f5f4a579917f69ae26b9f4969f07afcacfc755b0dc5fb872295cd03b13eee9",
+      "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
+      "schools/rikkyo/writingPractice.js": "a0135de017703c76c3146ac922676e4a88d62515a9961061ed84e23ea3f6813d",
+      "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
+      "ui/writing-feedback.js": "fa1c4122a4ac26566434d15d6b0e94ca1857e3574721cea695dfbf60eacdeb72",
+      "ui/writing-feedback.css": "c3fd2dcc537cd595553d9b1d566e3dc0eb32d45544653a469ad3c2727920069c",
+      "data/writing-holdout-task.json": "ecf272b04d6110ccb4edbe4a952b84ed963f46388c1d713b142ae08f56eb3fa6",
+      "assets/writing/FY25A-Q9.png": "d5e99b263445f21b3d81b20d49d7fb70abc56c3e4aaa9252886a810c43afae6a",
+      "assets/writing/FY25B-Q9.png": "d4a0e32a5d23308b3bd0ac5f51618cf603928e3d41352aef60fb83b9ec8b34f3",
+      "tests/story-writing-browser.test.mjs": "21249748985da39325184166202b1ad6f63671dedb3aa8765b088b8c895bb7b8",
+      "tests/story-writing-production.test.mjs": "ba866b0a495a4eb74029a1feff07759baf76a42885956349571798154d2343f8",
+      ".github/workflows/pages.yml": "c6b5a752db500c72cd13e5fda7eb1b79e4c644ba49a0f9839e78c3997d2c77dd",
+      "tests/bootstrap-integrity.test.mjs": "fc597a1caaae0ddfb5e86ae8ef4d5753a527805e0bd447d2d34ca49036d99cae"
     },
     "postMergePolicy": {
       "required": true,
       "workflow": "verify",
       "deploymentWorkflow": "pages",
       "exactVerifiedMainCommit": true
-    }
+    },
+    "candidateRunAttempt": 1,
+    "candidateAttemptsMeaning": "Acceptance loop passes within the workflow; not GitHub run attempts"
   },
   "limitations": [
     "No official answer key or official score model was supplied; app answers are independent and non-official.",
     "Listening audio/transcripts not supplied are not graded and do not count as wrong.",
     "Omitted FY24/FY25 source sections are not reconstructed.",
-    "FY25 picture assets are not integrated. Open/picture writing is not automatically graded; FY26A has local drafting and self-review.",
-    "FY26B remains final holdout and is not used for training.",
+    "Only four source-verified free story tasks receive unofficial AI feedback. FY24 Q7-Q9 are omitted and are not reconstructed. FY25 picture assets are cropped from the original PDFs.",
+    "FY26B task/feedback remain hidden until final exam completion is recorded; paper completion is a learner declaration, not server-authenticated exam evidence.",
     "Unmatched short-answer practice uses explicit learner self-review; it is not automatic semantic grading."
   ],
   "schemaVersion": 2
