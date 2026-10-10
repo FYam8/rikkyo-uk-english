@@ -32,7 +32,7 @@
   ],
   "releaseCandidate": false,
   "releaseStatus": "production-ready",
-  "releaseVersion": "1.0.2",
+  "releaseVersion": "1.0.3",
   "releaseEvidence": {
     "candidateHead": "29fae010d9649c05ebb222ea35edcccd6372e73b",
     "cleanWorkflowRun": 38086623495,

@@ -225,7 +225,7 @@ function toggleExamInfo(){return examSession.toggleExamInfo()}
 function jumpAnswerMajor(major){return examSession.jumpAnswerMajor(major)}
 function jumpToProblem(id){return examSession.jumpToProblem({id:id})}
 function response(id){return S.currentAttempt&&S.currentAttempt.responses[id]}
-function setResponse(id,v){if(S.currentAttempt){S.currentAttempt.responses[id]=v;save()}}
+function setResponse(id,v){if(S.currentAttempt){S.currentAttempt.responses[id]=v;save();updateReadingFeedback(id)}}
 function setSlot(id,i,v){setResponse(id,ANSWER_WIDGETS.slot(response(id),i,v))}
 function toggleMulti(id,v,on){setResponse(id,ANSWER_WIDGETS.selection(response(id),v,{on:on}).values)}
 function toggleGroup(id,n,on){const cur=response(id)||{selected:[],corrections:{}};setResponse(id,{selected:ANSWER_WIDGETS.selection(cur.selected,n,{on:on}).values.sort(function(a,b){return a-b}),corrections:Object.assign({},cur.corrections||{})});render()}
@@ -267,9 +267,19 @@ function displayAnswer(q){const a=q.answerSpec;if(q.scoringType==='multi_slot_te
 function wordOrderInput(q,r){
   return (q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+'<div class="input-guide">語句を正しい順にタップしてください。'+(q.scoringType==='word_order_missing_word'?'不足する1語も自分で補います。':'')+'</div>'+ANSWER_WIDGETS.reorder({tokens:q.tokens||[],state:r,allowMissing:wordOrderOptions(q).allowMissing,boxId:'order-'+q.id,emptyText:'ここに並べた語句が表示されます',handlers:{add:i=>"__RIKKYO_APP__.addWordOrderToken('"+q.id+"',"+i+")",missing:"__RIKKYO_APP__.setWordOrderMissing('"+q.id+"',this.value)",addMissing:"__RIKKYO_APP__.addWordOrderMissing('"+q.id+"')",undo:"__RIKKYO_APP__.undoWordOrder('"+q.id+"')",clear:"__RIKKYO_APP__.clearWordOrder('"+q.id+"')"}});
 }
+const readingIds=new Set(['R25-ENG-A-Q6-4','R26-ENG-A-Q7-1','R26-ENG-A-Q7-2','R26-ENG-A-Q7-3','R26-ENG-A-Q7-4']);
+const readingPending=new Map(),readingMessages=new Map(),submittingAttempts=new Set();
+function readingTask(id){return readingIds.has(id)?{schoolId:'rikkyo',scope:'exam',taskId:id,skill:'reading_short_answer',maxScore:12,feedbackSchema:'reading-v1'}:null}
+function readingFresh(a,id){const x=a?.readingFeedback?.[id];return !!(x&&x.answer===String(a.responses[id]||'').trim()&&window.ENGLISH_WRITING_FEEDBACK.validateAIFeedback(x.feedback,12)&&window.ENGLISH_WRITING_FEEDBACK.validateReadingFeedback(x.feedback,readingTask(id),x.answer))}
+function readingFeedbackMarkup(id){const a=S.currentAttempt;if(!a)return '';const x=a.readingFeedback?.[id],pending=readingPending.get(id)?.attempt===a,answer=String(a.responses[id]||'').trim(),stale=x&&!readingFresh(a,id);return '<button type="button" '+(pending?'disabled':'')+' onclick="__RIKKYO_APP__.gradeReading(\''+id+'\')">'+(pending?'AIが確認中…':'AI添削する')+'</button><p class="tiny reading-status" role="status">'+h(readingMessages.get(id)||'採点時にもAIで確認します。')+'</p>'+(stale?'<p class="warnbox">答案を変更したため、前の評価は無効です。再提出してください。</p>':'')+(!stale&&x?window.ENGLISH_WRITING_FEEDBACK.aiFeedbackMarkup(x.feedback,answer):'')}
+function updateReadingFeedback(id){const node=document.getElementById('reading-tools-'+id);if(node)node.innerHTML=readingFeedbackMarkup(id)}
+function gradeReading(id){const a=S.currentAttempt,task=readingTask(id),originalState=S,answer=String(a?.responses?.[id]||'').trim();if(!a||!task)return Promise.resolve(false);const pending=readingPending.get(id);if(pending?.attempt===a)return pending.promise;if(!answer||answer.length>1200){readingMessages.set(id,!answer?'答えを入力してください。':'AI添削は1200文字以内です。答案は保存されています。');updateReadingFeedback(id);return Promise.resolve(false)}
+ const entry={attempt:a,promise:null};readingPending.set(id,entry);readingMessages.set(id,'本文と答案を確認しています…');updateReadingFeedback(id);
+ entry.promise=(async()=>{try{const feedback=await window.ENGLISH_WRITING_FEEDBACK.requestWritingFeedback(task,answer,C.aiWriting.endpoint);if(S!==originalState||S.currentAttempt!==a)return false;a.readingFeedback=a.readingFeedback||{};a.readingFeedback[id]={answer,feedback};save();const fresh=readingFresh(a,id);readingMessages.set(id,fresh?'添削を保存しました。修正して再提出できます。':'答案が変更されています。もう一度提出してください。');return fresh}catch(e){if(S===originalState&&S.currentAttempt===a)readingMessages.set(id,e.message+' 答案は保存されています。');return false}finally{if(readingPending.get(id)===entry)readingPending.delete(id);if(S===originalState&&S.currentAttempt===a)updateReadingFeedback(id)}})();return entry.promise;
+}
 function inputFor(q){
   const r=response(q.id),onInput="__RIKKYO_APP__.setResponse('"+q.id+"',this.value)";
-  if(q.scoringType==='manual_reading')return '<div class="warnbox"><b>自己採点の記述問題</b><p>本文を根拠に自分の言葉で答えてください。採点時に確認ポイントを表示します。</p></div>'+ANSWER_WIDGETS.textInput({multiline:true,value:r,placeholder:'答えを入力',onInput:onInput});
+  if(q.scoringType==='manual_reading')return '<div class="notice"><b>AI添削の記述問題</b><p>本文を根拠に自分の言葉で答えてください。AIが内容と言葉を確認し、本文の根拠を示します。非公式の学習用評価です。</p></div>'+ANSWER_WIDGETS.textInput({multiline:true,value:r,placeholder:q.examId==='FY25A'?'日本語で答えを入力':'英語で短く答えを入力',onInput:onInput})+'<div id="reading-tools-'+q.id+'">'+readingFeedbackMarkup(q.id)+'</div>';
   if(q.scoringType==='multi_slot_text')return ANSWER_WIDGETS.slots({count:q.answerSpec.slots.length,values:r,input:i=>({placeholder:'空所'+(i+1),onInput:"__RIKKYO_APP__.setSlot('"+q.id+"',"+i+",this.value)"})});
   if(q.scoringType==='single_choice'||q.scoringType==='multiple_choice'){
     const multi=q.scoringType==='multiple_choice';return ANSWER_WIDGETS.choices({options:q.options.map(o=>({value:o.id,labelHtml:'<b>'+h(o.id)+'</b> '+h(o.text)})),selected:multi?(Array.isArray(r)?r:[]):[r],multiple:multi,variant:'inputs',className:'choice-grid',name:q.id,label:qLabel(q)+'の回答',onAction:v=>multi?"__RIKKYO_APP__.toggleMulti('"+q.id+"','"+v+"',this.checked)":onInput});
@@ -315,17 +325,16 @@ function examAttempt(){
   return attemptBar+'<section class="card notice"><b>アプリ解答は非公式です。</b><br><span class="muted">本文・資料は該当する大問の直前に1回だけ表示します。</span></section>'+runtimeNotice+'<div class="examgrid"><section class="problem-column">'+paperHtml+'</section>'+answerPanel+'</div>'
 }
 function createWeak(q,r){const key=q.examId+':'+q.id,old=S.weak[key]||{},base=E.buildWrongWeaknessState(old,{year:examById(q.examId).year,id:q.id,label:qLabel(q),category:P.skillName(q.primarySkill),component:'main',skill:q.primarySkill,targetId:q.targetId,focusTag:q.targetId,examFormat:q.scoringType,trap:q.primarySkill,priority:P.resolveQuestionPriority(q),user:String(r==null?'':typeof r==='object'?JSON.stringify(r):r),today:today(),manualComponents:[]});base.examId=q.examId;base.questionId=q.id;delete base.points;S.weak[key]=base}
-function submitAttempt(){
-  const a=S.currentAttempt,qs=qsFor(a.examId),missing=qs.filter(function(q){return !answered(q,a.responses[q.id])});if(missing.length&&!confirm(missing.length+'問が未回答です。要復習として確定しますか？'))return;
-  let correct=0;const results={};qs.forEach(function(q){
-    const r=a.responses[q.id],hasAnswer=answered(q,r);let ok=false;
-    if(q.scoringType==='manual_reading'&&hasAnswer){
-      const guidance=q.answerSpec?.guidance||'本文の根拠と設問条件を満たしているか確認してください。';
-      ok=confirm('自己採点（学校公式解答ではありません）\n\n確認ポイント：\n'+guidance+'\n\nあなたの答えはこの内容を満たしていますか？');
-    }else ok=hasAnswer&&evaluate(q,r)===true;
-    results[q.id]=ok;if(ok)correct++;else createWeak(q,r);
-  });
-  a.status='graded';a.gradedAt=now();a.correctCount=correct;a.totalTasks=qs.length;a.results=results;a.scoreModel='unscored';S.attempts.push(clone(a));S.currentAttempt=null;S.dailyPlan=null;save();goto('review')
+async function submitAttempt(){
+  const a=S.currentAttempt,originalState=S;if(!a||submittingAttempts.has(a))return;const qs=qsFor(a.examId),snapshot=JSON.stringify(a.responses),missing=qs.filter(q=>!answered(q,a.responses[q.id]));if(missing.length&&!confirm(missing.length+'問が未回答です。要復習として確定しますか？'))return;
+  submittingAttempts.add(a);const button=document.querySelector('.grade-button');if(button){button.disabled=true;button.textContent='記述答案をAIで確認しています…'}
+  try{
+    for(const q of qs.filter(q=>q.scoringType==='manual_reading'&&answered(q,a.responses[q.id]))){if(!readingFresh(a,q.id)&&!await gradeReading(q.id))return;if(S!==originalState||S.currentAttempt!==a)return;}
+    if(S!==originalState||S.currentAttempt!==a)return;
+    if(JSON.stringify(a.responses)!==snapshot){alert('確認中に答案が変更されたため、確定していません。もう一度「解答を確認」を押してください。');return;}
+    let correct=0;const results={};qs.forEach(q=>{const r=a.responses[q.id],hasAnswer=answered(q,r),ok=!!(hasAnswer&&(q.scoringType==='manual_reading'?readingFresh(a,q.id)&&a.readingFeedback[q.id].feedback.learningCorrect:evaluate(q,r)===true));results[q.id]=ok;if(ok)correct++;else createWeak(q,r)});
+    a.status='graded';a.gradedAt=now();a.correctCount=correct;a.totalTasks=qs.length;a.results=results;a.scoreModel='unscored';S.attempts.push(clone(a));S.currentAttempt=null;S.dailyPlan=null;save();goto('review');
+  }finally{submittingAttempts.delete(a);if(S===originalState&&S.currentAttempt===a){const b=document.querySelector('.grade-button');if(b){b.disabled=false;b.textContent='解答を確認して弱点を登録'}}}
 }
 
 function weakMarkup(key,w){
@@ -402,6 +411,6 @@ function applyDay(){const cur=today(),d=E.decideDayRollover({renderedDate:render
 window.addEventListener('focus',function(){if(applyDay())render()});
 
 function render(){examSession.stop();if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,stats:stats,guide:guide,writing:writingView}[view];app.innerHTML=f();examSession.start(view);window.__RIKKYO_APP_READY__=true}
-window.__RIKKYO_APP__={openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
+window.__RIKKYO_APP__={gradeReading,openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
 loadData().then(function(){render()}).catch(function(e){console.error(e);app.innerHTML='<section class="card badbox"><h2>読み込みエラー</h2><p>'+h(e.message)+'</p></section>'});
 })();

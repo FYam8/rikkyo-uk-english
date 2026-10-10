@@ -11,7 +11,7 @@ const json=p=>JSON.parse(read(p));
 const gate=json('release-gate.json');
 const release=json('release.json');
 assert.equal(gate.schemaVersion,2);
-assert.equal(release.version,'1.0.2');
+assert.equal(release.version,'1.0.3');
 assert.equal(release.status,'production-ready');
 assert.equal(gate.deployAllowed,true);
 assert.equal(gate.releaseCandidate,false);
