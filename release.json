@@ -67,7 +67,7 @@
       "data/writing-holdout-task.json": "ecf272b04d6110ccb4edbe4a952b84ed963f46388c1d713b142ae08f56eb3fa6",
       "assets/writing/FY25A-Q9.png": "d5e99b263445f21b3d81b20d49d7fb70abc56c3e4aaa9252886a810c43afae6a",
       "assets/writing/FY25B-Q9.png": "d4a0e32a5d23308b3bd0ac5f51618cf603928e3d41352aef60fb83b9ec8b34f3",
-      "tests/story-writing-browser.test.mjs": "21249748985da39325184166202b1ad6f63671dedb3aa8765b088b8c895bb7b8",
+      "tests/story-writing-browser.test.mjs": "f71b9e63a477e81aeb3c22910137bd6a3812de670b6d6a1807b2cb8401c307f4",
       "tests/story-writing-production.test.mjs": "c058233dadf892fe3880cdde2ca9acdcdee2c1307aefdaf2d1dee20d96be5ccb",
       ".github/workflows/pages.yml": "c6b5a752db500c72cd13e5fda7eb1b79e4c644ba49a0f9839e78c3997d2c77dd",
       "tests/bootstrap-integrity.test.mjs": "fc597a1caaae0ddfb5e86ae8ef4d5753a527805e0bd447d2d34ca49036d99cae",
