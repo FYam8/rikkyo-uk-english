@@ -33,7 +33,7 @@ for(const path of ['schools/rikkyo/theme.css','ui/base.css','schools/rikkyo/ui-c
 for(const path of ['ui/contract.js','schools/rikkyo/ui.js','ui/shell.js','ui/components.js'])assert.ok(index.includes('src="'+path+'"'),path+' script missing');
 assert.ok(index.includes('ENGLISH_UI_SHELL.mount(window.ENGLISH_SCHOOL_UI)'));
 assert.ok(!index.includes('href="styles.css"'),'prototype CSS must not be loaded');
-assert.ok(index.indexOf('src="ui/components.js"')<index.indexOf('src="app.js"'));
+assert.ok(index.indexOf('src="ui/components.js"')<index.indexOf('src="app.js'));
 
 const ctx={};ctx.window=ctx;ctx.globalThis=ctx;vm.createContext(ctx);
 vm.runInContext(read('ui/contract.js'),ctx,{filename:'ui/contract.js'});
@@ -60,7 +60,7 @@ for(const [file,sha] of Object.entries(lock.sourceBlobs)){
  const bytes=Buffer.from(read(file));
  assert.equal(crypto.createHash('sha1').update(Buffer.from('blob '+bytes.length+'\0')).update(bytes).digest('hex'),sha,file+' vendor blob mismatch');
 }
-assert.ok(index.indexOf('src="ui/exam-session.js"')<index.indexOf('src="app.js"'));
+assert.ok(index.indexOf('src="ui/exam-session.js"')<index.indexOf('src="app.js'));
 assert.ok(app.includes('window.ENGLISH_UI_EXAM_SESSION.create'));
 
 assert.ok(!index.includes(String.fromCharCode(92)+'n'),'literal newline escape in HTML shell');

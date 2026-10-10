@@ -1,0 +1,1333 @@
+{
+  "date": "2026-10-10",
+  "workerSourceRepository": "FYam8/waseshibu-english",
+  "workerSourceCommit": "9ed166015cff7942fa915b45c1a5f84cb34ecc5a",
+  "workerEndpoint": "https://waseshibu-writing-grader-story-preview.fyam8.workers.dev/v1/grade-writing",
+  "previewVersion": "a7d05e2c-3df6-4731-81b1-f50dc06f2ab8",
+  "model": "@cf/openai/gpt-oss-20b",
+  "official": false,
+  "consecutiveCleanPasses": 2,
+  "casesPerPass": 9,
+  "conclusion": "CLEAN",
+  "transportPolicy": "HTTP 429 due to test traffic is recorded separately and retried; no failed semantic judgment is excluded. All final responses were HTTP 200 and matched expected verdicts.",
+  "results": [
+    {
+      "pass": 1,
+      "taskId": "R25-ENG-A-Q6-4",
+      "answer": "Goldie liked watching the apple tree.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": false,
+        "learningCorrect": false
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6965,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R25-ENG-A-Q6-4",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 0,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 0,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 0,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 0,
+            "max": 4
+          }
+        ],
+        "contentCorrect": false,
+        "learningCorrect": false,
+        "evidence": "Goldie liked to see the apple tree through the windows of the living room when he was alive.",
+        "explanationJa": "答えは英語で書かれており、設問は日本語での回答を求めているため不適切です。",
+        "answerLanguage": "ja",
+        "issues": [
+          {
+            "severity": "must_fix",
+            "category": "課題達成",
+            "original": "Goldie liked watching the apple tree.",
+            "correction": "Goldieは生きている間、リビングの窓からリンゴの木を見るのが好きでした。",
+            "explanationJa": "設問は日本語で理由を説明するよう求めているため、英語の回答は不適切です。"
+          }
+        ],
+        "strengths": [],
+        "reasons": [],
+        "revisedExample": "Goldieは生きている間、リビングの窓からリンゴの木を見るのが好きでした。",
+        "nextPractice": [
+          "設問が求める言語で回答しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:21:47.911Z",
+        "usage": {
+          "inputTokens": 1762,
+          "outputTokens": 320
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 1,
+      "taskId": "R25-ENG-A-Q6-4",
+      "answer": "ゴールディは生きていたとき、居間の窓からリンゴの木を眺めるのが好きだったから。",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 7105,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R25-ENG-A-Q6-4",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "Goldie liked to see the apple tree through the windows of the living room when he was alive.",
+        "explanationJa": "Goldieが居間の窓からリンゴの木を眺めるのが好きだったことを述べているため、本文の根拠に合致します。",
+        "answerLanguage": "ja",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "ゴールディは生きていたとき、居間の窓からリンゴの木を眺めるのが好きだったから。",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:19:45.485Z",
+        "usage": {
+          "inputTokens": 1786,
+          "outputTokens": 235
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 1,
+      "taskId": "R26-ENG-A-Q7-1",
+      "answer": "History.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": false,
+        "learningCorrect": false
+      },
+      "ok": true,
+      "transientAttempts": [
+        {
+          "status": 429,
+          "error": "rate_limited"
+        }
+      ],
+      "elapsedMs": 57328,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-1",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 8,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 0,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": false,
+        "learningCorrect": false,
+        "evidence": "Dr. Smith is a science teacher.",
+        "explanationJa": "答えは歴史と述べているが、本文ではドクター・スミスが科学教師であると明記されている。",
+        "answerLanguage": "en",
+        "issues": [
+          {
+            "severity": "must_fix",
+            "category": "本文の正確さ",
+            "original": "History.",
+            "correction": "Science.",
+            "explanationJa": "本文は科学を教えていると述べているため、答えも科学であるべきです。"
+          }
+        ],
+        "strengths": [],
+        "reasons": [],
+        "revisedExample": "Science.",
+        "nextPractice": [
+          "設問が求める情報を本文から正確に抜き出しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:20:35.934Z",
+        "usage": {
+          "inputTokens": 907,
+          "outputTokens": 221
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 1,
+      "taskId": "R26-ENG-A-Q7-1",
+      "answer": "Science.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6065,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-1",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "Dr. Smith is a science teacher.",
+        "explanationJa": "Dr. Smith が科学の教師であると本文に明記されているため、\"Science.\" は正しい答えです。",
+        "answerLanguage": "en",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "Science.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:18:33.339Z",
+        "usage": {
+          "inputTokens": 907,
+          "outputTokens": 181
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 1,
+      "taskId": "R26-ENG-A-Q7-1",
+      "answer": "She teach science.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": false
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 8363,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-1",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 10,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 3,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 3,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": false,
+        "evidence": "Dr. Smith is a science teacher.",
+        "explanationJa": "答えは正しい内容を示しているが、文法が不正確です。",
+        "answerLanguage": "en",
+        "issues": [
+          {
+            "severity": "must_fix",
+            "category": "文法",
+            "original": "She teach science.",
+            "correction": "She teaches science.",
+            "explanationJa": "動詞の三人称単数形が欠けているため、正しくは \"teaches\" です。"
+          }
+        ],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "She teaches science.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:19:46.966Z",
+        "usage": {
+          "inputTokens": 909,
+          "outputTokens": 356
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 1,
+      "taskId": "R26-ENG-A-Q7-2",
+      "answer": "They tested the effect of light on plant growth.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6140,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-2",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "Last week, her class tested how light affects plant growth.",
+        "explanationJa": "学生は光が植物の成長に与える影響を調べた。",
+        "answerLanguage": "en",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "They tested the effect of light on plant growth.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:18:33.430Z",
+        "usage": {
+          "inputTokens": 932,
+          "outputTokens": 174
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 1,
+      "taskId": "R26-ENG-A-Q7-3",
+      "answer": "The plant kept in the dark.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6047,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-3",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "the plant in the cupboard was yellow, small and weak",
+        "explanationJa": "設問は暗い場所に置かれた植物を尋ねている。本文ではその植物が黄色く小さく弱いと記述されている。",
+        "answerLanguage": "en",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "The plant kept in the dark.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:18:33.335Z",
+        "usage": {
+          "inputTokens": 927,
+          "outputTokens": 195
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 1,
+      "taskId": "R26-ENG-A-Q7-4",
+      "answer": "Plants need light to grow, but different kinds of light do not affect plants in the same way.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6299,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-4",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "Dr. Smith explained that plants need light to grow, but not all light has the same effect.",
+        "explanationJa": "答えは本文の両方のポイントを正しく含んでいる。",
+        "answerLanguage": "en",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "Plants need light to grow, but different kinds of light do not affect plants in the same way.",
+        "nextPractice": [],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:18:33.557Z",
+        "usage": {
+          "inputTokens": 965,
+          "outputTokens": 182
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 1,
+      "taskId": "R26-ENG-A-Q7-4",
+      "answer": "Plants need light to grow.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": false,
+        "learningCorrect": false
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 7098,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-4",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 10,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          3,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 2,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": false,
+        "learningCorrect": false,
+        "evidence": "Dr. Smith explained that plants need light to grow, but not all light has the same effect.",
+        "explanationJa": "回答は「植物は光が必要だ」と述べているが、光の種類による違いを説明していないため、本文の要点が不完全です。",
+        "answerLanguage": "en",
+        "issues": [
+          {
+            "severity": "must_fix",
+            "category": "本文の正確さ",
+            "original": "Plants need light to grow.",
+            "correction": "Plants need light to grow, but not all light has the same effect.",
+            "explanationJa": "光の種類による影響の違いを示す必要があります。"
+          }
+        ],
+        "strengths": [],
+        "reasons": [],
+        "revisedExample": "Plants need light to grow, but not all light has the same effect.",
+        "nextPractice": [
+          "設問が求める情報をすべて含めるようにしましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:19:45.533Z",
+        "usage": {
+          "inputTokens": 951,
+          "outputTokens": 272
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R25-ENG-A-Q6-4",
+      "answer": "Goldie liked watching the apple tree.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": false,
+        "learningCorrect": false
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 7351,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R25-ENG-A-Q6-4",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 4,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 0,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 0,
+            "max": 4
+          }
+        ],
+        "contentCorrect": false,
+        "learningCorrect": false,
+        "evidence": "Goldie liked to see the apple tree through the windows of the living room when he was alive.",
+        "explanationJa": "答えは英語で書かれており、設問の日本語での回答要件を満たしていません。",
+        "answerLanguage": "ja",
+        "issues": [
+          {
+            "severity": "must_fix",
+            "category": "課題達成",
+            "original": "Goldie liked watching the apple tree.",
+            "correction": "Goldieは生きている間、リビングルームの窓から木を見ていたのが好きだった。",
+            "explanationJa": "設問は日本語で理由を説明するよう求めているため、英語の回答は不適切です。"
+          }
+        ],
+        "strengths": [],
+        "reasons": [],
+        "revisedExample": "Goldieは生きている間、リビングルームの窓から木を見ていたのが好きだった。",
+        "nextPractice": [
+          "設問が求める言語で回答することを確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:24:13.821Z",
+        "usage": {
+          "inputTokens": 1762,
+          "outputTokens": 313
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R25-ENG-A-Q6-4",
+      "answer": "ゴールディは生きていたとき、居間の窓からリンゴの木を眺めるのが好きだったから。",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6753,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R25-ENG-A-Q6-4",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "Goldie liked to see the apple tree through the windows of the living room when he was alive.",
+        "explanationJa": "Goldieが生きていたときに居間の窓からリンゴの木を眺めるのが好きだったという情報に基づいている。",
+        "answerLanguage": "ja",
+        "issues": [],
+        "strengths": [
+          "本文の情報を正しく読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "ゴールディは生きていたとき、居間の窓からリンゴの木を眺めるのが好きだったから。",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:22:59.670Z",
+        "usage": {
+          "inputTokens": 1786,
+          "outputTokens": 277
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R26-ENG-A-Q7-1",
+      "answer": "History.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": false,
+        "learningCorrect": false
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 7003,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-1",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 8,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 0,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": false,
+        "learningCorrect": false,
+        "evidence": "Dr. Smith is a science teacher.",
+        "explanationJa": "答えは「History.」であり、本文では Dr. Smith が科学教師であると明記されているため、質問に対する正しい答えではありません。",
+        "answerLanguage": "en",
+        "issues": [
+          {
+            "severity": "must_fix",
+            "category": "本文の正確さ",
+            "original": "History.",
+            "correction": "Science.",
+            "explanationJa": "Dr. Smith は科学教師であるため、正しい答えは「Science.」です。"
+          }
+        ],
+        "strengths": [],
+        "reasons": [],
+        "revisedExample": "Science.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:22:59.923Z",
+        "usage": {
+          "inputTokens": 907,
+          "outputTokens": 217
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R26-ENG-A-Q7-1",
+      "answer": "Science.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 5967,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-1",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "Dr. Smith is a science teacher.",
+        "explanationJa": "Dr. Smithは科学の教師であると本文に明記されているため、\"Science.\"という答えは正しい。",
+        "answerLanguage": "en",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "Science.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:21:46.906Z",
+        "usage": {
+          "inputTokens": 907,
+          "outputTokens": 144
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R26-ENG-A-Q7-1",
+      "answer": "She teach science.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": false
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 8546,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-1",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 11,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 3,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": false,
+        "evidence": "Dr. Smith is a science teacher.",
+        "explanationJa": "答えは正しい内容を示しているが、文法が不正確です。",
+        "answerLanguage": "en",
+        "issues": [
+          {
+            "severity": "must_fix",
+            "category": "文法",
+            "original": "She teach science.",
+            "correction": "She teaches science.",
+            "explanationJa": "動詞の三人称単数形の一致が欠けているため、\"teach\"を\"teaches\"に直す必要があります。"
+          }
+        ],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "She teaches science.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:23:01.425Z",
+        "usage": {
+          "inputTokens": 909,
+          "outputTokens": 385
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R26-ENG-A-Q7-2",
+      "answer": "They tested the effect of light on plant growth.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6298,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-2",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "Last week, her class tested how light affects plant growth.",
+        "explanationJa": "学生は光が植物の成長に与える影響を調べたと答えている。",
+        "answerLanguage": "en",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "They tested the effect of light on plant growth.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:21:47.244Z",
+        "usage": {
+          "inputTokens": 932,
+          "outputTokens": 179
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R26-ENG-A-Q7-3",
+      "answer": "The plant kept in the dark.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6230,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-3",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "the plant in the cupboard was yellow, small and weak",
+        "explanationJa": "設問は暗い棚に置かれた植物が不健康であると尋ねている。答えは「The plant kept in the dark」で、本文の記述と一致する。",
+        "answerLanguage": "en",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "The plant kept in the dark.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:21:47.173Z",
+        "usage": {
+          "inputTokens": 927,
+          "outputTokens": 193
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R26-ENG-A-Q7-4",
+      "answer": "Plants need light to grow, but different kinds of light do not affect plants in the same way.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": true,
+        "learningCorrect": true
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 6436,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-4",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 12,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": true,
+        "learningCorrect": true,
+        "evidence": "Dr. Smith explained that plants need light to grow, but not all light has the same effect.",
+        "explanationJa": "回答は「植物は光が必要で、光の種類によって影響が異なる」という本文の要点を正しく含んでいる。",
+        "answerLanguage": "en",
+        "issues": [],
+        "strengths": [
+          "本文の情報を読み取れています。"
+        ],
+        "reasons": [],
+        "revisedExample": "Plants need light to grow, but different kinds of light do not affect plants in the same way.",
+        "nextPractice": [
+          "設問が求める情報を確認しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:22:59.355Z",
+        "usage": {
+          "inputTokens": 965,
+          "outputTokens": 211
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    },
+    {
+      "pass": 2,
+      "taskId": "R26-ENG-A-Q7-4",
+      "answer": "Plants need light to grow.",
+      "status": 200,
+      "expected": {
+        "contentCorrect": false,
+        "learningCorrect": false
+      },
+      "ok": true,
+      "transientAttempts": [],
+      "elapsedMs": 7356,
+      "result": {
+        "schoolId": "rikkyo",
+        "questionId": "R26-ENG-A-Q7-4",
+        "scope": "exam",
+        "skill": "reading_short_answer",
+        "feedbackSchema": "reading-v1",
+        "official": false,
+        "score": 10,
+        "maxScore": 12,
+        "scoreLabel": "非公式・学習用AI評価（入試得点には加算しません）",
+        "semantic": [
+          3,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "breakdown": [
+          {
+            "name": "本文の正確さ",
+            "earned": 2,
+            "max": 4
+          },
+          {
+            "name": "言葉の正確さ",
+            "earned": 4,
+            "max": 4
+          },
+          {
+            "name": "明確さ",
+            "earned": 4,
+            "max": 4
+          }
+        ],
+        "contentCorrect": false,
+        "learningCorrect": false,
+        "evidence": "Dr. Smith explained that plants need light to grow, but not all light has the same effect.",
+        "explanationJa": "回答は「植物は光が必要」と述べているが、光の種類や条件が成長に与える違いについて触れていない。",
+        "answerLanguage": "en",
+        "issues": [
+          {
+            "severity": "must_fix",
+            "category": "本文の正確さ",
+            "original": "Plants need light to grow.",
+            "correction": "Plants need light to grow, but different light conditions affect growth differently.",
+            "explanationJa": "光の種類や条件が成長に与える影響を説明する必要がある"
+          }
+        ],
+        "strengths": [
+          "簡潔に光の重要性を述べている"
+        ],
+        "reasons": [],
+        "revisedExample": "Plants need light to grow, but different light conditions affect growth differently.",
+        "nextPractice": [
+          "設問が求める情報をすべて網羅しましょう。",
+          "光の種類や条件が成長に与える影響を具体的に説明できるように練習しましょう。"
+        ],
+        "promptVersion": "rikkyo-reading-v1",
+        "generatedAt": "2026-10-10T22:24:13.824Z",
+        "usage": {
+          "inputTokens": 951,
+          "outputTokens": 282
+        },
+        "model": "@cf/openai/gpt-oss-20b"
+      }
+    }
+  ]
+}

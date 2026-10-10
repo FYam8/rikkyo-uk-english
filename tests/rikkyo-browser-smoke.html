@@ -49,12 +49,13 @@
    if(!manual)fail('manual reading textarea missing');
    const manualId=a.data().questions.find(q=>q.examId==='FY25A'&&q.scoringType==='manual_reading')?.id;
    if(!manualId)fail('manual reading record missing');
-   a.setResponse(manualId,'Goldie liked seeing the apple tree from the living room.');
+   w.ENGLISH_WRITING_FEEDBACK={...w.ENGLISH_WRITING_FEEDBACK,requestWritingFeedback:async task=>({schoolId:'rikkyo',questionId:task.taskId,official:false,skill:'reading_short_answer',feedbackSchema:'reading-v1',score:12,maxScore:12,semantic:[1,1,1,1,0,0],breakdown:['本文の正確さ','言葉の正確さ','明確さ'].map(name=>({name,earned:4,max:4})),issues:[],contentCorrect:true,learningCorrect:true,answerLanguage:'ja',evidence:'Goldie liked to see the apple tree through the windows of the living room when he was alive.',explanationJa:'本文の理由を説明できています。',revisedExample:'リンゴの木を見るのが好きだったから。'})};
+   a.setResponse(manualId,'ゴールディは生きていたとき、居間の窓からリンゴの木を眺めるのが好きだったから。');
    a.submitAttempt();
    await wait(()=>a.getState().attempts.some(x=>x.examId==='FY25A'));
    const attempt=a.getState().attempts.find(x=>x.examId==='FY25A');
    if(attempt.totalTasks!==23)fail('FY25A reading task count');
-   if(attempt.results[manualId]!==true)fail('manual reading self-check result');
+   if(attempt.results[manualId]!==true)fail('reading AI learning result');
  }
  if(scenario==='renderer'){
    a.beginAttempt('FY26A');

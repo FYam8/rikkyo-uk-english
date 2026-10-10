@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "deployAllowed": true,
-  "reason": "Source-verified free-story AI feedback; exact-main verification and real production browser grading required for publication.",
+  "reason": "Source-verified story and reading AI feedback; exact-main verification and real production browser grading required for publication.",
   "blockers": [],
   "completedGates": [
     "Shared Engine v1.1 pinned",
@@ -23,19 +23,22 @@
     "42 practice / 122 runtime / six-PDF material audit",
     "all registered answers graded in mobile and desktop browsers",
     "audited content hashes pinned",
-    "four source-verified free-story tasks only",
+    "four source-verified free-story tasks",
     "original FY25 picture assets",
     "unofficial scores isolated from entrance results",
     "writing drafts/feedback backup and restore",
     "Chrome/Android/WebKit writing QA twice",
-    "real production browser AI feedback required after deployment"
+    "real production browser AI feedback required after deployment",
+    "five source-verified reading responses with AI feedback",
+    "reading answers/feedback edit, failure, reload and backup safety",
+    "nine real-AI reading cases twice CLEAN"
   ],
   "releaseCandidate": false,
   "releaseStatus": "production-ready",
-  "releaseVersion": "1.0.2",
+  "releaseVersion": "1.0.3",
   "releaseEvidence": {
-    "candidateHead": "29fae010d9649c05ebb222ea35edcccd6372e73b",
-    "cleanWorkflowRun": 38086623495,
+    "candidateHead": "c93e241691d6ffa3427d024a0ce85f097493a87b",
+    "cleanWorkflowRun": 38090744494,
     "cleanAttempts": [
       1,
       2
@@ -44,7 +47,7 @@
       "success",
       "success"
     ],
-    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38086623495",
+    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38090744494",
     "postMergePolicy": {
       "required": true,
       "workflow": "verify",

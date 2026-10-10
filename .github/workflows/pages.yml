@@ -69,7 +69,9 @@ jobs:
       - name: Actual production browser and AI feedback
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/production-browser/node_modules/playwright
-        run: node tests/story-writing-production.test.mjs
+        run: |
+          node tests/story-writing-production.test.mjs
+          node tests/reading-ai-production.test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -36,7 +36,7 @@ const html=w.reorder({tokens,state:{order:[0]},disabled:true,handlers:{add:i=>'a
 assert.equal((html.match(/disabled=""/g)||[]).length,6);
 assert.ok(!html.includes('undefined'));
 const root=new URL('../',import.meta.url),app=fs.readFileSync(new URL('app.js',root),'utf8'),index=fs.readFileSync(new URL('index.html',root),'utf8');
-assert.ok(index.indexOf('src="ui/answer-widgets.js"')<index.indexOf('src="app.js"'));
+assert.ok(index.indexOf('src="ui/answer-widgets.js"')<index.indexOf('src="app.js'));
 for(const name of ['choices','textInput','slots','selection','slot','reorder','reorderChange'])assert.ok(app.includes('ANSWER_WIDGETS.'+name),name+' not delegated');
 assert.doesNotMatch(fs.readFileSync(new URL('ui/answer-widgets.js',root),'utf8'),/localStorage|indexedDB|waseshibu|rikkyo|answerSpec|correctAnswer/i);
 console.log('Shared answer widgets: duplicate tokens, missing word, locks, selection, drafts, escaping and delegation CLEAN');
