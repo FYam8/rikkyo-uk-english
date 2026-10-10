@@ -75,7 +75,8 @@
       "tests/reading-ai-browser.test.mjs": "a3ecd4682da64ee5093b1c95c7f514e00ed8b79af25c73ac8b36ef072c850f3d",
       "tests/rikkyo-browser-smoke.html": "712b21e2e910831021780be90fd769dd44f43255759a894c294690f5160b8330",
       "tests/reading-ai-production.test.mjs": "2097e2de893fe92cb5f2e1fde7871247f3545ccb030355cf3b21cd98a782d8b7",
-      "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed"
+      "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed",
+      "tests/answer-widget-browser-checks.mjs": "7b47f2d5aaad781550074300a43ad686946e3fb6c6baab5c7d259312430234f5"
     },
     "postMergePolicy": {
       "required": true,

@@ -7,6 +7,18 @@ export async function runAnswerWidgetChecks(browser,url,isRikkyo){
   await p.goto(url+'/index.html');if(isRikkyo)await p.waitForFunction(()=>window.__RIKKYO_APP_READY__);else await p.waitForSelector('.today-card');
   async function stableClick(locator){
    await locator.click({trial:true});
+   // Navigation restores this view with smooth scrolling. Wait for that earlier
+   // motion to finish before measuring movement caused by the reorder action.
+   await p.evaluate(async()=>{
+    const read=()=>[scrollY,...['.answer-sheet-body','.problem-column','.drill-card'].map(s=>document.querySelector(s)?.scrollTop??null)];
+    let previous=read(),stable=0;
+    for(let frame=0;frame<90;frame++){
+     await new Promise(requestAnimationFrame);const current=read();
+     stable=current.every((v,i)=>v===previous[i])?stable+1:0;previous=current;
+     if(stable>=4)return;
+    }
+    throw Error('scrolling did not settle before the reorder check');
+   });
    const before=await p.evaluate(()=>{const nodes=[document.querySelector('.answer-sheet-body'),document.querySelector('.problem-column'),document.querySelector('.drill-card')];window.__scrollNodes=nodes;return {y:scrollY,positions:nodes.map(e=>e?e.scrollTop:null)}});
    if(width===390)await locator.tap();else await locator.click();
    const after=await p.evaluate(()=>{const nodes=[document.querySelector('.answer-sheet-body'),document.querySelector('.problem-column'),document.querySelector('.drill-card')];return {y:scrollY,positions:nodes.map(e=>e?e.scrollTop:null),same:nodes.every((e,i)=>e===window.__scrollNodes[i])}});
