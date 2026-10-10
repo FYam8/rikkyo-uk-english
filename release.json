@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "273b090a59b7d0334b89d6494920e5eb4075f5370234af0d8cb9036eb0d2d25d",
+      "app.js": "ede7117b2f7db5313b7e2826a22f77bc84aa7b27910b3315897cdbb1b1b3eadf",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -72,9 +72,9 @@
       ".github/workflows/pages.yml": "07004997b59d1a816d8b02bae68c31d1b4ebe0991cfff75b848db3085006c665",
       "tests/bootstrap-integrity.test.mjs": "fc597a1caaae0ddfb5e86ae8ef4d5753a527805e0bd447d2d34ca49036d99cae",
       "writing-shared.lock.json": "a3e8cb0c1a95979f100f4208d63d51e396f79c309ba68ebd0a8edadc9b9a5670",
-      "tests/reading-ai-browser.test.mjs": "b83a9a15a6573719566a55ffe3497635d9fd58572b1478b9043755260e4f9e02",
+      "tests/reading-ai-browser.test.mjs": "3e47f52128273f9cb91d62bc1e7ca519238ff5361f779bad96c4297e8b26bb1d",
       "tests/rikkyo-browser-smoke.html": "712b21e2e910831021780be90fd769dd44f43255759a894c294690f5160b8330",
-      "tests/reading-ai-production.test.mjs": "1a2b1feda6e346b5dab4cc38f2c2a9799a73b39289369f768d9b4dcba40d96db",
+      "tests/reading-ai-production.test.mjs": "02ae8515394516ffe200e87836917878da323e7a6b4854f237d72b719290cf09",
       "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed"
     },
     "postMergePolicy": {
