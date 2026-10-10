@@ -72,9 +72,9 @@
       ".github/workflows/pages.yml": "07004997b59d1a816d8b02bae68c31d1b4ebe0991cfff75b848db3085006c665",
       "tests/bootstrap-integrity.test.mjs": "fc597a1caaae0ddfb5e86ae8ef4d5753a527805e0bd447d2d34ca49036d99cae",
       "writing-shared.lock.json": "a3e8cb0c1a95979f100f4208d63d51e396f79c309ba68ebd0a8edadc9b9a5670",
-      "tests/reading-ai-browser.test.mjs": "3e47f52128273f9cb91d62bc1e7ca519238ff5361f779bad96c4297e8b26bb1d",
+      "tests/reading-ai-browser.test.mjs": "a3ecd4682da64ee5093b1c95c7f514e00ed8b79af25c73ac8b36ef072c850f3d",
       "tests/rikkyo-browser-smoke.html": "712b21e2e910831021780be90fd769dd44f43255759a894c294690f5160b8330",
-      "tests/reading-ai-production.test.mjs": "02ae8515394516ffe200e87836917878da323e7a6b4854f237d72b719290cf09",
+      "tests/reading-ai-production.test.mjs": "2097e2de893fe92cb5f2e1fde7871247f3545ccb030355cf3b21cd98a782d8b7",
       "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed"
     },
     "postMergePolicy": {
@@ -136,7 +136,7 @@
     ],
     "official": false,
     "schoolScoresUnchanged": true,
-    "workerSourceCommit": "ba7f66c00f5837731346121fdc78856fb123bdd8",
+    "workerSourceCommit": "daa883fdaa448df6d8b2f89691c7d5637e0463ab",
     "feedbackSchema": "reading-v1",
     "sourceLanguagePolicy": "Japanese reason for FY25A; short English answers for FY26A; no minimum word count",
     "staleAndFailurePolicy": "Retain answers; invalidate edited feedback; no weakness registration until successful fresh AI feedback",
