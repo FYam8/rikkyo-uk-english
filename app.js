@@ -209,7 +209,7 @@ function beginAttempt(id,options){
   if(!qsFor(id).length)return alert('問題データ整備中です。');
   if(mode==='timed'&&(!Number.isFinite(limit)||limit<10||limit>180))return alert('制限時間は10〜180分で指定してください。');
   if(S.currentAttempt&&S.currentAttempt.status==='active'&&S.currentAttempt.examId!==id)return alert(S.currentAttempt.examId+' が途中です。');
-  if(!S.currentAttempt||S.currentAttempt.status!=='active')S.currentAttempt={id:'attempt-'+Date.now(),examId:id,year:ex.year,status:'active',runtimeMode:ex.runtimeMode||'full',mode:mode,limitMinutes:limit,startedAt:now(),startedTimezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'local',overtime:false,responses:{},questionOrder:qsFor(id).map(function(q){return q.id})};
+  if(!S.currentAttempt||S.currentAttempt.status!=='active'){readingMessages.clear();S.currentAttempt={id:'attempt-'+Date.now(),examId:id,year:ex.year,status:'active',runtimeMode:ex.runtimeMode||'full',mode:mode,limitMinutes:limit,startedAt:now(),startedTimezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'local',overtime:false,responses:{},questionOrder:qsFor(id).map(function(q){return q.id})};}
   save();render()
 }
 const examSession=window.ENGLISH_UI_EXAM_SESSION.create({
