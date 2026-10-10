@@ -4,6 +4,8 @@ export async function runMaterialChecks(browser,url){
  for(const width of [390,1280]){
   const context=await browser.newContext({viewport:{width,height:900},serviceWorkers:'block'});
   await context.route('**/*',r=>new URL(r.request().url()).origin===url?r.continue():r.abort());
+  // Deterministic AI transport fixture; source/semantic model quality is tested independently.
+  await context.route('https://*.workers.dev/v1/grade-writing',async route=>{const {task,answer}=route.request().postDataJSON();await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({schoolId:'rikkyo',questionId:task.taskId,skill:'reading_short_answer',feedbackSchema:'reading-v1',official:false,score:12,maxScore:12,semantic:[1,1,1,1,0,0],breakdown:['本文の正確さ','言葉の正確さ','明確さ'].map(name=>({name,earned:4,max:4})),issues:[],contentCorrect:true,learningCorrect:true,answerLanguage:task.taskId.startsWith('R25')?'ja':'en',evidence:'Source evidence fixture',explanationJa:'登録解答の接続確認',revisedExample:answer})})});
   const page=await context.newPage(),errors=[],dialogs=[];let accept=true;
   page.on('pageerror',e=>errors.push(e.message));page.on('dialog',async d=>{dialogs.push(d.message());await(accept?d.accept():d.dismiss())});
   await page.goto(url+'/index.html');await page.waitForFunction(()=>window.__RIKKYO_APP_READY__);
@@ -28,14 +30,14 @@ export async function runMaterialChecks(browser,url){
     if(q.japanese)assert.ok((await page.locator('#problem-'+q.id).innerText()).includes(q.japanese),q.id+' invisible Japanese guide');
     if(q.wordOrderPrefix)assert.ok((await page.locator('#answer-'+q.id).innerText()).includes(q.wordOrderPrefix),q.id+' invisible fixed words');
    }
-   await page.evaluate(responses=>{const a=__RIKKYO_APP__;for(const [id,r]of Object.entries(responses))a.setResponse(id,r);a.submitAttempt()},responses);
+   await page.evaluate(async responses=>{const a=__RIKKYO_APP__;for(const [id,r]of Object.entries(responses))a.setResponse(id,r);await a.submitAttempt()},responses);
    const attempt=await page.evaluate(()=>__RIKKYO_APP__.getState().attempts.at(-1));
    for(const q of qs)assert.equal(attempt.results[q.id],true,q.id+' registered solution rejected through production grading');
    total+=qs.length;
   }
   // Alternatives are accepted as complete pairs, not arbitrary combinations.
   const check=async(examId,id,response)=>{
-   await page.evaluate(({examId,id,response})=>{const a=__RIKKYO_APP__;a.resetForTest();a.beginAttempt(examId);a.setResponse(id,response);a.submitAttempt()},{examId,id,response});
+   await page.evaluate(async({examId,id,response})=>{const a=__RIKKYO_APP__;a.resetForTest();a.beginAttempt(examId);a.setResponse(id,response);await a.submitAttempt()},{examId,id,response});
    return page.evaluate(id=>__RIKKYO_APP__.getState().attempts.at(-1).results[id],id);
   };
   assert.equal(await check('FY25A','R25-ENG-A-G5-1',['less','easy']),true);
