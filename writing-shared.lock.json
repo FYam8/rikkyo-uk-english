@@ -1,7 +1,7 @@
 {
   "sourceRepository": "FYam8/waseshibu-english",
-  "sourceCommit": "43573c15e2d85fb97ee554da37f7026d948d8de5",
+  "sourceCommit": "4bc96bec8ed1190fe2dbb4ee17850007469ad72a",
   "files": {
-    "ui/writing-feedback.js": "fa1c4122a4ac26566434d15d6b0e94ca1857e3574721cea695dfbf60eacdeb72"
+    "ui/writing-feedback.js": "47801ecf8debd953ebf7a87aa2eb29c0ed8c89932a0d6383cf0eb6d2d310bc82"
   }
 }

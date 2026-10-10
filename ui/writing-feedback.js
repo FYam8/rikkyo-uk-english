@@ -9,7 +9,7 @@ function validateAIFeedback(data,maxScore){
  return !!(data&&Number.isInteger(data.score)&&data.score>=0&&data.score<=maxScore&&data.maxScore===maxScore&&Array.isArray(data.semantic)&&data.semantic.length===6&&data.semantic.every((v,i)=>Number.isInteger(v)&&v>=0&&v<=(i<4?3:i===4?1:2))&&Array.isArray(data.breakdown)&&data.breakdown.every(x=>x&&typeof x.name==="string"&&Number.isFinite(x.earned)&&Number.isFinite(x.max)&&x.earned>=0&&x.earned<=x.max)&&Array.isArray(data.issues)&&data.issues.every(x=>x&&typeof x==="object")&&strings(data.reasons)&&strings(data.strengths));
 }
 async function requestWritingFeedback(task,answer,endpoint){
- const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),task.feedbackSchema==="story-v1"?55000:30000);
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),task.feedbackSchema==="story-v1"?95000:30000);
  try{
   const response=await fetch(`${endpoint}/v1/grade-writing`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({task,answer}),signal:controller.signal}),raw=await response.text(),data=(()=>{try{return JSON.parse(raw)}catch{return{}}})();
   if(!response.ok){if(data.error==="usage_limit_reached"||Number(data.cloudflareCode)===3036)throw new Error("AI採点の利用上限に達しました。Cloudflareの利用上限がリセットされた後に、もう一度お試しください。");throw new Error(data.message||(response.status===429?"Cloudflare側の一時的な利用上限に達しました。少し時間をおいてから、もう一度お試しください。":"AI採点を利用できませんでした。"))}
