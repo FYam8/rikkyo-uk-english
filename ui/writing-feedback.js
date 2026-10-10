@@ -9,13 +9,13 @@ function validateAIFeedback(data,maxScore){
  return !!(data&&Number.isInteger(data.score)&&data.score>=0&&data.score<=maxScore&&data.maxScore===maxScore&&Array.isArray(data.semantic)&&data.semantic.length===6&&data.semantic.every((v,i)=>Number.isInteger(v)&&v>=0&&v<=(i<4?3:i===4?1:2))&&Array.isArray(data.breakdown)&&data.breakdown.every(x=>x&&typeof x.name==="string"&&Number.isFinite(x.earned)&&Number.isFinite(x.max)&&x.earned>=0&&x.earned<=x.max)&&Array.isArray(data.issues)&&data.issues.every(x=>x&&typeof x==="object")&&strings(data.reasons)&&strings(data.strengths));
 }
 async function requestWritingFeedback(task,answer,endpoint){
- const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),task.schoolId==="rikkyo"?55000:30000);
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),task.feedbackSchema==="story-v1"?55000:30000);
  try{
   const response=await fetch(`${endpoint}/v1/grade-writing`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({task,answer}),signal:controller.signal}),raw=await response.text(),data=(()=>{try{return JSON.parse(raw)}catch{return{}}})();
   if(!response.ok){if(data.error==="usage_limit_reached"||Number(data.cloudflareCode)===3036)throw new Error("AI採点の利用上限に達しました。Cloudflareの利用上限がリセットされた後に、もう一度お試しください。");throw new Error(data.message||(response.status===429?"Cloudflare側の一時的な利用上限に達しました。少し時間をおいてから、もう一度お試しください。":"AI採点を利用できませんでした。"))}
-  if(!validateAIFeedback(data,task.maxScore)||task.schoolId==="rikkyo"&&!validateStoryFeedback(data,task,answer))throw new Error("AI採点結果を安全に確認できませんでした。");return data;
+  if(!validateAIFeedback(data,task.maxScore)||task.feedbackSchema==="story-v1"&&!validateStoryFeedback(data,task,answer))throw new Error("AI採点結果を安全に確認できませんでした。");return data;
  }catch(error){if(controller.signal.aborted)throw new Error("AI確認が時間内に終わりませんでした。答案は保存されています。");throw error}finally{clearTimeout(timeout)}
 }
-function validateStoryFeedback(d,t,a){return d.questionId===t.taskId&&d.schoolId==='rikkyo'&&d.skill===t.skill&&d.official===false&&typeof d.revisedExample==='string'&&d.revisedExample.length<=1500&&Array.isArray(d.nextPractice)&&d.nextPractice.every(x=>typeof x==='string')&&d.breakdown.length===7&&d.breakdown.every(x=>Number.isInteger(x.earned)&&x.max===4)&&d.issues.every(x=>['must_fix','improve'].includes(x.severity)&&typeof x.original==='string'&&x.original.length>0&&a.includes(x.original)&&typeof x.correction==='string'&&typeof x.explanationJa==='string')}
+function validateStoryFeedback(d,t,a){return d.questionId===t.taskId&&d.schoolId===t.schoolId&&d.skill===t.skill&&d.official===false&&typeof d.revisedExample==='string'&&d.revisedExample.length<=1500&&Array.isArray(d.nextPractice)&&d.nextPractice.every(x=>typeof x==='string')&&d.breakdown.length===7&&d.breakdown.every(x=>Number.isInteger(x.earned)&&x.max===4)&&d.issues.every(x=>['must_fix','improve'].includes(x.severity)&&typeof x.original==='string'&&x.original.length>0&&a.includes(x.original)&&typeof x.correction==='string'&&typeof x.explanationJa==='string')}
 root.ENGLISH_WRITING_FEEDBACK=Object.freeze({aiAnswerFingerprint,aiFeedbackMarkup,validateAIFeedback,requestWritingFeedback});
 })(typeof globalThis!=='undefined'?globalThis:this);
