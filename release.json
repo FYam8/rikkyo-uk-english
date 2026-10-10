@@ -4,7 +4,7 @@
   "status": "production-ready",
   "releaseDate": "2026-10-10",
   "sourceRepository": "FYam8/rikkyo-uk-english",
-  "candidateHead": "bd9f1dcac29f39a04a010a877b27870f815ef57d",
+  "candidateHead": "29fae010d9649c05ebb222ea35edcccd6372e73b",
   "sharedEngine": {
     "version": "1.1.0",
     "sourceCommit": "786d743978a4a498595ee90686ada07f3fddbf4a"
@@ -14,14 +14,14 @@
     "sourceCommit": "364af470f503c8424d305bb99168c0aca8d78c8d"
   },
   "verification": {
-    "candidateRun": 38085435636,
+    "candidateRun": 38086623495,
     "candidateAttempts": [
       1,
       2
     ],
-    "candidateHead": "bd9f1dcac29f39a04a010a877b27870f815ef57d",
+    "candidateHead": "29fae010d9649c05ebb222ea35edcccd6372e73b",
     "conclusion": "success",
-    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38085435636",
+    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38086623495",
     "cleanConclusions": [
       "success",
       "success"
@@ -90,5 +90,34 @@
     "FY26B task/feedback remain hidden until final exam completion is recorded; paper completion is a learner declaration, not server-authenticated exam evidence.",
     "Unmatched short-answer practice uses explicit learner self-review; it is not automatic semantic grading."
   ],
-  "schemaVersion": 2
+  "schemaVersion": 2,
+  "writingRelease": {
+    "taskCount": 4,
+    "taskIds": [
+      "FY25A:Q9",
+      "FY25B:Q9",
+      "FY26A:Q8",
+      "FY26B:Q8"
+    ],
+    "official": false,
+    "schoolScoresUnchanged": true,
+    "workerSourceCommit": "4bc96bec8ed1190fe2dbb4ee17850007469ad72a",
+    "browserEnvironments": [
+      "Desktop Chromium",
+      "Android Pixel 7 Chromium emulation",
+      "iPhone 13 WebKit emulation"
+    ],
+    "browserLoops": [
+      1,
+      2
+    ],
+    "paperHoldoutCompletion": "learner declaration after prior route completion",
+    "workerTimeoutMs": 90000,
+    "clientTimeoutMs": 95000,
+    "qualityEvidence": "docs/writing-ai-quality-20261010.json",
+    "acceptedQualityPasses": [
+      3,
+      4
+    ]
+  }
 }

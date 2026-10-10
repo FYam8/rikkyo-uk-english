@@ -34,8 +34,8 @@
   "releaseStatus": "production-ready",
   "releaseVersion": "1.0.2",
   "releaseEvidence": {
-    "candidateHead": "bd9f1dcac29f39a04a010a877b27870f815ef57d",
-    "cleanWorkflowRun": 38085435636,
+    "candidateHead": "29fae010d9649c05ebb222ea35edcccd6372e73b",
+    "cleanWorkflowRun": 38086623495,
     "cleanAttempts": [
       1,
       2
@@ -44,7 +44,7 @@
       "success",
       "success"
     ],
-    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38085435636",
+    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38086623495",
     "postMergePolicy": {
       "required": true,
       "workflow": "verify",
