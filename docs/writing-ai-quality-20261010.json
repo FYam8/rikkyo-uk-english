@@ -1,0 +1,873 @@
+{
+  "model": "@cf/openai/gpt-oss-20b",
+  "workerSourceCommit": "4bc96bec8ed1190fe2dbb4ee17850007469ad72a",
+  "previewDeploymentId": "974dc0da78df42d4bce7eaee07a27d0f",
+  "acceptedConsecutivePasses": [
+    3,
+    4
+  ],
+  "caseCountPerPass": 8,
+  "runs": [
+    {
+      "pass": 3,
+      "conclusion": "CLEAN",
+      "cases": [
+        {
+          "case": "good",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 87,
+          "score": 28,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "One morning I woke up and discovered that I could speak to birds. I felt excited, but a sparrow asked me to rescue its friend from a locked shed. I followed it through the garden and found a frightened robin inside. Although I was nervous, I asked my neighbour for the key and gently opened the door. The robin flew out safely and sang a beautiful song. That evening, I felt proud because my unusual ability had helped someone. I hoped I could use it again tomorrow.",
+          "generatedAt": "2026-10-10T21:09:05.984Z"
+        },
+        {
+          "case": "grammar",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 87,
+          "score": 26,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 2,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [
+            {
+              "severity": "must_fix",
+              "category": "文法",
+              "original": "One morning I wake up",
+              "correction": "One morning I woke up",
+              "explanationJa": "時制が不一致で、動作が過去形であるべきです。"
+            },
+            {
+              "severity": "must_fix",
+              "category": "文法",
+              "original": "a sparrow ask me",
+              "correction": "a sparrow asked me",
+              "explanationJa": "動詞の時制が過去形で統一される必要があります。"
+            }
+          ],
+          "revisedExample": "One morning I woke up and discovered that I could speak to birds. I felt excited, but a sparrow asked me to rescue its friend from a locked shed. I followed it through the garden and found a frightened robin inside. Although I was nervous, I asked my neighbour for the key and gently opened the door. The robin flew out safely and sang a beautiful song. That evening, I felt proud because my unusual ability had helped someone. I hoped I could use it again tomorrow.",
+          "generatedAt": "2026-10-10T21:09:09.554Z"
+        },
+        {
+          "case": "short",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 9,
+          "score": 8,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 0,
+              "max": 4
+            }
+          ],
+          "issues": [
+            {
+              "severity": "must_fix",
+              "category": "課題達成",
+              "original": "I woke up and could fly. I felt happy.",
+              "correction": "",
+              "explanationJa": "課題の要件を満たしていない。80〜100語で、起床後の新しい能力を使った一日全体を描写する必要があります。"
+            }
+          ],
+          "revisedExample": "I woke up and discovered I could fly. At first I was amazed and felt a rush of excitement. I flew over my neighborhood, watching the streetlights blink below. I tried to land on my balcony, but the wind was too strong, and I crashed into a potted plant. My mother called me down, and I felt embarrassed. Later, I used my new ability to help a neighbor pick up fallen apples from the garden. By sunset, I was tired but thrilled by my new power.",
+          "generatedAt": "2026-10-10T21:09:12.387Z"
+        },
+        {
+          "case": "off-task",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 83,
+          "score": 16,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [
+            {
+              "severity": "must_fix",
+              "category": "課題達成",
+              "original": "My favourite sport is football.",
+              "correction": "",
+              "explanationJa": "課題の条件に合っていません。"
+            }
+          ],
+          "revisedExample": "My favourite sport is football. One morning I woke up and discovered I could hear the thoughts of the ball. At first I felt nervous, but the idea of predicting its bounce thrilled me. I practiced with my friends after school, and the ball guided me to perfect passes. On Saturday, during a match, the ball whispered the exact angle to beat the goalkeeper. My teammates were amazed, and I felt like a superhero on the field. The new power made every game exciting, but I also learned to respect the ball’s quiet voice.",
+          "generatedAt": "2026-10-10T21:09:15.406Z"
+        },
+        {
+          "case": "picture-A",
+          "questionId": "FY25A:Q9",
+          "status": 200,
+          "wordCount": 89,
+          "score": 28,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "Jack and Jane climbed out of the boat and walked along the sunny beach. They wanted to explore the beautiful island, so they followed a narrow path into the trees. Suddenly, they heard a strange noise above their heads. Jane felt frightened, but Jack pointed at several playful monkeys on the branches. The animals jumped from tree to tree while the children watched in surprise. After taking some photographs, they returned safely to their boat. They were tired but excited, and they agreed that their adventure had been wonderful.",
+          "generatedAt": "2026-10-10T21:10:23.795Z"
+        },
+        {
+          "case": "picture-B",
+          "questionId": "FY25B:Q9",
+          "status": 200,
+          "wordCount": 89,
+          "score": 28,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "It was a warm and sunny Saturday afternoon. Anna decided to ride her bicycle to the lake for a picnic. On the way, she stopped at a small shop and bought some sandwiches and a drink. The friendly shopkeeper wished her a lovely day. When she reached the water, she sat on the grass and watched ducks swimming nearby. She felt peaceful as she ate her lunch and enjoyed the sunshine. Later, she packed everything carefully and cycled home, happy that she had spent such a pleasant afternoon outside.",
+          "generatedAt": "2026-10-10T21:10:27.637Z"
+        },
+        {
+          "case": "over",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 113,
+          "score": 26,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 2,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "One morning I woke up and discovered that I could speak to birds. I felt excited, and a sparrow asked me to rescue its friend from a locked shed. I followed it through the garden and found a frightened robin inside. Though nervous, I asked my neighbour for the key and gently opened the door. The robin flew out safely and sang a beautiful song. That evening I felt proud that my unusual ability had helped someone, and I hoped to use it again tomorrow. I enjoyed helping my friends and exploring the garden with my new power.",
+          "generatedAt": "2026-10-10T21:10:30.036Z"
+        },
+        {
+          "case": "holdout",
+          "questionId": "FY26B:Q8",
+          "status": 200,
+          "wordCount": 90,
+          "score": 28,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "One morning I found a mysterious door behind the school library. I opened it and stepped into a bright forest filled with enormous flowers. At first I felt frightened because I could not see the way back. Then a small fox appeared and offered to guide me. We crossed a narrow bridge and found the door hidden behind a tree. I thanked the fox and hurried through it before the bell rang. Back at school, I felt relieved but excited. I wondered whether my strange new friend would remember me.",
+          "generatedAt": "2026-10-10T21:11:42.287Z"
+        }
+      ]
+    },
+    {
+      "pass": 4,
+      "conclusion": "CLEAN",
+      "cases": [
+        {
+          "case": "good",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 87,
+          "score": 28,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "One morning I woke up and discovered that I could speak to birds. I felt excited, but a sparrow asked me to rescue its friend from a locked shed. I followed it through the garden and found a frightened robin inside. Although I was nervous, I asked my neighbour for the key and gently opened the door. The robin flew out safely and sang a beautiful song. That evening, I felt proud because my unusual ability had helped someone. I hoped I could use it again tomorrow.",
+          "generatedAt": "2026-10-10T21:12:31.208Z"
+        },
+        {
+          "case": "grammar",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 87,
+          "score": 25,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 3,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 2,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [
+            {
+              "severity": "must_fix",
+              "category": "文法",
+              "original": "One morning I wake up and discovered",
+              "correction": "One morning I woke up and discovered",
+              "explanationJa": "時制が混在しており、過去形に統一する必要があります。"
+            },
+            {
+              "severity": "must_fix",
+              "category": "文法",
+              "original": "a sparrow ask me",
+              "correction": "a sparrow asked me",
+              "explanationJa": "動詞の時制が現在形で、過去形に直すべきです。"
+            }
+          ],
+          "revisedExample": "One morning I woke up and discovered that I could speak to birds. I felt excited, but a sparrow asked me to rescue its friend from a locked shed. I followed it through the garden and found a frightened robin inside. Although I was nervous, I asked my neighbour for the key and gently opened the door. The robin flew out safely and sang a beautiful song. That evening, I felt proud because my unusual ability had helped someone. I hoped I could use it again tomorrow.",
+          "generatedAt": "2026-10-10T21:12:33.718Z"
+        },
+        {
+          "case": "short",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 9,
+          "score": 8,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 0,
+              "max": 4
+            }
+          ],
+          "issues": [
+            {
+              "severity": "must_fix",
+              "category": "課題達成",
+              "original": "I woke up and could fly. I felt happy.",
+              "correction": "",
+              "explanationJa": "課題の要件を満たしていない。80〜100語で、能力を使った一日全体を描写する必要がある。"
+            },
+            {
+              "severity": "must_fix",
+              "category": "内容",
+              "original": "I woke up and could fly. I felt happy.",
+              "correction": "",
+              "explanationJa": "物語の内容が極めて簡潔で、出来事や感情、問題点が欠如している。"
+            },
+            {
+              "severity": "must_fix",
+              "category": "構成",
+              "original": "I woke up and could fly. I felt happy.",
+              "correction": "",
+              "explanationJa": "物語の構成が不十分で、導入・展開・結末がない。"
+            }
+          ],
+          "revisedExample": "One morning I woke up and discovered I could fly. I felt a rush of excitement as I lifted off the bed and hovered over my bedroom. I flew to the kitchen, where the cat stared up at me in surprise. I tried to land on the table, but my feet slipped and I crashed into a stack of books, scattering them everywhere. After cleaning up, I decided to explore the neighborhood. I flew past the park, over the river, and finally returned home, exhausted but thrilled by my new power.",
+          "generatedAt": "2026-10-10T21:12:36.875Z"
+        },
+        {
+          "case": "off-task",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 83,
+          "score": 16,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 0,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [
+            {
+              "severity": "must_fix",
+              "category": "課題達成",
+              "original": "My favourite sport is football.",
+              "correction": "",
+              "explanationJa": "課題の指示に沿っていないため、課題達成ができていません。"
+            }
+          ],
+          "revisedExample": "My favourite sport is football. One morning I woke up and discovered I could hear the thoughts of the ball. At first I felt nervous, but the idea of predicting its bounce thrilled me. I practiced with my friends after school, and the ball guided me to perfect passes. On Saturday, during a match, the ball whispered the exact angle to beat the goalkeeper. My teammates were amazed, and I felt like a superhero on the field. The new power made every game exciting, but I also learned to respect the ball’s quiet voice.",
+          "generatedAt": "2026-10-10T21:12:42.297Z"
+        },
+        {
+          "case": "picture-A",
+          "questionId": "FY25A:Q9",
+          "status": 200,
+          "wordCount": 89,
+          "score": 28,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "Jack and Jane climbed out of the boat and walked along the sunny beach. They wanted to explore the beautiful island, so they followed a narrow path into the trees. Suddenly, they heard a strange noise above their heads. Jane felt frightened, but Jack pointed at several playful monkeys on the branches. The animals jumped from tree to tree while the children watched in surprise. After taking some photographs, they returned safely to their boat. They were tired but excited, and they agreed that their adventure had been wonderful.",
+          "generatedAt": "2026-10-10T21:13:52.352Z"
+        },
+        {
+          "case": "picture-B",
+          "questionId": "FY25B:Q9",
+          "status": 200,
+          "wordCount": 89,
+          "score": 28,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "It was a warm and sunny Saturday afternoon. Anna decided to ride her bicycle to the lake for a picnic. On the way, she stopped at a small shop and bought some sandwiches and a drink. The friendly shopkeeper wished her a lovely day. When she reached the water, she sat on the grass and watched ducks swimming nearby. She felt peaceful as she ate her lunch and enjoyed the sunshine. Later, she packed everything carefully and cycled home, happy that she had spent such a pleasant afternoon outside.",
+          "generatedAt": "2026-10-10T21:13:56.485Z"
+        },
+        {
+          "case": "over",
+          "questionId": "FY26A:Q8",
+          "status": 200,
+          "wordCount": 113,
+          "score": 26,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 2,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "One morning I woke up and discovered that I could speak to birds. I felt excited when a sparrow asked me to help rescue its friend from a locked shed. I followed the bird through the garden, finding a frightened robin trapped inside. I called my neighbor for a key, opened the door, and the robin flew out safely. The robin sang a beautiful song, and I felt proud of my new ability. That evening I reflected on how my gift could help others and decided to keep listening to the birds.",
+          "generatedAt": "2026-10-10T21:14:01.116Z"
+        },
+        {
+          "case": "holdout",
+          "questionId": "FY26B:Q8",
+          "status": 200,
+          "wordCount": 90,
+          "score": 28,
+          "maxScore": 28,
+          "breakdown": [
+            {
+              "name": "課題達成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "内容",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "構成",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "文法",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語彙",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "結束性",
+              "earned": 4,
+              "max": 4
+            },
+            {
+              "name": "語数",
+              "earned": 4,
+              "max": 4
+            }
+          ],
+          "issues": [],
+          "revisedExample": "One morning I found a mysterious door behind the school library. I opened it and stepped into a bright forest filled with enormous flowers. At first I felt frightened because I could not see the way back. Then a small fox appeared and offered to guide me. We crossed a narrow bridge and found the door hidden behind a tree. I thanked the fox and hurried through it before the bell rang. Back at school, I felt relieved but excited. I wondered whether my strange new friend would remember me.",
+          "generatedAt": "2026-10-10T21:14:04.226Z"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Earlier validation and timeout failures are not counted as CLEAN.",
+    "Rate-limit resets were observed before retrying test traffic.",
+    "These are controlled learning-feedback cases, not official exam marks or a guarantee for every possible answer."
+  ]
+}

@@ -39,10 +39,10 @@ assert.equal(config.storage.syncDbVersion,7);
 assert.equal(config.progress.enabled,true);
 assert.equal(config.progress.endpoint,'https://rikkyo-uk-progress-api.fyam8.workers.dev');
 assert.equal(config.progress.appId,'rikkyo-uk-english');
-assert.equal(config.aiWriting.enabled,false);
+assert.equal(config.aiWriting.enabled,true);
 
 const serialized=JSON.stringify(plain(config));
-for(const forbidden of ['waseshibu.adaptive','waseshibu-progress-sync','waseshibu-progress-api','waseshibu-writing-grader'])assert.ok(!serialized.includes(forbidden),`Rikkyo adapter leaked Waseda identity: ${forbidden}`);
+for(const forbidden of ['waseshibu.adaptive','waseshibu-progress-sync','waseshibu-progress-api'])assert.ok(!serialized.includes(forbidden),`Rikkyo adapter leaked Waseda identity: ${forbidden}`);
 
 assert.equal(policy.routeRole('FY26A'),'初回診断');
 assert.equal(policy.routeRole('FY26B'),'最終判定');

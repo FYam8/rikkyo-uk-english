@@ -11,7 +11,7 @@ const json=p=>JSON.parse(read(p));
 const gate=json('release-gate.json');
 const release=json('release.json');
 assert.equal(gate.schemaVersion,2);
-assert.equal(release.version,'1.0.1');
+assert.equal(release.version,'1.0.2');
 assert.equal(release.status,'production-ready');
 assert.equal(gate.deployAllowed,true);
 assert.equal(gate.releaseCandidate,false);
@@ -90,9 +90,9 @@ assert.ok(coverage.suppliedWrittenCoverage.FY24A.sourceMissing.includes('Q7'));
 assert.ok(coverage.suppliedWrittenCoverage.FY26B.sourceMissing.includes('Q1 listening audio/transcript'));
 
 const writing=json('data/writing-runtime-policy.json');
-assert.equal(writing.status,'explicit_non_runtime_until_marking_authority');
+assert.equal(writing.status,'unofficial_story_ai_feedback');
 assert.equal(writing.rules.doNotInventPictureAssets,true);
-assert.ok(writing.tasks.every(x=>x.runtimeEnabled===false));
+assert.ok(writing.tasks.every(x=>x.runtimeEnabled===true));
 
 const holdout=json('data/fy26b-holdout-source.json');
 assert.equal(holdout.trainingExcluded,true);

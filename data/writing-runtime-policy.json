@@ -1,17 +1,18 @@
 {
   "schemaVersion": 1,
-  "status": "explicit_non_runtime_until_marking_authority",
-  "aiWritingEnabled": false,
+  "status": "unofficial_story_ai_feedback",
+  "aiWritingEnabled": true,
   "officialMarkingAuthorityAvailable": false,
   "rules": {
     "doNotInventPictureAssets": true,
-    "doNotAutoScoreOpenWriting": true,
+    "doNotAutoScoreOpenWriting": false,
     "preserveSourcePrompt": true,
     "futureEnablementRequires": [
       "source asset available in app when required",
       "Rikkyo-specific marking/self-review contract",
       "browser regression"
-    ]
+    ],
+    "doNotAddToExamScores": true
   },
   "tasks": [
     {
@@ -20,8 +21,9 @@
       "sourcePage": 7,
       "type": "picture_story_writing",
       "approxWords": "80-100",
-      "runtimeEnabled": false,
-      "reason": "The supplied PDF contains picture-sequence source material. The app must not recreate or replace those pictures, and no official marking authority is supplied."
+      "runtimeEnabled": true,
+      "reason": "Source verified; unofficial learning feedback only.",
+      "holdoutCompletionRequired": false
     },
     {
       "examId": "FY25B",
@@ -29,8 +31,9 @@
       "sourcePage": 7,
       "type": "picture_story_writing",
       "approxWords": "80-100",
-      "runtimeEnabled": false,
-      "reason": "The supplied PDF contains picture-sequence source material. The app must not recreate or replace those pictures, and no official marking authority is supplied."
+      "runtimeEnabled": true,
+      "reason": "Source verified; unofficial learning feedback only.",
+      "holdoutCompletionRequired": false
     },
     {
       "examId": "FY26A",
@@ -38,8 +41,9 @@
       "sourcePage": 10,
       "type": "open_writing",
       "approxWords": "80-100",
-      "runtimeEnabled": false,
-      "reason": "Prompt is preserved from source, but no official marking authority is supplied and Rikkyo AI Writing is disabled."
+      "runtimeEnabled": true,
+      "reason": "Source verified; unofficial learning feedback only.",
+      "holdoutCompletionRequired": false
     },
     {
       "examId": "FY26B",
@@ -47,13 +51,16 @@
       "sourcePage": 10,
       "type": "open_writing",
       "approxWords": "80-100",
-      "runtimeEnabled": false,
-      "reason": "Final holdout is intentionally runtime-locked; writing remains part of the protected holdout source."
+      "runtimeEnabled": true,
+      "reason": "Source verified; unofficial learning feedback only.",
+      "holdoutCompletionRequired": true
     }
   ],
   "selfReviewPractice": {
     "enabled": true,
     "examIds": [
+      "FY25A",
+      "FY25B",
       "FY26A"
     ],
     "sourceQuestionId": "R26-ENG-A-Q8",
@@ -61,6 +68,6 @@
     "automaticScoring": false,
     "countsAsExamCompletion": false,
     "rawTextCloudUpload": false,
-    "policy": "Local draft and app-authored self-review checklist; original exam marking remains disabled. FY25 images unavailable; FY26B excluded."
+    "policy": "Local drafts and AI history; paper FY26B completion is learner-attested after prior runtime exams. No official scores, no automatic mastery."
   }
 }

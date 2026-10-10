@@ -1,0 +1,3 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import{createHash}from'node:crypto';
+const lock=JSON.parse(fs.readFileSync('writing-shared.lock.json'));for(const[file,hash]of Object.entries(lock.files))assert.equal(createHash('sha256').update(fs.readFileSync(file)).digest('hex'),hash);assert.equal(lock.sourceRepository,'FYam8/waseshibu-english');
+const tasks=fs.readFileSync('schools/rikkyo/writingTasks.js','utf8');assert.ok(!tasks.includes('FY26B'));assert.ok(!tasks.includes('mysterious door'));assert.ok(fs.existsSync('assets/writing/FY25A-Q9.png'));assert.ok(fs.existsSync('assets/writing/FY25B-Q9.png'));console.log('Shared writing source pin, exact module integrity, original assets, holdout lazy fetch PASS');
