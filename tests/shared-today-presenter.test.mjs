@@ -34,5 +34,5 @@ const app=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8');
 for(const method of ['content','learningActions','futureConfirmations'])assert.ok(app.includes('TODAY_PRESENTER.'+method));
 assert.doesNotMatch(app,/class=["']?(?:future-confirmations|queued-actions|alternative-actions|daily-summary)/,'shared markup duplicated in app');
 const index=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-assert.ok(index.includes('src="ui/today-presenter.js"'));assert.ok(index.indexOf('ui/today-presenter.js')<index.indexOf('src="app.js"'));
+assert.ok(index.includes('src="ui/today-presenter.js"'));assert.ok(index.indexOf('ui/today-presenter.js')<index.indexOf('src="app.js'));
 console.log('Shared Today presenter contract, immutability, target continuation, escaping and delegation: CLEAN');
