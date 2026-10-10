@@ -4,7 +4,7 @@
   "status": "production-ready",
   "releaseDate": "2026-10-10",
   "sourceRepository": "FYam8/rikkyo-uk-english",
-  "candidateHead": "29fae010d9649c05ebb222ea35edcccd6372e73b",
+  "candidateHead": "c93e241691d6ffa3427d024a0ce85f097493a87b",
   "sharedEngine": {
     "version": "1.1.0",
     "sourceCommit": "786d743978a4a498595ee90686ada07f3fddbf4a"
@@ -14,14 +14,14 @@
     "sourceCommit": "364af470f503c8424d305bb99168c0aca8d78c8d"
   },
   "verification": {
-    "candidateRun": 38086623495,
+    "candidateRun": 38090744494,
     "candidateAttempts": [
       1,
       2
     ],
-    "candidateHead": "29fae010d9649c05ebb222ea35edcccd6372e73b",
+    "candidateHead": "c93e241691d6ffa3427d024a0ce85f097493a87b",
     "conclusion": "success",
-    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38086623495",
+    "workflowUrl": "https://github.com/FYam8/rikkyo-uk-english/actions/runs/38090744494",
     "cleanConclusions": [
       "success",
       "success"
@@ -136,10 +136,17 @@
     ],
     "official": false,
     "schoolScoresUnchanged": true,
-    "workerSourceCommit": "daa883fdaa448df6d8b2f89691c7d5637e0463ab",
+    "workerSourceCommit": "9ed166015cff7942fa915b45c1a5f84cb34ecc5a",
     "feedbackSchema": "reading-v1",
     "sourceLanguagePolicy": "Japanese reason for FY25A; short English answers for FY26A; no minimum word count",
     "staleAndFailurePolicy": "Retain answers; invalidate edited feedback; no weakness registration until successful fresh AI feedback",
-    "verificationPolicy": "Current exact-head workflow must pass both browser acceptance loops before publication"
+    "verificationPolicy": "Current exact-head workflow must pass both browser acceptance loops before publication",
+    "qualityEvidence": "docs/reading-ai-quality-20261010.json",
+    "acceptedQualityPasses": [
+      1,
+      2
+    ],
+    "candidateBrowserRun": 38090744494,
+    "sourceReport": "docs/reading-ai-release-20261010.md"
   }
 }
