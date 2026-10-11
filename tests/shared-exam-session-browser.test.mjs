@@ -18,17 +18,17 @@ let browser;
 try{
  browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage']});
  if(isRikkyo)for(const width of [320,390,768,1280]){
-  const page=await browser.newPage({viewport:{width,height:844}});
-  await page.goto(url+'/index.html');await page.waitForFunction(()=>window.__RIKKYO_APP_READY__);
   for(const id of ['FY24A','FY24B','FY25A','FY25B','FY26A']){
-   await page.evaluate(id=>__RIKKYO_APP__.beginAttempt(id),id);
+   const page=await browser.newPage({viewport:{width,height:844}});
+   await page.goto(url+'/index.html');await page.waitForFunction(()=>window.__RIKKYO_APP_READY__);
+   await page.evaluate(id=>{__RIKKYO_APP__.openExam(id);__RIKKYO_APP__.beginAttempt(id)},id);
    const rows=await page.locator('.choice-grid label,.correction-row label').evaluateAll(labels=>labels.map(label=>({control:label.querySelector('input').getBoundingClientRect().width,text:label.querySelector('.choice-text')?.getBoundingClientRect().width,row:label.getBoundingClientRect().width})));
    assert.ok(rows.length,'choice rows missing '+id);
    assert.ok(rows.every(r=>r.control<=24&&r.text>=r.row-45),width+' '+id+' cramped answer choices');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,width+' '+id+' horizontal overflow');
    console.log('Answer layout '+width+' '+id+': CLEAN');
+   await page.close();
   }
-  await page.close();
  }
  const scenarios=isRikkyo?['fresh','attempt','subset','reading','renderer','drill','resume','backup','mobile','coverage','crossyear','scheduler','holdout']:['fresh','attempt','drill','drill-legacy-choice','future'];
  for(const scenario of scenarios){
