@@ -77,7 +77,8 @@
       "tests/reading-ai-production.test.mjs": "2097e2de893fe92cb5f2e1fde7871247f3545ccb030355cf3b21cd98a782d8b7",
       "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed",
       "tests/answer-widget-browser-checks.mjs": "7b47f2d5aaad781550074300a43ad686946e3fb6c6baab5c7d259312430234f5",
-      "schools/rikkyo/ui-compat.css": "4fca089eca0db00a956197eb37375a316c3049a67023768be9bf210f57fd5c64"
+      "schools/rikkyo/ui-compat.css": "4fca089eca0db00a956197eb37375a316c3049a67023768be9bf210f57fd5c64",
+      "tests/shared-ui-migration-hold.test.mjs": "615689703c0fe3af9000af7fb6563fb7cf6ba8937a4366cb0bca8731d2e44f3d"
     },
     "postMergePolicy": {
       "required": true,

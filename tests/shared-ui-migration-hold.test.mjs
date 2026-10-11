@@ -29,7 +29,7 @@ for(const file of ['ui/answer-widgets.js','ui/base.css','ui/components.js','ui/c
 }
 
 const index=read('index.html');
-for(const path of ['schools/rikkyo/theme.css','ui/base.css','schools/rikkyo/ui-compat.css'])assert.ok(index.includes('href="'+path+'"'),path+' stylesheet missing');
+for(const path of ['schools/rikkyo/theme.css','ui/base.css','schools/rikkyo/ui-compat.css'])assert.ok((index.includes('href="'+path+'"')||index.includes('href="'+path+'?')),path+' stylesheet missing');
 for(const path of ['ui/contract.js','schools/rikkyo/ui.js','ui/shell.js','ui/components.js'])assert.ok(index.includes('src="'+path+'"'),path+' script missing');
 assert.ok(index.includes('ENGLISH_UI_SHELL.mount(window.ENGLISH_SCHOOL_UI)'));
 assert.ok(!index.includes('href="styles.css"'),'prototype CSS must not be loaded');
