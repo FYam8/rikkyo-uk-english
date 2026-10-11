@@ -7,3 +7,15 @@ input[type=text],textarea{width:100%;padding:10px 11px;border:1px solid var(--li
 .feedback{margin-top:10px;padding:10px;border-radius:10px;background:var(--bluebg)}.feedback.good{background:var(--okbg)}.feedback.bad{background:var(--badbg)}.answer-note{white-space:pre-wrap;font-size:.9rem}
 .practice-context{white-space:pre-wrap;background:var(--bluebg);border-radius:10px;padding:10px;margin:10px 0}
 @media(max-width:780px){.exam-list{grid-template-columns:1fr}.slot-row{grid-template-columns:1fr}}
+
+/* Choice controls must not inherit full-width text-field styles from .q. */
+.choice-grid label,.correction-row label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;min-width:0;line-height:1.6}
+.choice-grid input[type=radio],.choice-grid input[type=checkbox],.correction-row input[type=checkbox]{flex:0 0 20px;width:20px;height:20px;min-width:20px;margin:3px 0 0;padding:0;accent-color:var(--brand)}
+.choice-text{display:block;flex:1;min-width:0;overflow-wrap:anywhere;text-align:left}
+.q,.choice-grid,.correction-row,.slot-row,.route-main{min-width:0}
+.q textarea,.q input[type=text],.reorder-answer,.practice-context,.feedback,.answer-note{overflow-wrap:anywhere}
+.q textarea{resize:vertical}
+.missing-word-row{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.missing-word-row input{flex:1 1 120px;min-width:0;width:auto}
+.q .row>b{min-width:0;overflow-wrap:anywhere}
+@media(max-width:380px){.answer-sheet-head{flex-wrap:wrap}.sheet-actions{gap:4px}.sheet-actions button{padding:5px 7px}.page-label{flex-wrap:wrap}.q .row.space{gap:6px}}

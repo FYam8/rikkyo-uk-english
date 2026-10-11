@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "c22b7a5119e64f0755ac00540d4106a0259b230acc1952aa3d019431ebb5ac81",
+      "app.js": "5af8e8caa7b0a6026fe341ecd8eead1c17b6468f27000f4342491e52a19fb113",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -57,7 +57,7 @@
       ".github/workflows/verify.yml": "2fa385b1bca2eeb46bf8e97d386620bf81c8053b0c28ddb5f85a6e4ed54895d4",
       "tests/material-integrity.test.mjs": "824049b3ad3c58134cba9241cd4c59bef6f31c596de9970bacf0046fef95d3a1",
       "tests/material-browser-checks.mjs": "a90ce9b4f7a1034567e1d10b803c1650394d08b1a5363c8c20e1c9d4cf0f8882",
-      "tests/shared-exam-session-browser.test.mjs": "72d8611d83d043a3f87ea16f8ab481193a8f716de641805460b172c69abaa2b2",
+      "tests/shared-exam-session-browser.test.mjs": "3f86fb6f5150e37dd8bfa8bccf57dadd6acae413a8581e1295460554e543f037",
       "index.html": "33ea14432f41e9b3ee9a2fb229e3c144d09b0adcd9625b6d61618a7ea49e07c8",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "a0135de017703c76c3146ac922676e4a88d62515a9961061ed84e23ea3f6813d",
@@ -76,7 +76,8 @@
       "tests/rikkyo-browser-smoke.html": "712b21e2e910831021780be90fd769dd44f43255759a894c294690f5160b8330",
       "tests/reading-ai-production.test.mjs": "2097e2de893fe92cb5f2e1fde7871247f3545ccb030355cf3b21cd98a782d8b7",
       "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed",
-      "tests/answer-widget-browser-checks.mjs": "7b47f2d5aaad781550074300a43ad686946e3fb6c6baab5c7d259312430234f5"
+      "tests/answer-widget-browser-checks.mjs": "7b47f2d5aaad781550074300a43ad686946e3fb6c6baab5c7d259312430234f5",
+      "schools/rikkyo/ui-compat.css": "4fca089eca0db00a956197eb37375a316c3049a67023768be9bf210f57fd5c64"
     },
     "postMergePolicy": {
       "required": true,
@@ -86,7 +87,13 @@
     },
     "candidateRunAttempt": 1,
     "candidateAttemptsMeaning": "Acceptance loop passes within the workflow; not GitHub run attempts",
-    "browserImageSynchronization": "Original source image loading is awaited before the unchanged image-integrity assertion. Test-only patch; current exact-head and post-merge main workflows must complete two acceptance loops before deployment."
+    "browserImageSynchronization": "Original source image loading is awaited before the unchanged image-integrity assertion. Test-only patch; current exact-head and post-merge main workflows must complete two acceptance loops before deployment.",
+    "layoutHotfix": {
+      "date": "2026-10-11",
+      "baseCommit": "55a56576a2c01c658469a22e342f32ee81266fa5",
+      "changes": "Fixed full-width choice controls and grouped option labels; added 20 cross-year viewport checks. Browser verification required in exact-head CI before Pages deploy.",
+      "localBrowser": "Unavailable: browser download failed; no local browser CLEAN claimed."
+    }
   },
   "limitations": [
     "No official answer key or official score model was supplied; app answers are independent and non-official.",
