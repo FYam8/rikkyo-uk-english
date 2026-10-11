@@ -57,7 +57,7 @@
       ".github/workflows/verify.yml": "2fa385b1bca2eeb46bf8e97d386620bf81c8053b0c28ddb5f85a6e4ed54895d4",
       "tests/material-integrity.test.mjs": "824049b3ad3c58134cba9241cd4c59bef6f31c596de9970bacf0046fef95d3a1",
       "tests/material-browser-checks.mjs": "a90ce9b4f7a1034567e1d10b803c1650394d08b1a5363c8c20e1c9d4cf0f8882",
-      "tests/shared-exam-session-browser.test.mjs": "acc35283102c8558142fbffd4f9ca0e61e9f3401530f9cd68ac9228241f1faaa",
+      "tests/shared-exam-session-browser.test.mjs": "24ce75dc04fe5eb1905477196b9937ec2285c3b9fe326a07f4a4bff00548e831",
       "index.html": "33ea14432f41e9b3ee9a2fb229e3c144d09b0adcd9625b6d61618a7ea49e07c8",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "a0135de017703c76c3146ac922676e4a88d62515a9961061ed84e23ea3f6813d",

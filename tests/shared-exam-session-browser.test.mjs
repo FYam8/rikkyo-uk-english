@@ -22,9 +22,9 @@ try{
    const page=await browser.newPage({viewport:{width,height:844}});
    await page.goto(url+'/index.html');await page.waitForFunction(()=>window.__RIKKYO_APP_READY__);
    await page.evaluate(id=>{__RIKKYO_APP__.openExam(id);__RIKKYO_APP__.beginAttempt(id)},id);
-   const rows=await page.locator('.choice-grid label,.correction-row label').evaluateAll(labels=>labels.map(label=>({control:label.querySelector('input').getBoundingClientRect().width,text:label.querySelector('.choice-text')?.getBoundingClientRect().width,row:label.getBoundingClientRect().width})));
+   const rows=await page.locator('.choice-grid label,.correction-row label').evaluateAll(labels=>labels.map(label=>({control:label.querySelector('input').getBoundingClientRect().width,text:label.querySelector('.choice-text')?.getBoundingClientRect().width,row:label.getBoundingClientRect().width,expected:label.clientWidth-parseFloat(getComputedStyle(label).paddingLeft)-parseFloat(getComputedStyle(label).paddingRight)-parseFloat(getComputedStyle(label).columnGap)-label.querySelector('input').getBoundingClientRect().width})));
    assert.ok(rows.length,'choice rows missing '+id);
-   assert.ok(rows.every(r=>r.control<=24&&r.text>=r.row-45),width+' '+id+' cramped answer choices');
+   assert.ok(rows.every(r=>r.control<=24&&r.text>=r.expected-1),width+' '+id+' cramped answer choices');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,width+' '+id+' horizontal overflow');
    console.log('Answer layout '+width+' '+id+': CLEAN');
    await page.close();
