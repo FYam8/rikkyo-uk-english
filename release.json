@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "5af8e8caa7b0a6026fe341ecd8eead1c17b6468f27000f4342491e52a19fb113",
+      "app.js": "5b1b59f0940313e6b047899d477bdc8724d9384759cee7eea5e1b37bfb6fba91",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -58,7 +58,7 @@
       "tests/material-integrity.test.mjs": "824049b3ad3c58134cba9241cd4c59bef6f31c596de9970bacf0046fef95d3a1",
       "tests/material-browser-checks.mjs": "a90ce9b4f7a1034567e1d10b803c1650394d08b1a5363c8c20e1c9d4cf0f8882",
       "tests/shared-exam-session-browser.test.mjs": "24ce75dc04fe5eb1905477196b9937ec2285c3b9fe326a07f4a4bff00548e831",
-      "index.html": "d0996e8ea902be73055647eeb57b4457bc3c3255e7a46be26f2b263413e45f9e",
+      "index.html": "1aa3786123f7a02b2693a40f721c31ef5c24add5f13cf69afad887b57c852953",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "a0135de017703c76c3146ac922676e4a88d62515a9961061ed84e23ea3f6813d",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
@@ -157,5 +157,19 @@
     ],
     "candidateBrowserRun": 38090744494,
     "sourceReport": "docs/reading-ai-release-20261010.md"
+  },
+  "answerHistory": {
+    "version": 1,
+    "date": "2026-10-18",
+    "scope": "explicit submitted answer records and protected per-device history",
+    "intermediateReview": "completed",
+    "browserCleanRounds": [
+      1,
+      2
+    ],
+    "widths": [
+      390,
+      1280
+    ]
   }
 }
