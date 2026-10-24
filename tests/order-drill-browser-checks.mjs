@@ -67,6 +67,11 @@ export async function runOrderDrillChecks(browser,url){
   // Restore the exact legacy mismatch from the reported screenshot. Completed logs survive.
   await p.evaluate(()=>{const a=__RIKKYO_APP__,s=a.getState();s.currentDrill.q=structuredClone(a.data().practice.find(q=>q.id==='rwo05'));s.currentDrill.answered=false;s.currentDrill.response='old unrelated draft';a.importPayload({format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:s},'replace');a.resumeDrill()});
   assert.equal((await read()).currentDrill.q.targetId,'word-order-past-perfect');assert.equal((await read()).currentDrill.response,null);assert.ok((await read()).drillLog.length>=2);
+  // A saved old confirmation must not earn mastery on the upgraded foundation item.
+  await p.evaluate(()=>{const a=__RIKKYO_APP__,s=a.getState(),d=s.currentDrill,w=s.weak[d.key];d.q.contentVersion=1;d.mode='confirm';d.response='legacy same-topic draft';w.status='pending';w.confirmStreak=1;w.reservedConfirm=[d.q.id];a.importPayload({format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:s},'replace');a.resumeDrill()});
+  const migrated=await read();assert.equal(migrated.currentDrill.mode,'train');assert.equal(migrated.weak[key].status,'active');assert.equal(migrated.weak[key].confirmStreak,0);
+  assert.equal(await p.evaluate(key=>{const a=__RIKKYO_APP__;return a.getState().weak[key].reservedConfirm.every(id=>a.data().practice.find(q=>q.id===id).level===3)},key),true);
+  assert.equal(migrated.recoveredDrills.at(-1).response,'legacy same-topic draft');
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   assert.deepEqual(errors,[]);console.log(`Order drill ${width}px: real taps/clicks, duplicate words, undo/clear, reload, 3+2 next day, negative answer, legacy mismatch CLEAN`);
   await c.close();

@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "4620121b7fc025a8d7778e118d337ce28456f7990c15f8123c3663453fc8c5d4",
+      "app.js": "46b1f8e34f88860d5ea41a1ec28491db223ca1d6e4510ceb1a940b19b8586201",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -83,9 +83,9 @@
       "tests/error-correction-browser-checks.mjs": "d40e0488b6ca94479e7d743b98a3130778a08d7dea92f5039b43340f515222c8",
       "styles.css": "fc81a0567c95b300d28b9f7301b03cdb2fefad66c17a46545456b1b375118815",
       "tests/order-drill.test.mjs": "5c8a22ca0276774951620e85f1a5a5f69b4a62b404bb8c246e442af0c3755373",
-      "tests/order-drill-browser-checks.mjs": "baec40aa916b7adfc870379a7dea14dcad5c6c4c66aa8c5fbe9ff839bc616d47",
+      "tests/order-drill-browser-checks.mjs": "222e0d2a1111622e7f993daf64e657d3578ec3a7faca6a2dae8bf714dfc98f2f",
       "tests/practice-bank.test.mjs": "373031539759e2222681634cf0ec66cea8a620fb91dc9fbafc81bc8a4a942b8d",
-      "docs/order-drill-20261025.md": "d504c8ba0ba51b08f3f569fc500d1bc283cf30b6e02025aa9644ec39e463080d",
+      "docs/order-drill-20261025.md": "367dc01c8d1c3530bd637e215028be7b5fbac23cb3d44583fe5ba785666f0b06",
       "tests/order-drill-production.test.mjs": "74ffd4f0efff453855638b7f1aeedb6f3f9297ec9926721a11cc26d9d934e1eb"
     },
     "postMergePolicy": {

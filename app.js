@@ -52,6 +52,10 @@ function refreshUnfinishedPractice(){
   }
   if(current&&current.contentVersion>(drill.q.contentVersion||1)){
     if(current.type==='word_order'&&drill.response){S.recoveredDrills=S.recoveredDrills||[];S.recoveredDrills.push({...clone(drill),recoveredAt:now(),recoveryReason:'practice-content-updated'})}
+    if(current.type==='word_order'&&w?.skill==='word_order'){
+      w.status='active';w.streak=0;w.confirmStreak=0;w.reservedConfirm=[];
+      drill=E.createPracticeSessionState({key:drill.key,weak:w,mode:'train'});nextPractice();return;
+    }
     drill.q=clone(current);
     if(current.type==='word_order')drill.response=null;
     save();
