@@ -50,7 +50,7 @@ export async function runMaterialChecks(browser,url){
   }
   assert.equal(await check('FY26A','R26-ENG-A-Q3-1',{order:[0,1,5,2,3],missing:'had'}),false);
   // Exercise every practice item through the actual remediation path.
-  await page.evaluate(()=>{const a=__RIKKYO_APP__;a.resetForTest();a.beginAttempt('FY26A');a.submitAttempt();a.startWeak(Object.keys(a.getState().weak)[0])});
+  await page.evaluate(()=>{const a=__RIKKYO_APP__;a.resetForTest();a.beginAttempt('FY26A');a.submitAttempt();a.startWeak(Object.keys(a.getState().weak).find(k=>a.getState().weak[k].targetId==='grammar-error-correction-group'))});
   const template=await page.evaluate(()=>__RIKKYO_APP__.getState());
   const bank=await page.evaluate(()=>__RIKKYO_APP__.data().practice);
   async function practice(q,response){

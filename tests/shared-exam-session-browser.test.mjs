@@ -1,3 +1,4 @@
+import {runAnswerReviewChecks} from './answer-review-browser-checks.mjs';
 // Real-browser integration. Run with a local repository root; never seed production storage.
 import assert from 'node:assert/strict';
 import {runTodayPresenterChecks} from './today-presenter-browser-checks.mjs';
@@ -41,7 +42,7 @@ try{
  if(isRikkyo){
   const page=await browser.newPage();page.on('dialog',d=>d.accept());await page.clock.install({time:new Date('2026-09-22T12:00:00Z')});
   await page.goto(url+'/index.html');await page.waitForFunction(()=>window.__RIKKYO_APP_READY__);
-  const key=await page.evaluate(()=>{const a=__RIKKYO_APP__;a.beginAttempt('FY26A');a.submitAttempt();const k=Object.keys(a.getState().weak)[0];a.startWeak(k);return k});
+  const key=await page.evaluate(()=>{const a=__RIKKYO_APP__;a.beginAttempt('FY26A');a.submitAttempt();const k=Object.keys(a.getState().weak).find(k=>a.getState().weak[k].targetId==='grammar-error-correction-group');a.startWeak(k);return k});
   const solve=async()=>page.evaluate(()=>{const a=__RIKKYO_APP__,q=a.getState().currentDrill.q;a.setPractice(q.type==='choice'?q.answer:q.answer||q.answerText);a.finishPractice();a.continuePractice()});
   for(let i=0;i<3;i++)await solve();
   const before=await page.evaluate(key=>__RIKKYO_APP__.getState().weak[key],key);assert.equal(before.status,'pending');assert.equal(before.reservedConfirm.length,2);
@@ -90,5 +91,5 @@ try{
  }
  await runAnswerWidgetChecks(browser,url,isRikkyo);
  await runTodayPresenterChecks(browser,url,isRikkyo);
- if(isRikkyo)await runMaterialChecks(browser,url);
+ if(isRikkyo){await runMaterialChecks(browser,url);await runAnswerReviewChecks(browser,url);}
 }finally{if(browser)await browser.close();await new Promise(r=>server.close(r))}

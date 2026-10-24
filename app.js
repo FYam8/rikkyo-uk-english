@@ -352,7 +352,7 @@ async function submitAttempt(){
     if(S!==originalState||S.currentAttempt!==a)return;
     if(JSON.stringify(a.responses)!==snapshot){alert('確認中に答案が変更されたため、確定していません。もう一度「解答を確認」を押してください。');return;}
     let correct=0;const results={};qs.forEach(q=>{const r=a.responses[q.id],hasAnswer=answered(q,r),ok=!!(hasAnswer&&(q.scoringType==='manual_reading'?readingFresh(a,q.id)&&a.readingFeedback[q.id].feedback.learningCorrect:evaluate(q,r)===true));results[q.id]=ok;if(ok)correct++;else createWeak(q,r)});
-    a.status='graded';a.gradedAt=now();a.correctCount=correct;a.totalTasks=qs.length;a.results=results;a.scoreModel='unscored';S.attempts.push(clone(a));S.currentAttempt=null;S.dailyPlan=null;save();if(typeof window.dispatchEvent==='function')window.dispatchEvent(new Event('learning-answer-saved'));goto('review');
+    a.reviewQuestions=clone(qs);a.reviewPassages=clone(DATA.passages.filter(p=>qs.some(q=>q.passageId&&(p.id===q.passageId||p.passageId===q.passageId))));a.status='graded';a.gradedAt=now();a.correctCount=correct;a.totalTasks=qs.length;a.results=results;a.scoreModel='unscored';S.attempts.push(clone(a));S.currentAttempt=null;S.dailyPlan=null;save();if(typeof window.dispatchEvent==='function')window.dispatchEvent(new Event('learning-answer-saved'));openResult(S.attempts.length-1);
   }finally{submittingAttempts.delete(a);if(S===originalState&&S.currentAttempt===a){const b=document.querySelector('.grade-button');if(b){b.disabled=false;b.textContent='解答を確認して弱点を登録'}}}
 }
 
@@ -362,15 +362,72 @@ function weakMarkup(key,w){
   const content='<div class="row space"><div><b>'+h(w.examId)+' · '+h(w.label)+'</b><div class="tiny"><span class=skill>'+h(P.skillName(w.skill))+'</span> ／ '+h(stateText)+'</div></div>'+action+'</div>';
   return U.weaknessCard({assigned:false,contentHtml:content});
 }
-function review(){const rows=weakEntries().sort(weakSort);return '<section class="card hero"><div class="eyebrow">REVIEW</div><h2>間違い対策</h2><p>誤答分野を類題3問連続→翌日2問で確認します。</p></section><section class="card"><h3>弱点一覧</h3>'+(rows.length?rows.map(function(x){return weakMarkup(x[0],x[1])}).join(''):'<p class="muted">まだ弱点はありません。</p>')+'</section><section class="card"><h3>過去問履歴</h3>'+([...S.attempts].reverse().map(function(a){return '<div class="row space"><span><b>'+a.examId+'</b> · '+a.correctCount+'/'+a.totalTasks+'タスク</span></div>'+Object.values(a.readingFeedback||{}).map(x=>window.ENGLISH_WRITING_FEEDBACK.aiFeedbackMarkup(x.feedback,x.answer)).join('')}).join('')||'<p class="muted">記録なし</p>')+'</section>'}
+let resultIndex=-1,resultFilter='wrong',resultFocus='';
+function resultQuestions(a){return a.reviewQuestions||qsFor(a.examId).filter(q=>Object.prototype.hasOwnProperty.call(a.results||{},q.id))}
+function resultStatus(a,q){
+  if(!a.responses||!Object.prototype.hasOwnProperty.call(a.responses,q.id))return a.responses?'empty':'unknown';
+  if(!answered(q,a.responses[q.id]))return 'empty';
+  return a.results?.[q.id]===true?'correct':a.results?.[q.id]===false?'wrong':'unknown';
+}
+function answerLabel(q,v){const o=(q.options||[]).find(o=>String(o.id)===String(v));return o?o.id+' '+o.text:String(v??'')}
+function reviewResponse(q,r){
+  if(r==null||r==='')return '未回答';
+  if(isWordOrder(q))return wordOrderSentence(q,r);
+  if(q.scoringType==='select_five_and_rewrite')return (r.selected||[]).map(n=>n+'. '+(r.corrections?.[n]||'訂正未入力')).join('\n');
+  if(Array.isArray(r))return r.map(v=>answerLabel(q,v)||'未回答').join(' ／ ');
+  return answerLabel(q,r);
+}
+function reviewExpected(q){
+  const a=q.answerSpec||{};
+  if(q.scoringType==='single_choice')return (a.acceptedChoices||[a.choice]).map(v=>answerLabel(q,v)).join(' ／ ');
+  if(q.scoringType==='multiple_choice')return (a.choices||[]).map(v=>answerLabel(q,v)).join('\n');
+  if(q.scoringType==='select_five_and_rewrite')return (a.errorNumbers||[]).map(n=>n+'. '+(a.corrections?.[n]||[]).join(' / ')).join('\n');
+  return displayAnswer(q)||'下の添削・本文を確認してください。';
+}
+function reviewParts(q,r){
+  if(q.scoringType==='multi_slot_text'){
+    const v=Array.isArray(r)?r:[],a=q.answerSpec;
+    const accepted=(a.acceptedResponses||[]).find(row=>row.every((x,i)=>norm(x)===norm(v[i])));
+    return a.slots.map((alts,i)=>{const ok=!!accepted||alts.some(x=>isLabelledCorrection(q)&&i===0?correctionLabel(x)===correctionLabel(v[i]):norm(x)===norm(v[i]));return '<div class="review-part '+(ok?'good':'bad')+'">'+(ok?'○':'×')+' '+(isLabelledCorrection(q)?(i===0?'記号':'訂正後の語句'):'空所'+(i+1))+'：'+h(v[i]||'未回答')+' → '+h(alts.join(' / '))+'</div>'}).join('');
+  }
+  if(q.scoringType==='multiple_choice'){
+    const v=Array.isArray(r)?r:[],expected=q.answerSpec.choices||[];
+    return v.filter(x=>!expected.includes(x)).map(x=>'<p>選び過ぎ：'+h(answerLabel(q,x))+'</p>').join('')+expected.filter(x=>!v.includes(x)).map(x=>'<p>選び漏れ：'+h(answerLabel(q,x))+'</p>').join('');
+  }
+  if(q.scoringType==='select_five_and_rewrite'){
+    const v=r||{},a=q.answerSpec,selected=v.selected||[];
+    return (q.subItems||[]).map(item=>{const n=item.number,need=a.errorNumbers.includes(n),picked=selected.map(Number).includes(n),ok=need===picked&&(!need||(a.corrections[String(n)]||[]).some(x=>norm(x)===norm(v.corrections?.[n])));return '<div class="review-part '+(ok?'good':'bad')+'">'+(ok?'○':'×')+' '+n+'：'+h(item.text)+'<br>'+(!need?(picked?'訂正不要の文を選んでいます。':'訂正不要です。'):!picked?'選び漏れです。':'訂正：'+h(v.corrections?.[n]||'未入力'))+'</div>'}).join('');
+  }
+  return '';
+}
+const REVIEW_POINTS={"grammar-gerund-enjoy":"enjoy の後ろに動詞を置くときは -ing 形にします。","grammar-whether-if-future":"「〜かどうか」は whether / if。未来のことには will を使います。","grammar-past-participle-modifier":"名詞を後ろから受け身の意味で説明するときは過去分詞を使います。","grammar-counterfactual-if":"現在の事実と違う仮定は If＋過去形、would＋動詞の原形。If I were ... が基本です。","grammar-modal-passive":"助動詞＋be＋過去分詞で、助動詞を含む受け身を作ります。","grammar-passive":"受け身は be動詞＋過去分詞です。時制と主語に合わせて be動詞を選びます。","word-order-past-perfect":"過去のある時点より前の出来事は had＋過去分詞で表します。","word-order-relative-preposition":"関係節を名詞の後ろに置きます。look for の for など、動詞に必要な前置詞も残します。","word-order-future-progressive":"未来のある時点で進行中の動作は will be＋-ing形です。","word-order-interested-in":"be interested in＋名詞／-ing形で「〜に興味がある」を表します。","word-order-participle-modifier":"過去分詞を使うまとまりを名詞の後ろに置き、受け身の意味で説明します。","word-order-duration":"期間の長さは for、開始時点は since で表します。","grammar-error-correction-group":"誤りのある文の選択と、訂正した文の両方を確認します。時制・語順・前置詞・動詞の形に注意してください。","reading-paraphrase-give-up":"give up は「あきらめる・やめる」。何をやめたのかは前後の文から判断します。","reading-remember-gerund":"remember＋-ing形は「以前したことを覚えている」という意味です。","reading-relative-pronoun-person":"人を説明する主格の関係代名詞は who が基本です。","reading-grammar-see-object-ing":"see＋人＋-ing形は「人が動作しているところを見る」です。"};
+function reviewReason(q){if(typeof q.explanation==='string'&&q.explanation)return q.explanation;return REVIEW_POINTS[q.targetId]||(q.context||q.passageId?'「問題・本文を見る」で、解答に対応する本文の表現と設問の条件を確認してください。':'正答と設問の条件を照らし合わせて確認してください。詳しい解説は未整備です。')}
+function openResult(index,focus){resultIndex=Number(index);resultFilter=focus?'all':'wrong';resultFocus=focus||'';goto('result');if(resultFocus)document.getElementById('review-'+resultFocus)?.scrollIntoView({block:'start'});}
+function setResultFilter(value){resultFilter=value;resultFocus='';render()}
+function openWeakResult(key){const w=S.weak[key];if(!w)return;for(let i=S.attempts.length-1;i>=0;i--){if(Object.prototype.hasOwnProperty.call(S.attempts[i].results||{},w.questionId)){openResult(i,w.questionId);return}}alert('この問題の答案履歴が残っていません。');}
+function reviewCard(a,q){
+  const r=a.responses?.[q.id],status=resultStatus(a,q),labels={correct:'○ 正解',wrong:'× 不正解',empty:'― 未回答',unknown:'要確認'},w=S.weak[q.examId+':'+q.id],exact=pool({targetId:q.targetId}),canPractice=E.familyCount(exact)>=5;
+  const feedback=a.readingFeedback?.[q.id],passages=(a.reviewPassages||DATA.passages).filter(p=>q.passageId&&(p.id===q.passageId||p.passageId===q.passageId));
+  return '<article class="card answer-review" id="review-'+h(q.id)+'"><div class="row space"><h3>'+h(qLabel(q))+'</h3><span class="review-status">'+labels[status]+'</span></div><p>'+sourceText(q.japanese||'')+'</p><p>'+sourceText(q.prompt||q.instruction||'')+'</p><div class="review-answer-grid"><div><b>あなたの答え</b><pre>'+h(a.responses?reviewResponse(q,r):'この履歴には答案が保存されていません。')+'</pre></div><div><b>正答・解答例（非公式）</b><pre>'+h(reviewExpected(q))+'</pre></div></div>'+(a.responses&&a.reviewQuestions?reviewParts(q,r):'')+'<p>'+h(reviewReason(q))+'</p>'+(feedback?window.ENGLISH_WRITING_FEEDBACK.aiFeedbackMarkup(feedback.feedback,feedback.answer):'')+'<details><summary>問題・本文を見る</summary>'+renderProblemFlow([q],passages)+'</details>'+(w&&status!=='correct'?'<div class="actions">'+(canPractice?'<button onclick="__RIKKYO_APP__.startWeak(\''+h(q.examId+':'+q.id)+'\')">このポイントを練習</button>':'<p class="muted">同じ論点の類題セットは整備中です。まず上の元問題と正答を確認してください。</p>')+'</div>':'')+'</article>';
+}
+function resultView(){
+  const a=S.attempts[resultIndex];if(!a)return '<section class="card">答案履歴が見つかりません。</section>';
+  const qs=resultQuestions(a),counts={correct:0,wrong:0,empty:0,unknown:0};qs.forEach(q=>counts[resultStatus(a,q)]++);
+  const rows=qs.filter(q=>resultFocus?q.id===resultFocus:resultFilter==='all'||resultFilter==='wrong'&&['wrong','empty','unknown'].includes(resultStatus(a,q)));
+  return '<section class="card"><h2>'+h(a.examId)+' 解答結果</h2><p>'+h(a.gradedAt?new Date(a.gradedAt).toLocaleString():'日時不明')+'</p><p>○ 正解 '+counts.correct+'　× 不正解 '+counts.wrong+'　未回答 '+counts.empty+'　要確認 '+counts.unknown+'</p>'+(!a.reviewQuestions?'<p class="muted">過去の答案です。問題・解答例は現在のデータで表示し、当時の判定を保持しています。</p>':'')+'<div class="review-filters"><button aria-pressed="'+(resultFilter==='wrong')+'" onclick="__RIKKYO_APP__.setResultFilter(\'wrong\')">間違い・未回答</button><button aria-pressed="'+(resultFilter==='all')+'" onclick="__RIKKYO_APP__.setResultFilter(\'all\')">全問</button><button onclick="__RIKKYO_APP__.goto(\'review\')">復習・履歴へ</button></div></section>'+(rows.map(q=>reviewCard(a,q)).join('')||'<section class="card">この表示に該当する問題はありません。「全問」で答案を確認できます。</section>');
+}
+function review(){
+  return '<section class="card"><h2>間違い対策</h2><p>元の答案を確認してから、同じポイントを練習します。</p></section><section class="card"><h3>弱点一覧</h3>'+(weakEntries().sort(weakSort).map(([key,w])=>'<div class="card"><b>'+h(w.examId)+' · '+h(w.label)+'</b><p>'+h(P.skillName(w.skill))+' ／ '+(w.status==='mastered'?'克服済み':w.status==='pending'?'翌日の確認待ち':'復習中')+'</p><button onclick="__RIKKYO_APP__.openWeakResult(\''+h(key)+'\')">元問題・解答を見る</button> '+(w.status!=='mastered'&&E.familyCount(pool(w))>=5?'<button onclick="__RIKKYO_APP__.startWeak(\''+h(key)+'\')">このポイントを練習</button>':'')+'</div>').join('')||'<p>まだ弱点はありません。</p>')+'</section><section class="card"><h3>過去問履歴</h3>'+S.attempts.map((a,i)=>({a,i})).reverse().map(({a,i})=>'<div class="card"><b>'+h(a.examId)+' · '+a.correctCount+'/'+a.totalTasks+'</b><p>'+h(a.gradedAt?new Date(a.gradedAt).toLocaleString():'日時不明')+'</p><button onclick="__RIKKYO_APP__.openResult('+i+')">答案を見る</button></div>').join('')+'</section>';
+}
 
-function pool(w){return E.selectPracticePool(DATA.practice,w,{minFamilies:5})}
+
+function pool(w){return DATA.practice.filter(q=>!q.retired&&q.targetId===w.targetId)}
 function lastUse(id){let n=-1;S.drillLog.forEach(function(x,i){if(x.q===id)n=i});return n}
 function rank(w,items,confirm){return E.rankPracticeQuestions(items,{weak:w,lastId:w.lastDrillId,confirm:!!confirm,lastUse:lastUse})}
 function reserve(w,p){w.reservedConfirm=E.reserveConfirmationIds({currentReserved:w.reservedConfirm,pool:p,rankChoices:function(x){return rank(w,x,true)},limit:2})}
 function startWeak(key){
   const w=S.weak[key];if(!w)return;if(drill&&drill.key!==key&&!drill.answered)return alert('別のドリルが途中です。');
-  const p=pool(w);reserve(w,p);const d=E.practiceSessionStartDecision({weak:w,key:key,currentDrill:drill,familyTotal:E.familyCount(p),today:today(),minFamilies:5});if(d.kind==='too-early')return alert('定着確認は '+d.date+' 以降です。');if(d.kind==='insufficient-families')return alert('類題を整備中です。');
+  const p=pool(w);reserve(w,p);const d=E.practiceSessionStartDecision({weak:w,key:key,currentDrill:drill,familyTotal:E.familyCount(p),today:today(),minFamilies:5});if(d.kind==='too-early')return alert('定着確認は '+d.date+' 以降です。');if(d.kind==='insufficient-families')return openWeakResult(key);
   drill=E.createPracticeSessionState({key:key,weak:w,mode:w.status==='pending'?'confirm':'train'});nextPractice();view='drill';save();render()
 }
 function nextPractice(){const w=S.weak[drill.key],p=pool(w);reserve(w,p);const r=E.selectNextPracticeQuestion({pool:p,reservedIds:w.reservedConfirm,usedIds:drill.used,mode:drill.mode,streak:w.streak,rankChoices:function(items,c){return rank(w,items,c)}});if(!r.question){drill.error='出題できません';return}E.applyPracticeQuestionState(drill,w,r.question,{usedIds:r.usedIds,choiceOrder:[]});drill.response=null;drill.feedback=null;save()}
@@ -429,8 +486,9 @@ async function importData(input){
 function applyDay(){const cur=today(),d=E.decideDayRollover({renderedDate:renderedDate,currentDate:cur,isDrillView:view==='drill',hasDrill:!!drill,drillAnswered:!!(drill&&drill.answered)});if(d.kind==='same'||d.kind==='defer')return false;E.applyDailyRolloverState(S,cur);renderedDate=cur;save();return true}
 window.addEventListener('focus',function(){if(applyDay())render()});
 
-function render(){examSession.stop();if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,stats:stats,guide:guide,writing:writingView}[view];app.innerHTML=f();examSession.start(view);window.__RIKKYO_APP_READY__=true}
-window.__RIKKYO_APP__={gradeReading,openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,setErrorLabel:setErrorLabel,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
+function render(){examSession.stop();if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,result:resultView,stats:stats,guide:guide,writing:writingView}[view];app.innerHTML=f();examSession.start(view);window.__RIKKYO_APP_READY__=true}
+window.__RIKKYO_APP__={openResult,setResultFilter,openWeakResult,gradeReading,openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,setErrorLabel:setErrorLabel,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
 loadData().then(function(){render()}).catch(function(e){console.error(e);app.innerHTML='<section class="card badbox"><h2>読み込みエラー</h2><p>'+h(e.message)+'</p></section>'});
 })();
+
 
