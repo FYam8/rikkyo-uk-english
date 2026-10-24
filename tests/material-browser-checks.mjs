@@ -69,14 +69,14 @@ export async function runMaterialChecks(browser,url){
   const review=await practice(short,'The subject taught by Mr Lee is geography.');
   assert.equal(review.ok,true);assert.equal(review.gradingMode,'self_review');assert.ok(dialogs.at(-1).includes('短答の自己確認'));
   accept=false;assert.equal((await practice(short,'mathematics')).ok,false);accept=true;
-  // Old unfinished drill snapshots adopt the revised bank without deleting their answer or past log.
+  // Old unfinished drill snapshots adopt the revised bank and archive the old draft when selectable chunks change.
   await page.evaluate(template=>{const s=structuredClone(template),a=__RIKKYO_APP__;s.selectedExamId='FY25B';s.currentDrill.q={...structuredClone(a.data().practice.find(q=>q.id==='rwo01')),contentVersion:1};s.currentDrill.q.tokens.pop();s.currentDrill.response='saved draft';s.currentDrill.answered=false;a.importPayload({format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:s},'replace')},template);
   await page.reload();await page.waitForFunction(()=>window.__RIKKYO_APP_READY__);
   const resumed=await page.evaluate(()=>__RIKKYO_APP__.getState().currentDrill);
   assert.equal(await page.evaluate(()=>__RIKKYO_APP__.getState().selectedExamId),'FY25B');
-  assert.equal(resumed.q.contentVersion,2);assert.equal(resumed.q.tokens.filter(t=>t==='he').length,2);assert.equal(resumed.response,'saved draft');
+  assert.equal(resumed.q.contentVersion,bank.find(q=>q.id==='rwo01').contentVersion);assert.equal(resumed.q.tokens.filter(t=>t==='he').length,2);assert.equal(resumed.response,null);assert.equal(await page.evaluate(()=>__RIKKYO_APP__.getState().recoveredDrills.at(-1).response),'saved draft');
   assert.deepEqual(errors,[]);
-  console.log(`Material browser ${width}px: ${total} runtime solutions, 42 practice answers, alternatives/negative controls, short-answer self-review, stale drill refresh: CLEAN`);
+  console.log(`Material browser ${width}px: ${total} runtime solutions, 66 practice answers, alternatives/negative controls, short-answer self-review, stale drill refresh: CLEAN`);
   await context.close();
  }
 }

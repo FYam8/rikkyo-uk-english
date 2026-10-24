@@ -1,3 +1,4 @@
+import {runOrderDrillChecks} from './order-drill-browser-checks.mjs';
 import {runAnswerReviewChecks} from './answer-review-browser-checks.mjs';
 // Real-browser integration. Run with a local repository root; never seed production storage.
 import assert from 'node:assert/strict';
@@ -91,5 +92,5 @@ try{
  }
  await runAnswerWidgetChecks(browser,url,isRikkyo);
  await runTodayPresenterChecks(browser,url,isRikkyo);
- if(isRikkyo){await runMaterialChecks(browser,url);await runAnswerReviewChecks(browser,url);}
+ if(isRikkyo){await runMaterialChecks(browser,url);await runAnswerReviewChecks(browser,url);await runOrderDrillChecks(browser,url);}
 }finally{if(browser)await browser.close();await new Promise(r=>server.close(r))}

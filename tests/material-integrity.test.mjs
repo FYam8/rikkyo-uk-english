@@ -18,7 +18,7 @@ export function orderFor(q){
  const order=search(left,[]);assert.ok(order,q.id+' cannot be assembled from exactly the permitted chunks');return order;
 }
 const bank=read('practice').items;
-assert.equal(bank.length,42);
+assert.equal(bank.length,66);
 for(const q of bank){
  if(q.type==='word_order'){orderFor(q);for(const a of q.accepted||[])orderFor({...q,answer:a})}
  if(q.type==='choice'){assert.equal(new Set(q.options.map(o=>o.id)).size,q.options.length,q.id);assert.ok(q.options.some(o=>o.id===q.answer),q.id)}
@@ -58,4 +58,4 @@ assert.ok(find('R25-ENG-A-Q6-4').prompt.includes('日本語'));
 assert.ok(bank.find(q=>q.id==='rec03').accepted.includes('The man that lives next door is a doctor.'));
 const writing=read('fy26a-late-runtime').nonRuntimeSource.find(q=>q.id==='R26-ENG-A-Q8');
 for(const phrase of ['you can fly','you can speak to animals','you can become invisible','Use full sentences and paragraphs.','Check your spelling and grammar.'])assert.ok(writing.prompt.includes(phrase),'FY26A writing source instruction missing: '+phrase);
-console.log('Material integrity: 42 practice items, all runtime/holdout Q3 reorder chunks, 48 Japanese guides, 16 labelled corrections: CLEAN');
+console.log('Material integrity: 66 practice items, all runtime/holdout Q3 reorder chunks, 48 Japanese guides, 16 labelled corrections: CLEAN');
