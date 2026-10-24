@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "a4162a0feb5b9af540df9447408f6ca7896ddc5fb623055d03ee78ebdea84af9",
+      "app.js": "b54bcfd7cd6ccf9d02aeaf5bf0b735d53d794ba5c449075f7889bf68d3dab3b1",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -54,7 +54,7 @@
       "data/supplied-source-passages.json": "a8e059b9d84d6712541fa3d7a5e93a02d978429da913eb6796745fbdb9071096",
       "data/supplied-source-questions.json": "71c56ca04a3ffd711effdc970adde0b4b4f51d4ba31e8c9fda9bcc7f3e17796a",
       "data/writing-runtime-policy.json": "868a7a9be73e708c34d8adab03ecea02dcf002c7560a779f0e774641da1ee4ad",
-      ".github/workflows/verify.yml": "38350628ddb907a1d59bfcae79016f54790249b1d95eefd3fb42c154dc47975b",
+      ".github/workflows/verify.yml": "1ad515ae3451c65b5f27b90e23a62e350acc0e7852389c8a9749f0d2cb4bc109",
       "tests/material-integrity.test.mjs": "824049b3ad3c58134cba9241cd4c59bef6f31c596de9970bacf0046fef95d3a1",
       "tests/material-browser-checks.mjs": "a90ce9b4f7a1034567e1d10b803c1650394d08b1a5363c8c20e1c9d4cf0f8882",
       "tests/shared-exam-session-browser.test.mjs": "24ce75dc04fe5eb1905477196b9937ec2285c3b9fe326a07f4a4bff00548e831",
@@ -101,6 +101,12 @@
       "date": "2026-10-25",
       "scope": "16 labelled corrections across FY24/FY25 A/B; legacy symbol normalization only",
       "browserPolicy": "exact-head verify workflow required before Pages deployment"
+    },
+    "questionInstructions": {
+      "date": "2026-10-25",
+      "scope": "38 task instructions across FY24A/B, FY25A/B and FY26A; 122 runnable tasks audited",
+      "test": "tests/question-instructions.test.mjs",
+      "verificationPolicy": "Updated content pins identify the instruction patch; full exact-head verify must succeed before Pages publication. Previous candidate evidence remains historical."
     }
   },
   "limitations": [
