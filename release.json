@@ -46,7 +46,7 @@
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
       "data/papers.json": "2645b4b086a5c5317948c9ed721f1bd8bee6bd3b8548143b8dd54a46b2e77526",
       "data/passages.json": "8bc7c98b5534af55c53d1d9ff6b212a8738d5dd08967c5bcb2613d4f91e4187b",
-      "data/practice.json": "bae39d9382a401f6a8e774d400bf2a1ff8051831737561072e8aaaa69ba52b72",
+      "data/practice.json": "938207afb16cc5f7680b914dcb60d376f03f8d2cb2b05eb5a27ea45bb6339983",
       "data/questions.json": "43b1a1d8ebedf0dd5e92d8e02ab8ba257a6ae1a0b3a5c72549c7275586afc96f",
       "data/sections.json": "a13f525fcbb048920037249c16d25178a5560fcea85f2964db18d07703f3b87f",
       "data/source-coverage.json": "81b6b9882ae2a9bc452a605031047e5a3605dca6316cbb15453d5c41a79c1f74",
@@ -82,10 +82,10 @@
       "tests/error-correction.test.mjs": "8ac69dce04a6851d3914c2ca6425ab8645815a9af182fe9290bdfacf07014065",
       "tests/error-correction-browser-checks.mjs": "d40e0488b6ca94479e7d743b98a3130778a08d7dea92f5039b43340f515222c8",
       "styles.css": "fc81a0567c95b300d28b9f7301b03cdb2fefad66c17a46545456b1b375118815",
-      "tests/order-drill.test.mjs": "5c8a22ca0276774951620e85f1a5a5f69b4a62b404bb8c246e442af0c3755373",
+      "tests/order-drill.test.mjs": "abf84c0d004161d9610b10c001830c10ba5317f8af64e668f97632d71c317e87",
       "tests/order-drill-browser-checks.mjs": "222e0d2a1111622e7f993daf64e657d3578ec3a7faca6a2dae8bf714dfc98f2f",
       "tests/practice-bank.test.mjs": "373031539759e2222681634cf0ec66cea8a620fb91dc9fbafc81bc8a4a942b8d",
-      "docs/order-drill-20261025.md": "367dc01c8d1c3530bd637e215028be7b5fbac23cb3d44583fe5ba785666f0b06",
+      "docs/order-drill-20261025.md": "d87a7a3345da9958a591443bd9b3a3f1a37df08476024b93bf743932dd35c82e",
       "tests/order-drill-production.test.mjs": "74ffd4f0efff453855638b7f1aeedb6f3f9297ec9926721a11cc26d9d934e1eb"
     },
     "postMergePolicy": {

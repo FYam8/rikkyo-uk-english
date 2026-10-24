@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "authored-practice-0.5",
+  "datasetVersion": "authored-practice-0.6",
   "holdoutSourceExamIds": [],
   "items": [
     {
@@ -651,7 +651,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 2,
+      "contentVersion": 3,
       "retired": false,
       "level": 2,
       "id": "rwo05-2",
@@ -664,19 +664,19 @@
         "her aunt",
         "a bag",
         "She",
-        "made",
+        "by",
         "uses"
       ],
       "answer": "She uses a bag made by her aunt.",
-      "explanation": "made by her aunt が a bag を修飾します。作り手を示す by を補います。",
+      "explanation": "bag は作られた側なので過去分詞 made を補います。made by her aunt が a bag を後ろから説明します。",
       "focusTag": "word-order-participle-modifier",
       "examFormat": "word_order_missing_word",
       "japanese": "彼女は叔母によって作られたかばんを使っています。",
-      "missingWord": "by"
+      "missingWord": "made"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 2,
+      "contentVersion": 3,
       "retired": false,
       "level": 2,
       "id": "rwo05-3",
@@ -687,21 +687,21 @@
       "prompt": "日本語の意味に合うように、語句を並べ替えてください。不足する1語も補ってください。",
       "tokens": [
         "a famous singer",
-        "sung",
+        "by",
         "We",
         "a song",
         "heard"
       ],
       "answer": "We heard a song sung by a famous singer.",
-      "explanation": "song は歌われる側なので過去分詞 sung。作り手は by で示します。",
+      "explanation": "song は歌われた側なので sing の過去分詞 sung を補います。sung by ... が名詞を修飾します。",
       "focusTag": "word-order-participle-modifier",
       "examFormat": "word_order_missing_word",
       "japanese": "私たちは有名な歌手によって歌われた歌を聞きました。",
-      "missingWord": "by"
+      "missingWord": "sung"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 2,
+      "contentVersion": 3,
       "retired": false,
       "level": 3,
       "id": "rwo05-4",
@@ -715,19 +715,19 @@
         "me",
         "a photo",
         "He",
-        "taken",
+        "by",
         "showed"
       ],
       "answer": "He showed me a photo taken by his grandfather.",
-      "explanation": "taken by his grandfather が photo を後ろから説明します。",
+      "explanation": "photo は撮られたものなので take の過去分詞 taken を補います。taken by ... が名詞を修飾します。",
       "focusTag": "word-order-participle-modifier",
       "examFormat": "word_order_missing_word",
       "japanese": "彼は祖父によって撮られた写真を私に見せました。",
-      "missingWord": "by"
+      "missingWord": "taken"
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 2,
+      "contentVersion": 3,
       "retired": false,
       "level": 3,
       "id": "rwo05-5",
@@ -737,18 +737,18 @@
       "type": "word_order",
       "prompt": "日本語の意味に合うように、語句を並べ替えてください。不足する1語も補ってください。",
       "tokens": [
-        "painted",
+        "by",
         "the picture",
         "I",
         "my sister",
         "like"
       ],
       "answer": "I like the picture painted by my sister.",
-      "explanation": "painted by my sister が picture を後ろから修飾します。",
+      "explanation": "picture は描かれたものなので過去分詞 painted を補います。painted by my sister が picture を後ろから説明します。",
       "focusTag": "word-order-participle-modifier",
       "examFormat": "word_order_missing_word",
       "japanese": "私は姉によって描かれた絵が好きです。",
-      "missingWord": "by"
+      "missingWord": "painted"
     },
     {
       "sourceType": "authored_practice",

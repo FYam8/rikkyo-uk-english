@@ -35,6 +35,7 @@ for(const targetId of new Set(bank.filter(q=>q.type==='word_order').map(q=>q.tar
   assert.equal(ctx.practiceComplete(q,{order:[0,0],missing:''}),false,q.id);
  }
 }
+assert.deepEqual(bank.filter(q=>q.targetId==='word-order-participle-modifier'&&q.missingWord).map(q=>q.missingWord),['made','sung','taken','painted'],'participle remediation must require the participle itself, matching the source skill');
 assert.ok(src.includes('ANSWER_WIDGETS.reorder({tokens:q.tokens'));
 assert.ok(src.includes('ANSWER_WIDGETS.refreshReorder(document.getElementById(\'practice-order\')'));
 console.log('Order drills: exact topics, 5 families each, scaffold → missing word, unseen reserved confirmation and incomplete rejection CLEAN');
