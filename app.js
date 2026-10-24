@@ -67,6 +67,7 @@ function flattenSuppliedRuntime(source){
           id:group.id+'-'+item.n,examId,majorQuestion:4,minorQuestion:item.n,sourcePage:group.sourcePage,
           sourceType:'past_exam',sourceSubset:true,primarySkill:'error_correction_rewrite',scoringType:'multi_slot_text',
           prompt:item.labelledSentence+'\n誤りの記号と、その【 】内の語句を訂正して書きなさい。',japanese:item.japanese,contentVersion:group.contentVersion,answerSpec:{slots:[[item.errorLabel],[item.correction]],correctedSentence:item.correctedSentence},
+          errorCorrectionLabels:[...item.labelledSentence.matchAll(/[（(]([ァ-ヺ]+)[）)]/g)].map(m=>m[1]),
           targetId:examId.toLowerCase()+'-error-correction-'+item.n,
           answerAuthority:group.answerAuthority,verificationStatus:group.verificationStatus,autoGradeAllowed:true
         });
@@ -253,7 +254,17 @@ function answered(q,r){
   if(isWordOrder(q)){const s=wordOrderState(q,r),needed=(q.tokens||[]).length+(q.scoringType==='word_order_missing_word'?1:0)-(q.scoringType==='word_order'&&q.answerSpec?.unused?1:0);return s.order.length===needed&&new Set(s.order).size===s.order.length&&(q.scoringType!=='word_order_missing_word'||String(s.missing).trim())}
   return !!String(r==null?'':r).trim()
 }
+// Normalize only the symbol slot; English correction text keeps the usual grading rules.
+function correctionLabel(v){return String(v??'').normalize('NFKC').trim().replace(/^[（(]\s*|\s*[）)]$/g,'').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60))}
+function isLabelledCorrection(q){return q.scoringType==='multi_slot_text'&&q.primarySkill==='error_correction_rewrite'&&q.errorCorrectionLabels?.length>0}
+function setErrorLabel(id,label){
+  setSlot(id,0,correctionLabel(label));
+  // Keep the panel, its scroll position and the correction draft in place.
+  const row=document.getElementById('answer-'+id);
+  row?.querySelectorAll('.error-label-options input').forEach(input=>input.checked=input.value===correctionLabel(label));
+}
 function evaluate(q,r){
+  if(isLabelledCorrection(q))return Array.isArray(r)&&r.length===2&&q.answerSpec.slots[0].some(v=>correctionLabel(v)===correctionLabel(r[0]))&&q.answerSpec.slots[1].some(v=>norm(v)===norm(r[1]));
   if(q.scoringType==='multi_slot_text')return Array.isArray(r)&&r.length===q.answerSpec.slots.length&&(q.answerSpec.slots.every(function(alts,i){return alts.map(norm).includes(norm(r[i]))})||(q.answerSpec.acceptedResponses||[]).some(a=>a.every((v,i)=>norm(v)===norm(r[i]))));
   if(isWordOrder(q))return [q.answerSpec.sentence,...(q.answerSpec.acceptedSentences||[])].map(norm).includes(norm(wordOrderSentence(q,r)));
   if(q.scoringType==='single_choice')return (q.answerSpec.acceptedChoices||[q.answerSpec.choice]).includes(r);
@@ -280,6 +291,7 @@ function gradeReading(id){const a=S.currentAttempt,task=readingTask(id),original
 function inputFor(q){
   const r=response(q.id),onInput="__RIKKYO_APP__.setResponse('"+q.id+"',this.value)";
   if(q.scoringType==='manual_reading')return '<div class="notice"><b>AI添削の記述問題</b><p>本文を根拠に自分の言葉で答えてください。AIが内容と言葉を確認し、本文の根拠を示します。非公式の学習用評価です。</p></div>'+ANSWER_WIDGETS.textInput({multiline:true,value:r,placeholder:q.examId==='FY25A'?'日本語で答えを入力':'英語で短く答えを入力',onInput:onInput})+'<div id="reading-tools-'+q.id+'">'+readingFeedbackMarkup(q.id)+'</div>';
+  if(isLabelledCorrection(q))return '<fieldset class="error-label-field"><legend>誤りの記号</legend>'+ANSWER_WIDGETS.choices({options:q.errorCorrectionLabels.map(value=>({value,label:value})),selected:[correctionLabel(r?.[0])],variant:'inputs',className:'error-label-options',name:q.id+'-error-label',label:qLabel(q)+'の誤りの記号',onAction:()=>"__RIKKYO_APP__.setErrorLabel('"+q.id+"',this.value)"})+'</fieldset><label class="error-correction-text">訂正後の語句'+ANSWER_WIDGETS.textInput({value:r?.[1],placeholder:'正しい語句を入力',onInput:"__RIKKYO_APP__.setSlot('"+q.id+"',1,this.value)"})+'</label>';
   if(q.scoringType==='multi_slot_text')return ANSWER_WIDGETS.slots({count:q.answerSpec.slots.length,values:r,input:i=>({placeholder:'空所'+(i+1),onInput:"__RIKKYO_APP__.setSlot('"+q.id+"',"+i+",this.value)"})});
   if(q.scoringType==='single_choice'||q.scoringType==='multiple_choice'){
     const multi=q.scoringType==='multiple_choice';return ANSWER_WIDGETS.choices({options:q.options.map(o=>({value:o.id,labelHtml:'<span class=choice-text><b>'+h(o.id)+'</b> '+h(o.text)+'</span>'})),selected:multi?(Array.isArray(r)?r:[]):[r],multiple:multi,variant:'inputs',className:'choice-grid',name:q.id,label:qLabel(q)+'の回答',onAction:v=>multi?"__RIKKYO_APP__.toggleMulti('"+q.id+"','"+v+"',this.checked)":onInput});
@@ -411,6 +423,7 @@ function applyDay(){const cur=today(),d=E.decideDayRollover({renderedDate:render
 window.addEventListener('focus',function(){if(applyDay())render()});
 
 function render(){examSession.stop();if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,stats:stats,guide:guide,writing:writingView}[view];app.innerHTML=f();examSession.start(view);window.__RIKKYO_APP_READY__=true}
-window.__RIKKYO_APP__={gradeReading,openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
+window.__RIKKYO_APP__={gradeReading,openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,setErrorLabel:setErrorLabel,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
 loadData().then(function(){render()}).catch(function(e){console.error(e);app.innerHTML='<section class="card badbox"><h2>読み込みエラー</h2><p>'+h(e.message)+'</p></section>'});
 })();
+
