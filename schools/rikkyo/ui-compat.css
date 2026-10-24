@@ -35,3 +35,8 @@ input[type=text],textarea{width:100%;padding:10px 11px;border:1px solid var(--li
 
 
 .exam-tabs{display:flex;gap:8px;margin:0 0 16px}.exam-tabs button{flex:1}.exam-tabs [aria-pressed=true]{background:var(--brand);color:white}.history-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}.history-row h3,.history-row p{margin:4px 0}.history-row>div{min-width:0;overflow-wrap:anywhere}.history-row button{flex-shrink:0}@media(max-width:600px){.history-row{align-items:flex-start;flex-direction:column}.history-row button{width:100%}}
+
+/* Touch-sized drill controls; shared answer widget markup stays pinned. */
+#practice-order .tokens button{min-width:44px;min-height:44px}
+#practice-order .missing-word-row{margin-top:10px}
+.practice-stage{color:var(--brand);font-size:.85rem;font-weight:700}

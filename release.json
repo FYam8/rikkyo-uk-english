@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "2eddd603c9a67ee57fb5fc88dd333586097248138d0f2d1a6245f0f92f08b069",
+      "app.js": "4620121b7fc025a8d7778e118d337ce28456f7990c15f8123c3663453fc8c5d4",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -58,7 +58,7 @@
       "tests/material-integrity.test.mjs": "add3840ba6bca6bf2a14b7214c7532782c428485b610ab8644f418079fef7f4d",
       "tests/material-browser-checks.mjs": "7886a6d766121c8c6d6e153dbbf334f951ac814f2f96923180cf1ea71894b6d1",
       "tests/shared-exam-session-browser.test.mjs": "15bd1c8a39706631b543b39941fd685efb3fbea6ab6ef2d034ad7d0543f73783",
-      "index.html": "1298aac604e4486544fe67395b2c8d37894dc156da3fad874682a05298530b08",
+      "index.html": "1c20df26bddc16309ebca50270098f34a87d646e235a47e81df8fcbd9a383511",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "a0135de017703c76c3146ac922676e4a88d62515a9961061ed84e23ea3f6813d",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
@@ -69,7 +69,7 @@
       "assets/writing/FY25B-Q9.png": "d4a0e32a5d23308b3bd0ac5f51618cf603928e3d41352aef60fb83b9ec8b34f3",
       "tests/story-writing-browser.test.mjs": "3dce7cf20664d44c41fa2ed36a52a1094e00f4eb66ed27ae44bffccb3be30a07",
       "tests/story-writing-production.test.mjs": "c058233dadf892fe3880cdde2ca9acdcdee2c1307aefdaf2d1dee20d96be5ccb",
-      ".github/workflows/pages.yml": "07004997b59d1a816d8b02bae68c31d1b4ebe0991cfff75b848db3085006c665",
+      ".github/workflows/pages.yml": "35d88ff1a30f1f1343d42670b8c064ded53fb3c7fb656c8ecea58deee09c8deb",
       "tests/bootstrap-integrity.test.mjs": "fc597a1caaae0ddfb5e86ae8ef4d5753a527805e0bd447d2d34ca49036d99cae",
       "writing-shared.lock.json": "a3e8cb0c1a95979f100f4208d63d51e396f79c309ba68ebd0a8edadc9b9a5670",
       "tests/reading-ai-browser.test.mjs": "a3ecd4682da64ee5093b1c95c7f514e00ed8b79af25c73ac8b36ef072c850f3d",
@@ -77,15 +77,16 @@
       "tests/reading-ai-production.test.mjs": "2097e2de893fe92cb5f2e1fde7871247f3545ccb030355cf3b21cd98a782d8b7",
       "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed",
       "tests/answer-widget-browser-checks.mjs": "3d2592f4a0431ed82202840b14d48ea5d003720268896e365bb77321cf3b5ea5",
-      "schools/rikkyo/ui-compat.css": "edc08c8b5b1f7655f3908df62f41d38de5a5680431f4c8b25c9701f40d40f269",
+      "schools/rikkyo/ui-compat.css": "9a2b8b92a98fb3241fa3ec1b2bb672188c1c9cf06398cf1ebc1fa0a3d7ad9b35",
       "tests/shared-ui-migration-hold.test.mjs": "615689703c0fe3af9000af7fb6563fb7cf6ba8937a4366cb0bca8731d2e44f3d",
       "tests/error-correction.test.mjs": "8ac69dce04a6851d3914c2ca6425ab8645815a9af182fe9290bdfacf07014065",
       "tests/error-correction-browser-checks.mjs": "d40e0488b6ca94479e7d743b98a3130778a08d7dea92f5039b43340f515222c8",
       "styles.css": "fc81a0567c95b300d28b9f7301b03cdb2fefad66c17a46545456b1b375118815",
-      "tests/order-drill.test.mjs": "8cf33d5c1261b724897ff328dff0b07f88aedecfb9935d8b77f69c4947a0247f",
-      "tests/order-drill-browser-checks.mjs": "bc5723af26a9be694187c71ce733f98138e5755fdc852b300a735a8dab2598bc",
+      "tests/order-drill.test.mjs": "5c8a22ca0276774951620e85f1a5a5f69b4a62b404bb8c246e442af0c3755373",
+      "tests/order-drill-browser-checks.mjs": "baec40aa916b7adfc870379a7dea14dcad5c6c4c66aa8c5fbe9ff839bc616d47",
       "tests/practice-bank.test.mjs": "373031539759e2222681634cf0ec66cea8a620fb91dc9fbafc81bc8a4a942b8d",
-      "docs/order-drill-20261025.md": "a6f3cea37724bbf46307214fb964b7aefde33203e406f2a35a9b4f0020936453"
+      "docs/order-drill-20261025.md": "d504c8ba0ba51b08f3f569fc500d1bc283cf30b6e02025aa9644ec39e463080d",
+      "tests/order-drill-production.test.mjs": "74ffd4f0efff453855638b7f1aeedb6f3f9297ec9926721a11cc26d9d934e1eb"
     },
     "postMergePolicy": {
       "required": true,

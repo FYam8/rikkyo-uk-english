@@ -457,7 +457,7 @@ function rank(w,items,confirm){
   if(w.skill==='word_order'&&!confirm){const level=w.streak?2:1;ranked.sort((a,b)=>Math.abs(a.level-level)-Math.abs(b.level-level))}
   return ranked;
 }
-function reserve(w,p){w.reservedConfirm=E.reserveConfirmationIds({currentReserved:w.reservedConfirm,pool:p,rankChoices:function(x){return rank(w,x,true)},limit:2})}
+function reserve(w,p){const confirmationPool=w.skill==='word_order'?p.filter(q=>q.level===3):p;w.reservedConfirm=E.reserveConfirmationIds({currentReserved:w.reservedConfirm,pool:confirmationPool,rankChoices:function(x){return rank(w,x,true)},limit:2})}
 function startWeak(key){
   const w=S.weak[key];if(!w)return;if(drill&&drill.key!==key&&!drill.answered)return alert('別のドリルが途中です。');
   const p=pool(w);reserve(w,p);const d=E.practiceSessionStartDecision({weak:w,key:key,currentDrill:drill,familyTotal:E.familyCount(p),today:today(),minFamilies:5});if(d.kind==='too-early')return alert('定着確認は '+d.date+' 以降です。');if(d.kind==='insufficient-families')return openWeakResult(key);

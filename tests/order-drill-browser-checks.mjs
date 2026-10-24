@@ -1,7 +1,9 @@
+import fs from 'node:fs';
 import assert from 'node:assert/strict';
 export async function runOrderDrillChecks(browser,url){
  for(const width of [390,1280]){
   const c=await browser.newContext({viewport:{width,height:850},isMobile:width===390,hasTouch:width===390,serviceWorkers:'block'});
+  await c.route('**/*',r=>new URL(r.request().url()).origin===new URL(url).origin?r.continue():r.abort());
   const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());
   await p.clock.install({time:new Date('2026-10-25T12:00:00Z')});
   await p.goto(url+'/index.html');await p.waitForFunction(()=>window.__RIKKYO_APP_READY__);
@@ -11,6 +13,7 @@ export async function runOrderDrillChecks(browser,url){
   const tokens=p.locator('#practice-order .tokens button'),preview=p.locator('#practice-order-answer'),submit=p.locator('#practice-submit');
   assert.equal(await submit.isDisabled(),true);
   assert.equal(await tokens.count(),8);
+  fs.mkdirSync('test-results',{recursive:true});await p.locator('main').screenshot({path:`test-results/order-drill-${width}.png`});
   const choose=async i=>{
    await tokens.nth(i).scrollIntoViewIfNeeded();
    const node=await p.locator('#practice-order').elementHandle();
