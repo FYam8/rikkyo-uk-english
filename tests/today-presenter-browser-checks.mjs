@@ -15,7 +15,7 @@ export async function runTodayPresenterChecks(browser,url,isRikkyo){
    const a=r?__RIKKYO_APP__:null;
    let state,base,keys;
    if(r){
-    a.resetForTest();a.beginAttempt('FY26A');a.submitAttempt();state=a.getState();base=Object.values(state.weak)[0];keys=Object.keys(state.weak).slice(0,4);
+    a.resetForTest();a.beginAttempt('FY26A');a.submitAttempt();state=a.getState();base=Object.values(state.weak).find(w=>w.targetId==='grammar-error-correction-group');keys=Object.keys(state.weak).slice(0,4);
    }else{
     const q=BANK.find(x=>!x.retired&&new Set(poolForWeak({skill:x.skill,targetId:x.targetId,focusTag:x.focusTag}).map(y=>y.familyId)).size>=5);
     if(!q)throw Error('no five-family practice');

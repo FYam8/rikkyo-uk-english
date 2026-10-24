@@ -17,3 +17,5 @@ assert.equal(ctx.pool({targetId:'one'}).length,1);assert.equal(ctx.pool({targetI
 const snapshot={reviewQuestions:[{id:'historical'}],results:{}};assert.equal(ctx.resultQuestions(snapshot)[0].id,'historical');
 assert.match(app,/a.reviewQuestions=clone\(qs\)/);assert.match(app,/openResult\(S.attempts.length-1\)/);
 console.log('Answer review: saved verdicts, missing answers, slot feedback, multiple selection, snapshots and exact practice pools PASS');
+
+assert.equal(ctx.reviewExpected({scoringType:'manual_reading',answerSpec:{guidance:'Science.'}}),'Science.');

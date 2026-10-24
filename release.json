@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "7cd5711ebd07e8870d85c3d1000ed99775be12fc4c13a23da61f5ba896cd3116",
+      "app.js": "8c4acb36a33e62b71969402f666b7d87e73160983ccd9bd4cbc9c3cce094e29d",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",

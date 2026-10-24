@@ -379,6 +379,7 @@ function reviewResponse(q,r){
 }
 function reviewExpected(q){
   const a=q.answerSpec||{};
+  if(q.scoringType==='manual_reading')return a.guidance||'下の添削・本文を確認してください。';
   if(q.scoringType==='single_choice')return (a.acceptedChoices||[a.choice]).map(v=>answerLabel(q,v)).join(' ／ ');
   if(q.scoringType==='multiple_choice')return (a.choices||[]).map(v=>answerLabel(q,v)).join('\n');
   if(q.scoringType==='select_five_and_rewrite')return (a.errorNumbers||[]).map(n=>n+'. '+(a.corrections?.[n]||[]).join(' / ')).join('\n');
@@ -402,7 +403,7 @@ function reviewParts(q,r){
 }
 const REVIEW_POINTS={"grammar-gerund-enjoy":"enjoy の後ろに動詞を置くときは -ing 形にします。","grammar-whether-if-future":"「〜かどうか」は whether / if。未来のことには will を使います。","grammar-past-participle-modifier":"名詞を後ろから受け身の意味で説明するときは過去分詞を使います。","grammar-counterfactual-if":"現在の事実と違う仮定は If＋過去形、would＋動詞の原形。If I were ... が基本です。","grammar-modal-passive":"助動詞＋be＋過去分詞で、助動詞を含む受け身を作ります。","grammar-passive":"受け身は be動詞＋過去分詞です。時制と主語に合わせて be動詞を選びます。","word-order-past-perfect":"過去のある時点より前の出来事は had＋過去分詞で表します。","word-order-relative-preposition":"関係節を名詞の後ろに置きます。look for の for など、動詞に必要な前置詞も残します。","word-order-future-progressive":"未来のある時点で進行中の動作は will be＋-ing形です。","word-order-interested-in":"be interested in＋名詞／-ing形で「〜に興味がある」を表します。","word-order-participle-modifier":"過去分詞を使うまとまりを名詞の後ろに置き、受け身の意味で説明します。","word-order-duration":"期間の長さは for、開始時点は since で表します。","grammar-error-correction-group":"誤りのある文の選択と、訂正した文の両方を確認します。時制・語順・前置詞・動詞の形に注意してください。","reading-paraphrase-give-up":"give up は「あきらめる・やめる」。何をやめたのかは前後の文から判断します。","reading-remember-gerund":"remember＋-ing形は「以前したことを覚えている」という意味です。","reading-relative-pronoun-person":"人を説明する主格の関係代名詞は who が基本です。","reading-grammar-see-object-ing":"see＋人＋-ing形は「人が動作しているところを見る」です。"};
 function reviewReason(q){if(typeof q.explanation==='string'&&q.explanation)return q.explanation;return REVIEW_POINTS[q.targetId]||(q.context||q.passageId?'「問題・本文を見る」で、解答に対応する本文の表現と設問の条件を確認してください。':'正答と設問の条件を照らし合わせて確認してください。詳しい解説は未整備です。')}
-function openResult(index,focus){resultIndex=Number(index);resultFilter=focus?'all':'wrong';resultFocus=focus||'';goto('result');if(resultFocus)document.getElementById('review-'+resultFocus)?.scrollIntoView({block:'start'});}
+function openResult(index,focus){resultIndex=Number(index);resultFilter=focus?'all':'wrong';resultFocus=focus||'';goto('result');if(resultFocus)document.getElementById('review-'+resultFocus)?.scrollIntoView({block:'start'});else window.scrollTo(0,0);}
 function setResultFilter(value){resultFilter=value;resultFocus='';render()}
 function openWeakResult(key){const w=S.weak[key];if(!w)return;for(let i=S.attempts.length-1;i>=0;i--){if(Object.prototype.hasOwnProperty.call(S.attempts[i].results||{},w.questionId)){openResult(i,w.questionId);return}}alert('この問題の答案履歴が残っていません。');}
 function reviewCard(a,q){
