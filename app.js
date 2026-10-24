@@ -300,8 +300,15 @@ function inputFor(q){
   if(isWordOrder(q))return wordOrderInput(q,r);
   return ANSWER_WIDGETS.textInput({value:r,placeholder:'解答を入力',onInput:onInput});
 }
+function questionInstruction(q){
+  if(q.primarySkill==='paraphrase')return 'AとBがほぼ同じ意味になるように、Bの各空所に適切な英単語を1語ずつ入れなさい。';
+  if(q.primarySkill==='guided_completion')return '日本語の意味に合うように、英文の各空所に適切な英単語を1語ずつ入れなさい。';
+  if(q.scoringType==='word_order_missing_word')return '日本語の意味に合うように、不足する英単語を1語補い、語句を並べ替えて英文を完成させなさい。';
+  return '';
+}
 function problemQuestionCard(q){
-  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceText(q.prompt)+'</div>':'')+(q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
+  const instruction=questionInstruction(q);
+  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(instruction?'<p class="question-instruction">'+h(instruction)+'</p>':'')+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceText(q.prompt)+'</div>':'')+(q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
 }
 function sourceBlock(title,text,extra){
   return '<section class="source-block"><div class="source-block-title"><b>'+h(title)+'</b>'+(extra?'<span>'+h(extra)+'</span>':'')+'</div><div class="passage">'+sourceText(text)+'</div></section>'
