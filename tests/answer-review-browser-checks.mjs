@@ -24,6 +24,7 @@ export async function runAnswerReviewChecks(browser,url){
   assert.match(await page.locator('#review-'+ids.choice).innerText(),/○ 正解/);
   await slot.locator('summary').click();assert.ok(await slot.locator('.question').isVisible());
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'result overflow at '+width);
+  assert.equal(await slot.locator('.review-answer-grid').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),width===320?1:2);
   const saved=await page.evaluate(()=>__RIKKYO_APP__.getState().attempts[0]);
   assert.ok(saved.reviewQuestions.length);assert.ok(saved.reviewPassages.length);
   await page.reload();await page.waitForFunction(()=>window.__RIKKYO_APP_READY__);

@@ -30,3 +30,6 @@ input[type=text],textarea{width:100%;padding:10px 11px;border:1px solid var(--li
 .q .error-label-options input[type=radio]{width:18px;height:18px;min-width:18px;margin:0;padding:0;accent-color:var(--brand)}
 .error-correction-text{display:block}
 .error-correction-text input{display:block;margin-top:6px}
+
+.answer-review {scroll-margin-top:1rem}.review-answer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.review-answer-grid>div{padding:12px;background:var(--paper);border:1px solid #8993a3;border-radius:8px;overflow-wrap:anywhere}.answer-review pre{white-space:pre-wrap;font:inherit}.answer-review summary{cursor:pointer;padding:12px 0}.review-status{font-weight:700}.review-filters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.review-filters [aria-pressed=true]{outline:3px solid #4775d1}.review-part{padding:8px;border-bottom:1px solid #8993a3}.review-part.bad{border-left:4px solid #c23b48}.review-part.good{border-left:4px solid #28835b}@media(max-width:600px){.review-answer-grid{grid-template-columns:1fr}}
+
