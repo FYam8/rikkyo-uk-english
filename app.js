@@ -179,13 +179,26 @@ function route(){
     return U.routeStepCard({index:i+1,title:id,role:P.routeRole(id),status:hold?'初見温存中':has?'利用可能':'整備中',description:description,protectedCard:hold,actionHtml:actionHtml});
   }).join('')+'</section>';
 }
-function exam(){
+let examTab='questions',historyExamId='';
+function openHistory(id=''){historyExamId=id;examTab='history';goto('exam')}
+function setExamTab(tab){examTab=tab==='history'?'history':'questions';historyExamId='';goto('exam')}
+function historyRows(){return S.attempts.map((a,i)=>({a,i})).filter(({a})=>!historyExamId||a.examId===historyExamId).sort((x,y)=>(Date.parse(y.a.gradedAt)||0)-(Date.parse(x.a.gradedAt)||0)||y.i-x.i)}
+function examHistory(){
+  const rows=historyRows();
+  return '<section class="card"><div class="row space"><h2>解答履歴'+(historyExamId?' · '+h(historyExamId):'')+'</h2>'+(historyExamId?'<button onclick="__RIKKYO_APP__.openHistory()">すべての履歴</button>':'')+'</div>'+(rows.length?rows.map(({a,i})=>{
+    const counts={correct:0,wrong:0,empty:0,unknown:0};resultQuestions(a).forEach(q=>counts[resultStatus(a,q)]++);
+    const summary=Object.values(counts).some(Boolean)?'正解 '+counts.correct+' ／ 不正解 '+counts.wrong+' ／ 未回答 '+counts.empty+(counts.unknown?' ／ 要確認 '+counts.unknown:''):'正解 '+(a.correctCount??'不明')+' ／ 全 '+(a.totalTasks??'不明')+'問';
+    return '<article class="history-row"><div><h3>'+h(a.examId)+'</h3><p class="muted">'+h(a.gradedAt?new Date(a.gradedAt).toLocaleString():'日時不明')+'</p><p>'+h(summary)+'</p></div><button onclick="__RIKKYO_APP__.openResult('+i+')">答案を見る</button></article>';
+  }).join(''):'<p>まだ解答履歴はありません。過去問を提出すると、ここに保存されます。</p><button onclick="__RIKKYO_APP__.setExamTab(\'questions\')">問題を解く</button>')+'</section>';
+}
+function exam(){return '<div class="exam-tabs" role="group" aria-label="過去問メニュー"><button aria-pressed="'+(examTab==='questions')+'" onclick="__RIKKYO_APP__.setExamTab(\'questions\')">問題を解く</button><button aria-pressed="'+(examTab==='history')+'" onclick="__RIKKYO_APP__.setExamTab(\'history\')">解答履歴</button></div>'+(examTab==='history'?examHistory():examQuestions())}
+function examQuestions(){
   const id=selectedExamId,ex=examById(id),paper=paperById(id),qs=qsFor(id),hold=id===C.exam.holdoutExamId,subset=ex?.runtimeMode==='supplied_subset';
   if(S.currentAttempt&&S.currentAttempt.status==='active'&&S.currentAttempt.examId===id)return examAttempt();
   const cards=C.exam.examIds.map(function(x){
     const e=examById(x),count=qsFor(x).length,status=x===C.exam.holdoutExamId?'holdout':e?.runtimeMode==='supplied_subset'?'subset':count?'ready':'audit';
     const label=status==='holdout'?'最終holdout':status==='subset'?'原本subset':count?'問題データあり':'原本範囲監査済み';
-    return '<article class="exam-card '+(x===id?'selected':'')+'"><div class="row space"><h3>'+x+'</h3><span class="badge '+(x===C.exam.holdoutExamId?'holdout':'')+'">'+h(P.routeRole(x))+'</span></div><div class="muted">'+e.year+'年度 '+e.schedule+'日程 · '+label+'</div><button onclick="__RIKKYO_APP__.selectExam(\''+x+'\')">表示</button></article>';
+    return '<article class="exam-card '+(x===id?'selected':'')+'"><div class="row space"><h3>'+x+'</h3><span class="badge '+(x===C.exam.holdoutExamId?'holdout':'')+'">'+h(P.routeRole(x))+'</span></div><div class="muted">'+e.year+'年度 '+e.schedule+'日程 · '+label+'</div><button onclick="__RIKKYO_APP__.selectExam(\''+x+'\')">表示</button> <button onclick="__RIKKYO_APP__.openHistory(\''+x+'\')">履歴を見る（'+S.attempts.filter(a=>a.examId===x).length+'）</button></article>';
   }).join('');
   let detail='';
   if(hold)detail='<div class="badbox"><b>最終判定用holdout</b><p>問題本文の転記・非公式解答監査は別データとして完了していますが、最終判定前の学習には公開しません。リスニングは音源未入手のため採点対象外です。</p></div>';
@@ -197,7 +210,7 @@ function exam(){
   return '<section class="card hero"><div class="eyebrow">PAST EXAMS</div><h2>過去問</h2></section><section class="exam-list">'+cards+'</section><section class="card"><h2>'+id+' · '+h(P.routeRole(id))+'</h2><p>'+ex.year+'年度 '+ex.schedule+'日程 ／ supplied pages: '+paper.pageCount+'</p>'+detail+'</section>';
 }
 function selectExam(id){selectedExamId=id;save();render()}
-function openExam(id){selectedExamId=id;view='exam';document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v==='exam')});save();render();scrollTo({top:0})}
+function openExam(id){examTab='questions';selectedExamId=id;view='exam';document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v==='exam')});save();render();scrollTo({top:0})}
 function beginAttemptFromGate(id){
   const mode=document.querySelector('input[name="examMode"]:checked')?.value;if(!mode)return alert('実施方法を選んでください。');
   const limit=mode==='timed'?Number(document.getElementById('timeLimit')?.value):null;
@@ -415,12 +428,11 @@ function resultView(){
   const a=S.attempts[resultIndex];if(!a)return '<section class="card">答案履歴が見つかりません。</section>';
   const qs=resultQuestions(a),counts={correct:0,wrong:0,empty:0,unknown:0};qs.forEach(q=>counts[resultStatus(a,q)]++);
   const rows=qs.filter(q=>resultFocus?q.id===resultFocus:resultFilter==='all'||resultFilter==='wrong'&&['wrong','empty','unknown'].includes(resultStatus(a,q)));
-  return '<section class="card"><h2>'+h(a.examId)+' 解答結果</h2><p>'+h(a.gradedAt?new Date(a.gradedAt).toLocaleString():'日時不明')+'</p><p>○ 正解 '+counts.correct+'　× 不正解 '+counts.wrong+'　未回答 '+counts.empty+'　要確認 '+counts.unknown+'</p>'+(!a.reviewQuestions?'<p class="muted">過去の答案です。問題・解答例は現在のデータで表示し、当時の判定を保持しています。</p>':'')+'<div class="review-filters"><button aria-pressed="'+(resultFilter==='wrong')+'" onclick="__RIKKYO_APP__.setResultFilter(\'wrong\')">間違い・未回答</button><button aria-pressed="'+(resultFilter==='all')+'" onclick="__RIKKYO_APP__.setResultFilter(\'all\')">全問</button><button onclick="__RIKKYO_APP__.goto(\'review\')">復習・履歴へ</button></div></section>'+(rows.map(q=>reviewCard(a,q)).join('')||'<section class="card">この表示に該当する問題はありません。「全問」で答案を確認できます。</section>');
+  return '<section class="card"><h2>'+h(a.examId)+' 解答結果</h2><p>'+h(a.gradedAt?new Date(a.gradedAt).toLocaleString():'日時不明')+'</p><p>○ 正解 '+counts.correct+'　× 不正解 '+counts.wrong+'　未回答 '+counts.empty+'　要確認 '+counts.unknown+'</p>'+(!a.reviewQuestions?'<p class="muted">過去の答案です。問題・解答例は現在のデータで表示し、当時の判定を保持しています。</p>':'')+'<div class="review-filters"><button aria-pressed="'+(resultFilter==='wrong')+'" onclick="__RIKKYO_APP__.setResultFilter(\'wrong\')">間違い・未回答</button><button aria-pressed="'+(resultFilter==='all')+'" onclick="__RIKKYO_APP__.setResultFilter(\'all\')">全問</button><button onclick="__RIKKYO_APP__.openHistory()">解答履歴へ</button></div></section>'+(rows.map(q=>reviewCard(a,q)).join('')||'<section class="card">この表示に該当する問題はありません。「全問」で答案を確認できます。</section>');
 }
 function review(){
-  return '<section class="card"><h2>間違い対策</h2><p>元の答案を確認してから、同じポイントを練習します。</p></section><section class="card"><h3>弱点一覧</h3>'+(weakEntries().sort(weakSort).map(([key,w])=>'<div class="card"><b>'+h(w.examId)+' · '+h(w.label)+'</b><p>'+h(P.skillName(w.skill))+' ／ '+(w.status==='mastered'?'克服済み':w.status==='pending'?'翌日の確認待ち':'復習中')+'</p><button onclick="__RIKKYO_APP__.openWeakResult(\''+h(key)+'\')">元問題・解答を見る</button> '+(w.status!=='mastered'&&E.familyCount(pool(w))>=5?'<button onclick="__RIKKYO_APP__.startWeak(\''+h(key)+'\')">このポイントを練習</button>':'')+'</div>').join('')||'<p>まだ弱点はありません。</p>')+'</section><section class="card"><h3>過去問履歴</h3>'+S.attempts.map((a,i)=>({a,i})).reverse().map(({a,i})=>'<div class="card"><b>'+h(a.examId)+' · '+a.correctCount+'/'+a.totalTasks+'</b><p>'+h(a.gradedAt?new Date(a.gradedAt).toLocaleString():'日時不明')+'</p><button onclick="__RIKKYO_APP__.openResult('+i+')">答案を見る</button></div>').join('')+'</section>';
+  return '<section class="card"><h2>間違い対策</h2><p>元の答案を確認してから、同じポイントを練習します。</p><button onclick="__RIKKYO_APP__.openHistory()">解答履歴を見る</button></section><section class="card"><h3>弱点一覧</h3>'+(weakEntries().sort(weakSort).map(([key,w])=>'<div class="card"><b>'+h(w.examId)+' · '+h(w.label)+'</b><p>'+h(P.skillName(w.skill))+' ／ '+(w.status==='mastered'?'克服済み':w.status==='pending'?'翌日の確認待ち':'復習中')+'</p><button onclick="__RIKKYO_APP__.openWeakResult(\''+h(key)+'\')">元問題・解答を見る</button> '+(w.status!=='mastered'&&E.familyCount(pool(w))>=5?'<button onclick="__RIKKYO_APP__.startWeak(\''+h(key)+'\')">このポイントを練習</button>':'')+'</div>').join('')||'<p>まだ弱点はありません。</p>')+'</section>';
 }
-
 
 function pool(w){return DATA.practice.filter(q=>!q.retired&&q.targetId===w.targetId)}
 function lastUse(id){let n=-1;S.drillLog.forEach(function(x,i){if(x.q===id)n=i});return n}
@@ -488,7 +500,7 @@ function applyDay(){const cur=today(),d=E.decideDayRollover({renderedDate:render
 window.addEventListener('focus',function(){if(applyDay())render()});
 
 function render(){examSession.stop();if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,result:resultView,stats:stats,guide:guide,writing:writingView}[view];app.innerHTML=f();examSession.start(view);window.__RIKKYO_APP_READY__=true}
-window.__RIKKYO_APP__={openResult,setResultFilter,openWeakResult,gradeReading,openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,setErrorLabel:setErrorLabel,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
+window.__RIKKYO_APP__={openHistory,setExamTab,openResult,setResultFilter,openWeakResult,gradeReading,openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,setErrorLabel:setErrorLabel,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
 loadData().then(function(){render()}).catch(function(e){console.error(e);app.innerHTML='<section class="card badbox"><h2>読み込みエラー</h2><p>'+h(e.message)+'</p></section>'});
 })();
 

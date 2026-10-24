@@ -28,12 +28,22 @@ export async function runAnswerReviewChecks(browser,url){
   const saved=await page.evaluate(()=>__RIKKYO_APP__.getState().attempts[0]);
   assert.ok(saved.reviewQuestions.length);assert.ok(saved.reviewPassages.length);
   await page.reload();await page.waitForFunction(()=>window.__RIKKYO_APP_READY__);
-  await page.getByRole('button',{name:'間違い対策',exact:true}).click();
+  await page.getByRole('button',{name:'過去問',exact:true}).click();
+  await page.getByRole('button',{name:'解答履歴',exact:true}).click();
+  assert.equal(await page.locator('.history-row').count(),1);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'history overflow');
   await page.getByRole('button',{name:'答案を見る',exact:true}).click();
   assert.match(await slot.innerText(),/× 空所1：play/);
   await page.evaluate(id=>__RIKKYO_APP__.startWeak('FY26A:'+id),ids.slots);
   assert.equal(await page.evaluate(()=>__RIKKYO_APP__.getState().currentDrill),null);
   assert.match(await slot.innerText(),/同じ論点の類題セットは整備中/);
+  await page.getByRole('button',{name:'解答履歴へ',exact:true}).click();
+  await page.getByRole('button',{name:'問題を解く',exact:true}).click();
+  await page.locator('.exam-card').filter({has:page.getByRole('heading',{name:'FY26A',exact:true})}).getByRole('button',{name:'履歴を見る（1）',exact:true}).click();
+  assert.equal(await page.locator('.history-row').count(),1);
+  await page.getByRole('button',{name:'すべての履歴',exact:true}).click();
+  await page.evaluate(()=>__RIKKYO_APP__.openHistory('FY24A'));
+  assert.match(await page.locator('main').innerText(),/まだ解答履歴はありません/);
   // Historical records without saved responses must not invent learner answers or per-slot verdicts.
   await page.evaluate(()=>{const a=__RIKKYO_APP__,s=a.getState();delete s.attempts[0].responses;delete s.attempts[0].reviewQuestions;delete s.attempts[0].reviewPassages;a.importPayload({format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:s},'replace');a.openResult(0)});
   assert.match(await slot.innerText(),/この履歴には答案が保存されていません/);

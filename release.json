@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "8c4acb36a33e62b71969402f666b7d87e73160983ccd9bd4cbc9c3cce094e29d",
+      "app.js": "13072f732b3bb185aad45c2b8e1f8f6b352f8b0faf832293b53f7b196119d14a",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -58,7 +58,7 @@
       "tests/material-integrity.test.mjs": "824049b3ad3c58134cba9241cd4c59bef6f31c596de9970bacf0046fef95d3a1",
       "tests/material-browser-checks.mjs": "76bfd1ea821f8f2a9846cf0d24adbe4bc7532df03fa6d571ae9e872f6e373c10",
       "tests/shared-exam-session-browser.test.mjs": "9eb30d7d632a8e957fd132733f63f5ec0df4835e9f11467fcd9a431b14476c38",
-      "index.html": "2154dcf7a887fe851daf5e5f5ebd1f9eb1bf733a4e5d95ea399d3058c73ed7d0",
+      "index.html": "0bdfa9edacc143eebebef12e0640bc204f01f9bc515144f2f99940ad108ee09e",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "a0135de017703c76c3146ac922676e4a88d62515a9961061ed84e23ea3f6813d",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
@@ -77,7 +77,7 @@
       "tests/reading-ai-production.test.mjs": "2097e2de893fe92cb5f2e1fde7871247f3545ccb030355cf3b21cd98a782d8b7",
       "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed",
       "tests/answer-widget-browser-checks.mjs": "3d2592f4a0431ed82202840b14d48ea5d003720268896e365bb77321cf3b5ea5",
-      "schools/rikkyo/ui-compat.css": "8c99578dd8ac96a5eca53e5df3ee75f9ffee8e53c51a23750863450b8f5c6bc4",
+      "schools/rikkyo/ui-compat.css": "edc08c8b5b1f7655f3908df62f41d38de5a5680431f4c8b25c9701f40d40f269",
       "tests/shared-ui-migration-hold.test.mjs": "615689703c0fe3af9000af7fb6563fb7cf6ba8937a4366cb0bca8731d2e44f3d",
       "tests/error-correction.test.mjs": "8ac69dce04a6851d3914c2ca6425ab8645815a9af182fe9290bdfacf07014065",
       "tests/error-correction-browser-checks.mjs": "d40e0488b6ca94479e7d743b98a3130778a08d7dea92f5039b43340f515222c8",
@@ -119,6 +119,11 @@
         "Topics with fewer than five practice families open the original saved answer instead of unrelated practice.",
         "Unofficial explanations remain explicitly incomplete where source-specific explanations are unavailable."
       ]
+    },
+    "historyNavigation": {
+      "baseCommit": "f8ac618107a65b4f821ececce187725a03287fa3",
+      "changes": "Past exams question/history tabs, per-exam history links, newest-first history and answer return navigation.",
+      "validationPolicy": "Exact-head verify and Pages production checks required."
     }
   },
   "limitations": [
