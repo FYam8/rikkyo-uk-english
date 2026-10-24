@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "5b1b59f0940313e6b047899d477bdc8724d9384759cee7eea5e1b37bfb6fba91",
+      "app.js": "a4162a0feb5b9af540df9447408f6ca7896ddc5fb623055d03ee78ebdea84af9",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -54,11 +54,11 @@
       "data/supplied-source-passages.json": "a8e059b9d84d6712541fa3d7a5e93a02d978429da913eb6796745fbdb9071096",
       "data/supplied-source-questions.json": "71c56ca04a3ffd711effdc970adde0b4b4f51d4ba31e8c9fda9bcc7f3e17796a",
       "data/writing-runtime-policy.json": "868a7a9be73e708c34d8adab03ecea02dcf002c7560a779f0e774641da1ee4ad",
-      ".github/workflows/verify.yml": "2fa385b1bca2eeb46bf8e97d386620bf81c8053b0c28ddb5f85a6e4ed54895d4",
+      ".github/workflows/verify.yml": "38350628ddb907a1d59bfcae79016f54790249b1d95eefd3fb42c154dc47975b",
       "tests/material-integrity.test.mjs": "824049b3ad3c58134cba9241cd4c59bef6f31c596de9970bacf0046fef95d3a1",
       "tests/material-browser-checks.mjs": "a90ce9b4f7a1034567e1d10b803c1650394d08b1a5363c8c20e1c9d4cf0f8882",
       "tests/shared-exam-session-browser.test.mjs": "24ce75dc04fe5eb1905477196b9937ec2285c3b9fe326a07f4a4bff00548e831",
-      "index.html": "1aa3786123f7a02b2693a40f721c31ef5c24add5f13cf69afad887b57c852953",
+      "index.html": "84719bf6e943f04a2cb47a9dfdc6faec8d47117d76bc31091d64481c39b41bda",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "a0135de017703c76c3146ac922676e4a88d62515a9961061ed84e23ea3f6813d",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
@@ -76,9 +76,11 @@
       "tests/rikkyo-browser-smoke.html": "712b21e2e910831021780be90fd769dd44f43255759a894c294690f5160b8330",
       "tests/reading-ai-production.test.mjs": "2097e2de893fe92cb5f2e1fde7871247f3545ccb030355cf3b21cd98a782d8b7",
       "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed",
-      "tests/answer-widget-browser-checks.mjs": "7b47f2d5aaad781550074300a43ad686946e3fb6c6baab5c7d259312430234f5",
-      "schools/rikkyo/ui-compat.css": "4fca089eca0db00a956197eb37375a316c3049a67023768be9bf210f57fd5c64",
-      "tests/shared-ui-migration-hold.test.mjs": "615689703c0fe3af9000af7fb6563fb7cf6ba8937a4366cb0bca8731d2e44f3d"
+      "tests/answer-widget-browser-checks.mjs": "3d2592f4a0431ed82202840b14d48ea5d003720268896e365bb77321cf3b5ea5",
+      "schools/rikkyo/ui-compat.css": "178d35c0d98b15ced716a6c3b6b2c6ba754a41e3e7523f295ecc54662a1e863a",
+      "tests/shared-ui-migration-hold.test.mjs": "615689703c0fe3af9000af7fb6563fb7cf6ba8937a4366cb0bca8731d2e44f3d",
+      "tests/error-correction.test.mjs": "8ac69dce04a6851d3914c2ca6425ab8645815a9af182fe9290bdfacf07014065",
+      "tests/error-correction-browser-checks.mjs": "d40e0488b6ca94479e7d743b98a3130778a08d7dea92f5039b43340f515222c8"
     },
     "postMergePolicy": {
       "required": true,
@@ -94,6 +96,11 @@
       "baseCommit": "55a56576a2c01c658469a22e342f32ee81266fa5",
       "changes": "Fixed full-width choice controls and grouped option labels; added 20 cross-year viewport checks. Browser verification required in exact-head CI before Pages deploy.",
       "localBrowser": "Unavailable: browser download failed; no local browser CLEAN claimed."
+    },
+    "correctionControls": {
+      "date": "2026-10-25",
+      "scope": "16 labelled corrections across FY24/FY25 A/B; legacy symbol normalization only",
+      "browserPolicy": "exact-head verify workflow required before Pages deployment"
     }
   },
   "limitations": [

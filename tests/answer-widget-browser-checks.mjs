@@ -1,3 +1,4 @@
+import {runErrorCorrectionChecks} from './error-correction-browser-checks.mjs';
 import assert from 'node:assert/strict';
 export async function runAnswerWidgetChecks(browser,url,isRikkyo){
  for(const width of [390,1280]){
@@ -90,4 +91,5 @@ export async function runAnswerWidgetChecks(browser,url,isRikkyo){
   }
   assert.deepEqual(errors,[]);console.log(`${isRikkyo?'Rikkyo':'Waseda'} P1 ${width}px selection, input, reorder, restore: CLEAN`);await c.close();
  }
+ if(isRikkyo)await runErrorCorrectionChecks(browser,url);
 }
