@@ -68,7 +68,7 @@
       "assets/writing/FY25A-Q9.png": "d5e99b263445f21b3d81b20d49d7fb70abc56c3e4aaa9252886a810c43afae6a",
       "assets/writing/FY25B-Q9.png": "d4a0e32a5d23308b3bd0ac5f51618cf603928e3d41352aef60fb83b9ec8b34f3",
       "tests/story-writing-browser.test.mjs": "b7ac89da40283dd6fff32d517187ec8b3d6994c546e860c71da4fa17259d3671",
-      "tests/story-writing-production.test.mjs": "ff62c34495eb90870fc938f449d3e2d5b3cf160cca45e960abed8ebb36946911",
+      "tests/story-writing-production.test.mjs": "34c607e8825ccf4d34f4d426b889e3b67b602d0495967c61bd3f3e3d65b77337",
       ".github/workflows/pages.yml": "35d88ff1a30f1f1343d42670b8c064ded53fb3c7fb656c8ecea58deee09c8deb",
       "tests/bootstrap-integrity.test.mjs": "fc597a1caaae0ddfb5e86ae8ef4d5753a527805e0bd447d2d34ca49036d99cae",
       "writing-shared.lock.json": "a3e8cb0c1a95979f100f4208d63d51e396f79c309ba68ebd0a8edadc9b9a5670",
