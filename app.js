@@ -179,7 +179,8 @@ function learningActionsMarkup(action){
 }
 function qLabel(q){return q.id==='R26-ENG-A-G4'?'大問4':'大問'+q.majorQuestion+' 問'+q.minorQuestion}
 
-function goto(v){view=v;document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v===v)});render();scrollTo({top:0,behavior:'smooth'})}
+function goto(v){if(v==='writing')writingExamId=null;view=v;document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.v===(v==='writingTask'?'writing':v))});render();scrollTo({top:0,behavior:'smooth'})}
+window.RIKKYO_WRITING_HUB.mountNav();
 document.querySelectorAll('nav button').forEach(function(b){b.onclick=function(){goto(b.dataset.v)}});
 
 function home(){
@@ -505,22 +506,36 @@ function stats(){
 }
 function guide(){
   const backup=U.backupPanel({description:'立教英語専用JSONです。復元前の状態は端末内に3世代まで退避します。',exportOnclick:'__RIKKYO_APP__.exportData()',importOnchange:'__RIKKYO_APP__.importData(this)'});
-  return '<section class="card hero"><h2>使い方</h2><p>過去問→弱点→類題→翌日確認の順です。</p></section><section class="card warnbox"><b>非公式解答</b><p>学校公式解答・配点は未確認です。点数換算はしません。</p></section><section class="card badbox"><b>FY26B holdout</b><p>最終判定前は学習に使用しません。</p></section>'+'<section class="card"><h2>英作文の練習</h2><p>FY25A/B・FY26Aの自由英作文を、非公式の学習用AI添削で見直します。</p><button onclick="__RIKKYO_APP__.goto(\'writing\')">英作文</button></section>'+finalWritingGate()+backup;
+  return '<section class="card hero"><h2>使い方</h2><p>過去問→弱点→類題→翌日確認の順です。</p></section><section class="card warnbox"><b>非公式解答</b><p>学校公式解答・配点は未確認です。点数換算はしません。</p></section><section class="card badbox"><b>FY26B holdout</b><p>最終判定前は学習に使用しません。</p></section>'+'<section class="card"><h2>英作文の練習</h2><p>FY25A/B・FY26Aの自由英作文を、非公式の学習用AI添削で見直します。</p><button onclick="__RIKKYO_APP__.openWriting(\'FY26A\')">FY26Aの英作文</button></section>'+finalWritingGate()+backup;
 }
 function finalWritingGate(){if(writingUnlocked())return '<section class="card"><p>FY26Bの最終試験完了記録があります。</p><button onclick="__RIKKYO_APP__.openWriting(\'FY26B\')">試験後の自由英作文を添削する</button></section>';if(!C.exam.route.filter(id=>id!=='FY26B').every(completed))return '<section class="card"><p>FY26Bは最終試験完了後に添削できます。先に他の年度の学習を完了してください。</p></section>';return '<section class="card"><h2>最終試験後の添削</h2><p>FY26Bを印刷した原本で解き終えた場合にだけ、完了を記録してください。この記録は入試得点・正誤判定には反映しません。</p><label><input id="finalPaperComplete" type="checkbox">原本でFY26Bの最終試験を最後まで解き終えました</label><button onclick="__RIKKYO_APP__.recordFinalPaperExam()">紙での最終試験完了を記録</button></section>'}
-let writingExamId='FY26A';
+let writingExamId=null;
 let writingHoldoutTask=null;
 const writingPending=new Set();
 function writingUnlocked(){return completed('FY26B')||S.finalPaperExam?.examId==='FY26B'&&S.finalPaperExam?.completed===true}
-function writingDraft(){if(writingExamId==='FY26A')return window.RIKKYO_WRITING_PRACTICE.normalize(S.writingPractice);return window.RIKKYO_WRITING_PRACTICE.normalize(S.writingDrafts?.[writingExamId])}
+function writingDraft(id=writingExamId){if(id==='FY26A')return window.RIKKYO_WRITING_PRACTICE.normalize(S.writingPractice);return window.RIKKYO_WRITING_PRACTICE.normalize(S.writingDrafts?.[id])}
 function storeWriting(x){if(writingExamId==='FY26A')S.writingPractice=x;else{S.writingDrafts=S.writingDrafts||{};S.writingDrafts[writingExamId]=x}save()}
-async function openWriting(id){if(!['FY25A','FY25B','FY26A','FY26B'].includes(id))return;if(id==='FY26B'&&!writingUnlocked())return;writingExamId=id;if(id==='FY26B'&&!writingHoldoutTask){const r=await fetch('data/writing-holdout-task.json',{cache:'no-store'});if(!r.ok)return;writingHoldoutTask=await r.json()}goto('writing')}
+async function openWriting(id){if(![...Object.keys(window.RIKKYO_WRITING_TASKS),'FY26B'].includes(id))return;if(id==='FY26B'&&!writingUnlocked())return;writingExamId=id;if(id==='FY26B'&&!writingHoldoutTask){const r=await fetch('data/writing-holdout-task.json',{cache:'no-store'});if(!r.ok)return;writingHoldoutTask=await r.json()}goto('writingTask')}
 function writingTask(){const t=writingExamId==='FY26B'?(writingUnlocked()?writingHoldoutTask:null):window.RIKKYO_WRITING_TASKS[writingExamId];return t?{...t,finalExamCompleted:writingExamId==='FY26B'?writingUnlocked():undefined}:null}
-function writingView(){const t=writingTask();if(!t)return '<section class="card">最終試験完了後に添削できます。</section>';const links=['FY25A','FY25B','FY26A',...(writingUnlocked()?['FY26B']:[])].map(id=>'<button type="button" onclick="__RIKKYO_APP__.openWriting(\''+id+'\')">'+id+'</button>').join('');return '<section class="card">'+links+'</section>'+window.RIKKYO_WRITING_PRACTICE.render(writingDraft(),t.prompt,h,t,writingPending.has(writingExamId))}
-function saveWritingText(text){const x=writingDraft();x.text=text.slice(0,10000);x.checks={};x.updatedAt=now();storeWriting(x);document.getElementById('writingCount').textContent=window.RIKKYO_WRITING_PRACTICE.count(x.text);document.querySelectorAll('#app fieldset input[type=checkbox]').forEach(input=>input.checked=false);updateWritingFeedback()}
+function writingView(){if(!writingExamId)return window.RIKKYO_WRITING_HUB.catalog(writingDraft,h);const t=writingTask();if(!t)return '<section class="card">最終試験完了後に添削できます。</section>';if(window.RIKKYO_WRITING_HUB.get(writingExamId))return window.RIKKYO_WRITING_HUB.render(writingDraft(),t.prompt,h,t,writingPending.has(writingExamId));return '<button onclick="__RIKKYO_APP__.goto(\'writing\')">← 英作文の一覧</button>'+window.RIKKYO_WRITING_PRACTICE.render(writingDraft(),t.prompt,h,t,writingPending.has(writingExamId))}
+function saveWritingText(text){const x=writingDraft();x.text=text.slice(0,10000);x.checks={};x.updatedAt=now();try{storeWriting(x)}catch(e){document.getElementById('writingStatus').textContent='端末への保存に失敗しました。画面を閉じずにバックアップを書き出してください。';}document.getElementById('writingCount').textContent=window.RIKKYO_WRITING_PRACTICE.count(x.text);document.querySelectorAll('#app fieldset input[type=checkbox]').forEach(input=>input.checked=false);updateWritingFeedback()}
 function saveWritingCheck(key,checked){if(!window.RIKKYO_WRITING_PRACTICE.checks.some(x=>x[0]===key))return;const x=writingDraft();x.checks[key]=checked;x.updatedAt=now();storeWriting(x)}
-function updateWritingFeedback(){const panel=document.getElementById('writingFeedback');if(panel)panel.innerHTML=window.RIKKYO_WRITING_PRACTICE.feedback(writingDraft(),h);}
-async function gradeWriting(){const task=writingTask(),id=writingExamId,originalState=S,x=writingDraft(),answer=x.text.trim();if(!task||writingPending.has(id))return;const status=document.getElementById('writingStatus');if(!answer){status.textContent='英文を入力してください。';return}if(answer.length>1200){status.textContent='AI添削は1200文字以内です。答案は保存されています。';return}writingPending.add(id);document.getElementById('writingGrade').disabled=true;status.textContent='答案を確認しています…';try{const data=await window.ENGLISH_WRITING_FEEDBACK.requestWritingFeedback(task,answer,C.aiWriting.endpoint);if(S!==originalState)return;const current=id==='FY26A'?S.writingPractice:S.writingDrafts?.[id];if(!current)return;current.history=Array.isArray(current.history)?current.history:[];current.history.push({answer,feedback:data,generatedAt:data.generatedAt});current.history=current.history.slice(-20);save();if(view==='writing'&&writingExamId===id){updateWritingFeedback();document.getElementById('writingStatus').textContent=current.text.trim()===answer?'添削を保存しました。修正して再提出できます。':'答案が変更されています。もう一度提出してください。'}}catch(e){if(view==='writing'&&writingExamId===id)document.getElementById('writingStatus').textContent=e.message+' 答案は保存されています。'}finally{writingPending.delete(id);if(view==='writing'&&writingExamId===id)document.getElementById('writingGrade').disabled=false}}
+function updateWritingFeedback(){const panel=document.getElementById('writingFeedback');if(panel)panel.innerHTML=window.RIKKYO_WRITING_PRACTICE.feedback(writingDraft(),h,writingTask());}
+async function gradeWriting(){
+ const task=writingTask(),id=writingExamId,originalState=S,x=writingDraft(),answer=x.text.trim();if(!task||writingPending.has(id))return;
+ const status=document.getElementById('writingStatus');if(!/[A-Za-z]/.test(answer)){status.textContent='英文を入力してください。';return}if(answer.length>1200){status.textContent='AI添削は1200文字以内です。答案は保存されています。';return}
+ const submittedAt=now();writingPending.add(id);document.getElementById('writingGrade').disabled=true;status.textContent='答案を確認しています…';
+ try{
+  const data=await window.ENGLISH_WRITING_FEEDBACK.requestWritingFeedback(task,answer,C.aiWriting.endpoint);if(S!==originalState)return;
+  const current=id==='FY26A'?S.writingPractice:S.writingDrafts?.[id];if(!current)return;
+  current.history=Array.isArray(current.history)?current.history:[];
+  current.history.push({id:crypto.randomUUID(),exerciseKey:id,mode:'full_story',answer,feedback:clone(data),submittedAt,generatedAt:data.generatedAt||now(),guide:window.RIKKYO_WRITING_HUB.snapshot(id)});
+  let stored=true;try{save()}catch(e){stored=false;}
+  if(view==='writingTask'&&writingExamId===id){updateWritingFeedback();document.getElementById('writingStatus').textContent=!stored?'添削を取得しましたが、端末への保存に失敗しました。画面を閉じずにバックアップを書き出してください。':current.text.trim()===answer?'添削を保存しました。修正して再提出できます。':'答案が変更されています。もう一度提出してください。';}
+ }catch(e){if(view==='writingTask'&&writingExamId===id)document.getElementById('writingStatus').textContent=e.message+' 答案は入力欄に残っています。';}
+ finally{writingPending.delete(id);if(view==='writingTask'&&writingExamId===id)document.getElementById('writingGrade').disabled=false;}
+}
+
 function recordFinalPaperExam(){if(!C.exam.route.filter(id=>id!=='FY26B').every(completed))return;if(!document.getElementById('finalPaperComplete')?.checked)return;S.finalPaperExam={examId:'FY26B',completed:true,completedAt:now(),mode:'paper',learnerAttested:true};save();render()}
 
 function exportData(){const p={format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',exportedAt:now(),state:clone(S)},b=new Blob([JSON.stringify(p,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='rikkyo-uk-english-'+today()+'.json';a.click();setTimeout(function(){URL.revokeObjectURL(u)},1000)}
@@ -530,7 +545,7 @@ function validateBackup(payload){if(!payload||payload.format!=='rikkyo-uk-englis
 function importPayload(payload,mode){
   validateBackup(payload);saveImportRecovery();const incoming=normalizeState(payload.state);
   if(mode==='replace')S=incoming;
-  else {const localWriting=S.writingPractice,localDrafts=S.writingDrafts,localFinal=S.finalPaperExam;S=normalizeState(E.mergeImportedLearningState(S,incoming,{schemaVersion:SCHEMA,todayValue:today(),nowIso:now}));S.writingPractice=localWriting||incoming.writingPractice;S.writingDrafts={...(incoming.writingDrafts||{}),...(localDrafts||{})};S.finalPaperExam=localFinal||incoming.finalPaperExam;}
+  else {const localWriting=S.writingPractice,localDrafts=S.writingDrafts,localFinal=S.finalPaperExam;S=normalizeState(E.mergeImportedLearningState(S,incoming,{schemaVersion:SCHEMA,todayValue:today(),nowIso:now}));S.writingPractice=window.RIKKYO_WRITING_PRACTICE.merge(localWriting,incoming.writingPractice);S.writingDrafts={};for(const id of new Set([...Object.keys(incoming.writingDrafts||{}),...Object.keys(localDrafts||{})]))S.writingDrafts[id]=window.RIKKYO_WRITING_PRACTICE.merge(localDrafts?.[id],incoming.writingDrafts?.[id]);S.finalPaperExam=localFinal||incoming.finalPaperExam;}
   drill=S.currentDrill;selectedExamId=C.exam.examIds.includes(S.selectedExamId)?S.selectedExamId:C.exam.defaultExamId;refreshUnfinishedPractice();save();render();return clone(S)
 }
 async function importData(input){
@@ -542,7 +557,7 @@ async function importData(input){
 function applyDay(){const cur=today(),d=E.decideDayRollover({renderedDate:renderedDate,currentDate:cur,isDrillView:view==='drill',hasDrill:!!drill,drillAnswered:!!(drill&&drill.answered)});if(d.kind==='same'||d.kind==='defer')return false;E.applyDailyRolloverState(S,cur);renderedDate=cur;save();return true}
 window.addEventListener('focus',function(){if(applyDay())render()});
 
-function render(){examSession.stop();if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,result:resultView,stats:stats,guide:guide,writing:writingView}[view];app.innerHTML=f();examSession.start(view);window.__RIKKYO_APP_READY__=true}
+function render(){examSession.stop();if(!DATA)return;const f={home:home,route:route,exam:exam,review:review,drill:drillView,result:resultView,stats:stats,guide:guide,writing:writingView,writingTask:writingView}[view];app.innerHTML=f();examSession.start(view);window.__RIKKYO_APP_READY__=true}
 window.__RIKKYO_APP__={openHistory,setExamTab,openResult,setResultFilter,openWeakResult,gradeReading,openWriting,gradeWriting,recordFinalPaperExam,saveWritingText:saveWritingText,saveWritingCheck:saveWritingCheck,goto:goto,selectExam:selectExam,openExam:openExam,beginAttemptFromGate:beginAttemptFromGate,beginAttempt:beginAttempt,setWordOrderMissing:setWordOrderMissing,addWordOrderToken:addWordOrderToken,addWordOrderMissing:addWordOrderMissing,undoWordOrder:undoWordOrder,clearWordOrder:clearWordOrder,toggleAnswerSheet:toggleAnswerSheet,toggleAnswerSize:toggleAnswerSize,toggleExamInfo:toggleExamInfo,jumpAnswerMajor:jumpAnswerMajor,jumpToProblem:jumpToProblem,setResponse:setResponse,setSlot:setSlot,setErrorLabel:setErrorLabel,toggleMulti:toggleMulti,toggleGroup:toggleGroup,setCorrection:setCorrection,submitAttempt:submitAttempt,startWeak:startWeak,resumeDrill:resumeDrill,setPractice:setPractice,changePracticeOrder:changePracticeOrder,finishPractice:finishPractice,continuePractice:continuePractice,exportData:exportData,importData:importData,importPayload:importPayload,getState:function(){return clone(S)},recoveryKeys:recoveryKeys,resetForTest:function(){localStorage.removeItem(KEY);recoveryKeys().forEach(function(k){localStorage.removeItem(k)});S=fresh();drill=null;selectedExamId=C.exam.defaultExamId;save();render()},data:function(){return DATA}};
 loadData().then(function(){render()}).catch(function(e){console.error(e);app.innerHTML='<section class="card badbox"><h2>読み込みエラー</h2><p>'+h(e.message)+'</p></section>'});
 })();

@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "46b1f8e34f88860d5ea41a1ec28491db223ca1d6e4510ceb1a940b19b8586201",
+      "app.js": "603d3b5b69e47d1ef6618a066874b35d4362ae8f601ee64876a4ecc67cae6eb6",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -54,21 +54,21 @@
       "data/supplied-source-passages.json": "a8e059b9d84d6712541fa3d7a5e93a02d978429da913eb6796745fbdb9071096",
       "data/supplied-source-questions.json": "71c56ca04a3ffd711effdc970adde0b4b4f51d4ba31e8c9fda9bcc7f3e17796a",
       "data/writing-runtime-policy.json": "868a7a9be73e708c34d8adab03ecea02dcf002c7560a779f0e774641da1ee4ad",
-      ".github/workflows/verify.yml": "9042af8cbbdd8b4480cdd06b24272845402f37c48fe91af3c1d907d7e69c7bbd",
+      ".github/workflows/verify.yml": "55f8261aa5b908e9e087c797968930ee9cafea667706fd439bcf79196ad16e7a",
       "tests/material-integrity.test.mjs": "add3840ba6bca6bf2a14b7214c7532782c428485b610ab8644f418079fef7f4d",
       "tests/material-browser-checks.mjs": "7886a6d766121c8c6d6e153dbbf334f951ac814f2f96923180cf1ea71894b6d1",
       "tests/shared-exam-session-browser.test.mjs": "15bd1c8a39706631b543b39941fd685efb3fbea6ab6ef2d034ad7d0543f73783",
-      "index.html": "1c20df26bddc16309ebca50270098f34a87d646e235a47e81df8fcbd9a383511",
+      "index.html": "3ec9cc11bd3f08fa04b56f429d364008d8e677c201d7b1a74f31bbd69fb13bbc",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
-      "schools/rikkyo/writingPractice.js": "a0135de017703c76c3146ac922676e4a88d62515a9961061ed84e23ea3f6813d",
+      "schools/rikkyo/writingPractice.js": "226006d0f4e5f1f99ad5af9d31a36f345aa17df4513b4275973053f0a9b563ad",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
       "ui/writing-feedback.js": "c280697a0e8068105067df13240865ce40b6f657b9071e5b2333725593efdf53",
       "ui/writing-feedback.css": "c3fd2dcc537cd595553d9b1d566e3dc0eb32d45544653a469ad3c2727920069c",
       "data/writing-holdout-task.json": "ecf272b04d6110ccb4edbe4a952b84ed963f46388c1d713b142ae08f56eb3fa6",
       "assets/writing/FY25A-Q9.png": "d5e99b263445f21b3d81b20d49d7fb70abc56c3e4aaa9252886a810c43afae6a",
       "assets/writing/FY25B-Q9.png": "d4a0e32a5d23308b3bd0ac5f51618cf603928e3d41352aef60fb83b9ec8b34f3",
-      "tests/story-writing-browser.test.mjs": "3dce7cf20664d44c41fa2ed36a52a1094e00f4eb66ed27ae44bffccb3be30a07",
-      "tests/story-writing-production.test.mjs": "c058233dadf892fe3880cdde2ca9acdcdee2c1307aefdaf2d1dee20d96be5ccb",
+      "tests/story-writing-browser.test.mjs": "b7ac89da40283dd6fff32d517187ec8b3d6994c546e860c71da4fa17259d3671",
+      "tests/story-writing-production.test.mjs": "ff62c34495eb90870fc938f449d3e2d5b3cf160cca45e960abed8ebb36946911",
       ".github/workflows/pages.yml": "35d88ff1a30f1f1343d42670b8c064ded53fb3c7fb656c8ecea58deee09c8deb",
       "tests/bootstrap-integrity.test.mjs": "fc597a1caaae0ddfb5e86ae8ef4d5753a527805e0bd447d2d34ca49036d99cae",
       "writing-shared.lock.json": "a3e8cb0c1a95979f100f4208d63d51e396f79c309ba68ebd0a8edadc9b9a5670",
@@ -86,7 +86,13 @@
       "tests/order-drill-browser-checks.mjs": "222e0d2a1111622e7f993daf64e657d3578ec3a7faca6a2dae8bf714dfc98f2f",
       "tests/practice-bank.test.mjs": "373031539759e2222681634cf0ec66cea8a620fb91dc9fbafc81bc8a4a942b8d",
       "docs/order-drill-20261025.md": "d87a7a3345da9958a591443bd9b3a3f1a37df08476024b93bf743932dd35c82e",
-      "tests/order-drill-production.test.mjs": "74ffd4f0efff453855638b7f1aeedb6f3f9297ec9926721a11cc26d9d934e1eb"
+      "tests/order-drill-production.test.mjs": "74ffd4f0efff453855638b7f1aeedb6f3f9297ec9926721a11cc26d9d934e1eb",
+      "schools/rikkyo/writingHub.js": "9c61ff0bb32b9c725fb808218110bc6deade2fcc9bbd6ba238436b15b480ede2",
+      "schools/rikkyo/writing.css": "9533f553c876a0303c664598e1c6fe03e1902d67f1bf12375486d6c45d1c5d10",
+      "assets/writing/FY25A-pictures.png": "51da2e1b0ec66232cc647b323f89eb67efbe42253e793cd41a90cf9ad3322310",
+      "assets/writing/FY25B-pictures.png": "f4884ae70619e183323364385054e057175c1484abb4140f9cd82cde8c69a87b",
+      "tests/writing-hub.test.mjs": "6e9785b887e2ab656a9f29329114e813b0b089008279c1bea4aa6f8a66222a2d",
+      "tests/writing-hub-browser.test.mjs": "9b16595c4892f481f81a9e7148bbf88815e994020c32d6ba36ff66647a8a3dae"
     },
     "postMergePolicy": {
       "required": true,
@@ -216,5 +222,18 @@
       390,
       1280
     ]
+  },
+  "writingHub": {
+    "baseMain": "199e2e6ed42374ff4b254941e61b004dd75c3fc0",
+    "initialExerciseKeys": [
+      "FY25B",
+      "FY25A"
+    ],
+    "modes": [
+      "full_story"
+    ],
+    "historyRetention": "no-automatic-count-limit",
+    "verificationPolicy": "verify workflow runs browser acceptance twice; Pages requires exact verified main SHA",
+    "sourceAuditEvidence": "Existing candidateHead and source audit fields above refer to the historical source audit, not to this feature acceptance."
   }
 }

@@ -4,7 +4,7 @@
 
 ## Release
 
-- Version: `1.0.1`
+- Version: `1.0.3`
 - Shared English Engine: `1.1.0`
 - Shared English UI: `1.3.1`
 - Learning flow: 過去問 → 弱点 → 類題3連続正解 → 翌日2連続正解 → 克服
@@ -30,7 +30,7 @@
 - 学校公式配点が確認できないため、100点換算・合格点換算は作っていません。
 - 入手できていないListening音源／transcriptは採点しません。未利用を誤答扱いしません。
 - PDFで省略されているFY24/FY25の問題は、推測で過去問として復元しません。
-- FY25のpicture writing、FY26のopen writingは原本情報を保持しますが、立教専用の採点authorityがないため現ランタイムでは自動採点しません。
+- FY25 A/Bの絵作文、FY26 Aの自由英作文は非公式の学習用AI添削に対応します。学校公式の配点・入試得点には換算しません。FY26 Bは最終試験完了後に解放します。
 
 ## Isolation
 
@@ -38,8 +38,8 @@
 - recovery: `rikkyo.uk.english.pre-migration`
 - import recovery: `rikkyo.uk.english.pre-import`
 - IndexedDB namespace: `rikkyo-uk-english-progress-sync`
-- Cloud Sync: disabled until a Rikkyo-specific endpoint/identity exists
-- AI Writing: disabled until a Rikkyo-specific writing contract exists
+- Cloud Sync: Rikkyo-specific progress endpoint/identity
+- AI Writing: Rikkyo-specific story/reading task contracts on the shared grading service
 
 Wasedaの保存キー、Cloud identity、問題データは使用しません。
 
@@ -48,3 +48,7 @@ Wasedaの保存キー、Cloud identity、問題データは使用しません。
 教材監査の候補 `79c744b8d9477e1eb17d4410ae71ea2cd6293f3c` で、[全検証](https://github.com/FYam8/rikkyo-uk-english/actions/runs/37208182759)の attempt 1・2 が連続成功。各回の追加修正事項は0件です。類題42問・実施可能な過去問122タスク・FY24〜FY26 A/Bの英語PDF6本を照合しました。main反映後も、同じコミットの verify 成功を条件にPagesへ公開します。
 
 修正内容・原本との対応は [教材監査](docs/material-audit-20261004.md)、リリース内容は [変更履歴](CHANGELOG.md) を参照してください。
+
+## 英作文タブ
+
+「過去問」の右の「英作文」からFY25B/Aの2問を個別練習できます。提出後に型と模範解答を表示し、各回の答案・添削結果を端末とバックアップに保存します。履歴の自動20回削除は行いません。今後の問題・書き出し・型の練習の追加方針は [英作文Hub](docs/writing-hub.md) を参照してください。
