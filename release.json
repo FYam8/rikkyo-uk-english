@@ -60,7 +60,7 @@
       "tests/shared-exam-session-browser.test.mjs": "15bd1c8a39706631b543b39941fd685efb3fbea6ab6ef2d034ad7d0543f73783",
       "index.html": "3ec9cc11bd3f08fa04b56f429d364008d8e677c201d7b1a74f31bbd69fb13bbc",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
-      "schools/rikkyo/writingPractice.js": "226006d0f4e5f1f99ad5af9d31a36f345aa17df4513b4275973053f0a9b563ad",
+      "schools/rikkyo/writingPractice.js": "02dc89ef972c4909f2cfee8e4976a7f333114f505ea305ef7330adc613eccc6a",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
       "ui/writing-feedback.js": "c280697a0e8068105067df13240865ce40b6f657b9071e5b2333725593efdf53",
       "ui/writing-feedback.css": "c3fd2dcc537cd595553d9b1d566e3dc0eb32d45544653a469ad3c2727920069c",
@@ -91,7 +91,7 @@
       "schools/rikkyo/writing.css": "9533f553c876a0303c664598e1c6fe03e1902d67f1bf12375486d6c45d1c5d10",
       "assets/writing/FY25A-pictures.png": "51da2e1b0ec66232cc647b323f89eb67efbe42253e793cd41a90cf9ad3322310",
       "assets/writing/FY25B-pictures.png": "f4884ae70619e183323364385054e057175c1484abb4140f9cd82cde8c69a87b",
-      "tests/writing-hub.test.mjs": "6e9785b887e2ab656a9f29329114e813b0b089008279c1bea4aa6f8a66222a2d",
+      "tests/writing-hub.test.mjs": "c92b3e89c4bd95938001f5b791a995512899b3c170d17ce3437a59d91446d988",
       "tests/writing-hub-browser.test.mjs": "9b16595c4892f481f81a9e7148bbf88815e994020c32d6ba36ff66647a8a3dae",
       "tests/writing-hub-production.test.mjs": "86408cf3bd5c3ec79fa2cbb513aa1b0e2bf53c4ab302e07d1e8fc8e18fc7fc1c"
     },

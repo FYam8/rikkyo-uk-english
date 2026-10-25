@@ -15,3 +15,5 @@ const html=hub.render({text:'<script>bad()</script>'},'',h,ctx.RIKKYO_WRITING_TA
 const catalog=hub.catalog(id=>w.normalize(id==='FY25A'?draft:{}),h);assert.ok(catalog.indexOf('A Day Out by Bicycle')<catalog.indexOf('An Island Adventure'));assert.ok(catalog.includes('25回提出'));assert.ok(!catalog.includes('FY26B'));assert.ok(!catalog.includes('mysterious door'));
 const legacy=w.merge({text:'old',history:[{answer:'Legacy answer',feedback,generatedAt:'2026-10-01T00:00:00Z'}]},{history:[{answer:'Another legacy answer',feedback:{...feedback,score:19},generatedAt:'2026-10-01T00:00:00Z'}]});assert.equal(legacy.history.length,2,'same timestamp must not collapse different legacy feedback');
 console.log('Writing hub catalog, models, escaping, >20 immutable records, backup union and legacy migration PASS');
+
+const repeated={text:"old",history:[legacy.history[0],legacy.history[0]]};assert.equal(w.merge(repeated,{history:[legacy.history[0]]}).history.length,2,"preserve repeated identical legacy submissions within a backup");assert.equal(w.merge(w.merge(repeated,repeated),repeated).history.length,2,"reimport must not inflate repeated legacy submissions");
