@@ -69,7 +69,7 @@
       "assets/writing/FY25B-Q9.png": "d4a0e32a5d23308b3bd0ac5f51618cf603928e3d41352aef60fb83b9ec8b34f3",
       "tests/story-writing-browser.test.mjs": "b7ac89da40283dd6fff32d517187ec8b3d6994c546e860c71da4fa17259d3671",
       "tests/story-writing-production.test.mjs": "34c607e8825ccf4d34f4d426b889e3b67b602d0495967c61bd3f3e3d65b77337",
-      ".github/workflows/pages.yml": "35d88ff1a30f1f1343d42670b8c064ded53fb3c7fb656c8ecea58deee09c8deb",
+      ".github/workflows/pages.yml": "3487dc071fe15fcad3af5e92b3221e1e5a5b2f8465689b8f5ce6b22e7d244755",
       "tests/bootstrap-integrity.test.mjs": "fc597a1caaae0ddfb5e86ae8ef4d5753a527805e0bd447d2d34ca49036d99cae",
       "writing-shared.lock.json": "a3e8cb0c1a95979f100f4208d63d51e396f79c309ba68ebd0a8edadc9b9a5670",
       "tests/reading-ai-browser.test.mjs": "a3ecd4682da64ee5093b1c95c7f514e00ed8b79af25c73ac8b36ef072c850f3d",
@@ -92,7 +92,8 @@
       "assets/writing/FY25A-pictures.png": "51da2e1b0ec66232cc647b323f89eb67efbe42253e793cd41a90cf9ad3322310",
       "assets/writing/FY25B-pictures.png": "f4884ae70619e183323364385054e057175c1484abb4140f9cd82cde8c69a87b",
       "tests/writing-hub.test.mjs": "6e9785b887e2ab656a9f29329114e813b0b089008279c1bea4aa6f8a66222a2d",
-      "tests/writing-hub-browser.test.mjs": "9b16595c4892f481f81a9e7148bbf88815e994020c32d6ba36ff66647a8a3dae"
+      "tests/writing-hub-browser.test.mjs": "9b16595c4892f481f81a9e7148bbf88815e994020c32d6ba36ff66647a8a3dae",
+      "tests/writing-hub-production.test.mjs": "86408cf3bd5c3ec79fa2cbb513aa1b0e2bf53c4ab302e07d1e8fc8e18fc7fc1c"
     },
     "postMergePolicy": {
       "required": true,
