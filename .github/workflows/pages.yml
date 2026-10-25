@@ -72,6 +72,7 @@ jobs:
         run: |
           node tests/order-drill-production.test.mjs
           node tests/story-writing-production.test.mjs
+          node tests/writing-hub-production.test.mjs
           node tests/reading-ai-production.test.mjs
       - uses: actions/upload-artifact@v4
         if: always()

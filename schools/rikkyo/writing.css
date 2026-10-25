@@ -1,0 +1,22 @@
+.writing-catalog,.writing-editor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.writing-choice,.writing-editor-grid>.card{min-width:0;margin:0}
+.writing-choice img,.writing-original{display:block;width:100%;height:auto;margin:18px 0;background:#fff;border-radius:8px}
+.writing-choice button{width:100%}
+.writing-badge{display:inline-block;background:var(--soft);color:var(--brand);padding:5px 10px;border-radius:20px;font-size:.85rem}
+.writing-prompt,.writing-opening{font:1.08rem/1.7 Georgia,serif}
+.writing-opening{border-left:3px solid var(--brand);background:var(--soft);padding:10px 14px}
+.writing-editor-grid textarea{display:block;width:100%;box-sizing:border-box;min-height:285px;margin-top:12px;font:1.05rem/1.8 Georgia,serif;resize:vertical}
+.writing-results{margin-top:20px}
+.writing-results:empty{display:none}
+.writing-guide{margin:20px 0}
+.writing-model-row{display:grid;grid-template-columns:minmax(170px,1fr) minmax(0,2.7fr);gap:24px;padding:14px 0;border-top:1px solid var(--line);align-items:start}
+.writing-model-row p{margin:2px 0;overflow-wrap:anywhere}
+.writing-model-row>p{font:1.05rem/1.7 Georgia,serif}
+.writing-pattern{color:var(--brand);font:1rem/1.5 Georgia,serif}
+.writing-history{margin-top:18px}
+.writing-history>summary{font-weight:700;padding:8px 0;cursor:pointer}
+.writing-history-entry{border-top:1px solid var(--line);padding:12px 0}
+.writing-history-entry summary{padding:8px 0;cursor:pointer}
+.writing-answer{white-space:pre-wrap;overflow-wrap:anywhere;font:1.05rem/1.7 Georgia,serif}
+.writing-back{margin-bottom:14px}
+@media(max-width:700px){.writing-catalog,.writing-editor-grid{grid-template-columns:1fr}.writing-model-row{grid-template-columns:1fr;gap:8px}.writing-model-row .muted{display:inline;margin-left:8px}.writing-pattern{display:block}.writing-model-row>div{min-width:0}}
