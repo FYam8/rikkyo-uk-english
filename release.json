@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "a25fea103ecdaa5f794a4bde528ef2475ee2a64c04ff8ad02bf91d3af4736129",
+      "app.js": "f3be14b07196089d55fba489f34ee4d95a17d54e365f8a30a0fd8c0317f3b624",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "742f95ff55e06a244feb6ef4ac0a1dd820580b584e2bc481eeda61f9ed4859a7",
@@ -81,7 +81,7 @@
       "tests/shared-ui-migration-hold.test.mjs": "615689703c0fe3af9000af7fb6563fb7cf6ba8937a4366cb0bca8731d2e44f3d",
       "tests/error-correction.test.mjs": "8ac69dce04a6851d3914c2ca6425ab8645815a9af182fe9290bdfacf07014065",
       "tests/error-correction-browser-checks.mjs": "d40e0488b6ca94479e7d743b98a3130778a08d7dea92f5039b43340f515222c8",
-      "styles.css": "db1a1d15e439391ca553b08361a9795732f1dcc4ad16744c10cb2ea6582fff83",
+      "styles.css": "9464bbf687b97081caa073c167c58d59546f72961b8a7d36e3b2a0ed34d677ba",
       "tests/order-drill.test.mjs": "abf84c0d004161d9610b10c001830c10ba5317f8af64e668f97632d71c317e87",
       "tests/order-drill-browser-checks.mjs": "222e0d2a1111622e7f993daf64e657d3578ec3a7faca6a2dae8bf714dfc98f2f",
       "tests/practice-bank.test.mjs": "373031539759e2222681634cf0ec66cea8a620fb91dc9fbafc81bc8a4a942b8d",
@@ -95,7 +95,7 @@
       "tests/writing-hub-browser.test.mjs": "9b16595c4892f481f81a9e7148bbf88815e994020c32d6ba36ff66647a8a3dae",
       "tests/writing-hub-production.test.mjs": "86408cf3bd5c3ec79fa2cbb513aa1b0e2bf53c4ab302e07d1e8fc8e18fc7fc1c",
       "tests/source-annotations.test.mjs": "eb01713f28cdb3d59bc2fa75718917e4cf1c935faf3b6c432d6bee6c02e559bf",
-      "tests/source-annotations-browser.test.mjs": "35ec05caa7e18bf945e0a5dc09b0b00c1b2cf07151061372c12159af3c9f11e3"
+      "tests/source-annotations-browser.test.mjs": "b194d286eac309b9bc44066bee26e653bfe790316bcf419d7a2f5f493a753d01"
     },
     "postMergePolicy": {
       "required": true,
@@ -151,7 +151,7 @@
     },
     "sourceFidelityFollowup": {
       "originalCandidateHead": "c93e241691d6ffa3427d024a0ce85f097493a87b",
-      "scope": "FY24A/B FY25A/B FY26A/B long-reading underlines and starred Japanese glossary",
+      "scope": "FY24A/B FY25A/B FY26A/B long-reading underlines and starred Japanese glossary; FY24/FY25 Q4 correction underline formatting (48 labelled fragments)",
       "underlinedTargets": 38,
       "footnotes": 57,
       "sourceDocuments": "six user supplied examination PDFs",
@@ -161,7 +161,8 @@
         "tests/source-annotations.test.mjs",
         "tests/source-annotations-browser.test.mjs"
       ],
-      "note": "The prior historical CLEAN candidate is retained; this patch requires fresh verification before production."
+      "note": "The prior historical CLEAN candidate is retained; this patch requires fresh verification before production.",
+      "q4MarkedSegments": 48
     }
   },
   "limitations": [
