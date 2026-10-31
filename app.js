@@ -308,8 +308,15 @@ function evaluate(q,r){
   return false
 }
 function displayAnswer(q){const a=q.answerSpec;if(q.scoringType==='multi_slot_text')return [a.slots.map(function(x){return x.join(' / ')}).join(' ｜ '),...(a.acceptedResponses||[]).map(x=>x.join(' ｜ '))].join(' または ');if(q.scoringType==='select_five_and_rewrite')return a.errorNumbers.join(', ');if(q.scoringType==='single_choice')return (a.acceptedChoices||[a.choice]).join(' / ')+(a.note?' — '+a.note:'');if(q.scoringType==='multiple_choice')return a.choices.join('・');return a.sentence||(a.accepted&&a.accepted.join(' / '))||(a.text&&a.text.join(' / '))||a.preferred||''}
+function wordOrderFrame(q){
+  // Source context is presentation-only. Never include it in scoring or saved answers.
+  const before=q.sourceContextBefore??q.wordOrderPrefix??'',after=q.sourceContextAfter??q.wordOrderSuffix??'';
+  if(!before&&!after)return '';
+  const spaceAfter=after&&!/^[,.;:!?！？。，）)\]"'”’]/.test(after)?' ':'';
+  return '<p class="word-order-frame">'+sourceText(before)+(before?' ':'')+'<span class="word-order-blank">［並べ替え］</span>'+spaceAfter+sourceText(after)+'</p>';
+}
 function wordOrderInput(q,r){
-  return (q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+'<div class="input-guide">語句を正しい順にタップしてください。'+(q.scoringType==='word_order_missing_word'?'不足する1語も自分で補います。':'')+'</div>'+ANSWER_WIDGETS.reorder({tokens:q.tokens||[],state:r,allowMissing:wordOrderOptions(q).allowMissing,boxId:'order-'+q.id,emptyText:'ここに並べた語句が表示されます',handlers:{add:i=>"__RIKKYO_APP__.addWordOrderToken('"+q.id+"',"+i+")",missing:"__RIKKYO_APP__.setWordOrderMissing('"+q.id+"',this.value)",addMissing:"__RIKKYO_APP__.addWordOrderMissing('"+q.id+"')",undo:"__RIKKYO_APP__.undoWordOrder('"+q.id+"')",clear:"__RIKKYO_APP__.clearWordOrder('"+q.id+"')"}});
+  return wordOrderFrame(q)+'<div class="input-guide">語句を正しい順にタップしてください。'+(q.scoringType==='word_order_missing_word'?'不足する1語も自分で補います。':'')+'</div>'+ANSWER_WIDGETS.reorder({tokens:q.tokens||[],state:r,allowMissing:wordOrderOptions(q).allowMissing,boxId:'order-'+q.id,emptyText:'ここに並べた語句が表示されます',handlers:{add:i=>"__RIKKYO_APP__.addWordOrderToken('"+q.id+"',"+i+")",missing:"__RIKKYO_APP__.setWordOrderMissing('"+q.id+"',this.value)",addMissing:"__RIKKYO_APP__.addWordOrderMissing('"+q.id+"')",undo:"__RIKKYO_APP__.undoWordOrder('"+q.id+"')",clear:"__RIKKYO_APP__.clearWordOrder('"+q.id+"')"}});
 }
 const readingIds=new Set(['R25-ENG-A-Q6-4','R26-ENG-A-Q7-1','R26-ENG-A-Q7-2','R26-ENG-A-Q7-3','R26-ENG-A-Q7-4']);
 const readingPending=new Map(),readingMessages=new Map(),submittingAttempts=new Set();
@@ -352,7 +359,7 @@ function sourceQuestionPrompt(q){
 }
 function problemQuestionCard(q){
   const instruction=questionInstruction(q);
-  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(instruction?'<p class="question-instruction">'+h(instruction)+'</p>':'')+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceQuestionPrompt(q)+'</div>':'')+(q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
+  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(instruction?'<p class="question-instruction">'+h(instruction)+'</p>':'')+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceQuestionPrompt(q)+'</div>':'')+wordOrderFrame(q)+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
 }
 function sourcePassageText(pass){
   // Source spans use exact substrings from the printed paper. Escape every
