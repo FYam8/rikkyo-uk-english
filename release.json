@@ -157,13 +157,25 @@
       "footnotes": 57,
       "sourceDocuments": "six user supplied examination PDFs",
       "runtimeHoldoutUnchanged": true,
-      "verificationState": "pending-post-change-ci",
+      "verificationState": "verified-two-consecutive-clean-runs",
       "requiredTests": [
         "tests/source-annotations.test.mjs",
         "tests/source-annotations-browser.test.mjs"
       ],
       "note": "The prior historical CLEAN candidate is retained; this patch requires fresh verification before production.",
-      "q4MarkedSegments": 48
+      "q4MarkedSegments": 48,
+      "verifiedSourceHead": "813a363beb1307727c1e4367a4e5d407c29fc4f6",
+      "verificationRuns": [
+        {
+          "id": 41233571444,
+          "conclusion": "success"
+        },
+        {
+          "id": 41233618399,
+          "conclusion": "success"
+        }
+      ],
+      "browserAcceptance": "390px and 1280px, five runtime papers; FY26B verified in static holdout coverage"
     }
   },
   "limitations": [
