@@ -346,7 +346,7 @@ function problemQuestionCard(q){
 function sourcePassageText(pass){
   // Source spans use exact substrings from the printed paper. Escape every
   // character before emitting any presentation HTML; never interpret HTML in data.
-  const raw=String(pass.text==null?'':pass.text).replace(/\\\\n/g,'\n');
+  const raw=String(pass.text==null?'':pass.text).replace(/\\n/g,'\n');
   const marks=Array.isArray(pass.underlinedSpans)?pass.underlinedSpans:[];
   const ranges=[];
   for(const marked of marks){
