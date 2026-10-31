@@ -40,3 +40,35 @@ input[type=text],textarea{width:100%;padding:10px 11px;border:1px solid var(--li
 #practice-order .tokens button{min-width:44px;min-height:44px}
 #practice-order .missing-word-row{margin-top:10px}
 .practice-stage{color:var(--brand);font-size:.85rem;font-weight:700}
+
+/* Source-paper fidelity: visible numbered underlines and printed starred glossary. */
+.passage .source-underline,.question .prompt .source-underline{
+  text-decoration-line:underline;
+  text-decoration-style:solid;
+  text-decoration-thickness:1.5px;
+  text-underline-offset:3px;
+  text-decoration-skip-ink:none;
+}
+.passage .source-note-marker{
+  font-size:.65em;
+  vertical-align:super;
+  line-height:0;
+  margin-right:1px;
+  color:var(--muted);
+}
+.source-glossary{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+}
+.source-glossary-title{font-weight:700;margin-bottom:9px}
+.source-glossary-title small{font-weight:400;color:var(--muted);font-size:.82rem}
+.source-glossary-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));
+  gap:8px 14px;
+  margin:0;
+}
+.source-glossary-grid > div{display:flex;align-items:baseline;gap:8px;min-width:0}
+.source-glossary-grid dt{font-weight:700;white-space:nowrap}
+.source-glossary-grid dd{margin:0;color:var(--text);overflow-wrap:anywhere}
