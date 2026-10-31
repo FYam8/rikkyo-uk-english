@@ -25,7 +25,7 @@ assert.ok(passages.find(p=>p.examId==='FY25B').underlinedSpans.includes('What tr
 assert.ok(passages.find(p=>p.examId==='FY24A').text.includes('*leather'));
 assert.ok(passages.find(p=>p.examId==='FY24B').text.includes('*path'));
 const app=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8');
-const css=fs.readFileSync(new URL('../styles.css',import.meta.url),'utf8');
+const css=fs.readFileSync(new URL('../schools/rikkyo/ui-compat.css',import.meta.url),'utf8');
 assert.ok(app.includes('sourcePassageText(pass)'));
 assert.ok(app.includes('sourcePassageGlossary(pass)'));
 assert.ok(app.includes("pass.sourceAttribution||'',pass)"));

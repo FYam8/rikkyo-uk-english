@@ -32,6 +32,9 @@ try{
       const notes=page.locator('.source-block .source-glossary dd');
       assert.equal(await lines.count(),underlines,width+' '+examId+' underlines');
       assert.equal(await notes.count(),glossary,width+' '+examId+' annotations');
+      const computed=await page.evaluate(()=>({notes:getComputedStyle(document.querySelector('.source-glossary-grid')).display,underlines:getComputedStyle(document.querySelector('.source-underline')).textDecorationLine}));
+      assert.equal(computed.notes,'grid',width+' '+examId+' glossary styles not loaded');
+      assert.ok(computed.underlines.includes('underline'),width+' '+examId+' underline style not applied');
       assert.equal(await page.locator('.question .prompt u.source-underline').count(),examId==='FY26A'?0:12,width+' '+examId+' Q4 correction underlines');
       assert.equal(await page.locator('.source-block .passage .source-note-marker').count(),glossary,width+' '+examId+' stars');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,width+' '+examId+' horizontal overflow');
