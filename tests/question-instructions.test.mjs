@@ -6,7 +6,7 @@ const read=p=>fs.readFileSync(new URL(p,root),'utf8');
 const json=p=>JSON.parse(read(p));
 const app=read('app.js');
 const context={};vm.createContext(context);
-for(const name of ['h','sourceText','sourceQuestionPrompt','qLabel','flattenSuppliedRuntime','questionInstruction','problemQuestionCard','sourceBlock','renderProblemFlow']){
+for(const name of ['h','sourceText','sourceQuestionPrompt','qLabel','flattenSuppliedRuntime','questionInstruction','wordOrderFrame','problemQuestionCard','sourceBlock','renderProblemFlow']){
   const start=app.indexOf('function '+name+'(');
   const end=app.indexOf('\nfunction ',start+1);
   assert.ok(start>=0,name);
