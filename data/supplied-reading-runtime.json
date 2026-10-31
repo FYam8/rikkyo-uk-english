@@ -78,7 +78,9 @@
       },
       "wordOrderPrefix": "four elves",
       "wordOrderSuffix": "the workshop",
-      "contentVersion": 2
+      "contentVersion": 2,
+      "sourceContextBefore": "While the shoemaker and his wife were talking, (2) four *elves",
+      "sourceContextAfter": "the *workshop. They felt sorry for the kind man."
     },
     {
       "id": "R24-ENG-A-Q6-3",
@@ -352,7 +354,9 @@
         "sentence": "How much will it cost to repair the roof and the ceiling?"
       },
       "wordOrderPrefix": "How",
-      "contentVersion": 2
+      "contentVersion": 2,
+      "sourceContextBefore": "She said to him, “(1) How",
+      "sourceContextAfter": "?” He said, “It will cost about £2,200.”"
     },
     {
       "id": "R24-ENG-B-Q6-2",
@@ -406,7 +410,9 @@
       ],
       "answerSpec": {
         "sentence": "whose cat it was"
-      }
+      },
+      "sourceContextBefore": "She (3) wondered",
+      "sourceContextAfter": ", so she knocked on her neighbour’s door."
     },
     {
       "id": "R24-ENG-B-Q6-4",
@@ -715,7 +721,9 @@
       ],
       "answerSpec": {
         "sentence": "Mark was very glad to see Daisy eating mealworms."
-      }
+      },
+      "sourceContextBefore": "Daisy came. (5)",
+      "sourceContextAfter": ". He was standing beside the flowerpot but Daisy did not fly away and ate them."
     },
     {
       "id": "R25-ENG-A-Q6-6",
@@ -878,7 +886,9 @@
       ],
       "answerSpec": {
         "sentence": "the vine will be big and thick enough for someone to climb up"
-      }
+      },
+      "sourceContextBefore": "Then someday (2)",
+      "sourceContextAfter": ". A hunter will be able to climb up the vine and catch us."
     },
     {
       "id": "R25-ENG-B-Q6-3",
@@ -949,7 +959,9 @@
       ],
       "answerSpec": {
         "sentence": "why it was so big and thick"
-      }
+      },
+      "sourceContextBefore": "(4) He thought",
+      "sourceContextAfter": "and decided to climb up the vine using his torch."
     },
     {
       "id": "R25-ENG-B-Q6-5",
