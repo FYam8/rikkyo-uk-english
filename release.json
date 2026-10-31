@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "603d3b5b69e47d1ef6618a066874b35d4362ae8f601ee64876a4ecc67cae6eb6",
+      "app.js": "4637edac74d82abcb33fac2b2a01f2b031a74ab819fd7a6a23bb502995388c6a",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
@@ -50,7 +50,7 @@
       "data/questions.json": "43b1a1d8ebedf0dd5e92d8e02ab8ba257a6ae1a0b3a5c72549c7275586afc96f",
       "data/sections.json": "a13f525fcbb048920037249c16d25178a5560fcea85f2964db18d07703f3b87f",
       "data/source-coverage.json": "81b6b9882ae2a9bc452a605031047e5a3605dca6316cbb15453d5c41a79c1f74",
-      "data/supplied-reading-runtime.json": "2e31c4b50d7746d7423cfbc6ad7496de6a88fba7b86b694f35dba80101f65687",
+      "data/supplied-reading-runtime.json": "680b8d63bddc31e52eba916a2005f659decec1d9999c0769e5a77c7129eb0d37",
       "data/supplied-source-passages.json": "a8e059b9d84d6712541fa3d7a5e93a02d978429da913eb6796745fbdb9071096",
       "data/supplied-source-questions.json": "71c56ca04a3ffd711effdc970adde0b4b4f51d4ba31e8c9fda9bcc7f3e17796a",
       "data/writing-runtime-policy.json": "868a7a9be73e708c34d8adab03ecea02dcf002c7560a779f0e774641da1ee4ad",
@@ -58,7 +58,7 @@
       "tests/material-integrity.test.mjs": "add3840ba6bca6bf2a14b7214c7532782c428485b610ab8644f418079fef7f4d",
       "tests/material-browser-checks.mjs": "7886a6d766121c8c6d6e153dbbf334f951ac814f2f96923180cf1ea71894b6d1",
       "tests/shared-exam-session-browser.test.mjs": "15bd1c8a39706631b543b39941fd685efb3fbea6ab6ef2d034ad7d0543f73783",
-      "index.html": "4d32c90aac44a2d0630185c7e42b6c56ff059481ff47a860da503d4b973a0401",
+      "index.html": "820f7b7cd03f3f7473b663030883d4d1ba3ae96de795e6554398b4b0c9bd95e9",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "02dc89ef972c4909f2cfee8e4976a7f333114f505ea305ef7330adc613eccc6a",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
@@ -146,6 +146,15 @@
       "scope": "Shared reorder widget adapter, exact-topic 5-family practice pools, scaffold then missing word, reserved next-day confirmation, old draft recovery",
       "localBrowser": "Unavailable: Chromium download failed; no local browser CLEAN claimed.",
       "evidencePolicy": "Historical candidate evidence above is unchanged. Current pins identify this patch; successful exact-head candidate and main verify are required before Pages deployment."
+    },
+    "sourceContextHotfix": {
+      "date": "2026-11-01",
+      "scope": "FY24/FY25 Q6 six original word-order items; presentation-only fixed words; no changes to PDF transcription, tokens, answer specs, grading or history",
+      "tests": [
+        "tests/supplied-reading-runtime.test.mjs",
+        "tests/question-instructions.test.mjs"
+      ],
+      "verificationPolicy": "Historical CLEAN candidate remains historical; new branch and post-merge exact-main verify must succeed before GitHub Pages publishes."
     }
   },
   "limitations": [
