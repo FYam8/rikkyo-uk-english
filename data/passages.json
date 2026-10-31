@@ -25,7 +25,16 @@
         "shaded": "日陰の",
         "confused": "困惑した",
         "recognise": "〜だとわかる"
-      }
+      },
+      "underlinedSpans": [
+        "(1) (ア walk / イ walked / ウ walking / エ was walking)",
+        "(2) (　　　)",
+        "(3) (　　　)",
+        "(4) give up",
+        "(5) ( I / grown / the rose / planted / that / has )",
+        "(6) (see)",
+        "(7) do"
+      ]
     }
   ]
 }

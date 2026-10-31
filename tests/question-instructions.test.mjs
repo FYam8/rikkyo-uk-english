@@ -6,7 +6,7 @@ const read=p=>fs.readFileSync(new URL(p,root),'utf8');
 const json=p=>JSON.parse(read(p));
 const app=read('app.js');
 const context={};vm.createContext(context);
-for(const name of ['h','sourceText','qLabel','flattenSuppliedRuntime','questionInstruction','problemQuestionCard','sourceBlock','renderProblemFlow']){
+for(const name of ['h','sourceText','sourceQuestionPrompt','qLabel','flattenSuppliedRuntime','questionInstruction','problemQuestionCard','sourceBlock','renderProblemFlow']){
   const start=app.indexOf('function '+name+'(');
   const end=app.indexOf('\nfunction ',start+1);
   assert.ok(start>=0,name);
@@ -21,7 +21,7 @@ for(const q of rows){
   if(instruction){
     counts[q.primarySkill]=(counts[q.primarySkill]||0)+1;
     assert.ok(card.includes(instruction),q.id);
-    if(q.prompt)assert.ok(card.indexOf(instruction)<card.indexOf(context.sourceText(q.prompt)),q.id);
+    if(q.prompt)assert.ok(card.indexOf(instruction)<card.indexOf(context.sourceQuestionPrompt(q)),q.id);
     if(q.primarySkill==='paraphrase')assert.match(instruction,/AとB.*同じ意味.*1語ずつ/);
     if(q.primarySkill==='guided_completion')assert.match(instruction,/日本語.*1語ずつ/);
     if(q.scoringType==='word_order_missing_word')assert.match(instruction,/不足.*1語.*並べ替え/);

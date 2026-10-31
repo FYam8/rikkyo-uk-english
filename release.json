@@ -40,21 +40,21 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "603d3b5b69e47d1ef6618a066874b35d4362ae8f601ee64876a4ecc67cae6eb6",
+      "app.js": "f3be14b07196089d55fba489f34ee4d95a17d54e365f8a30a0fd8c0317f3b624",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
-      "data/fy26b-holdout-source.json": "05558ea6952d788b6717dc1468c9c8f4f7777198df78b5f38a735c59342fbb79",
+      "data/fy26b-holdout-source.json": "742f95ff55e06a244feb6ef4ac0a1dd820580b584e2bc481eeda61f9ed4859a7",
       "data/papers.json": "2645b4b086a5c5317948c9ed721f1bd8bee6bd3b8548143b8dd54a46b2e77526",
-      "data/passages.json": "8bc7c98b5534af55c53d1d9ff6b212a8738d5dd08967c5bcb2613d4f91e4187b",
+      "data/passages.json": "6dddc702b7270127e15dcf40f06a6a34b1ec523b59e28a9975af633cbb2e167f",
       "data/practice.json": "938207afb16cc5f7680b914dcb60d376f03f8d2cb2b05eb5a27ea45bb6339983",
       "data/questions.json": "43b1a1d8ebedf0dd5e92d8e02ab8ba257a6ae1a0b3a5c72549c7275586afc96f",
       "data/sections.json": "a13f525fcbb048920037249c16d25178a5560fcea85f2964db18d07703f3b87f",
       "data/source-coverage.json": "81b6b9882ae2a9bc452a605031047e5a3605dca6316cbb15453d5c41a79c1f74",
       "data/supplied-reading-runtime.json": "2e31c4b50d7746d7423cfbc6ad7496de6a88fba7b86b694f35dba80101f65687",
-      "data/supplied-source-passages.json": "a8e059b9d84d6712541fa3d7a5e93a02d978429da913eb6796745fbdb9071096",
+      "data/supplied-source-passages.json": "3cad735388e7d59b35cd351a8d8cbda358ac58eb9dd365d9a0042daa7b953c40",
       "data/supplied-source-questions.json": "71c56ca04a3ffd711effdc970adde0b4b4f51d4ba31e8c9fda9bcc7f3e17796a",
       "data/writing-runtime-policy.json": "868a7a9be73e708c34d8adab03ecea02dcf002c7560a779f0e774641da1ee4ad",
-      ".github/workflows/verify.yml": "55f8261aa5b908e9e087c797968930ee9cafea667706fd439bcf79196ad16e7a",
+      ".github/workflows/verify.yml": "08b2a314b00a38fbba05d964cae3cfcc294c7a6cdd288b5da45b97d93d725bfc",
       "tests/material-integrity.test.mjs": "add3840ba6bca6bf2a14b7214c7532782c428485b610ab8644f418079fef7f4d",
       "tests/material-browser-checks.mjs": "7886a6d766121c8c6d6e153dbbf334f951ac814f2f96923180cf1ea71894b6d1",
       "tests/shared-exam-session-browser.test.mjs": "15bd1c8a39706631b543b39941fd685efb3fbea6ab6ef2d034ad7d0543f73783",
@@ -81,7 +81,7 @@
       "tests/shared-ui-migration-hold.test.mjs": "615689703c0fe3af9000af7fb6563fb7cf6ba8937a4366cb0bca8731d2e44f3d",
       "tests/error-correction.test.mjs": "8ac69dce04a6851d3914c2ca6425ab8645815a9af182fe9290bdfacf07014065",
       "tests/error-correction-browser-checks.mjs": "d40e0488b6ca94479e7d743b98a3130778a08d7dea92f5039b43340f515222c8",
-      "styles.css": "fc81a0567c95b300d28b9f7301b03cdb2fefad66c17a46545456b1b375118815",
+      "styles.css": "9464bbf687b97081caa073c167c58d59546f72961b8a7d36e3b2a0ed34d677ba",
       "tests/order-drill.test.mjs": "abf84c0d004161d9610b10c001830c10ba5317f8af64e668f97632d71c317e87",
       "tests/order-drill-browser-checks.mjs": "222e0d2a1111622e7f993daf64e657d3578ec3a7faca6a2dae8bf714dfc98f2f",
       "tests/practice-bank.test.mjs": "373031539759e2222681634cf0ec66cea8a620fb91dc9fbafc81bc8a4a942b8d",
@@ -93,7 +93,10 @@
       "assets/writing/FY25B-pictures.png": "f4884ae70619e183323364385054e057175c1484abb4140f9cd82cde8c69a87b",
       "tests/writing-hub.test.mjs": "c92b3e89c4bd95938001f5b791a995512899b3c170d17ce3437a59d91446d988",
       "tests/writing-hub-browser.test.mjs": "9b16595c4892f481f81a9e7148bbf88815e994020c32d6ba36ff66647a8a3dae",
-      "tests/writing-hub-production.test.mjs": "86408cf3bd5c3ec79fa2cbb513aa1b0e2bf53c4ab302e07d1e8fc8e18fc7fc1c"
+      "tests/writing-hub-production.test.mjs": "86408cf3bd5c3ec79fa2cbb513aa1b0e2bf53c4ab302e07d1e8fc8e18fc7fc1c",
+      "tests/source-annotations.test.mjs": "eb01713f28cdb3d59bc2fa75718917e4cf1c935faf3b6c432d6bee6c02e559bf",
+      "tests/source-annotations-browser.test.mjs": "b194d286eac309b9bc44066bee26e653bfe790316bcf419d7a2f5f493a753d01",
+      "tests/question-instructions.test.mjs": "4337232b138dad6988a80f228cbfefc9c01331852d3da93ddb1dcade4ddcf7e5"
     },
     "postMergePolicy": {
       "required": true,
@@ -146,6 +149,33 @@
       "scope": "Shared reorder widget adapter, exact-topic 5-family practice pools, scaffold then missing word, reserved next-day confirmation, old draft recovery",
       "localBrowser": "Unavailable: Chromium download failed; no local browser CLEAN claimed.",
       "evidencePolicy": "Historical candidate evidence above is unchanged. Current pins identify this patch; successful exact-head candidate and main verify are required before Pages deployment."
+    },
+    "sourceFidelityFollowup": {
+      "originalCandidateHead": "c93e241691d6ffa3427d024a0ce85f097493a87b",
+      "scope": "FY24A/B FY25A/B FY26A/B long-reading underlines and starred Japanese glossary; FY24/FY25 Q4 correction underline formatting (48 labelled fragments)",
+      "underlinedTargets": 38,
+      "footnotes": 57,
+      "sourceDocuments": "six user supplied examination PDFs",
+      "runtimeHoldoutUnchanged": true,
+      "verificationState": "verified-two-consecutive-clean-runs",
+      "requiredTests": [
+        "tests/source-annotations.test.mjs",
+        "tests/source-annotations-browser.test.mjs"
+      ],
+      "note": "The prior historical CLEAN candidate is retained; this patch requires fresh verification before production.",
+      "q4MarkedSegments": 48,
+      "verifiedSourceHead": "813a363beb1307727c1e4367a4e5d407c29fc4f6",
+      "verificationRuns": [
+        {
+          "id": 41233571444,
+          "conclusion": "success"
+        },
+        {
+          "id": 41233618399,
+          "conclusion": "success"
+        }
+      ],
+      "browserAcceptance": "390px and 1280px, five runtime papers; FY26B verified in static holdout coverage"
     }
   },
   "limitations": [

@@ -11,7 +11,7 @@
       ],
       "title": "The Shoemaker and the Elves",
       "transcriptionStatus": "source_checked_visual_v1",
-      "text": "Once upon a time there were a kind shoemaker and his wife. Sadly, no one bought his shoes and they became poor. They only had a piece of leather to make one last pair of shoes. To *console him, his wife said, “Don’t worry too much. Everything will be fine soon! (1) Leave the leather on the table. Let’s go to bed now.”\n\nWhile the shoemaker and his wife were talking, (2) four *elves ( them / heard / of / outside / and / their house / the window / came to / talking ) the *workshop. They felt sorry for the kind man.\n\n“We must help the poor shoemaker,” said one of the elves. Then they talked about how to help the shoemaker and his wife. One of the elves said, “How about making beautiful shoes while they are sleeping?” [A]\n\nThe clever elves *fluttered into the house through the window of the workshop. They took the leather and soon began cutting, *sewing, and decorating it. Before morning, they finished making the most beautiful pair of shoes in the world and then (3) fly away.\n\nIn the morning the shoemaker and his wife were amazed to see the pretty little shoes on the table. They said, “Who made the shoes? They are beautiful!” [B] Soon, a *merchant living in the next town saw the shoes in the shop window and said to the shoemaker, “The shoes are really beautiful. Did you make them?” (4) The shoemaker did not say anything but smiled. The merchant decided to buy them and gave the shoemaker enough money to buy leather for two pairs of shoes. That night the shoemaker left the leather on the table again before going to bed and then the elves returned.\n\nBefore sunrise they made two pairs of shoes (5) (　　　) were much prettier. This continued for many more nights. Every morning, the shoemaker found new shoes on the table and they were all bought in a day.\n\nOne day the shoemaker said to his wife, “I want to know who are making shoes. We must thank them for their kindness.” [C] They decided to keep *awake that night and hide behind the door to find out who made the shoes for them.\n\nAs they waited, finally the elves came into the workshop. They quickly made the shoes, laughing and singing. “We are very lucky. We must give something to them! Their clothes are *torn. Let’s make tiny clothes for them,” said his wife. They both worked hard to make the best clothes and the cutest pair of shoes for the elves and left them on the table. The shoemaker’s wife said to her husband, “Do you think the elves will be pleased with the gifts from us?” “Yes, I think so,” said the shoemaker.\n\nNext night the elves came and they were surprised to see the new clothes. One of the elves said, “(6) This shirt is my (f　　　).” Another elf said, “I want to take these shoes with me.” They danced happily, sang songs and went out of the window carrying clothes and shoes in their hands. They were never seen again. The shoemaker continued to make the best shoes in the town and sold them. He said to his wife, “We must not forget the kind elves.” [D]",
+      "text": "Once upon a time there were a kind shoemaker and his wife. Sadly, no one bought his shoes and they became poor. They only had a piece of *leather to make one last pair of shoes. To *console him, his wife said, “Don’t worry too much. Everything will be fine soon! (1) Leave the leather on the table. Let’s go to bed now.”\n\nWhile the shoemaker and his wife were talking, (2) four *elves ( them / heard / of / outside / and / their house / the window / came to / talking ) the *workshop. They felt sorry for the kind man.\n\n“We must help the poor shoemaker,” said one of the elves. Then they talked about how to help the shoemaker and his wife. One of the elves said, “How about making beautiful shoes while they are sleeping?” [A]\n\nThe clever elves *fluttered into the house through the window of the workshop. They took the leather and soon began cutting, *sewing, and decorating it. Before morning, they finished making the most beautiful pair of shoes in the world and then (3) fly away.\n\nIn the morning the shoemaker and his wife were amazed to see the pretty little shoes on the table. They said, “Who made the shoes? They are beautiful!” [B] Soon, a *merchant living in the next town saw the shoes in the shop window and said to the shoemaker, “The shoes are really beautiful. Did you make them?” (4) The shoemaker did not say anything but smiled. The merchant decided to buy them and gave the shoemaker enough money to buy leather for two pairs of shoes. That night the shoemaker left the leather on the table again before going to bed and then the elves returned.\n\nBefore sunrise they made two pairs of shoes (5) (　　　) were much prettier. This continued for many more nights. Every morning, the shoemaker found new shoes on the table and they were all bought in a day.\n\nOne day the shoemaker said to his wife, “I want to know who are making shoes. We must thank them for their kindness.” [C] They decided to keep *awake that night and hide behind the door to find out who made the shoes for them.\n\nAs they waited, finally the elves came into the workshop. They quickly made the shoes, laughing and singing. “We are very lucky. We must give something to them! Their clothes are *torn. Let’s make tiny clothes for them,” said his wife. They both worked hard to make the best clothes and the cutest pair of shoes for the elves and left them on the table. The shoemaker’s wife said to her husband, “Do you think the elves will be pleased with the gifts from us?” “Yes, I think so,” said the shoemaker.\n\nNext night the elves came and they were surprised to see the new clothes. One of the elves said, “(6) This shirt is my (f　　　).” Another elf said, “I want to take these shoes with me.” They danced happily, sang songs and went out of the window carrying clothes and shoes in their hands. They were never seen again. The shoemaker continued to make the best shoes in the town and sold them. He said to his wife, “We must not forget the kind elves.” [D]",
       "glossary": {
         "leather": "革",
         "console": "慰める",
@@ -22,7 +22,15 @@
         "merchant": "商人",
         "awake": "眠らずに",
         "torn": "破れていて"
-      }
+      },
+      "underlinedSpans": [
+        "(1) Leave the leather on the table.",
+        "(2) four *elves ( them / heard / of / outside / and / their house / the window / came to / talking ) the *workshop.",
+        "(3) fly",
+        "(4) The shoemaker did not say anything",
+        "(5) (　　　)",
+        "(6) This shirt is my (f　　　)."
+      ]
     },
     {
       "passageId": "R24-ENG-B-P6",
@@ -34,7 +42,7 @@
       ],
       "title": "Helen and the Black Cat",
       "transcriptionStatus": "source_checked_visual_v1",
-      "text": "Helen was a young writer who lived in a rented house in the south of England. She wrote a fantasy story for children. She asked some *publishing companies to publish it but they were not interested in it. (A-1) she worked at a local *pharmacy to *earn a living.\n\nOne day she found a small old house for sale in her village. (A-2) there was a small hole in the roof, she decided to buy it. (A-3) she was not rich, she borrowed money from a bank.\n\n(A-4) buying the house, Helen decorated the walls of her house and *sowed flower seeds in her garden. In summer the flowers in her garden were in full bloom. She enjoyed painting pictures there. The weather was good until the middle of August but then it rained every day. One night the rainwater came through the *ceiling of her bedroom from the hole of the roof. The rainwater *dripped all night and the floor and her bed were wet.\n\nNext day Helen called a *builder and told him about the *leaking problem. She said to him, “(1) How ( the roof / the ceiling / it / to / and / will / much / repair / cost )?” He said, “It will cost about £2,200.” It was expensive and she wanted to cry.\n\nOne day in early September Helen saw a black cat on one of the chairs in the garden. The cat didn’t wear a *collar. Helen went out of the house, walked towards the cat and said to it, “Hello, my friend. What’s your name?” Normally cats run away when they see strangers but it (2) didn’t. She was able to *stroke it. After a while it went away. The black cat visited Helen’s garden every day. One day it slept under the tree and another day it sat on the garden table.\n\nThe cat visited Helen’s garden every day. It was friendly to her. She (3) wondered ( was / whose / it / cat ), so she knocked on her neighbour’s door. A few seconds later Emma, her neighbour, opened the front door. Helen said to Emma, “Hello, Emma. I wonder if you know a black cat without a collar. It visits my garden every day.” Emma said, “( B-1 ) How about asking John, a postman, tomorrow morning?” Helen said, “( B-2 ) Thanks.”\n\nNext morning Helen saw John delivering letters to her neighbours. She called John and said to him, “Good morning, John. Do you know a family who have a black cat around here?” “No, I don’t. But I have seen it a few times. (4) It’s a lovely cat, ( a )( b )?” said John. Helen said, “Some people think that black cats bring us a bad luck when they cross our path. Has the cat brought you a bad luck?” “No, I don’t think so. Don’t worry. Black cats may bring us a good luck! Have a nice day, Helen,” said John.\n\nIn the late afternoon Helen had a call on her mobile phone from someone. “Hello, are you Miss Helen Wood?” “Yes, I am. Who is calling?” “I’m Mike Adams, calling from Victory Books, a publishing company in London. We read your fantasy story and decided to publish it if you like.” It was great news for Helen. She said to Mike Adams, “Yes, I would like you to publish my story!” Then Mike Adams said, “( B-3 ) Can you come to our office next Monday?” Helen said, “( B-4 )” After the telephone call, Helen jumped up and remembered (5) the postman’s words.",
+      "text": "Helen was a young writer who lived in a rented house in the south of England. She wrote a fantasy story for children. She asked some *publishing companies to publish it but they were not interested in it. (A-1) she worked at a local *pharmacy to *earn a living.\n\nOne day she found a small old house for sale in her village. (A-2) there was a small hole in the roof, she decided to buy it. (A-3) she was not rich, she borrowed money from a bank.\n\n(A-4) buying the house, Helen decorated the walls of her house and *sowed flower seeds in her garden. In summer the flowers in her garden were in full bloom. She enjoyed painting pictures there. The weather was good until the middle of August but then it rained every day. One night the rainwater came through the *ceiling of her bedroom from the hole of the roof. The rainwater *dripped all night and the floor and her bed were wet.\n\nNext day Helen called a *builder and told him about the *leaking problem. She said to him, “(1) How ( the roof / the ceiling / it / to / and / will / much / repair / cost )?” He said, “It will cost about £2,200.” It was expensive and she wanted to cry.\n\nOne day in early September Helen saw a black cat on one of the chairs in the garden. The cat didn’t wear a *collar. Helen went out of the house, walked towards the cat and said to it, “Hello, my friend. What’s your name?” Normally cats run away when they see strangers but it (2) didn’t. She was able to *stroke it. After a while it went away. The black cat visited Helen’s garden every day. One day it slept under the tree and another day it sat on the garden table.\n\nThe cat visited Helen’s garden every day. It was friendly to her. She (3) wondered ( was / whose / it / cat ), so she knocked on her neighbour’s door. A few seconds later Emma, her neighbour, opened the front door. Helen said to Emma, “Hello, Emma. I wonder if you know a black cat without a collar. It visits my garden every day.” Emma said, “( B-1 ) How about asking John, a postman, tomorrow morning?” Helen said, “( B-2 ) Thanks.”\n\nNext morning Helen saw John delivering letters to her neighbours. She called John and said to him, “Good morning, John. Do you know a family who have a black cat around here?” “No, I don’t. But I have seen it a few times. (4) It’s a lovely cat, ( a )( b )?” said John. Helen said, “Some people think that black cats bring us a bad luck when they cross our *path. Has the cat brought you a bad luck?” “No, I don’t think so. Don’t worry. Black cats may bring us a good luck! Have a nice day, Helen,” said John.\n\nIn the late afternoon Helen had a call on her mobile phone from someone. “Hello, are you Miss Helen Wood?” “Yes, I am. Who is calling?” “I’m Mike Adams, calling from Victory Books, a publishing company in London. We read your fantasy story and decided to publish it if you like.” It was great news for Helen. She said to Mike Adams, “Yes, I would like you to publish my story!” Then Mike Adams said, “( B-3 ) Can you come to our office next Monday?” Helen said, “( B-4 )” After the telephone call, Helen jumped up and remembered (5) the postman’s words.",
       "glossary": {
         "publishing_company": "出版社",
         "pharmacy": "薬局",
@@ -45,8 +53,16 @@
         "builder": "建築業者",
         "leak": "漏れる",
         "collar": "首輪",
-        "stroke": "なでる"
-      }
+        "stroke": "なでる",
+        "path": "通り道"
+      },
+      "underlinedSpans": [
+        "(1) How ( the roof / the ceiling / it / to / and / will / much / repair / cost )?",
+        "(2) didn’t",
+        "(3) wondered ( was / whose / it / cat )",
+        "(4) It’s a lovely cat, ( a )( b )?",
+        "(5) the postman’s words."
+      ]
     },
     {
       "passageId": "R25-ENG-A-P6",
@@ -71,7 +87,16 @@
         "feed": "えさを与える",
         "mealworms": "鳥のえさ",
         "flowerpot": "植木鉢"
-      }
+      },
+      "underlinedSpans": [
+        "(1) He had a parrot (　　　) Goldie",
+        "(2) catch",
+        "(3) pass away",
+        "(4) *buried it under the apple tree in the garden.",
+        "(5) ( to / Mark / Daisy / mealworms / was / eating / very / see / glad )",
+        "(6) did it, too.",
+        "(7) They (s　　　) doing it."
+      ]
     },
     {
       "passageId": "R25-ENG-B-P6",
@@ -95,7 +120,15 @@
         "get stuck": "身動きがとれなくなる",
         "stay still": "じっとしている",
         "peck away": "つついて取り除く"
-      }
+      },
+      "underlinedSpans": [
+        "(1)(　　　)",
+        "(2) ( someone / be / big and thick / to / will / enough / the vine / climb up / for )",
+        "What trouble can come from such a little vine?",
+        "(4) He thought ( was / big and thick / why / it / so )",
+        "(5) ( throw )",
+        "(6) I’m sorry, I was wrong."
+      ]
     }
   ]
 }

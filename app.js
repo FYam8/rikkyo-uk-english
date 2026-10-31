@@ -339,19 +339,65 @@ function questionInstruction(q){
   if(q.scoringType==='word_order_missing_word')return '日本語の意味に合うように、不足する英単語を1語補い、語句を並べ替えて英文を完成させなさい。';
   return '';
 }
+function sourceQuestionPrompt(q){
+  const escaped=sourceText(q.prompt||'');
+  if(q.sourceSubset&&q.primarySkill==='error_correction_rewrite'){
+    // Keep the established (ア)【...】 answer labels, but also restore
+    // underlining of the three original correction candidates.
+    return escaped.replace(/（([アイウ])）【([^】]+)】/g,function(_whole,label,text){
+      return '（'+label+'）【<u class="source-underline">'+text+'</u>】';
+    });
+  }
+  return escaped;
+}
 function problemQuestionCard(q){
   const instruction=questionInstruction(q);
-  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(instruction?'<p class="question-instruction">'+h(instruction)+'</p>':'')+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceText(q.prompt)+'</div>':'')+(q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
+  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(instruction?'<p class="question-instruction">'+h(instruction)+'</p>':'')+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceQuestionPrompt(q)+'</div>':'')+(q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
 }
-function sourceBlock(title,text,extra){
-  return '<section class="source-block"><div class="source-block-title"><b>'+h(title)+'</b>'+(extra?'<span>'+h(extra)+'</span>':'')+'</div><div class="passage">'+sourceText(text)+'</div></section>'
+function sourcePassageText(pass){
+  // Source spans use exact substrings from the printed paper. Escape every
+  // character before emitting any presentation HTML; never interpret HTML in data.
+  const raw=String(pass.text==null?'':pass.text).replace(/\\n/g,'\n');
+  const marks=Array.isArray(pass.underlinedSpans)?pass.underlinedSpans:[];
+  const ranges=[];
+  for(const marked of marks){
+    const value=typeof marked==='string'?marked:marked.text;
+    const index=raw.indexOf(value);
+    if(!value||index<0||raw.indexOf(value,index+value.length)!==-1){
+      console.warn('Invalid passage underline',pass.passageId,value);
+      continue;
+    }
+    if(ranges.some(r=>index<r.end&&index+value.length>r.start)){
+      console.warn('Overlapping passage underline',pass.passageId,value);
+      continue;
+    }
+    ranges.push({start:index,end:index+value.length});
+  }
+  const starts=new Set(ranges.map(r=>r.start)),ends=new Set(ranges.map(r=>r.end));
+  let html='';
+  for(let i=0;i<=raw.length;i++){
+    if(ends.has(i))html+='</u>';
+    if(starts.has(i))html+='<u class="source-underline">';
+    if(i===raw.length)break;
+    if(raw[i]==='*'&&/[A-Za-z]/.test(raw[i+1]||''))html+='<sup class="source-note-marker" aria-hidden="true">＊</sup>';
+    else html+=h(raw[i]);
+  }
+  return html;
+}
+function sourcePassageGlossary(pass){
+  const glossary=pass&&pass.glossary&&typeof pass.glossary==='object'?Object.entries(pass.glossary):[];
+  if(!glossary.length)return '';
+  return '<aside class="source-glossary" aria-label="原本の語句注釈"><div class="source-glossary-title">語句の注釈 <small>原本掲載・＊印の語句</small></div><dl class="source-glossary-grid">'+glossary.map(([word,meaning])=>'<div><dt>'+h(word.replace(/_/g,' '))+'</dt><dd>'+h(meaning)+'</dd></div>').join('')+'</dl></aside>';
+}
+function sourceBlock(title,text,extra,pass){
+  return '<section class="source-block"><div class="source-block-title"><b>'+h(title)+'</b>'+(extra?'<span>'+h(extra)+'</span>':'')+'</div><div class="passage">'+(pass?sourcePassageText(pass):sourceText(text))+'</div>'+(pass?sourcePassageGlossary(pass):'')+'</section>'
 }
 function renderProblemFlow(rows,passes){
   const out=[],shownPassages=new Set();let lastContext=null;
   for(const q of rows){
     if(q.passageId&&!shownPassages.has(q.passageId)){
       const pass=passes.find(function(p){return p.passageId===q.passageId});
-      if(pass){out.push(sourceBlock('大問'+q.majorQuestion+' 長文 · '+(pass.title||'本文'),pass.text,pass.sourceAttribution||''));shownPassages.add(q.passageId);lastContext=null}
+      if(pass){out.push(sourceBlock('大問'+q.majorQuestion+' 長文 · '+(pass.title||'本文'),pass.text,pass.sourceAttribution||'',pass));shownPassages.add(q.passageId);lastContext=null}
     }
     if(q.context&&q.context!==lastContext){out.push(sourceBlock('大問'+q.majorQuestion+' 資料',q.context,''));lastContext=q.context}
     if(!q.context)lastContext=null;
