@@ -32,6 +32,7 @@ jobs:
       - run: node tests/source-coverage-status.test.mjs
       - run: node tests/question-instructions.test.mjs
       - run: node tests/source-linked-presentation.test.mjs
+      - run: node tests/source-annotations.test.mjs
       - run: node tests/writing-runtime-policy.test.mjs
       - run: node tests/writing-practice.test.mjs
       - run: node tests/writing-hub.test.mjs
@@ -54,6 +55,11 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/exam-session-deps/node_modules/playwright
         run: node tests/shared-exam-session-browser.test.mjs .
+
+      - name: Verify source underlines and glossaries in real browser
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/exam-session-deps/node_modules/playwright
+        run: node tests/source-annotations-browser.test.mjs .
 
       - name: Verify writing draft and self-review
         env:
