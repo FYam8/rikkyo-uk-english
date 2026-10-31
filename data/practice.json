@@ -274,7 +274,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 3,
+      "contentVersion": 4,
       "retired": false,
       "level": 2,
       "id": "rwo02-3",
@@ -292,11 +292,15 @@
         "that"
       ],
       "answer": "He is the teacher that I talked to yesterday.",
-      "explanation": "talk to＋人 の to を、関係節 that I talked to に残します。",
+      "explanation": "talk to＋人、talk with＋人 はどちらも「人と話す」。関係節の最後に to または with を残します。",
       "focusTag": "word-order-relative-preposition",
       "examFormat": "word_order_missing_word",
       "japanese": "彼は私が昨日話をした先生です。",
-      "missingWord": "to"
+      "missingWord": "to",
+      "accepted": [
+        "He is the teacher that I talked to yesterday.",
+        "He is the teacher that I talked with yesterday."
+      ]
     },
     {
       "sourceType": "authored_practice",
@@ -676,7 +680,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 3,
+      "contentVersion": 4,
       "retired": false,
       "level": 2,
       "id": "rwo05-3",
@@ -693,11 +697,15 @@
         "heard"
       ],
       "answer": "We heard a song sung by a famous singer.",
-      "explanation": "song は歌われた側なので sing の過去分詞 sung を補います。sung by ... が名詞を修飾します。",
+      "explanation": "歌は歌われた側なので sing の過去分詞 sung。performed（披露された）も、この文脈では「歌われた歌」を表せます。",
       "focusTag": "word-order-participle-modifier",
       "examFormat": "word_order_missing_word",
       "japanese": "私たちは有名な歌手によって歌われた歌を聞きました。",
-      "missingWord": "sung"
+      "missingWord": "sung",
+      "accepted": [
+        "We heard a song sung by a famous singer.",
+        "We heard a song performed by a famous singer."
+      ]
     },
     {
       "sourceType": "authored_practice",
@@ -727,7 +735,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 3,
+      "contentVersion": 4,
       "retired": false,
       "level": 3,
       "id": "rwo05-5",
@@ -744,11 +752,15 @@
         "like"
       ],
       "answer": "I like the picture painted by my sister.",
-      "explanation": "picture は描かれたものなので過去分詞 painted を補います。painted by my sister が picture を後ろから説明します。",
+      "explanation": "picture は描かれたものなので、paint の過去分詞 painted または draw の過去分詞 drawn を補います。",
       "focusTag": "word-order-participle-modifier",
       "examFormat": "word_order_missing_word",
       "japanese": "私は姉によって描かれた絵が好きです。",
-      "missingWord": "painted"
+      "missingWord": "painted",
+      "accepted": [
+        "I like the picture painted by my sister.",
+        "I like the picture drawn by my sister."
+      ]
     },
     {
       "sourceType": "authored_practice",
@@ -882,7 +894,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 1,
+      "contentVersion": 2,
       "retired": false,
       "level": 1,
       "id": "rec01",
@@ -892,7 +904,11 @@
       "type": "text",
       "prompt": "Correct the sentence: I have known her since three years.",
       "answerText": "I have known her for three years.",
-      "explanation": "期間の長さ three years の前は since ではなく for です。"
+      "explanation": "期間は for three years。起点を示す since を使う場合は three years ago（3年前）とします。",
+      "accepted": [
+        "I have known her for three years.",
+        "I have known her since three years ago."
+      ]
     },
     {
       "sourceType": "authored_practice",
@@ -999,7 +1015,7 @@
     },
     {
       "sourceType": "authored_practice",
-      "contentVersion": 2,
+      "contentVersion": 3,
       "retired": false,
       "level": 1,
       "id": "rrd02",
@@ -1010,7 +1026,11 @@
       "context": "Aya met Mr Brown at a school event last year.",
       "prompt": "Complete: Aya remembers ( _____ ) Mr Brown at the event.（空所は1語。）",
       "answerText": "meeting",
-      "explanation": "過去にしたことを覚えている、という remember -ing の用法です。"
+      "explanation": "過去に会ったことを覚えているので remember＋動名詞。meeting と seeing のどちらでも文脈に合います。",
+      "accepted": [
+        "meeting",
+        "seeing"
+      ]
     },
     {
       "sourceType": "authored_practice",
