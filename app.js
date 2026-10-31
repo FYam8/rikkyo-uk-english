@@ -339,9 +339,20 @@ function questionInstruction(q){
   if(q.scoringType==='word_order_missing_word')return '日本語の意味に合うように、不足する英単語を1語補い、語句を並べ替えて英文を完成させなさい。';
   return '';
 }
+function sourceQuestionPrompt(q){
+  const escaped=sourceText(q.prompt||'');
+  if(q.sourceSubset&&q.primarySkill==='error_correction_rewrite'){
+    // Keep the established (ア)【...】 answer labels, but also restore
+    // underlining of the three original correction candidates.
+    return escaped.replace(/（([アイウ])）【([^】]+)】/g,function(_whole,label,text){
+      return '（'+label+'）【<u class="source-underline">'+text+'</u>】';
+    });
+  }
+  return escaped;
+}
 function problemQuestionCard(q){
   const instruction=questionInstruction(q);
-  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(instruction?'<p class="question-instruction">'+h(instruction)+'</p>':'')+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceText(q.prompt)+'</div>':'')+(q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
+  return '<article id="problem-'+q.id+'" class="question"><div class="qhead"><h3>'+h(qLabel(q))+'</h3><span class="source-badge">'+q.id+(q.sourceSubset?' · supplied subset':'')+'</span></div>'+(instruction?'<p class="question-instruction">'+h(instruction)+'</p>':'')+(q.japanese?'<div class="jp">'+sourceText(q.japanese)+'</div>':'')+(q.prompt?'<div class="prompt">'+sourceQuestionPrompt(q)+'</div>':'')+(q.wordOrderPrefix||q.wordOrderSuffix?'<p class="word-order-frame">'+h(q.wordOrderPrefix||'')+' ［並べ替え］ '+h(q.wordOrderSuffix||'')+'</p>':'')+(q.tokens?'<div class="token-list source-token-list">'+q.tokens.map(function(t){return '<span class="token">'+sourceText(t)+'</span>'}).join('')+'</div>':'')+'</article>'
 }
 function sourcePassageText(pass){
   // Source spans use exact substrings from the printed paper. Escape every
