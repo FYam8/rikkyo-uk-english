@@ -178,12 +178,17 @@
       "browserAcceptance": "390px and 1280px, five runtime papers; FY26B verified in static holdout coverage",
       "cacheBustFollowup": {
         "scope": "Active source-note CSS and app.js cache-busting in index.html",
-        "verificationState": "pending-fresh-ci",
+        "verificationState": "browser-and-integrity-checks-passed-twice",
         "requiredChecks": [
           "tests/source-annotations.test.mjs",
           "tests/source-annotations-browser.test.mjs"
         ],
-        "note": "New active stylesheet path and computed-style checks prevent false-green static presentation tests."
+        "note": "Both runs passed static integrity and active-stylesheet computed CSS browser validation; full writing regression still separately gated at main after merge.",
+        "verifiedSourceCommit": "b5a001fabe6f863e898c6f6e0e73285787e585a7",
+        "verificationRuns": [
+          41234269780,
+          41234284026
+        ]
       }
     }
   },
