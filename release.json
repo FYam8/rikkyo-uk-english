@@ -56,7 +56,7 @@
       "data/writing-runtime-policy.json": "868a7a9be73e708c34d8adab03ecea02dcf002c7560a779f0e774641da1ee4ad",
       ".github/workflows/verify.yml": "55f8261aa5b908e9e087c797968930ee9cafea667706fd439bcf79196ad16e7a",
       "tests/material-integrity.test.mjs": "add3840ba6bca6bf2a14b7214c7532782c428485b610ab8644f418079fef7f4d",
-      "tests/material-browser-checks.mjs": "7886a6d766121c8c6d6e153dbbf334f951ac814f2f96923180cf1ea71894b6d1",
+      "tests/material-browser-checks.mjs": "16bd23e66251c49c5015b7d6112fe6d78ae7e758cd01d9055edab5c3e43c5c56",
       "tests/shared-exam-session-browser.test.mjs": "15bd1c8a39706631b543b39941fd685efb3fbea6ab6ef2d034ad7d0543f73783",
       "index.html": "820f7b7cd03f3f7473b663030883d4d1ba3ae96de795e6554398b4b0c9bd95e9",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
