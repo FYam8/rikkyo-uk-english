@@ -18,7 +18,7 @@ for(const passage of passages){
   assert.ok(ranges.every(([a,b])=>idx>=b||idx+phrase.length<=a),paper+' overlapping underlines');
   ranges.push([idx,idx+phrase.length]);
  }
- const stars=[...raw.matchAll(/\\*[a-zA-Z]+/g)].map(x=>x[0]);
+ const stars=[...raw.matchAll(/\*[a-zA-Z]+/g)].map(x=>x[0]);
  assert.equal(stars.length,notes,paper+' starred source words differ from original glossary');
 }
 assert.ok(passages.find(p=>p.examId==='FY25B').underlinedSpans.includes('What trouble can come from such a little vine?'));
