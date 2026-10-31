@@ -32,6 +32,7 @@ try{
       const notes=page.locator('.source-block .source-glossary dd');
       assert.equal(await lines.count(),underlines,width+' '+examId+' underlines');
       assert.equal(await notes.count(),glossary,width+' '+examId+' annotations');
+      assert.equal(await page.locator('.question .prompt u.source-underline').count(),examId==='FY26A'?0:12,width+' '+examId+' Q4 correction underlines');
       assert.equal(await page.locator('.source-block .passage .source-note-marker').count(),glossary,width+' '+examId+' stars');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,width+' '+examId+' horizontal overflow');
       if(examId==='FY25B')assert.equal(await page.locator('u.source-underline').filter({hasText:'What trouble can come from such a little vine?'}).count(),1);
