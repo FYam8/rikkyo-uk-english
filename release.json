@@ -58,7 +58,7 @@
       "tests/material-integrity.test.mjs": "add3840ba6bca6bf2a14b7214c7532782c428485b610ab8644f418079fef7f4d",
       "tests/material-browser-checks.mjs": "7886a6d766121c8c6d6e153dbbf334f951ac814f2f96923180cf1ea71894b6d1",
       "tests/shared-exam-session-browser.test.mjs": "15bd1c8a39706631b543b39941fd685efb3fbea6ab6ef2d034ad7d0543f73783",
-      "index.html": "4d32c90aac44a2d0630185c7e42b6c56ff059481ff47a860da503d4b973a0401",
+      "index.html": "476de5ded7490cb2e3f46ab880991dc2cdb9e58209111844afa8671f14eea256",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "02dc89ef972c4909f2cfee8e4976a7f333114f505ea305ef7330adc613eccc6a",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
@@ -77,11 +77,11 @@
       "tests/reading-ai-production.test.mjs": "2097e2de893fe92cb5f2e1fde7871247f3545ccb030355cf3b21cd98a782d8b7",
       "tests/final-release-readiness.test.mjs": "f82d735398a6fcd699e04392a53b1dbc8318480b5ca4a873799511fe1cdc32ed",
       "tests/answer-widget-browser-checks.mjs": "3d2592f4a0431ed82202840b14d48ea5d003720268896e365bb77321cf3b5ea5",
-      "schools/rikkyo/ui-compat.css": "9a2b8b92a98fb3241fa3ec1b2bb672188c1c9cf06398cf1ebc1fa0a3d7ad9b35",
+      "schools/rikkyo/ui-compat.css": "736e9666e62be9ee38ab2a33c4324159b9326b993b7b9bd831acc1ad7a902593",
       "tests/shared-ui-migration-hold.test.mjs": "615689703c0fe3af9000af7fb6563fb7cf6ba8937a4366cb0bca8731d2e44f3d",
       "tests/error-correction.test.mjs": "8ac69dce04a6851d3914c2ca6425ab8645815a9af182fe9290bdfacf07014065",
       "tests/error-correction-browser-checks.mjs": "d40e0488b6ca94479e7d743b98a3130778a08d7dea92f5039b43340f515222c8",
-      "styles.css": "9464bbf687b97081caa073c167c58d59546f72961b8a7d36e3b2a0ed34d677ba",
+      "styles.css": "fc81a0567c95b300d28b9f7301b03cdb2fefad66c17a46545456b1b375118815",
       "tests/order-drill.test.mjs": "abf84c0d004161d9610b10c001830c10ba5317f8af64e668f97632d71c317e87",
       "tests/order-drill-browser-checks.mjs": "222e0d2a1111622e7f993daf64e657d3578ec3a7faca6a2dae8bf714dfc98f2f",
       "tests/practice-bank.test.mjs": "373031539759e2222681634cf0ec66cea8a620fb91dc9fbafc81bc8a4a942b8d",
@@ -94,8 +94,8 @@
       "tests/writing-hub.test.mjs": "c92b3e89c4bd95938001f5b791a995512899b3c170d17ce3437a59d91446d988",
       "tests/writing-hub-browser.test.mjs": "9b16595c4892f481f81a9e7148bbf88815e994020c32d6ba36ff66647a8a3dae",
       "tests/writing-hub-production.test.mjs": "86408cf3bd5c3ec79fa2cbb513aa1b0e2bf53c4ab302e07d1e8fc8e18fc7fc1c",
-      "tests/source-annotations.test.mjs": "eb01713f28cdb3d59bc2fa75718917e4cf1c935faf3b6c432d6bee6c02e559bf",
-      "tests/source-annotations-browser.test.mjs": "b194d286eac309b9bc44066bee26e653bfe790316bcf419d7a2f5f493a753d01",
+      "tests/source-annotations.test.mjs": "43ab2c1226f056f965f4b4122f8be077f808ce03260ad40df9a02ce6bc0f67f5",
+      "tests/source-annotations-browser.test.mjs": "8a52881e647395b1a4d627249aa4029bb82dfeb3499e2769e484c17c515b200f",
       "tests/question-instructions.test.mjs": "4337232b138dad6988a80f228cbfefc9c01331852d3da93ddb1dcade4ddcf7e5"
     },
     "postMergePolicy": {
@@ -175,7 +175,16 @@
           "conclusion": "success"
         }
       ],
-      "browserAcceptance": "390px and 1280px, five runtime papers; FY26B verified in static holdout coverage"
+      "browserAcceptance": "390px and 1280px, five runtime papers; FY26B verified in static holdout coverage",
+      "cacheBustFollowup": {
+        "scope": "Active source-note CSS and app.js cache-busting in index.html",
+        "verificationState": "pending-fresh-ci",
+        "requiredChecks": [
+          "tests/source-annotations.test.mjs",
+          "tests/source-annotations-browser.test.mjs"
+        ],
+        "note": "New active stylesheet path and computed-style checks prevent false-green static presentation tests."
+      }
     }
   },
   "limitations": [
