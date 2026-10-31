@@ -18,12 +18,12 @@ const passages=JSON.parse(fs.readFileSync(new URL('../data/supplied-source-passa
 const appSource=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8');
 const snippet=appSource.slice(appSource.indexOf('function wordOrderFrame(q){'),appSource.indexOf('\nfunction wordOrderInput(q,r){'));
 assert.ok(snippet.includes('sourceContextBefore'),'both panes must render source context metadata');
-assert.equal((appSource.match(/wordOrderFrame\\(q\\)/g)||[]).length,3,'word-order frame definition + question/answer panes');
+assert.equal((appSource.match(/wordOrderFrame\(q\)/g)||[]).length,3,'word-order frame definition + question/answer panes');
 const ctx=vm.createContext({sourceText:v=>String(v)});
 vm.runInContext(snippet,ctx);
 const orders=d.records.filter(q=>q.scoringType==='word_order');
 assert.equal(orders.length,6,'all available FY24/FY25 Q6 reorder questions covered');
-const normalize=s=>String(s).toLowerCase().replace(/[.!?]+$/,'').trim().replace(/\\s+/g,' ');
+const normalize=s=>String(s).toLowerCase().replace(/[.!?]+$/,'').trim().replace(/\s+/g,' ');
 for(const q of orders){
  const p=passages.find(x=>x.passageId===q.passageId);
  assert.ok(p,q.id+' original passage is missing');
