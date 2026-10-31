@@ -96,7 +96,7 @@
       "tests/writing-hub-production.test.mjs": "86408cf3bd5c3ec79fa2cbb513aa1b0e2bf53c4ab302e07d1e8fc8e18fc7fc1c",
       "tests/source-annotations.test.mjs": "43ab2c1226f056f965f4b4122f8be077f808ce03260ad40df9a02ce6bc0f67f5",
       "tests/source-annotations-browser.test.mjs": "8a52881e647395b1a4d627249aa4029bb82dfeb3499e2769e484c17c515b200f",
-      "tests/question-instructions.test.mjs": "4337232b138dad6988a80f228cbfefc9c01331852d3da93ddb1dcade4ddcf7e5"
+      "tests/question-instructions.test.mjs": "6796175aa37e1502a5aca890a4eb39cb76b288e716085bbcc667f3e9f50b6f94"
     },
     "postMergePolicy": {
       "required": true,
