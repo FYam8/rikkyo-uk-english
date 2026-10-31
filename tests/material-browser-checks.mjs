@@ -28,7 +28,12 @@ export async function runMaterialChecks(browser,url){
      for(const label of ['ア','イ','ウ'])assert.ok(text.includes('（'+label+'）【'),q.id+' invisible label');
     }
     if(q.japanese)assert.ok((await page.locator('#problem-'+q.id).innerText()).includes(q.japanese),q.id+' invisible Japanese guide');
-    if(q.wordOrderPrefix)assert.ok((await page.locator('#answer-'+q.id).innerText()).includes(q.wordOrderPrefix),q.id+' invisible fixed words');
+    const expectedBefore=q.sourceContextBefore||q.wordOrderPrefix||'',expectedAfter=q.sourceContextAfter||q.wordOrderSuffix||'';
+    if(expectedBefore||expectedAfter){
+     const displayed=await page.locator('#answer-'+q.id).innerText();
+     if(expectedBefore)assert.ok(displayed.includes(expectedBefore),q.id+' invisible source-verbatim leading words');
+     if(expectedAfter)assert.ok(displayed.includes(expectedAfter),q.id+' invisible source-verbatim trailing words');
+    }
    }
    await page.evaluate(async responses=>{const a=__RIKKYO_APP__;for(const [id,r]of Object.entries(responses))a.setResponse(id,r);await a.submitAttempt()},responses);
    const attempt=await page.evaluate(()=>__RIKKYO_APP__.getState().attempts.at(-1));
