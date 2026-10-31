@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {orderFor} from './material-integrity.test.mjs';
+import {solutions} from './independent-solutions.test.mjs';
 export async function runMaterialChecks(browser,url){
  for(const width of [390,1280]){
   const context=await browser.newContext({viewport:{width,height:900},serviceWorkers:'block'});
@@ -70,6 +71,24 @@ export async function runMaterialChecks(browser,url){
   assert.equal((await practice(bank.find(q=>q.id==='rwo01'),'He realised that had forgotten his key.')).ok,false);
   assert.equal((await practice(bank.find(q=>q.id==='rec03'),'The man that lives next door is a doctor.')).ok,true);
   const short=bank.find(q=>q.id==='rsa01');
+  // Enter independently solved alternatives using the real text/reorder widgets.
+  for(const [id,answer,missing]of solutions){
+   const q=bank.find(q=>q.id===id);
+   await page.evaluate(({template,q})=>{
+    const s=structuredClone(template);s.currentDrill.q=q;s.currentDrill.response=null;s.currentDrill.answered=false;s.currentDrill.feedback=null;
+    __RIKKYO_APP__.importPayload({format:'rikkyo-uk-english-backup',version:1,appId:'rikkyo-uk-english',state:s},'replace');__RIKKYO_APP__.goto('drill');
+   },{template,q});
+   if(q.tokens){
+    for(const index of orderFor({...q,answer,missingWord:missing})){
+     if(index==='missing'){
+      await page.locator('#practice-order .missing-word-row input').fill(missing);
+      await page.getByRole('button',{name:'不足語を追加',exact:true}).click();
+     }else await page.locator('#practice-order .tokens button').nth(index).click();
+    }
+   }else await page.locator('#app input[type="text"]').fill(answer);
+   await page.locator('#practice-submit').click();
+   assert.equal(await page.evaluate(()=>__RIKKYO_APP__.getState().drillLog.at(-1).ok),true,id+' UI rejected valid alternative');
+  }
   assert.equal((await practice(short,'Mr Lee teaches geography.')).gradingMode,'registered_answer');
   const review=await practice(short,'The subject taught by Mr Lee is geography.');
   assert.equal(review.ok,true);assert.equal(review.gradingMode,'self_review');assert.ok(dialogs.at(-1).includes('短答の自己確認'));

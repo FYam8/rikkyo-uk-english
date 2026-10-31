@@ -15,7 +15,14 @@ export function orderFor(q){
   for(const t of tokens)if(!used.includes(t.i)&&(rest===t.v||rest.startsWith(t.v+' '))){const result=search(rest.slice(t.v.length).trim(),[...used,t.i]);if(result)return result}
   return null;
  }
- const order=search(left,[]);assert.ok(order,q.id+' cannot be assembled from exactly the permitted chunks');return order;
+ let order=search(left,[]);
+ // The missing-word input is free text; a valid alternative sentence may use
+ // another single word (talked with/to, painted/drawn).
+ if(!order&&q.missingWord){
+  const missing=tokens.find(t=>t.i==='missing');
+  for(const word of new Set(left.split(' '))){missing.v=word;order=search(left,[]);if(order)break}
+ }
+ assert.ok(order,q.id+' cannot be assembled from exactly the permitted chunks');return order;
 }
 const bank=read('practice').items;
 assert.equal(bank.length,66);

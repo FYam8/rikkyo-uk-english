@@ -42,6 +42,7 @@ jobs:
       - run: node tests/order-drill.test.mjs
       - run: node tests/practice-bank.test.mjs
       - run: node tests/material-integrity.test.mjs
+      - run: node tests/independent-solutions.test.mjs
       - run: node --check engine/core.js
       - run: node --check engine/contract.js
       - run: node --check engine/bootstrap.js
