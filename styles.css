@@ -21,7 +21,7 @@ footer{max-width:1180px;margin:auto;padding:0 20px 36px;color:var(--muted);font-
 @media(max-width:780px){.two,.three,.exam-list{grid-template-columns:1fr}.slot-row{grid-template-columns:1fr}.hero{padding:18px}main,nav,header{padding-left:12px;padding-right:12px}.daily-summary{grid-template-columns:1fr 1fr}.attempt-bar{align-items:flex-start}.route-step{grid-template-columns:38px 1fr}.route-number{width:34px;height:34px}.question{padding:13px}}
 
 /* Source-paper fidelity: visible numbered underlines and printed starred glossary. */
-.passage .source-underline{
+.passage .source-underline,.question .prompt .source-underline{
   text-decoration-line:underline;
   text-decoration-style:solid;
   text-decoration-thickness:1.5px;
