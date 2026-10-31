@@ -40,7 +40,7 @@
       "inventory": "docs/material-audit-inventory.json"
     },
     "auditedContentSha256": {
-      "app.js": "f3be14b07196089d55fba489f34ee4d95a17d54e365f8a30a0fd8c0317f3b624",
+      "app.js": "bcf9030bac6443afb3c9401196a585aff54909526dd9f6d058035f448210ad71",
       "data/exams.json": "fe085f0c11b9b2a4f77215f6be91e01b2fea08c30678d983f8ae7b7d3b665ff2",
       "data/fy26a-late-runtime.json": "c846ac884152e4d214a4cb226f3a4ad9e5b11db98108df69e0bda4fc638ab489",
       "data/fy26b-holdout-source.json": "742f95ff55e06a244feb6ef4ac0a1dd820580b584e2bc481eeda61f9ed4859a7",
@@ -50,15 +50,15 @@
       "data/questions.json": "43b1a1d8ebedf0dd5e92d8e02ab8ba257a6ae1a0b3a5c72549c7275586afc96f",
       "data/sections.json": "a13f525fcbb048920037249c16d25178a5560fcea85f2964db18d07703f3b87f",
       "data/source-coverage.json": "81b6b9882ae2a9bc452a605031047e5a3605dca6316cbb15453d5c41a79c1f74",
-      "data/supplied-reading-runtime.json": "2e31c4b50d7746d7423cfbc6ad7496de6a88fba7b86b694f35dba80101f65687",
+      "data/supplied-reading-runtime.json": "680b8d63bddc31e52eba916a2005f659decec1d9999c0769e5a77c7129eb0d37",
       "data/supplied-source-passages.json": "3cad735388e7d59b35cd351a8d8cbda358ac58eb9dd365d9a0042daa7b953c40",
       "data/supplied-source-questions.json": "71c56ca04a3ffd711effdc970adde0b4b4f51d4ba31e8c9fda9bcc7f3e17796a",
       "data/writing-runtime-policy.json": "868a7a9be73e708c34d8adab03ecea02dcf002c7560a779f0e774641da1ee4ad",
       ".github/workflows/verify.yml": "08b2a314b00a38fbba05d964cae3cfcc294c7a6cdd288b5da45b97d93d725bfc",
       "tests/material-integrity.test.mjs": "add3840ba6bca6bf2a14b7214c7532782c428485b610ab8644f418079fef7f4d",
-      "tests/material-browser-checks.mjs": "7886a6d766121c8c6d6e153dbbf334f951ac814f2f96923180cf1ea71894b6d1",
+      "tests/material-browser-checks.mjs": "16bd23e66251c49c5015b7d6112fe6d78ae7e758cd01d9055edab5c3e43c5c56",
       "tests/shared-exam-session-browser.test.mjs": "15bd1c8a39706631b543b39941fd685efb3fbea6ab6ef2d034ad7d0543f73783",
-      "index.html": "476de5ded7490cb2e3f46ab880991dc2cdb9e58209111844afa8671f14eea256",
+      "index.html": "89863d9c2e8962cdf498ab8724841fbf3f1d7332bb03c20f21d4857ae8ae7790",
       "schools/rikkyo/config.js": "e71eeafc25087ffa91c56ed18cf65c6618c493899dbdb9562464d617b81e24f2",
       "schools/rikkyo/writingPractice.js": "02dc89ef972c4909f2cfee8e4976a7f333114f505ea305ef7330adc613eccc6a",
       "schools/rikkyo/writingTasks.js": "b538c6bbdc420bfc63d1032ae57db1a2bd145c0b462ca02601bdf93314888ca3",
@@ -96,7 +96,7 @@
       "tests/writing-hub-production.test.mjs": "86408cf3bd5c3ec79fa2cbb513aa1b0e2bf53c4ab302e07d1e8fc8e18fc7fc1c",
       "tests/source-annotations.test.mjs": "43ab2c1226f056f965f4b4122f8be077f808ce03260ad40df9a02ce6bc0f67f5",
       "tests/source-annotations-browser.test.mjs": "8a52881e647395b1a4d627249aa4029bb82dfeb3499e2769e484c17c515b200f",
-      "tests/question-instructions.test.mjs": "4337232b138dad6988a80f228cbfefc9c01331852d3da93ddb1dcade4ddcf7e5"
+      "tests/question-instructions.test.mjs": "6796175aa37e1502a5aca890a4eb39cb76b288e716085bbcc667f3e9f50b6f94"
     },
     "postMergePolicy": {
       "required": true,
@@ -190,6 +190,16 @@
           41234284026
         ]
       }
+    },
+    "sourceContextHotfix": {
+      "date": "2026-11-01",
+      "baseMain": "fef0463f3a56c44cd7bd2743e580f574e140ac04",
+      "scope": "Source-verbatim fixed word contexts in all six FY24/FY25 English Q6 word-order items; preserve new source underline/footnote presentation, tokens, answer specs, grading and histories",
+      "tests": [
+        "tests/supplied-reading-runtime.test.mjs",
+        "tests/material-browser-checks.mjs"
+      ],
+      "verificationPolicy": "Historical CLEAN candidate evidence remains historical; full exact-head branch and main verifications required before Pages publication."
     }
   },
   "limitations": [
